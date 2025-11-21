@@ -15,6 +15,7 @@
   "权限": "Permission",
   "调试": "Debug",
   "日志": "Log",
+  "添加于": "Added at {{date}}",
   "THEME_SETTINGS": "Theme Settings",
   "CONTROL": {
     "DIGITAL_SELECT": "Digital Channel Selection",

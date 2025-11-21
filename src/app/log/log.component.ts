@@ -1,5 +1,5 @@
-import { Component, OnInit, signal, Renderer2, OnDestroy, ViewChild, AfterViewInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, OnInit, signal, Renderer2, OnDestroy, ViewChild, AfterViewInit, Inject, PLATFORM_ID } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatTableModule, MatTableDataSource } from '@angular/material/table';
 import { MatPaginatorModule, MatPaginator, MatPaginatorIntl } from '@angular/material/paginator';
@@ -54,14 +54,19 @@ export class LogComponent implements OnInit, OnDestroy, AfterViewInit {
   private globalTouchMoveListener: (() => void) | null = null;
   private globalTouchEndListener: (() => void) | null = null;
 
-  constructor(private renderer: Renderer2) {}
+  constructor(
+    private renderer: Renderer2,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) {}
 
   ngOnInit() {
     this.dataSource.filterPredicate = (data: AppLog, filter: string) => {
       if (filter === 'ALL') return true;
       return data.level === filter;
     };
-    this.loadLogs();
+    if (isPlatformBrowser(this.platformId)) {
+      this.loadLogs();
+    }
   }
 
   ngAfterViewInit() {

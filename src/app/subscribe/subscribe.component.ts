@@ -1,5 +1,5 @@
-import { Component, inject, effect } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, inject, effect, Inject, PLATFORM_ID } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatListModule } from '@angular/material/list';
@@ -65,13 +65,15 @@ export class SubscribeComponent {
     pageSize = 10;
     pageIndex = 0;
 
-    constructor() {
+    constructor(@Inject(PLATFORM_ID) private platformId: Object) {
         effect(() => {
             this.configs = this.configsService.data();
         });
-        AppApi.getChannelAlias().then(alias => {
-            this.channelAlias = alias;
-        });
+        if (isPlatformBrowser(this.platformId)) {
+            AppApi.getChannelAlias().then(alias => {
+                this.channelAlias = alias;
+            });
+        }
     }
 
     handlePageEvent(e: PageEvent) {
@@ -209,9 +211,8 @@ export class SubscribeComponent {
     getSourceTypeLabel(type: number): string {
         switch (type) {
             case 0: return 'HOME.REMOTE';
-            case 1: return 'HOME.XTREAM';
-            case 2: return 'HOME.FILE';
-            case 3: return 'HOME.CONTENT';
+            case 2: return 'HOME.XTREAM';
+            case 1: return 'HOME.FILE';
             default: return 'Unknown';
         }
     }
@@ -219,9 +220,8 @@ export class SubscribeComponent {
     getSourceTypeBadgeClass(type: number): string {
         switch (type) {
             case 0: return 'badge-remote';
-            case 1: return 'badge-xtream';
-            case 2: return 'badge-file';
-            case 3: return 'badge-content';
+            case 2: return 'badge-xtream';
+            case 1: return 'badge-file';
             default: return 'badge-default';
         }
     }

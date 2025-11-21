@@ -1,5 +1,5 @@
-import { Component, inject, effect } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, inject, effect, Inject, PLATFORM_ID } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -46,9 +46,11 @@ export class HomeComponent {
 
     isSmallScreen = false;
 
+    initName = this.translate.instant('添加于', { date: new Date().toLocaleString() });
+
     subscription = {
         type: 'remote',
-        name: '',
+        name: this.initName,
         userName: '',
         password: '',
         format: 'm3u_plus',
@@ -57,7 +59,7 @@ export class HomeComponent {
     };
 
     epgSource = {
-        name: '',
+        name: this.initName,
         url: ''
     };
 
@@ -85,7 +87,7 @@ export class HomeComponent {
 
     cloudSyncProvider = CloudSyncProvider;
 
-    constructor() {
+    constructor(@Inject(PLATFORM_ID) private platformId: Object) {
         this.breakpointObserver.observe([Breakpoints.Handset, Breakpoints.Small, '(max-width: 600px)']).subscribe(result => {
             this.isSmallScreen = result.matches;
         });
@@ -96,24 +98,24 @@ export class HomeComponent {
             this.cookie = this.configs.iptvHybridYangshipinCookie || '';
         });
 
-        AppApi.getChannelAlias().then(alias => {
-            this.channelAlias = alias;
-        }); 
-        AppApi.getAbout().then(info => {
-            this.info = info;
-        });
+        if (isPlatformBrowser(this.platformId)) {
+            AppApi.getChannelAlias().then(alias => {
+                this.channelAlias = alias;
+            }); 
+            AppApi.getAbout().then(info => {
+                this.info = info;
+            });
+        }
     }
 
-    pushSubscription() {
+    async pushSubscription() {
         var type = 0;
         if (this.subscription.type === 'remote')
             type = 0;
         else if (this.subscription.type === 'xtream')
-            type = 1;
-        else if (this.subscription.type === 'file')
             type = 2;
         else
-            type = 3;
+            type = 1;
         var usrName = undefined;
         var passwrd = undefined;
         var format = undefined;
@@ -125,6 +127,9 @@ export class HomeComponent {
         if (!this.subscription.name) {
             const dateStr = new Date().toLocaleString();
             this.subscription.name = this.translate.instant('HOME.ADDED_AT', { date: dateStr });
+        }
+        if (this.subscription.type === 'content') {
+            this.subscription.url = (await AppApi.writeFileContentWithDir('file', `iptv_source_local_${Date.now()}.txt`, this.subscription.url)) as unknown as string;
         }
         const iptvsource: IptvSource = {
             name: this.subscription.name,

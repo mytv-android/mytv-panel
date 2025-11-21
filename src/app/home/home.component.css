@@ -55,13 +55,13 @@ mat-radio-group {
     flex-direction: column;
     gap: 6px;
     padding: 12px;
-    background-color: var(--card-bg);
-    border-radius: 8px;
+    /* background-color: var(--card-bg); Removed to use mat-card default */
+    /* border-radius: 8px; Removed to use mat-card default (M3 is usually 12px) */
     transition: background-color 0.2s;
 }
 
 .info-item:hover {
-    background-color: var(--card-hover-bg);
+    background-color: var(--card-hover-bg) !important; /* Force hover effect */
 }
 
 .info-item .label {

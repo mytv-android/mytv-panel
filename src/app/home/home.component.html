@@ -152,7 +152,7 @@
             <mat-card-title>{{ 'HOME.CHANNEL_ALIAS' | translate }}</mat-card-title>
         </mat-card-header>
         <mat-card-content>
-            <app-textarea-with-lines class="full-width" [(ngModel)]="channelAlias" [rows]="10"
+            <app-textarea-with-lines class="full-width" [(ngModel)]="channelAlias"
                     placeholder="{{channelAliasExample}}"></app-textarea-with-lines>
         </mat-card-content>
         <mat-card-actions align="end">
@@ -174,7 +174,7 @@
             </div>
             <div class="form-row">
                 <mat-form-field appearance="outline" class="full-width">
-                    <input matInput [(ngModel)]="epgSource.name" placeholder="添加于2025-11-20 18:48:43">
+                    <input matInput [(ngModel)]="epgSource.name">
                 </mat-form-field>
             </div>
             <div class="form-row">
@@ -213,7 +213,7 @@
                 <label>{{ 'HOME.CUSTOM_HEADERS' | translate }}</label>
             </div>
             <div class="form-row">
-                <app-textarea-with-lines class="full-width" [(ngModel)]="configs.videoPlayerHeaders" [rows]="3"
+                <app-textarea-with-lines class="full-width" [(ngModel)]="configs.videoPlayerHeaders"
                         placeholder="Header-Name-1: Header-Value-1&#10;Header-Name-2: Header-Value-2"></app-textarea-with-lines>
             </div>
             <div class="form-row" style="justify-content: flex-end; display: flex;">

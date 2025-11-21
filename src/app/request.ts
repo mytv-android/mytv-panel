@@ -23,6 +23,11 @@ export class RequestUtil {
     return firstValueFrom(this.http.get<T>(url, { params }));
   }
 
+  static getText(url: string, params?: any) {
+    if (!this.http) throw new Error('RequestUtil not initialized');
+    return firstValueFrom(this.http.get(url, { params, responseType: 'text' }));
+  }
+
   static post<T>(url: string, body: any, options?: any, isJson: boolean = true) {
     if (!this.http) throw new Error('RequestUtil not initialized');
     return firstValueFrom(this.http.post<T>(url, body, options));

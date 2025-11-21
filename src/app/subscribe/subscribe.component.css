@@ -16,7 +16,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 16px 0;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+    border-bottom: 1px solid var(--border-color);
     min-height: 56px;
 }
 
@@ -43,7 +43,7 @@
 
 .setting-block {
     padding: 16px 0;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+    border-bottom: 1px solid var(--border-color);
     display: flex;
     width: 100%;
     flex-direction: column;
@@ -52,7 +52,7 @@
 
 .setting-label {
     font-size: 16px;
-    color: rgba(0, 0, 0, 0.87);
+    color: var(--text-color);
 }
 
 .setting-item:last-child, .setting-block:last-child {
@@ -107,7 +107,7 @@
 }
 
 mat-list-item {
-    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    border-bottom: 1px solid var(--border-color);
 }
 
 mat-chip-set {

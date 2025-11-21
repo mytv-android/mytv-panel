@@ -17,14 +17,14 @@
             </mat-form-field>
         </div>
 
-        <mat-form-field appearance="outline" class="full-width" *ngIf="source.sourceType !== 3">
-            <mat-label>{{ (source.sourceType === 2 ? 'HOME.FILE_PATH' : 'HOME.LINK') | translate }}</mat-label>
+        <mat-form-field appearance="outline" class="full-width">
+            <mat-label>{{ (source.sourceType === 1 ? 'HOME.FILE_PATH' : 'HOME.LINK') | translate }}</mat-label>
             <input matInput [(ngModel)]="source.url" required>
         </mat-form-field>
 
-        <app-textarea-with-lines *ngIf="source.sourceType === 3" class="full-width" [label]="'HOME.CONTENT_LABEL' | translate" [(ngModel)]="source.url" [rows]="5" [required]="true"></app-textarea-with-lines>
+        <app-textarea-with-lines *ngIf="source.sourceType === 1" class="full-width" [label]="'HOME.CONTENT_LABEL' | translate" [(ngModel)]="content"></app-textarea-with-lines>
 
-        <ng-container *ngIf="source.sourceType === 1">
+        <ng-container *ngIf="source.sourceType === 2">
             <div class="form-row">
                 <mat-form-field appearance="outline" class="half-width">
                     <mat-label>{{ 'HOME.USERNAME' | translate }}</mat-label>
@@ -55,7 +55,7 @@
             <input matInput [(ngModel)]="source.httpUserAgent">
         </mat-form-field>
 
-        <app-textarea-with-lines class="full-width" [label]="'HOME.TRANSFORM_JS' | translate" [(ngModel)]="source.transformJs" [rows]="3" placeholder="function transform(channels) { ... }"></app-textarea-with-lines>
+        <app-textarea-with-lines class="full-width" [label]="'HOME.TRANSFORM_JS' | translate" [(ngModel)]="source.transformJs" placeholder="function transform(channels) { ... }"></app-textarea-with-lines>
 
     </div>
 </mat-dialog-content>

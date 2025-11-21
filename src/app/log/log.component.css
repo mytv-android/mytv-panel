@@ -40,7 +40,7 @@ mat-card-content {
     flex: 1;
     overflow: auto;
     border: 1px solid var(--border-color);
-    border-radius: 4px;
+    border-radius: 12px;
 }
 
 .log-table {
@@ -112,7 +112,7 @@ th.mat-header-cell {
 
 .level-badge {
     padding: 2px 8px;
-    border-radius: 4px;
+    border-radius: 8px;
     font-size: 0.8em;
     font-weight: 500;
 }

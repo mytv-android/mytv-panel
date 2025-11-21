@@ -1,7 +1,8 @@
-import { Injectable, signal } from '@angular/core';
+import { Injectable, signal, Inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { RequestUtil } from './request';
 
-const prefix = '/'
+const prefix = 'http://192.168.6.124:10591/' //
 
 export const AppApi = {
     getAbout() {
@@ -21,7 +22,7 @@ export const AppApi = {
     },
 
     getFileContent(path: string) {
-        return RequestUtil.get<string>(`${prefix}api/file/content`, { path })
+        return RequestUtil.getText(`${prefix}api/file/content`, { path })
     },
 
     writeFileContent(path: string, content: string) {
@@ -418,7 +419,9 @@ export class ConfigsService {
         await this.refresh()
     }
 
-    constructor() {
-        this.refresh()
+    constructor(@Inject(PLATFORM_ID) private platformId: Object) {
+        if (isPlatformBrowser(this.platformId)) {
+            this.refresh()
+        }
     }
 }

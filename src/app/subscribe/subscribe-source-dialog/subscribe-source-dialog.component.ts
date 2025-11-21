@@ -7,7 +7,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
 import { TranslateModule } from '@ngx-translate/core';
-import { IptvSource } from '../../api';
+import { AppApi, IptvSource } from '../../api';
 import { TextareaWithLinesComponent } from '../../common/textarea-with-lines/textarea-with-lines.component';
 
 @Component({
@@ -30,12 +30,11 @@ import { TextareaWithLinesComponent } from '../../common/textarea-with-lines/tex
 export class SubscribeSourceDialogComponent {
   source: IptvSource;
   isEdit: boolean;
-
+  content = '';
   sourceTypes = [
     { value: 0, label: 'HOME.REMOTE' },
-    { value: 1, label: 'HOME.XTREAM' },
-    { value: 2, label: 'HOME.FILE' },
-    { value: 3, label: 'HOME.CONTENT' }
+    { value: 2, label: 'HOME.XTREAM' },
+    { value: 1, label: 'HOME.FILE' },
   ];
 
   constructor(
@@ -49,6 +48,13 @@ export class SubscribeSourceDialogComponent {
         sourceType: 0,
         format: 'm3u_plus'
     };
+    if (this.source.sourceType === 1) {
+      AppApi.getFileContent(this.source.url).then(content => {
+        this.content = content;
+      }).catch(err => {
+        console.error('Failed to get file content', err);
+      });
+    }
   }
 
   onCancel(): void {
@@ -56,6 +62,9 @@ export class SubscribeSourceDialogComponent {
   }
 
   onSave(): void {
+    if (this.source.sourceType === 1) {
+      AppApi.writeFileContent(this.source.url, this.content);
+    }
     this.dialogRef.close(this.source);
   }
 }
