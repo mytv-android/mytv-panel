@@ -1,0 +1,28 @@
+<div class="container">
+    <mat-card class="card">
+        <mat-card-header>
+            <mat-card-title>{{ '网络' | translate }}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <div class="setting-item">
+                <div class="setting-label">
+                    <span>{{ 'NETWORK.RETRY_COUNT' | translate }}</span>
+                    <span class="setting-hint">{{ 'NETWORK.RETRY_COUNT_HINT' | translate }}</span>
+                </div>
+                <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
+                    <input matInput type="number" [(ngModel)]="configs.networkRetryCount" (change)="updateConfig()">
+                </mat-form-field>
+            </div>
+            <div class="setting-item">
+                <div class="setting-label">
+                    <span>{{ 'NETWORK.RETRY_INTERVAL' | translate }}</span>
+                    <span class="setting-hint">{{ 'NETWORK.RETRY_INTERVAL_HINT' | translate }}</span>
+                </div>
+                <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
+                    <input matInput type="number" [(ngModel)]="configs.networkRetryInterval" (change)="updateConfig()">
+                    <span matSuffix>ms</span>
+                </mat-form-field>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>

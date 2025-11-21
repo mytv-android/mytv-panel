@@ -1,0 +1,127 @@
+<div class="container">
+    <mat-card class="card">
+        <mat-card-header>
+            <mat-card-title>{{ '控制' | translate }}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <div class="setting-item">
+                <span>{{ 'CONTROL.DIGITAL_SELECT' | translate }}</span>
+                <mat-slide-toggle [(ngModel)]="configs.iptvChannelNoSelectEnable" (change)="updateConfig()"></mat-slide-toggle>
+            </div>
+            <div class="setting-item">
+                <span>{{ 'CONTROL.CHANNEL_LOOP' | translate }}</span>
+                <mat-slide-toggle [(ngModel)]="configs.iptvChannelChangeListLoop" (change)="updateConfig()"></mat-slide-toggle>
+            </div>
+            <div class="setting-item">
+                <span>{{ 'CONTROL.CROSS_GROUP' | translate }}</span>
+                <mat-slide-toggle [(ngModel)]="configs.iptvChannelChangeCrossGroup" (change)="updateConfig()"></mat-slide-toggle>
+            </div>
+
+            <h3>{{ 'CONTROL.KEY_BEHAVIOR' | translate }}</h3>
+
+            <div class="setting-item">
+                <span>{{ 'CONTROL.KEY_UP' | translate }}</span>
+                <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
+                    <mat-select [(ngModel)]="configs.keyDownEventUp" (selectionChange)="updateConfig()">
+                        <mat-option *ngFor="let action of keyDownActions" [value]="action">
+                            {{ keyDownActionLabels[action] | translate }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="setting-item">
+                <span>{{ 'CONTROL.KEY_DOWN' | translate }}</span>
+                <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
+                    <mat-select [(ngModel)]="configs.keyDownEventDown" (selectionChange)="updateConfig()">
+                        <mat-option *ngFor="let action of keyDownActions" [value]="action">
+                            {{ keyDownActionLabels[action] | translate }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="setting-item">
+                <span>{{ 'CONTROL.KEY_LEFT' | translate }}</span>
+                <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
+                    <mat-select [(ngModel)]="configs.keyDownEventLeft" (selectionChange)="updateConfig()">
+                        <mat-option *ngFor="let action of keyDownActions" [value]="action">
+                            {{ keyDownActionLabels[action] | translate }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="setting-item">
+                <span>{{ 'CONTROL.KEY_RIGHT' | translate }}</span>
+                <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
+                    <mat-select [(ngModel)]="configs.keyDownEventRight" (selectionChange)="updateConfig()">
+                        <mat-option *ngFor="let action of keyDownActions" [value]="action">
+                            {{ keyDownActionLabels[action] | translate }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="setting-item">
+                <span>{{ 'CONTROL.KEY_SELECT' | translate }}</span>
+                <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
+                    <mat-select [(ngModel)]="configs.keyDownEventSelect" (selectionChange)="updateConfig()">
+                        <mat-option *ngFor="let action of keyDownActions" [value]="action">
+                            {{ keyDownActionLabels[action] | translate }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <h3>{{ 'CONTROL.LONG_KEY_BEHAVIOR' | translate }}</h3>
+
+            <div class="setting-item">
+                <span>{{ 'CONTROL.KEY_UP' | translate }}</span>
+                <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
+                    <mat-select [(ngModel)]="configs.keyDownEventLongUp" (selectionChange)="updateConfig()">
+                        <mat-option *ngFor="let action of keyDownActions" [value]="action">
+                            {{ keyDownActionLabels[action] | translate }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="setting-item">
+                <span>{{ 'CONTROL.KEY_DOWN' | translate }}</span>
+                <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
+                    <mat-select [(ngModel)]="configs.keyDownEventLongDown" (selectionChange)="updateConfig()">
+                        <mat-option *ngFor="let action of keyDownActions" [value]="action">
+                            {{ keyDownActionLabels[action] | translate }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="setting-item">
+                <span>{{ 'CONTROL.KEY_LEFT' | translate }}</span>
+                <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
+                    <mat-select [(ngModel)]="configs.keyDownEventLongLeft" (selectionChange)="updateConfig()">
+                        <mat-option *ngFor="let action of keyDownActions" [value]="action">
+                            {{ keyDownActionLabels[action] | translate }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="setting-item">
+                <span>{{ 'CONTROL.KEY_RIGHT' | translate }}</span>
+                <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
+                    <mat-select [(ngModel)]="configs.keyDownEventLongRight" (selectionChange)="updateConfig()">
+                        <mat-option *ngFor="let action of keyDownActions" [value]="action">
+                            {{ keyDownActionLabels[action] | translate }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="setting-item">
+                <span>{{ 'CONTROL.KEY_SELECT' | translate }}</span>
+                <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
+                    <mat-select [(ngModel)]="configs.keyDownEventLongSelect" (selectionChange)="updateConfig()">
+                        <mat-option *ngFor="let action of keyDownActions" [value]="action">
+                            {{ keyDownActionLabels[action] | translate }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>

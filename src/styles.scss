@@ -1,0 +1,332 @@
+@use '@angular/material' as mat;
+
+$my-theme: mat.define-theme((color: (theme-type: light,
+                primary: mat.$azure-palette,
+                tertiary: mat.$blue-palette,
+            ),
+            typography: (brand-family: 'Roboto',
+                plain-family: 'Roboto',
+            ),
+            density: (scale: 0)));
+
+html {
+    color-scheme: light;
+    @include mat.all-component-themes($my-theme);
+}
+
+body.dark-mode {
+    color-scheme: dark;
+}
+
+/* Global Styles */
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+/* Existing Variables and Overrides adapted for body.dark-mode */
+:root {
+    --bg-color: #ffffff;
+    --text-color: #333333;
+    --text-secondary: rgba(0, 0, 0, 0.6);
+    --toolbar-bg: #1976d2;
+    --toolbar-text: #ffffff;
+    --sidenav-bg: #ffffff;
+    --card-bg: #f5f5f5;
+    --card-hover-bg: #eeeeee;
+    --input-bg: #ffffff;
+    --border-color: rgba(0, 0, 0, 0.12);
+}
+
+body.dark-mode {
+    --bg-color: #303030;
+    --text-color: #ffffff;
+    --text-secondary: rgba(255, 255, 255, 0.7);
+    --toolbar-bg: #212121;
+    --toolbar-text: #ffffff;
+    --sidenav-bg: #424242;
+    --card-bg: #424242;
+    --card-hover-bg: #4c4c4c;
+    --input-bg: #424242;
+    --border-color: rgba(255, 255, 255, 0.12);
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* Override Material styles for dark mode support */
+body.dark-mode .mat-toolbar.mat-primary {
+    background-color: var(--toolbar-bg) !important;
+    color: var(--toolbar-text) !important;
+}
+
+body.dark-mode .mat-drawer {
+    background-color: var(--sidenav-bg) !important;
+    color: var(--text-color) !important;
+}
+
+body.dark-mode .mat-drawer-inner-container {
+    background-color: var(--sidenav-bg) !important;
+}
+
+body.dark-mode .mat-drawer-container {
+    background-color: var(--bg-color) !important;
+    color: var(--text-color) !important;
+}
+
+body.dark-mode .mat-mdc-list-base {
+    --mdc-list-list-item-label-text-color: var(--text-color);
+    --mdc-list-list-item-hover-label-text-color: var(--text-color);
+    --mdc-list-list-item-focus-label-text-color: var(--text-color);
+    --mdc-list-list-item-leading-icon-color: var(--text-color);
+    --mdc-list-list-item-hover-leading-icon-color: var(--text-color);
+}
+
+body.dark-mode .mat-mdc-list-item,
+body.dark-mode .mat-list-item {
+    color: var(--text-color) !important;
+}
+
+body.dark-mode a.mat-mdc-list-item {
+    color: var(--text-color) !important;
+}
+
+/* Button overrides */
+body.dark-mode .mat-mdc-button,
+body.dark-mode .mat-mdc-icon-button {
+    color: var(--text-color) !important;
+    --mat-mdc-button-persistent-ripple-color: var(--text-color);
+    --mat-mdc-button-ripple-color: var(--text-color);
+}
+
+body.dark-mode .mat-mdc-outlined-button {
+    color: var(--text-color) !important;
+    --mdc-outlined-button-outline-color: var(--border-color);
+    --mdc-outlined-button-label-text-color: var(--text-color);
+    background-color: transparent !important;
+}
+
+/* Default background for raised/unelevated buttons */
+body.dark-mode .mat-mdc-raised-button:not(.mat-primary):not(.mat-accent):not(.mat-warn),
+body.dark-mode .mat-mdc-unelevated-button:not(.mat-primary):not(.mat-accent):not(.mat-warn) {
+    background-color: var(--card-bg) !important;
+    color: var(--text-color) !important;
+    --mdc-protected-button-container-color: var(--card-bg);
+    --mdc-protected-button-label-text-color: var(--text-color);
+}
+
+/* Disabled state overrides */
+body.dark-mode .mat-mdc-button[disabled],
+body.dark-mode .mat-mdc-icon-button[disabled],
+body.dark-mode .mat-mdc-outlined-button[disabled] {
+    color: rgba(255, 255, 255, 0.38) !important;
+    --mdc-outlined-button-outline-color: rgba(255, 255, 255, 0.12);
+}
+
+body.dark-mode .mat-mdc-raised-button[disabled] {
+    background-color: rgba(255, 255, 255, 0.12) !important;
+    color: rgba(255, 255, 255, 0.38) !important;
+}
+
+/* Primary Button overrides for Dark Mode */
+body.dark-mode .mat-mdc-raised-button.mat-primary,
+body.dark-mode .mat-mdc-unelevated-button.mat-primary,
+body.dark-mode .mat-mdc-fab.mat-primary,
+body.dark-mode .mat-mdc-mini-fab.mat-primary {
+    background-color: #90caf9 !important;
+    color: rgba(0, 0, 0, 0.87) !important;
+    --mdc-protected-button-container-color: #90caf9;
+    --mdc-protected-button-label-text-color: rgba(0, 0, 0, 0.87);
+}
+
+body.dark-mode .mat-mdc-outlined-button.mat-primary {
+    color: #90caf9 !important;
+    --mdc-outlined-button-label-text-color: #90caf9;
+    --mdc-outlined-button-outline-color: rgba(144, 202, 249, 0.5);
+}
+
+body.dark-mode .mat-mdc-button.mat-primary,
+body.dark-mode .mat-mdc-icon-button.mat-primary {
+    color: #90caf9 !important;
+    --mat-mdc-button-persistent-ripple-color: #90caf9;
+    --mat-mdc-button-ripple-color: #90caf9;
+}
+
+/* Table overrides */
+body.dark-mode .mat-mdc-table {
+    background-color: transparent !important;
+}
+
+body.dark-mode .mat-mdc-header-cell {
+    color: var(--text-secondary) !important;
+    background-color: var(--card-bg) !important;
+}
+
+body.dark-mode .mat-mdc-cell {
+    color: var(--text-color) !important;
+    border-bottom-color: var(--border-color) !important;
+}
+
+body.dark-mode .mat-mdc-row:hover {
+    background-color: rgba(255, 255, 255, 0.04) !important;
+}
+
+/* Material Card overrides */
+body.dark-mode .mat-mdc-card {
+    background-color: var(--card-bg) !important;
+    color: var(--text-color) !important;
+}
+
+body.dark-mode .mat-mdc-card-header,
+body.dark-mode .mat-mdc-card-title-group,
+body.dark-mode .mat-mdc-card-title,
+body.dark-mode .mat-mdc-card-subtitle,
+body.dark-mode .mat-mdc-card-content {
+    color: inherit !important;
+}
+
+body.dark-mode .mat-mdc-card-header-text {
+    color: inherit !important;
+}
+
+/* Form Fields overrides */
+body.dark-mode .mat-mdc-form-field {
+    --mdc-filled-text-field-container-color: var(--input-bg);
+    --mdc-filled-text-field-input-text-color: var(--text-color);
+    --mdc-filled-text-field-label-text-color: var(--text-secondary);
+    --mat-select-trigger-text-color: var(--text-color);
+
+    --mdc-outlined-text-field-outline-color: var(--border-color);
+    --mdc-outlined-text-field-focus-outline-color: #90caf9;
+    --mdc-outlined-text-field-label-text-color: var(--text-secondary);
+    --mdc-outlined-text-field-focus-label-text-color: #90caf9;
+    --mdc-outlined-text-field-input-text-color: var(--text-color);
+    --mdc-outlined-text-field-caret-color: var(--text-color);
+}
+
+body.dark-mode .mat-mdc-text-field-wrapper {
+    background-color: var(--input-bg) !important;
+}
+
+body.dark-mode .mat-mdc-input-element {
+    color: var(--text-color) !important;
+}
+
+body.dark-mode .mat-mdc-input-element::placeholder {
+    color: var(--text-secondary) !important;
+    opacity: 1;
+}
+
+body.dark-mode .mat-mdc-select-value {
+    color: var(--text-color) !important;
+}
+
+body.dark-mode .mat-mdc-select-value-text {
+    color: var(--text-color) !important;
+}
+
+body.dark-mode .mat-mdc-select-arrow {
+    color: var(--text-secondary) !important;
+}
+
+body.dark-mode .mat-pseudo-checkbox {
+    color: var(--text-secondary) !important;
+}
+
+/* Button Toggle overrides */
+body.dark-mode .mat-button-toggle-group {
+    border-color: var(--border-color);
+    background-color: var(--card-bg);
+}
+
+body.dark-mode .mat-button-toggle {
+    background-color: transparent;
+    color: var(--text-color);
+}
+
+body.dark-mode .mat-button-toggle-checked {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--text-color);
+}
+
+body.dark-mode .mat-button-toggle-button {
+    background-color: transparent !important;
+}
+
+/* Select Panel Override */
+body.dark-mode .mat-mdc-select-panel {
+    background-color: var(--card-bg) !important;
+}
+
+body.dark-mode .mat-mdc-option {
+    background-color: var(--card-bg) !important;
+    color: var(--text-color) !important;
+}
+
+body.dark-mode .mat-mdc-option .mdc-list-item__primary-text {
+    color: var(--text-color) !important;
+}
+
+/* Selected Option Styling */
+body.dark-mode .mat-mdc-option.mdc-list-item--selected {
+    background-color: rgba(144, 202, 249, 0.12) !important;
+}
+
+body.dark-mode .mat-mdc-option.mdc-list-item--selected .mdc-list-item__primary-text {
+    color: #90caf9 !important;
+}
+
+body.dark-mode .mat-mdc-option:hover:not(.mdc-list-item--selected) {
+    background-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+/* Pseudo Checkbox (Checkmark) overrides */
+body.dark-mode .mat-pseudo-checkbox {
+    color: var(--text-secondary) !important;
+}
+
+/* Minimal Checkbox (Single Selection) */
+body.dark-mode .mat-pseudo-checkbox-minimal.mat-pseudo-checkbox-checked,
+body.dark-mode .mat-pseudo-checkbox-minimal.mat-pseudo-checkbox-indeterminate,
+body.dark-mode .mat-mdc-option.mdc-list-item--selected .mat-pseudo-checkbox-minimal {
+    color: #90caf9 !important;
+}
+
+body.dark-mode .mat-pseudo-checkbox-minimal::after {
+    color: inherit !important;
+}
+
+/* Full Checkbox (Multiple Selection) */
+body.dark-mode .mat-pseudo-checkbox-full.mat-pseudo-checkbox-checked,
+body.dark-mode .mat-pseudo-checkbox-full.mat-pseudo-checkbox-indeterminate {
+    background-color: #90caf9 !important;
+    border-color: #90caf9 !important;
+}
+
+body.dark-mode .mat-pseudo-checkbox-full.mat-pseudo-checkbox-checked::after {
+    color: var(--bg-color) !important;
+}
+
+.setting-item{
+    width: 550px;
+}
+
+@media (max-width: 600px) {
+    .setting-item{
+        width:300px;
+    }
+}
+
+@media (max-width: 350px) {
+    .setting-item {
+        width: 100%;
+    }
+}

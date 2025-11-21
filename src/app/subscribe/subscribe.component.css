@@ -1,0 +1,115 @@
+.container {
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.card {
+    max-width: 800px;
+    margin: 0 auto;
+    align-items: center;
+    width: 100%;
+}
+
+.setting-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+    min-height: 56px;
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding-top: 16px;
+}
+
+.url-line {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+    max-width: 500px; /* Limit width to trigger truncation */
+}
+
+@media (max-width: 600px) {
+    .url-line {
+        max-width: 200px;
+    }
+}
+
+.setting-block {
+    padding: 16px 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.setting-label {
+    font-size: 16px;
+    color: rgba(0, 0, 0, 0.87);
+}
+
+.setting-item:last-child, .setting-block:last-child {
+    border-bottom: none;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.section-header h3 {
+    margin: 0;
+}
+
+.badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 500;
+    color: white;
+    margin-left: 8px;
+    vertical-align: middle;
+}
+
+.badge-remote {
+    background-color: #2196F3; /* Blue */
+}
+
+.badge-xtream {
+    background-color: #9C27B0; /* Purple */
+}
+
+.badge-file {
+    background-color: #FF9800; /* Orange */
+}
+
+.badge-content {
+    background-color: #4CAF50; /* Green */
+}
+
+.badge-default {
+    background-color: #757575; /* Grey */
+}
+
+mat-list-item {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+mat-chip-set {
+    margin-bottom: 20px;
+}

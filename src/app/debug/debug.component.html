@@ -1,0 +1,24 @@
+<div class="container">
+  <mat-card class="card">
+    <mat-card-header>
+        <mat-card-title>{{ '调试' | translate }}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="setting-item">
+        <span>{{ 'DEBUG.SHOW_FPS' | translate }}</span>
+        <mat-slide-toggle [ngModel]="configs.data().debugShowFps" (ngModelChange)="toggleShowFps()">
+        </mat-slide-toggle>
+      </div>
+      <div class="setting-item">
+        <span>{{ 'DEBUG.SHOW_PLAYER_METADATA' | translate }}</span>
+        <mat-slide-toggle [ngModel]="configs.data().debugShowVideoPlayerMetadata" (ngModelChange)="toggleShowVideoPlayerMetadata()">
+        </mat-slide-toggle>
+      </div>
+      <div class="setting-item no-border">
+        <span>{{ 'DEBUG.SHOW_LAYOUT_GRIDS' | translate }}</span>
+        <mat-slide-toggle [ngModel]="configs.data().debugShowLayoutGrids" (ngModelChange)="toggleShowLayoutGrids()">
+        </mat-slide-toggle>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

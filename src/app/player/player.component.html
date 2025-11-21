@@ -1,0 +1,135 @@
+<div class="container">
+    <mat-card class="card">
+        <mat-card-header>
+            <mat-card-title>{{ '播放器' | translate }}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <div class="setting-item">
+                <span>{{ 'PLAYER.CORE' | translate }}</span>
+                <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
+                    <mat-select [(ngModel)]="configs.videoPlayerCore" (selectionChange)="updateConfig()">
+                        <mat-option *ngFor="let core of videoPlayerCores" [value]="core">
+                            {{ 'SETTINGS.VIDEO_PLAYER_CORE.' + core | translate }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <div class="setting-item">
+                <span>{{ 'PLAYER.RENDER_MODE' | translate }}</span>
+                <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
+                    <mat-select [(ngModel)]="configs.videoPlayerRenderMode" (selectionChange)="updateConfig()">
+                        <mat-option *ngFor="let mode of videoPlayerRenderModes" [value]="mode">
+                            {{ 'SETTINGS.VIDEO_PLAYER_RENDER_MODE.' + mode | translate }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <div class="setting-item">
+                <div class="setting-label">
+                    <span>{{ 'PLAYER.FORCE_SOFT_DECODE' | translate }}</span>
+                    <span class="setting-desc">{{ 'PLAYER.FORCE_SOFT_DECODE_DESC' | translate }}</span>
+                </div>
+                <mat-slide-toggle [(ngModel)]="configs.videoPlayerForceSoftDecode" (change)="updateConfig()"></mat-slide-toggle>
+            </div>
+
+            <div class="setting-item">
+                <span>{{ 'PLAYER.STOP_PREVIOUS_MEDIA_ITEM' | translate }}</span>
+                <mat-slide-toggle [(ngModel)]="configs.videoPlayerStopPreviousMediaItem" (change)="updateConfig()"></mat-slide-toggle>
+            </div>
+
+            <div class="setting-item">
+                <div class="setting-label">
+                    <span>{{ 'PLAYER.FIT_FRAME_RATE' | translate }}</span>
+                    <span class="setting-desc">{{ 'PLAYER.FIT_FRAME_RATE_DESC' | translate }}</span>
+                </div>
+                <mat-slide-toggle [(ngModel)]="configs.videoPlayerFitFrameRate" (change)="updateConfig()"></mat-slide-toggle>
+            </div>
+
+            <div class="setting-item">
+                <div class="setting-label">
+                    <span>{{ 'PLAYER.BETTER_DETECTION' | translate }}</span>
+                    <span class="setting-desc">{{ 'PLAYER.BETTER_DETECTION_DESC' | translate }}</span>
+                </div>
+                <mat-slide-toggle [(ngModel)]="configs.videoPlayerApplyBetterDetection" (change)="updateConfig()"></mat-slide-toggle>
+            </div>
+
+            <div class="setting-item">
+                <div class="setting-label">
+                    <span>{{ 'PLAYER.EXTRACT_HEADER_FROM_LINK' | translate }}</span>
+                    <span class="setting-desc">{{ 'PLAYER.EXTRACT_HEADER_FROM_LINK_DESC' | translate }}</span>
+                </div>
+                <mat-slide-toggle [(ngModel)]="configs.videoPlayerExtractHeaderFromLink" (change)="updateConfig()"></mat-slide-toggle>
+            </div>
+
+            <div class="setting-item">
+                <span>{{ 'PLAYER.DISPLAY_MODE' | translate }}</span>
+                <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
+                    <mat-select [(ngModel)]="configs.videoPlayerDisplayMode" (selectionChange)="updateConfig()">
+                        <mat-option *ngFor="let mode of videoPlayerDisplayModes" [value]="mode">
+                            {{ 'SETTINGS.VIDEO_PLAYER_DISPLAY_MODE.' + mode | translate }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <div class="setting-item">
+                <span>{{ 'PLAYER.SEEK_TO_MODE' | translate }}</span>
+                <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
+                    <mat-select [(ngModel)]="configs.videoPlayerSeekToMode" (selectionChange)="updateConfig()">
+                        <mat-option *ngFor="let mode of videoPlayerSeekToModes" [value]="mode">
+                            {{ 'SETTINGS.VIDEO_PLAYER_SEEK_TO_MODE.' + mode | translate }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <div class="setting-item">
+                <div class="setting-label">
+                    <span>{{ 'PLAYER.LOAD_TIMEOUT' | translate }}</span>
+                    <span class="setting-desc">{{ 'PLAYER.LOAD_TIMEOUT_DESC' | translate }}</span>
+                </div>
+                <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
+                    <input matInput type="number" [(ngModel)]="configs.videoPlayerLoadTimeout" (change)="updateConfig()">
+                </mat-form-field>
+            </div>
+
+            <div class="setting-item">
+                <div class="setting-label">
+                    <span>{{ 'PLAYER.BUFFER_TIME' | translate }}</span>
+                    <span class="setting-desc">{{ 'PLAYER.BUFFER_TIME_DESC' | translate }}</span>
+                </div>
+                <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
+                    <input matInput type="number" [(ngModel)]="configs.videoPlayerBufferTime" (change)="updateConfig()">
+                </mat-form-field>
+            </div>
+
+            <div class="setting-item">
+                <span>{{ 'PLAYER.RTSP_TRANSPORT' | translate }}</span>
+                <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
+                    <mat-select [(ngModel)]="configs.videoPlayerRtspTransport" (selectionChange)="updateConfig()">
+                        <mat-option *ngFor="let transport of rtspTransports" [value]="transport">
+                            {{ 'SETTINGS.RTSP_TRANSPORT.' + transport | translate }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <div class="setting-item">
+                <span>{{ 'HOME.USER_AGENT' | translate }}</span>
+                <mat-form-field appearance="outline" style="margin-bottom: -1.25em; width: 100%;">
+                    <input matInput [(ngModel)]="configs.videoPlayerUserAgent" (change)="updateConfig()">
+                </mat-form-field>
+            </div>
+
+            <div class="setting-item">
+                <div class="setting-label">
+                    <span>{{ 'HOME.CUSTOM_HEADERS' | translate }}</span>
+                </div>
+                <app-textarea-with-lines [(ngModel)]="configs.videoPlayerHeaders" (change)="updateConfig()" [rows]="3"></app-textarea-with-lines>
+            </div>
+
+        </mat-card-content>
+    </mat-card>
+</div>

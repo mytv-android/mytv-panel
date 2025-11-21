@@ -1,0 +1,67 @@
+<h2 mat-dialog-title>{{ (isEdit ? 'SUBSCRIBE.EDIT_SOURCE' : 'SUBSCRIBE.ADD_SOURCE') | translate }}</h2>
+<mat-dialog-content>
+    <div class="form-container">
+        <div class="form-row">
+            <mat-form-field appearance="outline" class="half-width">
+                <mat-label>{{ 'HOME.NAME' | translate }}</mat-label>
+                <input matInput [(ngModel)]="source.name" required>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="half-width">
+                <mat-label>{{ 'HOME.TYPE' | translate }}</mat-label>
+                <mat-select [(ngModel)]="source.sourceType">
+                    <mat-option *ngFor="let type of sourceTypes" [value]="type.value">
+                        {{ type.label | translate }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <mat-form-field appearance="outline" class="full-width" *ngIf="source.sourceType !== 3">
+            <mat-label>{{ (source.sourceType === 2 ? 'HOME.FILE_PATH' : 'HOME.LINK') | translate }}</mat-label>
+            <input matInput [(ngModel)]="source.url" required>
+        </mat-form-field>
+
+        <app-textarea-with-lines *ngIf="source.sourceType === 3" class="full-width" [label]="'HOME.CONTENT_LABEL' | translate" [(ngModel)]="source.url" [rows]="5" [required]="true"></app-textarea-with-lines>
+
+        <ng-container *ngIf="source.sourceType === 1">
+            <div class="form-row">
+                <mat-form-field appearance="outline" class="half-width">
+                    <mat-label>{{ 'HOME.USERNAME' | translate }}</mat-label>
+                    <input matInput [(ngModel)]="source.userName">
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="half-width">
+                    <mat-label>{{ 'HOME.PASSWORD' | translate }}</mat-label>
+                    <input matInput [(ngModel)]="source.password">
+                </mat-form-field>
+            </div>
+            <div class="form-row">
+                <mat-form-field appearance="outline" class="half-width">
+                    <mat-label>{{ 'HOME.OUTPUT_TYPE' | translate }}</mat-label>
+                    <mat-select [(ngModel)]="source.format">
+                        <mat-option value="m3u_plus">M3U Plus</mat-option>
+                        <mat-option value="m3u">M3U</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="half-width">
+                    <mat-label>{{ 'HOME.USER_AGENT' | translate }}</mat-label>
+                    <input matInput [(ngModel)]="source.httpUserAgent">
+                </mat-form-field>
+            </div>
+        </ng-container>
+
+        <mat-form-field appearance="outline" class="full-width" *ngIf="source.sourceType !== 1">
+            <mat-label>{{ 'HOME.USER_AGENT' | translate }}</mat-label>
+            <input matInput [(ngModel)]="source.httpUserAgent">
+        </mat-form-field>
+
+        <app-textarea-with-lines class="full-width" [label]="'HOME.TRANSFORM_JS' | translate" [(ngModel)]="source.transformJs" [rows]="3" placeholder="function transform(channels) { ... }"></app-textarea-with-lines>
+
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button (click)="onCancel()">{{ 'HOME.CLOSE' | translate }}</button>
+    <button mat-flat-button color="primary" (click)="onSave()" [disabled]="!source.name || !source.url">
+        {{ 'HOME.ADD' | translate }}
+    </button>
+</mat-dialog-actions>

@@ -1,0 +1,165 @@
+.container {
+    padding: 20px;
+ /* Adjust based on toolbar height and padding */
+    display: flex;
+    flex-direction: column;
+}
+
+.card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+mat-card-header {
+    display: flex;
+    align-items: center;
+    padding: 16px;
+}
+
+.spacer {
+    flex: 1 1 auto;
+}
+
+mat-card-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    padding: 0 16px 16px 16px;
+}
+
+.filter-container {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 16px;
+    margin-top: 8px;
+}
+
+.table-container {
+    flex: 1;
+    overflow: auto;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+}
+
+.log-table {
+    width: 100%;
+    background-color: transparent;
+    table-layout: fixed; /* Enforce fixed layout for better resizing control */
+}
+
+th.mat-header-cell {
+    position: relative;
+    overflow: hidden; /* Prevent content from spilling out */
+    padding-right: 10px; /* Make space for resizer */
+}
+
+.resizer {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 20px; /* Increased width for better touch target */
+    cursor: col-resize;
+    z-index: 100;
+    user-select: none;
+    touch-action: none; /* Prevent scrolling while resizing */
+}
+
+.resizer:hover, .resizer:active {
+    background-color: var(--border-color);
+}
+
+.time-cell {
+    white-space: nowrap;
+    color: var(--text-secondary);
+    font-size: 0.9em;
+    width: 160px; /* Initial width */
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.tag-cell {
+    font-weight: 500;
+    width: 120px; /* Initial width */
+    color: var(--text-color);
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.message-cell {
+    word-break: break-word;
+    color: var(--text-color);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap; /* Keep single line for fixed layout, or remove for multiline */
+}
+
+/* If we want multiline message in fixed layout, we remove white-space: nowrap */
+/* But for log table, usually single line with ellipsis is cleaner, or let it wrap but column width is fixed */
+.message-cell {
+    white-space: normal; /* Allow wrapping */
+}
+
+.cause-cell {
+    color: #f44336;
+    width: 200px; /* Initial width */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.level-badge {
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.8em;
+    font-weight: 500;
+}
+
+.level-badge.INFO {
+    background-color: #e3f2fd;
+    color: #1976d2;
+}
+
+.level-badge.WARN {
+    background-color: #fff3e0;
+    color: #f57c00;
+}
+
+.level-badge.ERROR {
+    background-color: #ffebee;
+    color: #d32f2f;
+}
+
+.level-badge.DEBUG {
+    background-color: #f5f5f5;
+    color: #616161;
+}
+
+/* Dark mode support for badges using :host-context */
+:host-context([data-theme="dark"]) .level-badge.INFO {
+    background-color: rgba(25, 118, 210, 0.2);
+    color: #90caf9;
+}
+
+:host-context([data-theme="dark"]) .level-badge.WARN {
+    background-color: rgba(245, 124, 0, 0.2);
+    color: #ffb74d;
+}
+
+:host-context([data-theme="dark"]) .level-badge.ERROR {
+    background-color: rgba(211, 47, 47, 0.2);
+    color: #ef9a9a;
+}
+
+:host-context([data-theme="dark"]) .level-badge.DEBUG {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #bdbdbd;
+}
+
+.no-data {
+    padding: 20px;
+    text-align: center;
+    color: var(--text-secondary);
+}

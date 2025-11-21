@@ -1,0 +1,48 @@
+.full-width {
+    width: 100%;
+}
+
+.line-numbers-container {
+    height: 100%;
+    overflow: hidden;
+    margin-right: 8px;
+    border-right: 1px solid rgba(0,0,0,0.12);
+    padding-right: 8px;
+    user-select: none;
+    display: flex;
+    flex-direction: column;
+    align-self: stretch; /* Ensure it stretches to full height of form field content */
+}
+
+.line-numbers {
+    display: flex;
+    flex-direction: column;
+    color: #999;
+    font-family: monospace;
+    text-align: right;
+    /* Match textarea line-height and font-size */
+    line-height: 1.5; 
+    font-size: 14px; 
+}
+
+.line-number {
+    height: 21px; /* 14px * 1.5 */
+}
+
+.custom-textarea {
+    font-family: monospace !important;
+    line-height: 1.5 !important;
+    font-size: 14px !important;
+}
+
+/* Adjust mat-form-field to allow prefix to stretch */
+::ng-deep .mat-mdc-form-field-icon-prefix {
+    align-self: stretch;
+    padding-top: 16px; /* Match input padding */
+    padding-bottom: 16px;
+}
+
+:host {
+    display: block;
+    width: 100%;
+}

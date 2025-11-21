@@ -1,0 +1,66 @@
+<div class="container">
+    <mat-card class="card">
+        <mat-card-header>
+            <mat-card-title>{{ '节目单' | translate }}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <!-- Enable EPG -->
+            <div class="setting-item">
+                <div class="setting-text">
+                    <span class="setting-title">{{ 'EPG.ENABLE' | translate }}</span>
+                    <span class="setting-desc">{{ 'EPG.ENABLE_DESC' | translate }}</span>
+                </div>
+                <mat-slide-toggle [(ngModel)]="configs.epgEnable" (change)="updateConfig()"></mat-slide-toggle>
+            </div>
+
+            <!-- Follow Subscription Source -->
+            <div class="setting-item">
+                <div class="setting-text">
+                    <span class="setting-title">{{ 'EPG.FOLLOW_SOURCE' | translate }}</span>
+                    <span class="setting-desc">{{ 'EPG.FOLLOW_SOURCE_DESC' | translate }}</span>
+                </div>
+                <mat-slide-toggle [(ngModel)]="configs.epgSourceFollowIptv" (change)="updateConfig()"></mat-slide-toggle>
+            </div>
+
+            <!-- Load All EPGs -->
+            <div class="setting-item">
+                <div class="setting-text">
+                    <span class="setting-title">{{ 'EPG.LOAD_ALL' | translate }}</span>
+                    <span class="setting-desc">{{ 'EPG.LOAD_ALL_DESC' | translate }}</span>
+                </div>
+                <mat-slide-toggle [(ngModel)]="configs.epgSourceLoadAll" (change)="updateConfig()"></mat-slide-toggle>
+            </div>
+
+            <!-- Custom EPG -->
+            <div class="setting-item" (click)="openEpgManager()">
+                <div class="setting-text">
+                    <span class="setting-title">{{ 'EPG.CUSTOM_EPG' | translate }}</span>
+                </div>
+                <div class="setting-value">
+                    <span>{{ customEpgCount }}</span>
+                    <mat-icon>chevron_right</mat-icon>
+                </div>
+            </div>
+
+            <!-- Refresh Time Threshold -->
+            <div class="setting-item" (click)="openThresholdSettings()">
+                <div class="setting-text">
+                    <span class="setting-title">{{ 'EPG.REFRESH_THRESHOLD' | translate }}</span>
+                    <span class="setting-desc">
+                        <ng-container *ngIf="configs.epgRefreshTimeThreshold === -1 || configs.epgRefreshTimeThreshold === undefined; else timeDesc">
+                            {{ 'EPG.REFRESH_THRESHOLD_ALWAYS_DESC' | translate }}
+                        </ng-container>
+                        <ng-template #timeDesc>
+                            {{ 'EPG.REFRESH_THRESHOLD_DESC' | translate: { time: refreshTimeThreshold } }}
+                        </ng-template>
+                    </span>
+                </div>
+                <div class="setting-value">
+                    <span>{{ refreshTimeThreshold }}</span>
+                    <mat-icon>chevron_right</mat-icon>
+                </div>
+            </div>
+
+        </mat-card-content>
+    </mat-card>
+</div>

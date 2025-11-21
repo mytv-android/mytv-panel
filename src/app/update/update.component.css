@@ -1,0 +1,31 @@
+.container {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.card {
+    max-width: 800px;
+    margin: 0 auto;
+    align-items: center;
+    width: 100%;
+}
+
+mat-card-header {
+    display: flex;
+    align-items: center;
+    padding: 16px;
+}
+
+.setting-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.setting-item:last-child {
+    border-bottom: none;
+}

@@ -1,0 +1,41 @@
+.container {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.card {
+    max-width: 800px;
+    margin: 0 auto;
+    align-items: center;
+    width: 100%;
+}
+
+.setting-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.setting-item:last-child {
+    border-bottom: none;
+}
+
+mat-form-field {
+    width: 200px;
+}
+
+.setting-label {
+    display: flex;
+    flex-direction: column;
+}
+
+.setting-hint {
+    font-size: 12px;
+    color: rgba(0, 0, 0, 0.54);
+    margin-top: 4px;
+    max-width: 80%;
+}

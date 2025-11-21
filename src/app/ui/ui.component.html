@@ -1,0 +1,142 @@
+<div class="container">
+    <mat-card class="card">
+        <mat-card-header>
+            <mat-card-title>{{ '界面' | translate }}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <!-- uiShowEpgProgrammeProgress -->
+            <div class="setting-item">
+                <div class="setting-text">
+                    <span class="setting-title">{{ 'UI.SHOW_EPG_PROGRAMME_PROGRESS' | translate }}</span>
+                    <span class="setting-desc">{{ 'UI.SHOW_EPG_PROGRAMME_PROGRESS_DESC' | translate }}</span>
+                </div>
+                <mat-slide-toggle [(ngModel)]="configs.uiShowEpgProgrammeProgress" (change)="updateConfig()"></mat-slide-toggle>
+            </div>
+
+            <!-- uiShowEpgProgrammePermanentProgress -->
+            <div class="setting-item">
+                <div class="setting-text">
+                    <span class="setting-title">{{ 'UI.SHOW_EPG_PROGRAMME_PERMANENT_PROGRESS' | translate }}</span>
+                    <span class="setting-desc">{{ 'UI.SHOW_EPG_PROGRAMME_PERMANENT_PROGRESS_DESC' | translate }}</span>
+                </div>
+                <mat-slide-toggle [(ngModel)]="configs.uiShowEpgProgrammePermanentProgress" (change)="updateConfig()"></mat-slide-toggle>
+            </div>
+
+            <!-- uiShowChannelLogo -->
+            <div class="setting-item">
+                <span>{{ 'UI.SHOW_CHANNEL_LOGO' | translate }}</span>
+                <mat-slide-toggle [(ngModel)]="configs.uiShowChannelLogo" (change)="updateConfig()"></mat-slide-toggle>
+            </div>
+
+            <!-- uiShowChannelPreview -->
+            <div class="setting-item">
+                <span>{{ 'UI.SHOW_CHANNEL_PREVIEW' | translate }}</span>
+                <mat-slide-toggle [(ngModel)]="configs.uiShowChannelPreview" (change)="updateConfig()"></mat-slide-toggle>
+            </div>
+
+            <!-- uiUseClassicPanelScreen -->
+            <div class="setting-item">
+                <div class="setting-text">
+                    <span class="setting-title">{{ 'UI.USE_CLASSIC_PANEL_SCREEN' | translate }}</span>
+                    <span class="setting-desc">{{ 'UI.USE_CLASSIC_PANEL_SCREEN_DESC' | translate }}</span>
+                </div>
+                <mat-slide-toggle [(ngModel)]="configs.uiUseClassicPanelScreen" (change)="updateConfig()"></mat-slide-toggle>
+            </div>
+
+            <!-- Classic Panel Options -->
+            <ng-container *ngIf="configs.uiUseClassicPanelScreen">
+                <div class="setting-item">
+                    <div class="setting-text">
+                        <span class="setting-title">{{ 'UI.CLASSIC_SHOW_SOURCE_LIST' | translate }}</span>
+                        <span class="setting-desc">{{ 'UI.CLASSIC_SHOW_SOURCE_LIST_DESC' | translate }}</span>
+                    </div>
+                    <mat-slide-toggle [(ngModel)]="configs.uiClassicShowSourceList" (change)="updateConfig()"></mat-slide-toggle>
+                </div>
+
+                <div class="setting-item">
+                    <div class="setting-text">
+                        <span class="setting-title">{{ 'UI.CLASSIC_SHOW_CHANNEL_INFO' | translate }}</span>
+                        <span class="setting-desc">{{ 'UI.CLASSIC_SHOW_CHANNEL_INFO_DESC' | translate }}</span>
+                    </div>
+                    <mat-slide-toggle [(ngModel)]="configs.uiClassicShowChannelInfo" (change)="updateConfig()"></mat-slide-toggle>
+                </div>
+
+                <div class="setting-item">
+                    <div class="setting-text">
+                        <span class="setting-title">{{ 'UI.CLASSIC_SHOW_ALL_CHANNELS' | translate }}</span>
+                        <span class="setting-desc">{{ 'UI.CLASSIC_SHOW_ALL_CHANNELS_DESC' | translate }}</span>
+                    </div>
+                    <mat-slide-toggle [(ngModel)]="configs.uiClassicShowAllChannels" (change)="updateConfig()"></mat-slide-toggle>
+                </div>
+            </ng-container>
+
+            <!-- uiTimeShowMode -->
+            <div class="setting-item">
+                <span>{{ 'UI.TIME_SHOW_MODE' | translate }}</span>
+                <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
+                    <mat-select [(ngModel)]="configs.uiTimeShowMode" (selectionChange)="updateConfig()">
+                        <mat-option *ngFor="let mode of timeShowModes" [value]="mode">
+                            {{ uiTimeShowModeLabels[mode] | translate }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <!-- uiScreenAutoCloseDelay -->
+            <div class="setting-item">
+                <span>{{ 'UI.SCREEN_AUTO_CLOSE_DELAY' | translate }}</span>
+                <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
+                    <mat-select [(ngModel)]="configs.uiScreenAutoCloseDelay" (selectionChange)="updateConfig()">
+                        <mat-option *ngFor="let option of autoCloseDelayOptions" [value]="option.value">
+                            {{ option.label | translate }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <!-- uiDensityScaleRatio -->
+            <div class="setting-item">
+                <span>{{ 'UI.DENSITY_SCALE_RATIO' | translate }}</span>
+                <mat-form-field appearance="outline" style="margin-bottom: -1.25em; width: 100px;">
+                    <input matInput type="number" step="0.1" [(ngModel)]="configs.uiDensityScaleRatio" (change)="updateConfig()">
+                </mat-form-field>
+            </div>
+
+            <!-- uiFontScaleRatio -->
+            <div class="setting-item">
+                <span>{{ 'UI.FONT_SCALE_RATIO' | translate }}</span>
+                <mat-form-field appearance="outline" style="margin-bottom: -1.25em; width: 100px;">
+                    <input matInput type="number" step="0.1" [(ngModel)]="configs.uiFontScaleRatio" (change)="updateConfig()">
+                </mat-form-field>
+            </div>
+
+            <!-- uiFocusOptimize -->
+            <div class="setting-item">
+                <div class="setting-text">
+                    <span class="setting-title">{{ 'UI.FOCUS_OPTIMIZE' | translate }}</span>
+                    <span class="setting-desc">{{ 'UI.FOCUS_OPTIMIZE_DESC' | translate }}</span>
+                </div>
+                <mat-slide-toggle [(ngModel)]="configs.uiFocusOptimize" (change)="updateConfig()"></mat-slide-toggle>
+            </div>
+
+            <!-- iptvChannelFavoriteEnable -->
+            <div class="setting-item">
+                <div class="setting-text">
+                    <span class="setting-title">{{ 'IPTV.CHANNEL_FAVORITE_ENABLE' | translate }}</span>
+                    <span class="setting-desc">{{ 'IPTV.CHANNEL_FAVORITE_ENABLE_DESC' | translate }}</span>
+                </div>
+                <mat-slide-toggle [(ngModel)]="configs.iptvChannelFavoriteEnable" (change)="updateConfig()"></mat-slide-toggle>
+            </div>
+
+            <!-- iptvChannelHistoryEnable -->
+            <div class="setting-item">
+                <div class="setting-text">
+                    <span class="setting-title">{{ 'IPTV.CHANNEL_RECENT_ENABLE' | translate }}</span>
+                    <span class="setting-desc">{{ 'IPTV.CHANNEL_RECENT_ENABLE_DESC' | translate }}</span>
+                </div>
+                <mat-slide-toggle [(ngModel)]="configs.iptvChannelHistoryEnable" (change)="updateConfig()"></mat-slide-toggle>
+            </div>
+
+        </mat-card-content>
+    </mat-card>
+</div>

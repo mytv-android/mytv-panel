@@ -1,0 +1,64 @@
+.container {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.card {
+  max-width: 800px;
+  margin: 0 auto;
+  align-items: center;
+  width: 100%;
+}
+
+mat-card-header {
+    display: flex;
+    align-items: center;
+    padding: 16px;
+}
+
+mat-card-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+    padding: 0 16px 16px 16px;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-top: 16px;
+}
+
+.hint-text {
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin-top: 8px;
+}
+
+.slider-container {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 0 16px;
+  min-height: 56px; /* Match standard form field height */
+}
+
+.slider-container label {
+  color: var(--text-secondary);
+  min-width: 100px;
+}
+
+.slider-container mat-slider {
+  flex-grow: 1;
+}
+
+.slider-container span {
+  min-width: 40px;
+  text-align: right;
+  color: var(--text-color);
+}

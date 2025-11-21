@@ -1,0 +1,21 @@
+<div class="container">
+    <mat-card class="card">
+        <mat-card-header>
+            <mat-card-title>{{ '更新' | translate }}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <div class="setting-item">
+                <span>{{ 'UPDATE.CHANNEL' | translate }}</span>
+                <mat-button-toggle-group [(ngModel)]="configs.updateChannel" (change)="updateConfig()">
+                    <mat-button-toggle value="stable">{{ 'UPDATE.CHANNELS.STABLE' | translate }}</mat-button-toggle>
+                    <mat-button-toggle value="beta">{{ 'UPDATE.CHANNELS.BETA' | translate }}</mat-button-toggle>
+                    <mat-button-toggle value="dev">{{ 'UPDATE.CHANNELS.DEV' | translate }}</mat-button-toggle>
+                </mat-button-toggle-group>
+            </div>
+            <div class="setting-item">
+                <span>{{ 'UPDATE.FORCE_REMIND' | translate }}</span>
+                <mat-slide-toggle [(ngModel)]="configs.updateForceRemind" (change)="updateConfig()"></mat-slide-toggle>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>
