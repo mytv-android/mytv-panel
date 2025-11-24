@@ -5,6 +5,25 @@
     </mat-card-header>
     <mat-card-content>
       <div class="form-container">
+        <div class="toggles-row">
+          <div class="toggle-block">
+            <label class="toggle-label">{{ 'THEME_MODE' | translate }}</label>
+            <mat-button-toggle-group [(ngModel)]="themeMode" (ngModelChange)="updateConfig()" appearance="standard">
+              <mat-button-toggle [value]="0">{{ 'THEME_MODE_LIGHT' | translate }}</mat-button-toggle>
+              <mat-button-toggle [value]="1">{{ 'THEME_MODE_DARK' | translate }}</mat-button-toggle>
+              <mat-button-toggle [value]="2">{{ 'THEME_MODE_SYSTEM' | translate }}</mat-button-toggle>
+            </mat-button-toggle-group>
+          </div>
+
+          <div class="toggle-block">
+            <label class="toggle-label">{{ 'THEME_COLOR_PROVIDER' | translate }}</label>
+            <mat-button-toggle-group [(ngModel)]="themeColorProvider" (ngModelChange)="updateConfig()" appearance="standard">
+              <mat-button-toggle [value]="0">{{ 'THEME_COLOR_PROVIDER_BUILTIN' | translate }}</mat-button-toggle>
+              <mat-button-toggle [value]="1">{{ 'THEME_COLOR_PROVIDER_WALLPAPER' | translate }}</mat-button-toggle>
+              <mat-button-toggle [value]="2">{{ 'THEME_COLOR_PROVIDER_PLAIN' | translate }}</mat-button-toggle>
+            </mat-button-toggle-group>
+          </div>
+        </div>
         <mat-form-field appearance="outline">
           <mat-label>{{ 'THEME_NAME' | translate }}</mat-label>
           <input matInput [(ngModel)]="theme.name" (ngModelChange)="updateConfig()">

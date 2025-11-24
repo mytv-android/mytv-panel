@@ -2,7 +2,7 @@ import { Injectable, signal, Inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { RequestUtil } from './request';
 
-const prefix = '/' // 'http://192.168.6.124:10591/' //
+const prefix =   '/' // 'http://192.168.6.124:10591/' //
 
 export const AppApi = {
     getAbout() {

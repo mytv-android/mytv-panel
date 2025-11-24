@@ -5,6 +5,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSliderModule } from '@angular/material/slider';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { TranslateModule } from '@ngx-translate/core';
 import { ConfigsService, AppConfigs, AppThemeDef } from '../api';
 
@@ -18,6 +19,7 @@ import { ConfigsService, AppConfigs, AppThemeDef } from '../api';
         MatFormFieldModule,
         MatInputModule,
         MatSliderModule,
+        MatButtonToggleModule,
         TranslateModule
     ],
     templateUrl: './theme.component.html',
@@ -32,6 +34,8 @@ export class ThemeComponent {
         texture: '',
         textureAlpha: ''
     };
+    themeMode: number = 0
+    themeColorProvider: number = 0
 
     constructor() {
         effect(() => {
@@ -47,11 +51,16 @@ export class ThemeComponent {
                     textureAlpha: ''
                 };
             }
+            // sync toggles
+            this.themeMode = this.configs.themeMode ?? 0
+            this.themeColorProvider = this.configs.themeColorProvider ?? 0
         });
     }
 
     updateConfig() {
         this.configs.themeAppCurrent = this.theme;
+        this.configs.themeMode = this.themeMode
+        this.configs.themeColorProvider = this.themeColorProvider
         this.configsService.updateData(this.configs);
     }
 }

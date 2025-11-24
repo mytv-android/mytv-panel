@@ -302,5 +302,13 @@
     "MOVE_DOWN": "下移",
     "DELETE_SOURCE": "删除"
   },
-  "设置 / 节目单": "设置 / 节目单"
+  "设置 / 节目单": "设置 / 节目单",
+  "THEME_MODE": "主题模式",
+  "THEME_COLOR_PROVIDER": "配色方案",
+  "THEME_MODE_LIGHT": "浅色",
+  "THEME_MODE_DARK": "深色",
+  "THEME_MODE_SYSTEM": "跟随系统",
+  "THEME_COLOR_PROVIDER_BUILTIN": "内置颜色",
+  "THEME_COLOR_PROVIDER_WALLPAPER": "基于背景颜色",
+  "THEME_COLOR_PROVIDER_PLAIN": "朴素颜色"
 }

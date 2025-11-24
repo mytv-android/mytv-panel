@@ -294,5 +294,13 @@
     "MOVE_DOWN": "تحريك لأسفل",
     "DELETE_SOURCE": "حذف"
   },
-  "设置 / 节目单": "الإعدادات / دليل البرامج"
+  "设置 / 节目单": "الإعدادات / دليل البرامج",
+  "THEME_MODE": "وضع السمة",
+  "THEME_COLOR_PROVIDER": "نظام الألوان",
+  "THEME_MODE_LIGHT": "فاتح",
+  "THEME_MODE_DARK": "داكن",
+  "THEME_MODE_SYSTEM": "النظام",
+  "THEME_COLOR_PROVIDER_BUILTIN": "مدمج",
+  "THEME_COLOR_PROVIDER_WALLPAPER": "بناءً على الخلفية",
+  "THEME_COLOR_PROVIDER_PLAIN": "عادي"
 }

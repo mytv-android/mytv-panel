@@ -16,7 +16,7 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(withFetch()),
     provideAnimationsAsync(),
     provideTranslateService({
-      defaultLanguage: 'en'
+      fallbackLang: 'en'
     }),
     provideTranslateHttpLoader({
       prefix: './i18n/',

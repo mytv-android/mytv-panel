@@ -302,5 +302,13 @@
     "MOVE_DOWN": "Move Down",
     "DELETE_SOURCE": "Delete"
   },
-  "设置 / 节目单": "Settings / EPG"
+  "设置 / 节目单": "Settings / EPG",
+  "THEME_MODE": "Theme Mode",
+  "THEME_COLOR_PROVIDER": "Color Scheme",
+  "THEME_MODE_LIGHT": "Light",
+  "THEME_MODE_DARK": "Dark",
+  "THEME_MODE_SYSTEM": "System",
+  "THEME_COLOR_PROVIDER_BUILTIN": "Built-in",
+  "THEME_COLOR_PROVIDER_WALLPAPER": "Wallpaper Based",
+  "THEME_COLOR_PROVIDER_PLAIN": "Plain"
 }
