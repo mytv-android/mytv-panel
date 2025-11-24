@@ -1,33 +1,35 @@
 <div class="container">
-    <mat-card class="card">
-        <mat-card-header>
-            <mat-card-title>{{ 'WebView' | translate }}</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-            <div class="setting-item">
-                <span>{{ 'WEBVIEW.CORE' | translate }}</span>
-                <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
-                    <mat-select [(ngModel)]="configs.webViewCore" (selectionChange)="updateConfig()">
-                        <mat-option *ngFor="let core of webViewCores" [value]="core">
-                            {{ webViewCoreLabels[core] | translate }}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
-            </div>
-            <div class="setting-item">
-                <div class="setting-label">
-                    <span>{{ 'WEBVIEW.REPLACE_SYSTEM' | translate }}</span>
-                    <div class="setting-hint">{{ 'WEBVIEW.REPLACE_SYSTEM_HINT' | translate }}</div>
-                </div>
-                <mat-slide-toggle [(ngModel)]="configs.replaceSystemWebView" (change)="updateConfig()"></mat-slide-toggle>
-            </div>
-            <div class="setting-item">
-                <span>{{ 'WEBVIEW.LOAD_TIMEOUT' | translate }}</span>
-                <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
-                    <input matInput type="number" [(ngModel)]="configs.webViewLoadTimeout" (change)="updateConfig()">
-                    <span matSuffix>ms</span>
-                </mat-form-field>
-            </div>
-        </mat-card-content>
-    </mat-card>
+  <mat-card class="card">
+    <mat-card-header>
+      <mat-card-title>{{ 'WebView' | translate }}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="setting-item">
+        <span>{{ 'WEBVIEW.CORE' | translate }}</span>
+        <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
+          <mat-select [(ngModel)]="configs.webViewCore" (selectionChange)="updateConfig()">
+            @for (core of webViewCores; track core) {
+              <mat-option [value]="core">
+                {{ webViewCoreLabels[core] | translate }}
+              </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="setting-item">
+        <div class="setting-label">
+          <span>{{ 'WEBVIEW.REPLACE_SYSTEM' | translate }}</span>
+          <div class="setting-hint">{{ 'WEBVIEW.REPLACE_SYSTEM_HINT' | translate }}</div>
+        </div>
+        <mat-slide-toggle [(ngModel)]="configs.replaceSystemWebView" (change)="updateConfig()"></mat-slide-toggle>
+      </div>
+      <div class="setting-item">
+        <span>{{ 'WEBVIEW.LOAD_TIMEOUT' | translate }}</span>
+        <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
+          <input matInput type="number" [(ngModel)]="configs.webViewLoadTimeout" (change)="updateConfig()">
+          <span matSuffix>ms</span>
+        </mat-form-field>
+      </div>
+    </mat-card-content>
+  </mat-card>
 </div>

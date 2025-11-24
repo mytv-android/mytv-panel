@@ -1,5 +1,5 @@
 import { Component, inject, effect } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { FormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
@@ -13,15 +13,14 @@ import { ConfigsService, AppConfigs, WebViewCore, WebViewCoreLabels } from '../a
     selector: 'app-webview',
     standalone: true,
     imports: [
-        CommonModule,
-        FormsModule,
-        MatCardModule,
-        MatSlideToggleModule,
-        MatSelectModule,
-        MatFormFieldModule,
-        MatInputModule,
-        TranslateModule
-    ],
+    FormsModule,
+    MatCardModule,
+    MatSlideToggleModule,
+    MatSelectModule,
+    MatFormFieldModule,
+    MatInputModule,
+    TranslateModule
+],
     templateUrl: './webview.component.html',
     styleUrl: './webview.component.css'
 })

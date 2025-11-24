@@ -1,20 +1,24 @@
 <mat-form-field appearance="outline" class="full-width">
-    <mat-label *ngIf="label">{{label}}</mat-label>
-    <div matPrefix class="line-numbers-container">
-        <div class="line-numbers" #lineNumbers>
-            <div *ngFor="let line of lines" class="line-number">{{line}}</div>
-        </div>
+  @if (label) {
+    <mat-label>{{label}}</mat-label>
+  }
+  <div matPrefix class="line-numbers-container">
+    <div class="line-numbers" #lineNumbers>
+      @for (line of lines; track line) {
+        <div class="line-number">{{line}}</div>
+      }
     </div>
-    <textarea matInput 
-        #textarea
-        [rows]="rows" 
-        [placeholder]="placeholder" 
-        [value]="value" 
-        (input)="onInput($event)"
-        (scroll)="onScroll($event)"
-        (blur)="onBlur()"
-        [required]="required"
-        [rows]="lines.length" 
-        class="custom-textarea">
-    </textarea>
+  </div>
+  <textarea matInput
+    #textarea
+    [rows]="rows"
+    [placeholder]="placeholder"
+    [value]="value"
+    (input)="onInput($event)"
+    (scroll)="onScroll($event)"
+    (blur)="onBlur()"
+    [required]="required"
+    [rows]="lines.length"
+    class="custom-textarea">
+  </textarea>
 </mat-form-field>

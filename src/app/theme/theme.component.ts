@@ -1,5 +1,5 @@
 import { Component, inject, effect } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { FormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -13,15 +13,14 @@ import { ConfigsService, AppConfigs, AppThemeDef } from '../api';
     selector: 'app-theme',
     standalone: true,
     imports: [
-        CommonModule,
-        FormsModule,
-        MatCardModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatSliderModule,
-        MatButtonToggleModule,
-        TranslateModule
-    ],
+    FormsModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSliderModule,
+    MatButtonToggleModule,
+    TranslateModule
+],
     templateUrl: './theme.component.html',
     styleUrl: './theme.component.css'
 })

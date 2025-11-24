@@ -1,5 +1,5 @@
 import { Component, inject, effect } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { FormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
@@ -14,16 +14,15 @@ import { TextareaWithLinesComponent } from '../common/textarea-with-lines/textar
     selector: 'app-player',
     standalone: true,
     imports: [
-        CommonModule,
-        FormsModule,
-        MatCardModule,
-        MatSlideToggleModule,
-        MatSelectModule,
-        MatFormFieldModule,
-        MatInputModule,
-        TranslateModule,
-        TextareaWithLinesComponent
-    ],
+    FormsModule,
+    MatCardModule,
+    MatSlideToggleModule,
+    MatSelectModule,
+    MatFormFieldModule,
+    MatInputModule,
+    TranslateModule,
+    TextareaWithLinesComponent
+],
     templateUrl: './player.component.html',
     styleUrl: './player.component.css'
 })

@@ -1,5 +1,5 @@
 import { Component, Inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { FormsModule } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -14,7 +14,6 @@ import { TextareaWithLinesComponent } from '../../common/textarea-with-lines/tex
   selector: 'app-subscribe-source-dialog',
   standalone: true,
   imports: [
-    CommonModule,
     FormsModule,
     MatDialogModule,
     MatFormFieldModule,
@@ -23,7 +22,7 @@ import { TextareaWithLinesComponent } from '../../common/textarea-with-lines/tex
     MatSelectModule,
     TranslateModule,
     TextareaWithLinesComponent
-  ],
+],
   templateUrl: './subscribe-source-dialog.component.html',
   styleUrl: './subscribe-source-dialog.component.css'
 })

@@ -1,27 +1,29 @@
 <div class="container">
-    <mat-card class="card">
-        <mat-card-header>
-            <mat-card-title>{{ '通用' | translate }}</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-            <div class="setting-item">
-                <span>{{ 'GENERAL.BOOT_LAUNCH' | translate }}</span>
-                <mat-slide-toggle [(ngModel)]="configs.appBootLaunch" (change)="updateConfig()"></mat-slide-toggle>
-            </div>
-            <div class="setting-item">
-                <span>{{ 'GENERAL.STARTUP_SCREEN' | translate }}</span>
-                <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
-                    <mat-select [(ngModel)]="configs.appStartupScreen" (selectionChange)="updateConfig()">
-                        <mat-option *ngFor="let screen of startupScreens" [value]="screen">
-                            {{ 'GENERAL.STARTUP_SCREENS.' + screen | translate }}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
-            </div>
-            <div class="setting-item">
-                <span>{{ 'GENERAL.PIP' | translate }}</span>
-                <mat-slide-toggle [(ngModel)]="configs.appPipEnable" (change)="updateConfig()"></mat-slide-toggle>
-            </div>
-        </mat-card-content>
-    </mat-card>
+  <mat-card class="card">
+    <mat-card-header>
+      <mat-card-title>{{ '通用' | translate }}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="setting-item">
+        <span>{{ 'GENERAL.BOOT_LAUNCH' | translate }}</span>
+        <mat-slide-toggle [(ngModel)]="configs.appBootLaunch" (change)="updateConfig()"></mat-slide-toggle>
+      </div>
+      <div class="setting-item">
+        <span>{{ 'GENERAL.STARTUP_SCREEN' | translate }}</span>
+        <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
+          <mat-select [(ngModel)]="configs.appStartupScreen" (selectionChange)="updateConfig()">
+            @for (screen of startupScreens; track screen) {
+              <mat-option [value]="screen">
+                {{ 'GENERAL.STARTUP_SCREENS.' + screen | translate }}
+              </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="setting-item">
+        <span>{{ 'GENERAL.PIP' | translate }}</span>
+        <mat-slide-toggle [(ngModel)]="configs.appPipEnable" (change)="updateConfig()"></mat-slide-toggle>
+      </div>
+    </mat-card-content>
+  </mat-card>
 </div>

@@ -1,5 +1,5 @@
 import { Component, inject, effect } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { FormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -19,20 +19,19 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
     selector: 'app-backup',
     standalone: true,
     imports: [
-        CommonModule,
-        FormsModule,
-        MatCardModule,
-        MatFormFieldModule,
-        MatSlideToggleModule,
-        MatInputModule,
-        MatButtonModule,
-        MatIconModule,
-        MatListModule,
-        MatButtonToggleModule,
-        MatDividerModule,
-        TranslateModule,
-        MatSnackBarModule
-    ],
+    FormsModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatSlideToggleModule,
+    MatInputModule,
+    MatButtonModule,
+    MatIconModule,
+    MatListModule,
+    MatButtonToggleModule,
+    MatDividerModule,
+    TranslateModule,
+    MatSnackBarModule
+],
     templateUrl: './backup.component.html',
     styleUrl: './backup.component.css'
 })

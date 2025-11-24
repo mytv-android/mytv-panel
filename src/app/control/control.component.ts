@@ -1,5 +1,5 @@
 import { Component, inject, effect } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { FormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
@@ -12,14 +12,13 @@ import { ConfigsService, AppConfigs, KeyDownAction, KeyDownActionLabels } from '
     selector: 'app-control',
     standalone: true,
     imports: [
-        CommonModule,
-        FormsModule,
-        MatCardModule,
-        MatSlideToggleModule,
-        MatSelectModule,
-        MatFormFieldModule,
-        TranslateModule
-    ],
+    FormsModule,
+    MatCardModule,
+    MatSlideToggleModule,
+    MatSelectModule,
+    MatFormFieldModule,
+    TranslateModule
+],
     templateUrl: './control.component.html',
     styleUrl: './control.component.css'
 })

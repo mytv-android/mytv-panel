@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter, forwardRef, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -7,7 +7,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 @Component({
   selector: 'app-textarea-with-lines',
   standalone: true,
-  imports: [CommonModule, FormsModule, MatInputModule, MatFormFieldModule],
+  imports: [FormsModule, MatInputModule, MatFormFieldModule],
   templateUrl: './textarea-with-lines.component.html',
   styleUrls: ['./textarea-with-lines.component.css'],
   providers: [

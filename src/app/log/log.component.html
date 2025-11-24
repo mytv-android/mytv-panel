@@ -1,31 +1,33 @@
 <div class="container">
-    <mat-card class="card">
-        <mat-card-header>
-            <mat-card-title>{{ 'LOG.TITLE' | translate }}</mat-card-title>
-            <div class="spacer"></div>
-            <button mat-icon-button (click)="loadLogs()" color="primary">
-                <mat-icon>refresh</mat-icon>
-            </button>
-        </mat-card-header>
-        <mat-card-content>
-            <div class="filter-container">
-                <mat-form-field appearance="outline">
-                    <mat-label>{{ 'LOG.LEVEL' | translate }}</mat-label>
-                    <mat-select [(ngModel)]="selectedLevel" (selectionChange)="applyFilter()">
-                        <mat-option *ngFor="let level of levels" [value]="level">
-                            {{ level }}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
-            </div>
+  <mat-card class="card">
+    <mat-card-header>
+      <mat-card-title>{{ 'LOG.TITLE' | translate }}</mat-card-title>
+      <div class="spacer"></div>
+      <button mat-icon-button (click)="loadLogs()" color="primary">
+        <mat-icon>refresh</mat-icon>
+      </button>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="filter-container">
+        <mat-form-field appearance="outline">
+          <mat-label>{{ 'LOG.LEVEL' | translate }}</mat-label>
+          <mat-select [(ngModel)]="selectedLevel" (selectionChange)="applyFilter()">
+            @for (level of levels; track level) {
+              <mat-option [value]="level">
+                {{ level }}
+              </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+      </div>
 
-            <div class="table-container">
-                <table mat-table [dataSource]="dataSource" class="log-table">
+      <div class="table-container">
+        <table mat-table [dataSource]="dataSource" class="log-table">
 
           <!-- Time Column -->
           <ng-container matColumnDef="time">
-            <th mat-header-cell *matHeaderCellDef #timeHeader [style.width.px]="160"> 
-              {{ 'LOG.TIME' | translate }} 
+            <th mat-header-cell *matHeaderCellDef #timeHeader [style.width.px]="160">
+              {{ 'LOG.TIME' | translate }}
               <div class="resizer" (mousedown)="onResizeStart($event, timeHeader)" (touchstart)="onResizeStart($event, timeHeader)"></div>
             </th>
             <td mat-cell *matCellDef="let log" class="time-cell"> {{ formatTime(log.time) }} </td>
@@ -33,8 +35,8 @@
 
           <!-- Level Column -->
           <ng-container matColumnDef="level">
-            <th mat-header-cell *matHeaderCellDef #levelHeader [style.width.px]="80"> 
-              {{ 'LOG.LEVEL' | translate }} 
+            <th mat-header-cell *matHeaderCellDef #levelHeader [style.width.px]="80">
+              {{ 'LOG.LEVEL' | translate }}
               <div class="resizer" (mousedown)="onResizeStart($event, levelHeader)" (touchstart)="onResizeStart($event, levelHeader)"></div>
             </th>
             <td mat-cell *matCellDef="let log">
@@ -44,8 +46,8 @@
 
           <!-- Tag Column -->
           <ng-container matColumnDef="tag">
-            <th mat-header-cell *matHeaderCellDef #tagHeader [style.width.px]="120"> 
-              {{ 'LOG.TAG' | translate }} 
+            <th mat-header-cell *matHeaderCellDef #tagHeader [style.width.px]="120">
+              {{ 'LOG.TAG' | translate }}
               <div class="resizer" (mousedown)="onResizeStart($event, tagHeader)" (touchstart)="onResizeStart($event, tagHeader)"></div>
             </th>
             <td mat-cell *matCellDef="let log" class="tag-cell"> {{ log.tag }} </td>
@@ -53,8 +55,8 @@
 
           <!-- Message Column -->
           <ng-container matColumnDef="message">
-            <th mat-header-cell *matHeaderCellDef #messageHeader> 
-              {{ 'LOG.MESSAGE' | translate }} 
+            <th mat-header-cell *matHeaderCellDef #messageHeader>
+              {{ 'LOG.MESSAGE' | translate }}
               <div class="resizer" (mousedown)="onResizeStart($event, messageHeader)" (touchstart)="onResizeStart($event, messageHeader)"></div>
             </th>
             <td mat-cell *matCellDef="let log" class="message-cell"> {{ log.message }} </td>
@@ -62,23 +64,27 @@
 
           <!-- Cause Column -->
           <ng-container matColumnDef="cause">
-            <th mat-header-cell *matHeaderCellDef #causeHeader [style.width.px]="200"> 
-              {{ 'LOG.CAUSE' | translate }} 
+            <th mat-header-cell *matHeaderCellDef #causeHeader [style.width.px]="200">
+              {{ 'LOG.CAUSE' | translate }}
               <div class="resizer" (mousedown)="onResizeStart($event, causeHeader)" (touchstart)="onResizeStart($event, causeHeader)"></div>
             </th>
-            <td mat-cell *matCellDef="let log" class="cause-cell"> 
-              <span *ngIf="log.cause" [title]="log.cause">{{ log.cause }}</span>
+            <td mat-cell *matCellDef="let log" class="cause-cell">
+              @if (log.cause) {
+                <span [title]="log.cause">{{ log.cause }}</span>
+              }
             </td>
-          </ng-container>                    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-                </table>
+            </ng-container>                    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
 
-                <mat-paginator [pageSizeOptions]="[10, 20, 50, 100]" showFirstLastButtons></mat-paginator>
+          <mat-paginator [pageSizeOptions]="[10, 20, 50, 100]" showFirstLastButtons></mat-paginator>
 
-                <div *ngIf="dataSource.data.length === 0" class="no-data">
-                    {{ 'LOG.NO_DATA' | translate }}
-                </div>
+          @if (dataSource.data.length === 0) {
+            <div class="no-data">
+              {{ 'LOG.NO_DATA' | translate }}
             </div>
-        </mat-card-content>
+          }
+        </div>
+      </mat-card-content>
     </mat-card>
-</div>
+  </div>

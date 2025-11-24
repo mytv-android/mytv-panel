@@ -1,5 +1,5 @@
 import { Component, inject, effect } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { FormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
@@ -14,14 +14,13 @@ import { EpgThresholdDialogComponent } from './epg-threshold-dialog/epg-threshol
     selector: 'app-epg',
     standalone: true,
     imports: [
-        CommonModule,
-        FormsModule,
-        MatCardModule,
-        MatSlideToggleModule,
-        MatIconModule,
-        MatDialogModule,
-        TranslateModule
-    ],
+    FormsModule,
+    MatCardModule,
+    MatSlideToggleModule,
+    MatIconModule,
+    MatDialogModule,
+    TranslateModule
+],
     templateUrl: './epg.component.html',
     styleUrl: './epg.component.css'
 })

@@ -1,143 +1,149 @@
 <div class="container">
-    <mat-card class="card">
-        <mat-card-header>
-            <mat-card-title>{{ '订阅源' | translate }}</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
+  <mat-card class="card">
+    <mat-card-header>
+      <mat-card-title>{{ '订阅源' | translate }}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
 
-            <div class="form-container">
-                <!-- Custom Subscription Sources -->
-                <div class="section-header">
-                    <h3>{{ 'HOME.SUBSCRIPTION_SOURCE' | translate }}</h3>
-                    <button mat-button color="primary" (click)="addSource()">
-                        <mat-icon>add</mat-icon> {{ 'HOME.ADD' | translate }}
-                    </button>
-                </div>
-                <mat-list>
-                    <mat-list-item *ngFor="let source of paginatedSources; let i = index">
-                        <div matListItemIcon>
-                            <mat-radio-button [checked]="configs.iptvSourceCurrentIdx === getGlobalIndex(i)"
-                                (change)="setCurrentSource(getGlobalIndex(i))"></mat-radio-button>
-                        </div>
-                        <div matListItemTitle>
-                            {{ source.name }}
-                            <span class="badge" [ngClass]="getSourceTypeBadgeClass(source.sourceType)">
-                                {{ getSourceTypeLabel(source.sourceType) | translate }}
-                            </span>
-                        </div>
-                        <div matListItemLine class="url-line">{{ source.url }}</div>
-                        <div matListItemMeta>
-                            <button mat-icon-button [matMenuTriggerFor]="menu">
-                                <mat-icon>more_vert</mat-icon>
-                            </button>
-                            <mat-menu #menu="matMenu">
-                                <button mat-menu-item (click)="moveSource(getGlobalIndex(i), 'up')"
-                                    [disabled]="getGlobalIndex(i) === 0">
-                                    <mat-icon>arrow_upward</mat-icon>
-                                    <span>{{ 'SUBSCRIBE.MOVE_UP' | translate }}</span>
-                                </button>
-                                <button mat-menu-item (click)="moveSource(getGlobalIndex(i), 'down')"
-                                    [disabled]="getGlobalIndex(i) === (configs.iptvSourceList?.value?.length || 0) - 1">
-                                    <mat-icon>arrow_downward</mat-icon>
-                                    <span>{{ 'SUBSCRIBE.MOVE_DOWN' | translate }}</span>
-                                </button>
-                                <button mat-menu-item (click)="editSource(getGlobalIndex(i), source)">
-                                    <mat-icon>edit</mat-icon>
-                                    <span>{{ 'SUBSCRIBE.EDIT_SOURCE' | translate }}</span>
-                                </button>
-                                <button mat-menu-item (click)="deleteSource(getGlobalIndex(i))">
-                                    <mat-icon>delete</mat-icon>
-                                    <span>{{ 'SUBSCRIBE.DELETE_SOURCE' | translate }}</span>
-                                </button>
-                            </mat-menu>
-                        </div>
-                    </mat-list-item>
-                </mat-list>
-                <mat-paginator [length]="totalSources" [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 25, 100]"
-                    (page)="handlePageEvent($event)" aria-label="Select page">
-                </mat-paginator>
+      <div class="form-container">
+        <!-- Custom Subscription Sources -->
+        <div class="section-header">
+          <h3>{{ 'HOME.SUBSCRIPTION_SOURCE' | translate }}</h3>
+          <button mat-button color="primary" (click)="addSource()">
+            <mat-icon>add</mat-icon> {{ 'HOME.ADD' | translate }}
+          </button>
+        </div>
+        <mat-list>
+          @for (source of paginatedSources; track source; let i = $index) {
+            <mat-list-item>
+              <div matListItemIcon>
+                <mat-radio-button [checked]="configs.iptvSourceCurrentIdx === getGlobalIndex(i)"
+                (change)="setCurrentSource(getGlobalIndex(i))"></mat-radio-button>
+              </div>
+              <div matListItemTitle>
+                {{ source.name }}
+                <span class="badge" [ngClass]="getSourceTypeBadgeClass(source.sourceType)">
+                  {{ getSourceTypeLabel(source.sourceType) | translate }}
+                </span>
+              </div>
+              <div matListItemLine class="url-line">{{ source.url }}</div>
+              <div matListItemMeta>
+                <button mat-icon-button [matMenuTriggerFor]="menu">
+                  <mat-icon>more_vert</mat-icon>
+                </button>
+                <mat-menu #menu="matMenu">
+                  <button mat-menu-item (click)="moveSource(getGlobalIndex(i), 'up')"
+                    [disabled]="getGlobalIndex(i) === 0">
+                    <mat-icon>arrow_upward</mat-icon>
+                    <span>{{ 'SUBSCRIBE.MOVE_UP' | translate }}</span>
+                  </button>
+                  <button mat-menu-item (click)="moveSource(getGlobalIndex(i), 'down')"
+                    [disabled]="getGlobalIndex(i) === (configs.iptvSourceList?.value?.length || 0) - 1">
+                    <mat-icon>arrow_downward</mat-icon>
+                    <span>{{ 'SUBSCRIBE.MOVE_DOWN' | translate }}</span>
+                  </button>
+                  <button mat-menu-item (click)="editSource(getGlobalIndex(i), source)">
+                    <mat-icon>edit</mat-icon>
+                    <span>{{ 'SUBSCRIBE.EDIT_SOURCE' | translate }}</span>
+                  </button>
+                  <button mat-menu-item (click)="deleteSource(getGlobalIndex(i))">
+                    <mat-icon>delete</mat-icon>
+                    <span>{{ 'SUBSCRIBE.DELETE_SOURCE' | translate }}</span>
+                  </button>
+                </mat-menu>
+              </div>
+            </mat-list-item>
+          }
+        </mat-list>
+        <mat-paginator [length]="totalSources" [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 25, 100]"
+          (page)="handlePageEvent($event)" aria-label="Select page">
+        </mat-paginator>
 
-                <!-- Cache Time -->
-                <div class="setting-item">
-                    <span class="setting-label">{{ 'SUBSCRIBE.CACHE_TIME' | translate }}</span>
-                    <mat-form-field appearance="outline" style="width: 150px; margin-bottom: -1.25em;">
-                        <input matInput type="number" [(ngModel)]="cacheTimeInHours" min="0">
-                        <mat-hint>0 = No Cache</mat-hint>
-                    </mat-form-field>
-                </div>
+        <!-- Cache Time -->
+        <div class="setting-item">
+          <span class="setting-label">{{ 'SUBSCRIBE.CACHE_TIME' | translate }}</span>
+          <mat-form-field appearance="outline" style="width: 150px; margin-bottom: -1.25em;">
+            <input matInput type="number" [(ngModel)]="cacheTimeInHours" min="0">
+            <mat-hint>0 = No Cache</mat-hint>
+          </mat-form-field>
+        </div>
 
-                <!-- Hidden Channel Groups -->
-                <div class="setting-item">
-                    <span class="setting-label">{{ 'SUBSCRIBE.HIDDEN_GROUPS' | translate }}</span>
-                    <button mat-button color="primary" (click)="addHiddenGroup()">
-                        <mat-icon>add</mat-icon> {{ 'HOME.ADD' | translate }}
-                    </button>
-                </div>
-                <mat-chip-set>
-                    <mat-chip *ngFor="let group of hiddenGroups" (removed)="removeHiddenGroup(group)">
-                        {{ group }}
-                        <button matChipRemove>
-                            <mat-icon>cancel</mat-icon>
-                        </button>
-                    </mat-chip>
-                </mat-chip-set>
+        <!-- Hidden Channel Groups -->
+        <div class="setting-item">
+          <span class="setting-label">{{ 'SUBSCRIBE.HIDDEN_GROUPS' | translate }}</span>
+          <button mat-button color="primary" (click)="addHiddenGroup()">
+            <mat-icon>add</mat-icon> {{ 'HOME.ADD' | translate }}
+          </button>
+        </div>
+        <mat-chip-set>
+          @for (group of hiddenGroups; track group) {
+            <mat-chip (removed)="removeHiddenGroup(group)">
+              {{ group }}
+              <button matChipRemove>
+                <mat-icon>cancel</mat-icon>
+              </button>
+            </mat-chip>
+          }
+        </mat-chip-set>
 
-                <!-- Channel Alias -->
-                <div class="setting-block">
-                    <span class="setting-label">{{ 'HOME.CHANNEL_ALIAS' | translate }}</span>
-                    <app-textarea-with-lines placeholder="{{channelAliasExample}}" class="full-width"
-                        [(ngModel)]="channelAlias" (change)="updateChannelAlias()" ></app-textarea-with-lines>
-                </div>
+        <!-- Channel Alias -->
+        <div class="setting-block">
+          <span class="setting-label">{{ 'HOME.CHANNEL_ALIAS' | translate }}</span>
+          <app-textarea-with-lines placeholder="{{channelAliasExample}}" class="full-width"
+          [(ngModel)]="channelAlias" (change)="updateChannelAlias()" ></app-textarea-with-lines>
+        </div>
 
-                <!-- Merge Similar Channels -->
-                <div class="setting-item">
-                    <span class="setting-label">{{ 'SUBSCRIBE.MERGE_SIMILAR' | translate }}</span>
-                    <mat-slide-toggle [(ngModel)]="configs.iptvSimilarChannelMerge"
-                        (change)="updateConfig()"></mat-slide-toggle>
-                </div>
+        <!-- Merge Similar Channels -->
+        <div class="setting-item">
+          <span class="setting-label">{{ 'SUBSCRIBE.MERGE_SIMILAR' | translate }}</span>
+          <mat-slide-toggle [(ngModel)]="configs.iptvSimilarChannelMerge"
+          (change)="updateConfig()"></mat-slide-toggle>
+        </div>
 
-                <!-- Channel Icon Provider -->
-                <div class="setting-block">
-                    <span class="setting-label">{{ 'HOME.CHANNEL_ICON_PROVIDER' | translate }}</span>
-                    <mat-form-field appearance="outline" class="full-width">
-                        <input matInput [(ngModel)]="configs.iptvChannelLogoProvider" (change)="updateConfig()">
-                        <mat-hint>{{ 'HOME.CHANNEL_ICON_SUBTITLE' | translate }}</mat-hint>
-                    </mat-form-field>
-                </div>
+        <!-- Channel Icon Provider -->
+        <div class="setting-block">
+          <span class="setting-label">{{ 'HOME.CHANNEL_ICON_PROVIDER' | translate }}</span>
+          <mat-form-field appearance="outline" class="full-width">
+            <input matInput [(ngModel)]="configs.iptvChannelLogoProvider" (change)="updateConfig()">
+            <mat-hint>{{ 'HOME.CHANNEL_ICON_SUBTITLE' | translate }}</mat-hint>
+          </mat-form-field>
+        </div>
 
-                <!-- Channel Icon Override -->
-                <div class="setting-item">
-                    <span class="setting-label">{{ 'SUBSCRIBE.ICON_OVERRIDE' | translate }}</span>
-                    <mat-slide-toggle [(ngModel)]="configs.iptvChannelLogoOverride"
-                        (change)="updateConfig()"></mat-slide-toggle>
-                </div>
+        <!-- Channel Icon Override -->
+        <div class="setting-item">
+          <span class="setting-label">{{ 'SUBSCRIBE.ICON_OVERRIDE' | translate }}</span>
+          <mat-slide-toggle [(ngModel)]="configs.iptvChannelLogoOverride"
+          (change)="updateConfig()"></mat-slide-toggle>
+        </div>
 
-                <!-- PLTV to TVOD -->
-                <div class="setting-item">
-                    <span class="setting-label">{{ 'SUBSCRIBE.PLTV_TO_TVOD' | translate }}</span>
-                    <mat-slide-toggle [(ngModel)]="configs.iptvPLTVToTVOD" (change)="updateConfig()"></mat-slide-toggle>
-                </div>
+        <!-- PLTV to TVOD -->
+        <div class="setting-item">
+          <span class="setting-label">{{ 'SUBSCRIBE.PLTV_TO_TVOD' | translate }}</span>
+          <mat-slide-toggle [(ngModel)]="configs.iptvPLTVToTVOD" (change)="updateConfig()"></mat-slide-toggle>
+        </div>
 
-                <!-- Auto Add Web Source (Hybrid Mode) -->
-                <div class="setting-item">
-                    <span class="setting-label">{{ 'SUBSCRIBE.AUTO_ADD_WEB_SOURCE' | translate }}</span>
-                    <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
-                        <mat-select [(ngModel)]="configs.iptvHybridMode" (selectionChange)="updateConfig()">
-                            <mat-option *ngFor="let mode of hybridModes" [value]="mode">
-                                {{ iptvHybridModeLabels[mode] | translate }}
-                            </mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                </div>
+        <!-- Auto Add Web Source (Hybrid Mode) -->
+        <div class="setting-item">
+          <span class="setting-label">{{ 'SUBSCRIBE.AUTO_ADD_WEB_SOURCE' | translate }}</span>
+          <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
+            <mat-select [(ngModel)]="configs.iptvHybridMode" (selectionChange)="updateConfig()">
+              @for (mode of hybridModes; track mode) {
+                <mat-option [value]="mode">
+                  {{ iptvHybridModeLabels[mode] | translate }}
+                </mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+        </div>
 
-                <!-- Web Source Yangshipin Cookie -->
-                <div class="setting-block">
-                    <span class="setting-label">{{ 'HOME.YANGSHIPIN_COOKIE' | translate }}</span>
-                    <app-textarea-with-lines class="full-width" [(ngModel)]="configs.iptvHybridYangshipinCookie"
-                        (change)="updateConfig()" 
-                        placeholder="{{ 'HOME.YANGSHIPIN_SUBTITLE' | translate }}"></app-textarea-with-lines>
-                </div>
-            </div>
-        </mat-card-content>
-    </mat-card>
+        <!-- Web Source Yangshipin Cookie -->
+        <div class="setting-block">
+          <span class="setting-label">{{ 'HOME.YANGSHIPIN_COOKIE' | translate }}</span>
+          <app-textarea-with-lines class="full-width" [(ngModel)]="configs.iptvHybridYangshipinCookie"
+            (change)="updateConfig()"
+          placeholder="{{ 'HOME.YANGSHIPIN_SUBTITLE' | translate }}"></app-textarea-with-lines>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
 </div>

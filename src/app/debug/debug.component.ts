@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { FormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
@@ -10,7 +10,7 @@ import { ConfigsService, AppApi } from '../api';
 @Component({
   selector: 'app-debug',
   standalone: true,
-  imports: [CommonModule, FormsModule, MatCardModule, MatSlideToggleModule, MatIconModule, TranslateModule],
+  imports: [FormsModule, MatCardModule, MatSlideToggleModule, MatIconModule, TranslateModule],
   templateUrl: './debug.component.html',
   styleUrl: './debug.component.css'
 })

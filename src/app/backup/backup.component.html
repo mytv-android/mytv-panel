@@ -1,132 +1,142 @@
 <div class="container">
-    <mat-card class="card">
-        <mat-card-header>
-            <mat-card-title>{{ 'SYNC.TITLE' | translate }}</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-            <div class="setting-item">
-                <span>{{ 'SYNC.AUTO_PULL' | translate }}</span>
-                <mat-slide-toggle [(ngModel)]="configs.cloudSyncAutoPull" (change)="updateConfig()"></mat-slide-toggle>
+  <mat-card class="card">
+    <mat-card-header>
+      <mat-card-title>{{ 'SYNC.TITLE' | translate }}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="setting-item">
+        <span>{{ 'SYNC.AUTO_PULL' | translate }}</span>
+        <mat-slide-toggle [(ngModel)]="configs.cloudSyncAutoPull" (change)="updateConfig()"></mat-slide-toggle>
+      </div>
+      <div class="form-row">
+        <label>{{ 'HOME.PROVIDER' | translate }}</label>
+        <mat-button-toggle-group [(ngModel)]="configs.cloudSyncProvider" [vertical]="isSmallScreen">
+          <mat-button-toggle [value]="cloudSyncProvider.GITHUB_GIST">{{ 'HOME.GITHUB_GIST' | translate
+          }}</mat-button-toggle>
+          <mat-button-toggle [value]="cloudSyncProvider.GITEE_GIST">{{ 'HOME.GITEE_GIST' | translate
+          }}</mat-button-toggle>
+          <mat-button-toggle [value]="cloudSyncProvider.NETWORK_URL">{{ 'HOME.NETWORK_URL' | translate
+          }}</mat-button-toggle>
+          <mat-button-toggle [value]="cloudSyncProvider.LOCAL_FILE">{{ 'HOME.LOCAL_FILE' | translate
+          }}</mat-button-toggle>
+          <mat-button-toggle [value]="cloudSyncProvider.WEBDAV">{{ 'HOME.WEBDAV' | translate
+          }}</mat-button-toggle>
+        </mat-button-toggle-group>
+      </div>
+      @if (configs.cloudSyncProvider === cloudSyncProvider.GITHUB_GIST) {
+        <div>
+          <div class="form-row">
+            <label>{{ 'HOME.GITHUB_GIST_ID' | translate }}</label>
+          </div>
+          <div class="form-row">
+            <mat-form-field appearance="outline" class="full-width">
+              <input matInput [(ngModel)]="configs.cloudSyncGithubGistId"
+                placeholder="{{ 'HOME.GITHUB_GIST_ID' | translate }}">
+              </mat-form-field>
             </div>
             <div class="form-row">
-                <label>{{ 'HOME.PROVIDER' | translate }}</label>
-                <mat-button-toggle-group [(ngModel)]="configs.cloudSyncProvider" [vertical]="isSmallScreen">
-                    <mat-button-toggle [value]="cloudSyncProvider.GITHUB_GIST">{{ 'HOME.GITHUB_GIST' | translate
-                        }}</mat-button-toggle>
-                    <mat-button-toggle [value]="cloudSyncProvider.GITEE_GIST">{{ 'HOME.GITEE_GIST' | translate
-                        }}</mat-button-toggle>
-                    <mat-button-toggle [value]="cloudSyncProvider.NETWORK_URL">{{ 'HOME.NETWORK_URL' | translate
-                        }}</mat-button-toggle>
-                    <mat-button-toggle [value]="cloudSyncProvider.LOCAL_FILE">{{ 'HOME.LOCAL_FILE' | translate
-                        }}</mat-button-toggle>
-                    <mat-button-toggle [value]="cloudSyncProvider.WEBDAV">{{ 'HOME.WEBDAV' | translate
-                        }}</mat-button-toggle>
-                </mat-button-toggle-group>
+              <label>{{ 'HOME.GITHUB_GIST_TOKEN' | translate }}</label>
             </div>
-            <div *ngIf="configs.cloudSyncProvider === cloudSyncProvider.GITHUB_GIST">
-                <div class="form-row">
-                    <label>{{ 'HOME.GITHUB_GIST_ID' | translate }}</label>
-                </div>
-                <div class="form-row">
-                    <mat-form-field appearance="outline" class="full-width">
-                        <input matInput [(ngModel)]="configs.cloudSyncGithubGistId"
-                            placeholder="{{ 'HOME.GITHUB_GIST_ID' | translate }}">
-                    </mat-form-field>
-                </div>
-                <div class="form-row">
-                    <label>{{ 'HOME.GITHUB_GIST_TOKEN' | translate }}</label>
-                </div>
-                <div class="form-row">
-                    <mat-form-field appearance="outline" class="full-width">
-                        <input matInput [(ngModel)]="configs.cloudSyncGithubGistToken"
-                            placeholder="{{ 'HOME.GITHUB_GIST_TOKEN' | translate }}">
-                    </mat-form-field>
-                </div>
+            <div class="form-row">
+              <mat-form-field appearance="outline" class="full-width">
+                <input matInput [(ngModel)]="configs.cloudSyncGithubGistToken"
+                  placeholder="{{ 'HOME.GITHUB_GIST_TOKEN' | translate }}">
+                </mat-form-field>
+              </div>
             </div>
-            <div *ngIf="configs.cloudSyncProvider === cloudSyncProvider.GITEE_GIST">
-                <div class="form-row">
-                    <label>{{ 'HOME.GITEE_GIST_ID' | translate }}</label>
+          }
+          @if (configs.cloudSyncProvider === cloudSyncProvider.GITEE_GIST) {
+            <div>
+              <div class="form-row">
+                <label>{{ 'HOME.GITEE_GIST_ID' | translate }}</label>
+              </div>
+              <div class="form-row">
+                <mat-form-field appearance="outline" class="full-width">
+                  <input matInput [(ngModel)]="configs.cloudSyncGiteeGistId"
+                    placeholder="{{ 'HOME.GITEE_GIST_ID' | translate }}">
+                  </mat-form-field>
                 </div>
                 <div class="form-row">
-                    <mat-form-field appearance="outline" class="full-width">
-                        <input matInput [(ngModel)]="configs.cloudSyncGiteeGistId"
-                            placeholder="{{ 'HOME.GITEE_GIST_ID' | translate }}">
+                  <label>{{ 'HOME.GITEE_GIST_TOKEN' | translate }}</label>
+                </div>
+                <div class="form-row">
+                  <mat-form-field appearance="outline" class="full-width">
+                    <input matInput [(ngModel)]="configs.cloudSyncGiteeGistToken"
+                      placeholder="{{ 'HOME.GITEE_GIST_TOKEN' | translate }}">
                     </mat-form-field>
+                  </div>
                 </div>
-                <div class="form-row">
-                    <label>{{ 'HOME.GITEE_GIST_TOKEN' | translate }}</label>
-                </div>
-                <div class="form-row">
-                    <mat-form-field appearance="outline" class="full-width">
-                        <input matInput [(ngModel)]="configs.cloudSyncGiteeGistToken"
-                            placeholder="{{ 'HOME.GITEE_GIST_TOKEN' | translate }}">
-                    </mat-form-field>
-                </div>
-            </div>
-            <div *ngIf="configs.cloudSyncProvider === cloudSyncProvider.NETWORK_URL">
-                <div class="form-row">
+              }
+              @if (configs.cloudSyncProvider === cloudSyncProvider.NETWORK_URL) {
+                <div>
+                  <div class="form-row">
                     <label>{{ 'HOME.NETWORK_URL' | translate }}</label>
-                </div>
-                <div class="form-row">
+                  </div>
+                  <div class="form-row">
                     <mat-form-field appearance="outline" class="full-width">
-                        <input matInput [(ngModel)]="configs.cloudSyncNetworkUrl" placeholder="https://example.com/sync">
+                      <input matInput [(ngModel)]="configs.cloudSyncNetworkUrl" placeholder="https://example.com/sync">
                     </mat-form-field>
+                  </div>
                 </div>
-            </div>
-            <div *ngIf="configs.cloudSyncProvider === cloudSyncProvider.LOCAL_FILE">
-                <div class="form-row">
+              }
+              @if (configs.cloudSyncProvider === cloudSyncProvider.LOCAL_FILE) {
+                <div>
+                  <div class="form-row">
                     <label>{{ 'HOME.LOCAL_FILE_PATH' | translate }}</label>
-                </div>
-                <div class="form-row">
+                  </div>
+                  <div class="form-row">
                     <mat-form-field appearance="outline" class="full-width">
-                        <input matInput [(ngModel)]="configs.cloudSyncLocalFilePath"
-                            placeholder="file:///storage/emulated/0/Download/">
-                    </mat-form-field>
-                </div>
-            </div>
-            <div *ngIf="configs.cloudSyncProvider === cloudSyncProvider.WEBDAV">
-                <div class="form-row">
-                    <label>{{ 'HOME.WEBDAV_URL' | translate }}</label>
-                </div>
-                <div class="form-row">
-                    <mat-form-field appearance="outline" class="full-width">
+                      <input matInput [(ngModel)]="configs.cloudSyncLocalFilePath"
+                        placeholder="file:///storage/emulated/0/Download/">
+                      </mat-form-field>
+                    </div>
+                  </div>
+                }
+                @if (configs.cloudSyncProvider === cloudSyncProvider.WEBDAV) {
+                  <div>
+                    <div class="form-row">
+                      <label>{{ 'HOME.WEBDAV_URL' | translate }}</label>
+                    </div>
+                    <div class="form-row">
+                      <mat-form-field appearance="outline" class="full-width">
                         <input matInput [(ngModel)]="configs.cloudSyncWebDavUrl"
-                            placeholder="https://webdav.example.com/remote.php/dav/files/username/">
-                    </mat-form-field>
-                </div>
-                <div class="form-row">
-                    <label>{{ 'HOME.WEBDAV_USERNAME' | translate }}</label>
-                </div>
-                <div class="form-row">
-                    <mat-form-field appearance="outline" class="full-width">
-                        <input matInput [(ngModel)]="configs.cloudSyncWebDavUsername"
+                          placeholder="https://webdav.example.com/remote.php/dav/files/username/">
+                        </mat-form-field>
+                      </div>
+                      <div class="form-row">
+                        <label>{{ 'HOME.WEBDAV_USERNAME' | translate }}</label>
+                      </div>
+                      <div class="form-row">
+                        <mat-form-field appearance="outline" class="full-width">
+                          <input matInput [(ngModel)]="configs.cloudSyncWebDavUsername"
                             placeholder="{{ 'HOME.USERNAME' | translate }}">
-                    </mat-form-field>
-                </div>
-                <div class="form-row">
-                    <label>{{ 'HOME.WEBDAV_PASSWORD' | translate }}</label>
-                </div>
-                <div class="form-row">
-                    <mat-form-field appearance="outline" class="full-width">
-                        <input matInput [(ngModel)]="configs.cloudSyncWebDavPassword"
-                            placeholder="{{ 'HOME.PASSWORD' | translate }}">
-                    </mat-form-field>
-                </div>
-            </div>
-            <div class="action-container" style="text-align: right; margin-top: 16px; margin-bottom: 16px;">
-                <button mat-raised-button color="primary" (click)="updateConfig()">{{ 'HOME.PUSH' | translate }}</button>
-            </div>
-            
-            <mat-divider></mat-divider>
+                          </mat-form-field>
+                        </div>
+                        <div class="form-row">
+                          <label>{{ 'HOME.WEBDAV_PASSWORD' | translate }}</label>
+                        </div>
+                        <div class="form-row">
+                          <mat-form-field appearance="outline" class="full-width">
+                            <input matInput [(ngModel)]="configs.cloudSyncWebDavPassword"
+                              placeholder="{{ 'HOME.PASSWORD' | translate }}">
+                            </mat-form-field>
+                          </div>
+                        </div>
+                      }
+                      <div class="action-container" style="text-align: right; margin-top: 16px; margin-bottom: 16px;">
+                        <button mat-raised-button color="primary" (click)="updateConfig()">{{ 'HOME.PUSH' | translate }}</button>
+                      </div>
 
-            <div class="setting-item clickable" (click)="importData()">
-                <span>{{ 'SYNC.IMPORT_DATA' | translate }}</span>
-                <mat-icon>chevron_right</mat-icon>
-            </div>
-            <div class="setting-item clickable no-border" (click)="exportData()">
-                <span>{{ 'SYNC.EXPORT_DATA' | translate }}</span>
-                <mat-icon>chevron_right</mat-icon>
-            </div>
-        </mat-card-content>
-    </mat-card>
-</div>
+                      <mat-divider></mat-divider>
+
+                      <div class="setting-item clickable" (click)="importData()">
+                        <span>{{ 'SYNC.IMPORT_DATA' | translate }}</span>
+                        <mat-icon>chevron_right</mat-icon>
+                      </div>
+                      <div class="setting-item clickable no-border" (click)="exportData()">
+                        <span>{{ 'SYNC.EXPORT_DATA' | translate }}</span>
+                        <mat-icon>chevron_right</mat-icon>
+                      </div>
+                    </mat-card-content>
+                  </mat-card>
+                </div>

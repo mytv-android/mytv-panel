@@ -1,5 +1,5 @@
 import { Component, inject, effect } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { FormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
@@ -13,15 +13,14 @@ import { ConfigsService, AppConfigs, UiTimeShowMode, UiTimeShowModeLabels } from
     selector: 'app-ui',
     standalone: true,
     imports: [
-        CommonModule,
-        FormsModule,
-        MatCardModule,
-        MatSlideToggleModule,
-        MatSelectModule,
-        MatInputModule,
-        MatFormFieldModule,
-        TranslateModule
-    ],
+    FormsModule,
+    MatCardModule,
+    MatSlideToggleModule,
+    MatSelectModule,
+    MatInputModule,
+    MatFormFieldModule,
+    TranslateModule
+],
     templateUrl: './ui.component.html',
     styleUrl: './ui.component.css'
 })

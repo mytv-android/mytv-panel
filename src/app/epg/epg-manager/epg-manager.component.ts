@@ -1,5 +1,5 @@
 import { Component, Inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialogModule, MatDialog } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -14,7 +14,6 @@ import { MatRadioModule } from '@angular/material/radio';
   selector: 'app-epg-manager',
   standalone: true,
   imports: [
-    CommonModule,
     MatDialogModule,
     MatButtonModule,
     MatIconModule,
@@ -22,7 +21,7 @@ import { MatRadioModule } from '@angular/material/radio';
     MatRadioModule,
     DragDropModule,
     TranslateModule
-  ],
+],
   templateUrl: './epg-manager.component.html',
   styleUrl: './epg-manager.component.css'
 })

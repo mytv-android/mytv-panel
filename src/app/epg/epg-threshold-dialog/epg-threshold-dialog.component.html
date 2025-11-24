@@ -2,18 +2,22 @@
 <mat-dialog-content>
   <div class="options-container">
     <mat-radio-group [ngModel]="isCustom ? 'custom' : threshold" class="radio-group">
-      <mat-radio-button *ngFor="let opt of options" [value]="opt.value" (change)="onOptionChange(opt.value)">
-        {{ opt.value === -1 ? (opt.label | translate) : opt.label }}
-      </mat-radio-button>
+      @for (opt of options; track opt) {
+        <mat-radio-button [value]="opt.value" (change)="onOptionChange(opt.value)">
+          {{ opt.value === -1 ? (opt.label | translate) : opt.label }}
+        </mat-radio-button>
+      }
       <mat-radio-button value="custom" (change)="onCustomSelect()">
         {{ 'EPG.CUSTOM' | translate }}
       </mat-radio-button>
     </mat-radio-group>
 
-    <mat-form-field appearance="outline" *ngIf="isCustom" class="custom-input">
-      <mat-label>{{ 'EPG.HOURS' | translate }}</mat-label>
-      <input matInput type="number" [(ngModel)]="customValue" (ngModelChange)="onCustomValueChange()" min="0" step="0.5">
-    </mat-form-field>
+    @if (isCustom) {
+      <mat-form-field appearance="outline" class="custom-input">
+        <mat-label>{{ 'EPG.HOURS' | translate }}</mat-label>
+        <input matInput type="number" [(ngModel)]="customValue" (ngModelChange)="onCustomValueChange()" min="0" step="0.5">
+      </mat-form-field>
+    }
   </div>
 </mat-dialog-content>
 <mat-dialog-actions align="end">

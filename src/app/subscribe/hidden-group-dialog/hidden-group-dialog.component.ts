@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { FormsModule } from '@angular/forms';
 import { MatDialogRef, MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -11,14 +11,13 @@ import { TranslateModule } from '@ngx-translate/core';
   selector: 'app-hidden-group-dialog',
   standalone: true,
   imports: [
-    CommonModule,
     FormsModule,
     MatDialogModule,
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
     TranslateModule
-  ],
+],
   templateUrl: './hidden-group-dialog.component.html',
   styleUrl: './hidden-group-dialog.component.css'
 })
