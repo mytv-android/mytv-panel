@@ -57,6 +57,7 @@
     "TRANSFORM_JS": "转换JS",
     "PUSH_SUBSCRIPTION": "推送订阅源",
     "ADD": "新增",
+    "SAVE": "保存",
     "YANGSHIPIN_COOKIE": "网页源央视频Cookie",
     "YANGSHIPIN_SUBTITLE": "请在网页版打开央视频网站，并在登录后复制所有cookie",
     "PUSH": "推送",
@@ -165,6 +166,12 @@
     "RANGE_LABEL": "{{start}} - {{end}} / {{length}}"
   },
   "SYNC": {
+    "TITLE": "云同步",
+    "EXPORT_SUCCESS": "应用数据导出成功",
+    "EXPORT_FAILED": "应用数据导出失败",
+    "IMPORT_SUCCESS": "应用数据导入成功",
+    "IMPORT_FAILED": "应用数据导入失败",
+    "READ_FAILED": "应用数据读取失败",
     "AUTO_PULL": "自动拉取",
     "PROVIDER": "云同步服务商",
     "LOCAL_FILE": "本地文件",
@@ -177,7 +184,8 @@
     "DISPLAY_SETTINGS": "显示设置",
     "SHOW_FPS": "显示 FPS",
     "SHOW_PLAYER_METADATA": "显示播放器信息",
-    "SHOW_LAYOUT_GRIDS": "显示布局网格"
+    "SHOW_LAYOUT_GRIDS": "显示布局网格",
+    "EXPORT_LOGCAT": "导出 Logcat"
   },
   "SETTINGS": {
     "IPTV_HYBRID_MODE": {

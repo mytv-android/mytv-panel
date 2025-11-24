@@ -10,7 +10,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatDividerModule } from '@angular/material/divider';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { AppConfigs, ConfigsService, AppApi, CloudSyncProvider } from '../api';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
@@ -43,6 +43,7 @@ export class BackupComponent {
     isSmallScreen = false;
     breakpointObserver = inject(BreakpointObserver);
     snackBar = inject(MatSnackBar);
+    translate = inject(TranslateService);
 
     constructor() {
         this.breakpointObserver.observe([Breakpoints.Handset, Breakpoints.Small, '(max-width: 600px)']).subscribe(result => {
@@ -54,18 +55,24 @@ export class BackupComponent {
     }
 
     async exportData() {
-        const data = await AppApi.getCloudSyncData()
+        try {
+            const data = await AppApi.getCloudSyncData()
 
-        const jsonStr = JSON.stringify(data, null, 2)
-        const blob = new Blob([jsonStr], { type: 'application/json' })
+            const jsonStr = JSON.stringify(data, null, 2)
+            const blob = new Blob([jsonStr], { type: 'application/json' })
 
-        const link = document.createElement('a')
-        link.href = URL.createObjectURL(blob)
-        link.download = `${data.syncFrom}-v${data.version}-${data.syncAt}.json`
+            const link = document.createElement('a')
+            link.href = URL.createObjectURL(blob)
+            link.download = `${data.syncFrom}-v${data.version}-${data.syncAt}.json`
 
-        document.body.appendChild(link)
-        link.click()
-        document.body.removeChild(link)
+            document.body.appendChild(link)
+            link.click()
+            document.body.removeChild(link)
+            this.showSuccessToast(this.translate.instant('SYNC.EXPORT_SUCCESS'));
+        } catch (error) {
+            this.showFailToast(this.translate.instant('SYNC.EXPORT_FAILED'));
+            console.error(error);
+        }
     }
 
     updateConfig() {
@@ -85,14 +92,14 @@ export class BackupComponent {
                 if (e.target?.result) {
                     try {
                         await AppApi.pushCloudSyncData(JSON.parse(e.target.result as string));
-                        this.showSuccessToast('应用数据导入成功');
+                        this.showSuccessToast(this.translate.instant('SYNC.IMPORT_SUCCESS'));
                     } catch (error) {
-                        this.showFailToast('应用数据导入失败');
+                        this.showFailToast(this.translate.instant('SYNC.IMPORT_FAILED'));
                     }
                 }
             };
             reader.onerror = () => {
-                this.showFailToast('应用数据读取失败');
+                this.showFailToast(this.translate.instant('SYNC.READ_FAILED'));
             };
             reader.readAsText(file);
         };

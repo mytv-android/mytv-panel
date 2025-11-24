@@ -57,6 +57,7 @@
     "TRANSFORM_JS": "Transform JS",
     "PUSH_SUBSCRIPTION": "Push Subscription",
     "ADD": "Add",
+    "SAVE": "Save",
     "YANGSHIPIN_COOKIE": "Yangshipin Web Cookie",
     "YANGSHIPIN_SUBTITLE": "Please open Yangshipin website, login and copy all cookies",
     "PUSH": "Push",
@@ -165,6 +166,12 @@
     "RANGE_LABEL": "{{start}} - {{end}} of {{length}}"
   },
   "SYNC": {
+    "TITLE": "Cloud Sync",
+    "EXPORT_SUCCESS": "App data exported successfully",
+    "EXPORT_FAILED": "App data export failed",
+    "IMPORT_SUCCESS": "App data imported successfully",
+    "IMPORT_FAILED": "App data import failed",
+    "READ_FAILED": "Failed to read app data",
     "AUTO_PULL": "Auto Pull",
     "PROVIDER": "Cloud Sync Provider",
     "LOCAL_FILE": "Local File",
@@ -177,7 +184,8 @@
     "DISPLAY_SETTINGS": "Display Settings",
     "SHOW_FPS": "Show FPS",
     "SHOW_PLAYER_METADATA": "Show Player Metadata",
-    "SHOW_LAYOUT_GRIDS": "Show Layout Grids"
+    "SHOW_LAYOUT_GRIDS": "Show Layout Grids",
+    "EXPORT_LOGCAT": "Export Logcat"
   },
   "SETTINGS": {
     "IPTV_HYBRID_MODE": {

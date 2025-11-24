@@ -9,3 +9,16 @@ mat-sidenav {
 .spacer {
     flex: 1 1 auto;
 }
+
+.main-content {
+    padding: 16px;
+    height: calc(100vh - 64px); /* Adjust for toolbar height */
+    overflow: auto;
+    box-sizing: border-box;
+}
+
+@media (max-width: 600px) {
+    .main-content {
+        padding: 4px;
+    }
+}

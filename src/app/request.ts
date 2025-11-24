@@ -30,6 +30,13 @@ export class RequestUtil {
 
   static post<T>(url: string, body: any, options?: any, isJson: boolean = true) {
     if (!this.http) throw new Error('RequestUtil not initialized');
-    return firstValueFrom(this.http.post<T>(url, body, options));
+    // If caller expects a non-JSON/text response (e.g. plain string),
+    // set responseType to 'text' so HttpClient returns a string.
+    if (isJson) {
+      return firstValueFrom(this.http.post<T>(url, body, options));
+    } else {
+      const opts = Object.assign({}, options, { responseType: 'text' as 'json' });
+      return firstValueFrom(this.http.post<any>(url, body, opts));
+    }
   }
 }

@@ -147,10 +147,12 @@ export class HomeComponent {
             this.configs.iptvSourceList = { value: [...this.configs.iptvSourceList.value, iptvsource] };
         }
         this.configsService.updateData(this.configs);
+        window.location.reload();
     }
 
     updateConfig() {
         this.configsService.updateData(this.configs);
+        window.location.reload();
     }
 
     pushAlias() {

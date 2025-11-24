@@ -51,8 +51,7 @@ mat-card-content {
 
 th.mat-header-cell {
     position: relative;
-    overflow: hidden; /* Prevent content from spilling out */
-    padding-right: 10px; /* Make space for resizer */
+    padding-right: 14px; /* Make space for resizer */
 }
 
 .resizer {
@@ -60,15 +59,31 @@ th.mat-header-cell {
     top: 0;
     right: 0;
     bottom: 0;
-    width: 20px; /* Increased width for better touch target */
+    width: 14px; /* Increased width for better touch target */
     cursor: col-resize;
     z-index: 100;
     user-select: none;
     touch-action: none; /* Prevent scrolling while resizing */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.resizer::after {
+    content: "";
+    width: 1px;
+    height: 50%;
+    background-color: var(--border-color);
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.resizer:hover::after, .resizer:active::after {
+    opacity: 1;
 }
 
 .resizer:hover, .resizer:active {
-    background-color: var(--border-color);
+    background-color: var(--card-hover-bg);
 }
 
 .time-cell {
@@ -162,4 +177,14 @@ th.mat-header-cell {
     padding: 20px;
     text-align: center;
     color: var(--text-secondary);
+}
+
+@media (max-width: 600px) {
+    .container {
+        padding: 8px;
+    }
+    
+    mat-card-content {
+        padding: 0 8px 16px 8px;
+    }
 }

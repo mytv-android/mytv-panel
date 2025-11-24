@@ -9,6 +9,13 @@
     margin: 0 auto;
     align-items: center;
     width: 100%;
+    overflow: hidden; /* Ensure card doesn't overflow container */
+}
+
+mat-card-content {
+    width: 100%;
+    box-sizing: border-box;
+    overflow: hidden; /* Prevent content from expanding card */
 }
 
 .setting-item {
@@ -37,8 +44,55 @@
 
 @media (max-width: 600px) {
     .url-line {
-        max-width: 200px;
+        max-width: 120px; /* Aggressively limit width on mobile */
     }
+    
+    .container {
+        padding: 8px;
+    }
+    
+    mat-card-content {
+        padding: 0 8px 16px 8px;
+    }
+
+    /* Allow wrapping for setting items */
+    .setting-item {
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    /* Make form fields full width in settings */
+    .setting-item mat-form-field {
+        width: 100%;
+        margin-bottom: 0;
+    }
+
+    /* Fix Paginator overflow */
+    ::ng-deep .mat-mdc-paginator-container {
+        flex-wrap: wrap !important;
+        justify-content: center !important;
+        padding: 0 !important;
+        min-height: auto !important;
+    }
+
+    ::ng-deep .mat-mdc-paginator-page-size {
+        margin-right: 8px !important;
+    }
+
+    ::ng-deep .mat-mdc-paginator-range-label {
+        margin: 0 8px !important;
+    }
+}
+
+/* Ensure list content shrinks properly */
+::ng-deep .mat-mdc-list-item-content {
+    min-width: 0;
+}
+
+::ng-deep .mat-mdc-list-item-title {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .setting-block {

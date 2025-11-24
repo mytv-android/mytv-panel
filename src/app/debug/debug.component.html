@@ -14,10 +14,14 @@
         <mat-slide-toggle [ngModel]="configs.data().debugShowVideoPlayerMetadata" (ngModelChange)="toggleShowVideoPlayerMetadata()">
         </mat-slide-toggle>
       </div>
-      <div class="setting-item no-border">
+      <div class="setting-item">
         <span>{{ 'DEBUG.SHOW_LAYOUT_GRIDS' | translate }}</span>
         <mat-slide-toggle [ngModel]="configs.data().debugShowLayoutGrids" (ngModelChange)="toggleShowLayoutGrids()">
         </mat-slide-toggle>
+      </div>
+      <div class="setting-item clickable no-border" (click)="exportData()">
+        <span>{{ 'DEBUG.EXPORT_LOGCAT' | translate }}</span>
+        <mat-icon>chevron_right</mat-icon>
       </div>
     </mat-card-content>
   </mat-card>

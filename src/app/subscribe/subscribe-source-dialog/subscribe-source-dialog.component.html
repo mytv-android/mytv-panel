@@ -62,6 +62,6 @@
 <mat-dialog-actions align="end">
     <button mat-button (click)="onCancel()">{{ 'HOME.CLOSE' | translate }}</button>
     <button mat-flat-button color="primary" (click)="onSave()" [disabled]="!source.name || !source.url">
-        {{ 'HOME.ADD' | translate }}
+        {{ (isEdit ? 'HOME.SAVE' : 'HOME.ADD') | translate }}
     </button>
 </mat-dialog-actions>

@@ -47,3 +47,13 @@ mat-card-content {
     color: var(--text-secondary);
     margin-top: 4px;
 }
+
+@media (max-width: 600px) {
+    .container {
+        padding: 8px;
+    }
+    
+    mat-card-content {
+        padding: 0 8px 16px 8px;
+    }
+}

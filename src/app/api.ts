@@ -2,7 +2,7 @@ import { Injectable, signal, Inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { RequestUtil } from './request';
 
-const prefix = 'http://192.168.6.124:10591/' //
+const prefix = '/' // 'http://192.168.6.124:10591/' //
 
 export const AppApi = {
     getAbout() {
@@ -11,6 +11,10 @@ export const AppApi = {
 
     getLogs() {
         return RequestUtil.get<AppLog[]>(`${prefix}api/logs`)
+    },
+
+    getLogcat() {
+        return RequestUtil.getText(`${prefix}api/logcat`)
     },
 
     getConfigs() {
@@ -26,11 +30,11 @@ export const AppApi = {
     },
 
     writeFileContent(path: string, content: string) {
-        return RequestUtil.post(`${prefix}api/file/content`, { path, content })
+        return RequestUtil.post<string>(`${prefix}api/file/content`, { path, content }, undefined, false)
     },
 
     writeFileContentWithDir(dir: string, filename: string, content: string) {
-        return RequestUtil.post<string>(`${prefix}api/file/content-with-dir`, { dir, filename, content })
+        return RequestUtil.post<string>(`${prefix}api/file/content-with-dir`, { dir, filename, content }, undefined, false)
     },
 
     uploadApk(file: File) {

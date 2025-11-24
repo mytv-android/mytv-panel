@@ -89,3 +89,13 @@ mat-card-content {
 mat-icon {
     color: #ccc;
 }
+
+@media (max-width: 600px) {
+    .container {
+        padding: 8px;
+    }
+    
+    mat-card-content {
+        padding: 0 8px 16px 8px;
+    }
+}
