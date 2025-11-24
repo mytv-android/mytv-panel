@@ -110,13 +110,13 @@ body {
 
 /* Form Fields */
 .mat-mdc-form-field {
-    --mdc-filled-text-field-container-color: var(--input-bg);
-    --mdc-filled-text-field-input-text-color: var(--text-color);
-    --mdc-filled-text-field-label-text-color: var(--text-secondary);
+    --mat-form-field-filled-container-color: var(--input-bg);
+    --mat-form-field-filled-input-text-color: var(--text-color);
+    --mat-form-field-filled-label-text-color: var(--text-secondary);
     --mat-select-trigger-text-color: var(--text-color);
-    --mdc-outlined-text-field-outline-color: var(--border-color);
-    --mdc-outlined-text-field-input-text-color: var(--text-color);
-    --mdc-outlined-text-field-caret-color: var(--text-color);
+    --mat-form-field-outlined-outline-color: var(--border-color);
+    --mat-form-field-outlined-input-text-color: var(--text-color);
+    --mat-form-field-outlined-caret-color: var(--text-color);
 }
 
 /* Select Panel */
