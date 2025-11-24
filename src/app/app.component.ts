@@ -1,7 +1,7 @@
-import { Component, inject, PLATFORM_ID, OnInit } from '@angular/core';
+import { Component, inject, PLATFORM_ID, OnInit, DOCUMENT } from '@angular/core';
 import { RouterOutlet, RouterLink, Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { TranslateService, TranslateModule } from '@ngx-translate/core';
-import { isPlatformBrowser, DOCUMENT } from '@angular/common';
+import { isPlatformBrowser } from '@angular/common';
 import { Title } from '@angular/platform-browser';
 import { filter, map, mergeMap } from 'rxjs/operators';
 
