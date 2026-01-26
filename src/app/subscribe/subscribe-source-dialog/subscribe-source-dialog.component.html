@@ -54,6 +54,15 @@
       </div>
     }
 
+    @if (source.sourceType === 3) {
+      <div class="form-row">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>{{ 'HOME.MAC_ADDRESS' | translate }}</mat-label>
+          <input matInput [(ngModel)]="source.mac">
+        </mat-form-field>
+      </div>
+    }
+
     @if (source.sourceType !== 1) {
       <mat-form-field appearance="outline" class="full-width">
         <mat-label>{{ 'HOME.USER_AGENT' | translate }}</mat-label>

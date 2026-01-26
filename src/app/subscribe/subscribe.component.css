@@ -148,6 +148,10 @@ mat-card-content {
     background-color: #9C27B0; /* Purple */
 }
 
+.badge-stalker {
+    background-color: #E91E63; /* Pink */
+}
+
 .badge-file {
     background-color: #FF9800; /* Orange */
 }

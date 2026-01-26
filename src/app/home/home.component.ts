@@ -55,7 +55,8 @@ export class HomeComponent {
         password: '',
         format: 'm3u_plus',
         url: '',
-        ua: ''
+        ua: '',
+        mac: ''
     };
 
     epgSource = {
@@ -87,6 +88,8 @@ export class HomeComponent {
 
     cloudSyncProvider = CloudSyncProvider;
 
+    subscriptionFileName = ''; // Added: Store selected file name
+
     constructor(@Inject(PLATFORM_ID) private platformId: Object) {
         this.breakpointObserver.observe([Breakpoints.Handset, Breakpoints.Small, '(max-width: 600px)']).subscribe(result => {
             this.isSmallScreen = result.matches;
@@ -114,15 +117,21 @@ export class HomeComponent {
             type = 0;
         else if (this.subscription.type === 'xtream')
             type = 2;
+        else if (this.subscription.type === 'stalker')
+            type = 3;
         else
             type = 1;
         var usrName = undefined;
         var passwrd = undefined;
         var format = undefined;
-        if (type === 1) {
+        var mac = undefined;
+        if (type === 2) {
             usrName = this.subscription.userName;
             passwrd = this.subscription.password;
             format = this.subscription.format;
+        }
+        if (type === 3) {
+            mac = this.subscription.mac;
         }
         if (!this.subscription.name) {
             const dateStr = new Date().toLocaleString();
@@ -139,7 +148,8 @@ export class HomeComponent {
             password: passwrd,
             format: format,
             transformJs: undefined,
-            httpUserAgent: this.subscription.ua
+            httpUserAgent: this.subscription.ua,
+            mac: mac
         };
         if (this.configs.iptvSourceList === undefined) {
             this.configs.iptvSourceList = { value: [iptvsource] };
@@ -182,6 +192,24 @@ export class HomeComponent {
             this.configs.epgSourceList = { value: [...this.configs.epgSourceList.value, epgSource] };
         }
         this.configsService.updateData(this.configs);
+    }
+
+    onSubscriptionFileSelected(event: Event): void {
+        const input = event.target as HTMLInputElement;
+        if (!input || !input.files || input.files.length === 0) return;
+        const file = input.files[0];
+        this.subscriptionFileName = file.name;
+        const reader = new FileReader();
+        reader.onload = () => {
+            this.subscription.url = reader.result as string || '';
+            if (this.subscription.name === this.initName) {
+                this.subscription.name = file.name;
+            }
+        };
+        reader.onerror = (err) => {
+            console.error('Failed to read file', err);
+        };
+        reader.readAsText(file);
     }
 
     selectedFile: File | null = null;

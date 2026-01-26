@@ -13,6 +13,17 @@
         <mat-slide-toggle [(ngModel)]="configs.epgEnable" (change)="updateConfig()"></mat-slide-toggle>
       </div>
 
+        <!-- Always Show EPG In Classic Channel Screen -->
+        @if (configs.uiUseClassicPanelScreen) {
+        <div class="setting-item">
+          <div class="setting-text">
+            <span class="setting-title">{{ 'EPG.ALWAYS_SHOW_IN_CLASSIC' | translate }}</span>
+            <span class="setting-desc">{{ 'EPG.ALWAYS_SHOW_IN_CLASSIC_DESC' | translate }}</span>
+          </div>
+          <mat-slide-toggle [(ngModel)]="configs.alwaysShowEPGInClassicChannelScreen" (change)="updateConfig()"></mat-slide-toggle>
+        </div>
+        }
+
       <!-- Follow Subscription Source -->
       <div class="setting-item">
         <div class="setting-text">

@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, ViewChild, ElementRef } from '@angular/core';
 
 import { FormsModule } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
@@ -34,6 +34,7 @@ export class SubscribeSourceDialogComponent {
     { value: 0, label: 'HOME.REMOTE' },
     { value: 2, label: 'HOME.XTREAM' },
     { value: 1, label: 'HOME.FILE' },
+    { value: 3, label: 'HOME.STALKER' },
   ];
 
   constructor(

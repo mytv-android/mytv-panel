@@ -2,7 +2,7 @@ import { Injectable, signal, Inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { RequestUtil } from './request';
 
-const prefix =   '/' // 'http://192.168.6.124:10591/' //
+const prefix = '/' //  'http://192.168.6.124:10591/' //
 
 export const AppApi = {
     getAbout() {
@@ -114,6 +114,7 @@ export interface AppConfigs {
     epgRefreshTimeThreshold?: number
     epgSourceFollowIptv?: boolean
     epgSourceLoadAll?: boolean
+    alwaysShowEPGInClassicChannelScreen?: boolean
     epgChannelReserveList?: EpgProgrammeReserveList
     uiShowEpgProgrammeProgress?: boolean
     uiShowEpgProgrammePermanentProgress?: boolean
@@ -208,6 +209,7 @@ export enum KeyDownAction {
     ToEpgScreen = 'ToEpgScreen',
     ToChannelLineScreen = 'ToChannelLineScreen',
     ToVideoPlayerControllerScreen = 'ToVideoPlayerControllerScreen',
+    NoAction = 'NoAction',
 }
 
 export const KeyDownActionLabels: { [key in KeyDownAction]: string } = {
@@ -221,6 +223,7 @@ export const KeyDownActionLabels: { [key in KeyDownAction]: string } = {
     [KeyDownAction.ToEpgScreen]: 'SETTINGS.KEY_DOWN_ACTION.ToEpgScreen',
     [KeyDownAction.ToChannelLineScreen]: 'SETTINGS.KEY_DOWN_ACTION.ToChannelLineScreen',
     [KeyDownAction.ToVideoPlayerControllerScreen]: 'SETTINGS.KEY_DOWN_ACTION.ToVideoPlayerControllerScreen',
+    [KeyDownAction.NoAction]: 'SETTINGS.KEY_DOWN_ACTION.NoAction',
 }
 export enum WebViewCore {
     SYSTEM = 'SYSTEM',
@@ -271,6 +274,7 @@ export interface IptvSource {
     format?: string
     transformJs?: string
     httpUserAgent?: string
+    mac?: string
 }
 
 export interface IptvSourceList {
@@ -362,6 +366,7 @@ export enum CloudSyncProvider {
 export enum AppStartupScreen {
     Dashboard = 'Dashboard',
     Live = 'Live',
+    EpgGuide = 'EpgGuide',
     Channels = 'Channels',
     Favorites = 'Favorites',
     Search = 'Search',
@@ -371,6 +376,7 @@ export enum AppStartupScreen {
 export const AppStartupScreenLabels: { [key in AppStartupScreen]: string } = {
     [AppStartupScreen.Dashboard]: 'GENERAL.STARTUP_SCREENS.Dashboard',
     [AppStartupScreen.Live]: 'GENERAL.STARTUP_SCREENS.Live',
+    [AppStartupScreen.EpgGuide]: 'GENERAL.STARTUP_SCREENS.EpgGuide',
     [AppStartupScreen.Channels]: 'GENERAL.STARTUP_SCREENS.Channels',
     [AppStartupScreen.Favorites]: 'GENERAL.STARTUP_SCREENS.Favorites',
     [AppStartupScreen.Search]: 'GENERAL.STARTUP_SCREENS.Search',

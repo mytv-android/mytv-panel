@@ -45,6 +45,7 @@
         <mat-button-toggle-group [(ngModel)]="subscription.type" [vertical]="isSmallScreen">
           <mat-button-toggle value="remote">{{ 'HOME.REMOTE' | translate }}</mat-button-toggle>
           <mat-button-toggle value="xtream">{{ 'HOME.XTREAM' | translate }}</mat-button-toggle>
+          <mat-button-toggle value="stalker">{{ 'HOME.STALKER' | translate }}</mat-button-toggle>
           <mat-button-toggle value="file">{{ 'HOME.FILE' | translate }}</mat-button-toggle>
           <mat-button-toggle value="content">{{ 'HOME.CONTENT' | translate }}</mat-button-toggle>
         </mat-button-toggle-group>
@@ -57,11 +58,20 @@
         </mat-form-field>
       </div>
 
-      @if (subscription.type === 'remote' || subscription.type === 'xtream') {
+      @if (subscription.type === 'remote' || subscription.type === 'xtream' || subscription.type === 'stalker') {
         <div class="form-row">
           <mat-form-field appearance="outline" class="full-width">
             <mat-label>{{ 'HOME.LINK' | translate }}</mat-label>
             <input matInput [(ngModel)]="subscription.url" placeholder="{{ 'HOME.LINK' | translate }}">
+          </mat-form-field>
+        </div>
+      }
+
+      @if (subscription.type === 'stalker') {
+        <div class="form-row">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>{{ 'HOME.MAC_ADDRESS' | translate }}</mat-label>
+            <input matInput [(ngModel)]="subscription.mac" placeholder="{{ 'HOME.MAC_ADDRESS' | translate }}">
           </mat-form-field>
         </div>
       }
@@ -76,6 +86,11 @@
       }
 
       @if (subscription.type === 'content') {
+        <div class="form-row">
+          <button mat-stroked-button type="button" (click)="subFileInput.click()">{{ 'HOME.SELECT_FILE' | translate }}</button>
+          <span style="margin-left: 10px;" *ngIf="subscriptionFileName">{{ subscriptionFileName }}</span>
+          <input #subFileInput type="file" style="display:none" (change)="onSubscriptionFileSelected($event)" />
+        </div>
         <div class="form-row">
           <app-textarea-with-lines class="full-width" [(ngModel)]="subscription.url" [rows]="5" label="{{ 'HOME.CONTENT_LABEL' | translate }}"></app-textarea-with-lines>
         </div>

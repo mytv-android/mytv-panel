@@ -213,6 +213,7 @@ export class SubscribeComponent {
             case 0: return 'HOME.REMOTE';
             case 2: return 'HOME.XTREAM';
             case 1: return 'HOME.FILE';
+            case 3: return 'HOME.STALKER';
             default: return 'Unknown';
         }
     }
@@ -222,6 +223,7 @@ export class SubscribeComponent {
             case 0: return 'badge-remote';
             case 2: return 'badge-xtream';
             case 1: return 'badge-file';
+            case 3: return 'badge-stalker';
             default: return 'badge-default';
         }
     }

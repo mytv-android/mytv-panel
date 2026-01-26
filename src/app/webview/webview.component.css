@@ -35,7 +35,7 @@ mat-form-field {
 
 .setting-hint {
     font-size: 12px;
-    color: rgba(0, 0, 0, 0.54);
+    color: var(--text-secondary);
     margin-top: 4px;
     max-width: 80%;
 }

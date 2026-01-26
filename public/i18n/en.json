@@ -45,9 +45,12 @@
     "TYPE": "Type",
     "REMOTE": "Remote",
     "XTREAM": "Xtream",
+    "STALKER": "Stalker Portal",
+    "MAC_ADDRESS": "MAC Address",
     "FILE": "File",
     "CONTENT": "Static Content",
     "NAME": "Name",
+    "SELECT_FILE": "Select File",
     "LINK": "Link",
     "FILE_PATH": "File Path",
     "CONTENT_LABEL": "Content",
@@ -123,6 +126,7 @@
     "STARTUP_SCREENS": {
         "Dashboard": "Dashboard",
         "Live": "Live",
+        "EpgGuide": "EPG Guide",
         "Channels": "Channels",
         "Favorites": "Favorites",
         "Search": "Search",
@@ -238,7 +242,8 @@
         "ToQuickOpScreen": "Open Quick Actions",
         "ToEpgScreen": "Open EPG",
         "ToChannelLineScreen": "Open Line List",
-        "ToVideoPlayerControllerScreen": "Open Player Controller"
+        "ToVideoPlayerControllerScreen": "Open Player Controller",
+        "NoAction": "No Action"
     }
   },
   "UI": {
@@ -273,6 +278,8 @@
   "EPG": {
     "ENABLE": "Enable EPG",
     "ENABLE_DESC": "May be slow on first load",
+    "ALWAYS_SHOW_IN_CLASSIC": "Always show EPG in classic channel screen",
+    "ALWAYS_SHOW_IN_CLASSIC_DESC": "If enabled, the classic channel screen will always display the EPG.",
     "FOLLOW_SOURCE": "Follow Subscription Source",
     "FOLLOW_SOURCE_DESC": "Prioritize EPG defined in subscription source",
     "LOAD_ALL": "Load All EPGs",

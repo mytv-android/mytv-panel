@@ -45,9 +45,12 @@
     "TYPE": "النوع",
     "REMOTE": "عن بعد",
     "XTREAM": "Xtream",
+    "STALKER": "Stalker Portal",
+    "MAC_ADDRESS": "عنوان MAC",
     "FILE": "ملف",
     "CONTENT": "محتوى ثابت",
     "NAME": "الاسم",
+    "SELECT_FILE": "اختر ملف",
     "LINK": "الرابط",
     "FILE_PATH": "مسار الملف",
     "CONTENT_LABEL": "المحتوى",
@@ -122,6 +125,7 @@
     "STARTUP_SCREENS": {
         "Dashboard": "لوحة القيادة",
         "Live": "بث مباشر",
+        "EpgGuide": "دليل البرامج",
         "Channels": "القنوات",
         "Favorites": "المفضلة",
         "Search": "بحث",
@@ -230,7 +234,8 @@
         "ToQuickOpScreen": "فتح الإجراءات السريعة",
         "ToEpgScreen": "فتح دليل البرامج",
         "ToChannelLineScreen": "فتح قائمة الخطوط",
-        "ToVideoPlayerControllerScreen": "فتح وحدة تحكم المشغل"
+        "ToVideoPlayerControllerScreen": "فتح وحدة تحكم المشغل",
+        "NoAction": "لا إجراء"
     }
   },
   "UI": {
@@ -265,6 +270,8 @@
   "EPG": {
     "ENABLE": "تمكين دليل البرامج",
     "ENABLE_DESC": "قد يكون بطيئاً عند التحميل الأول",
+    "ALWAYS_SHOW_IN_CLASSIC": "عرض دليل البرامج دائماً في شاشة القنوات الكلاسيكية",
+    "ALWAYS_SHOW_IN_CLASSIC_DESC": "عند التفعيل، ستعرض واجهة اختيار القنوات الكلاسيكية دليل البرامج دائماً",
     "FOLLOW_SOURCE": "اتباع مصدر الاشتراك",
     "FOLLOW_SOURCE_DESC": "إعطاء الأولوية لدليل البرامج المحدد في مصدر الاشتراك",
     "LOAD_ALL": "تحميل كل أدلة البرامج",

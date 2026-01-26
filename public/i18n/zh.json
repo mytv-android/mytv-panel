@@ -45,9 +45,12 @@
     "TYPE": "类型",
     "REMOTE": "远程",
     "XTREAM": "Xtream",
+    "STALKER": "Stalker Portal",
+    "MAC_ADDRESS": "MAC地址",
     "FILE": "文件",
     "CONTENT": "静态内容",
     "NAME": "名称",
+    "SELECT_FILE": "选择文件",
     "LINK": "链接",
     "FILE_PATH": "文件路径",
     "CONTENT_LABEL": "内容",
@@ -123,6 +126,7 @@
     "STARTUP_SCREENS": {
         "Dashboard": "首页",
         "Live": "直播",
+        "EpgGuide": "节目单",
         "Channels": "全部频道",
         "Favorites": "收藏",
         "Search": "搜索",
@@ -238,7 +242,8 @@
         "ToQuickOpScreen": "打开快捷操作",
         "ToEpgScreen": "打开节目单",
         "ToChannelLineScreen": "打开线路列表",
-        "ToVideoPlayerControllerScreen": "打开播放控制器"
+        "ToVideoPlayerControllerScreen": "打开播放控制器",
+        "NoAction": "无操作"
     }
   },
   "UI": {
@@ -273,6 +278,8 @@
   "EPG": {
     "ENABLE": "节目单启用",
     "ENABLE_DESC": "首次加载时可能会较为缓慢",
+    "ALWAYS_SHOW_IN_CLASSIC": "经典选台界面始终显示节目单",
+    "ALWAYS_SHOW_IN_CLASSIC_DESC": "开启后，经典选台界面将始终显示节目单。",
     "FOLLOW_SOURCE": "跟随订阅源",
     "FOLLOW_SOURCE_DESC": "优先使用订阅源中定义的节目单",
     "LOAD_ALL": "加载全部节目单",
