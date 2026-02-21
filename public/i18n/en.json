@@ -296,6 +296,7 @@
   },
   "SUBSCRIBE": {
     "CACHE_TIME": "Source Cache Time (Hours)",
+    "NO_CACHE_HINT": "0 = No Cache",
     "HIDDEN_GROUPS": "Hidden Channel Groups",
     "MERGE_SIMILAR": "Merge Similar Channels",
     "ICON_OVERRIDE": "Channel Icon Override",

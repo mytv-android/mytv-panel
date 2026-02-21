@@ -64,7 +64,7 @@
           <span class="setting-label">{{ 'SUBSCRIBE.CACHE_TIME' | translate }}</span>
           <mat-form-field appearance="outline" style="width: 150px; margin-bottom: -1.25em;">
             <input matInput type="number" [(ngModel)]="cacheTimeInHours" min="0">
-            <mat-hint>0 = No Cache</mat-hint>
+            <mat-hint>{{ 'SUBSCRIBE.NO_CACHE_HINT' | translate }}</mat-hint>
           </mat-form-field>
         </div>
 
