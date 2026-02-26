@@ -4,12 +4,15 @@ import { provideHttpClient, withFetch } from '@angular/common/http';
 import { provideTranslateService, TranslateLoader } from "@ngx-translate/core";
 import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { MatPaginatorIntl } from '@angular/material/paginator';
 
 import { routes } from './app.routes';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
+import { CustomPaginatorIntl } from './log/custom-paginator-intl';
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    { provide: MatPaginatorIntl, useClass: CustomPaginatorIntl },
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideClientHydration(withEventReplay()),

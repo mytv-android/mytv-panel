@@ -46,6 +46,12 @@ body {
     font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
+html[lang="ar"],
+html[lang="ar"] body,
+html[lang="ar"] *:not(.mat-icon):not(.material-icons) {
+    font-family: "Tajawal", Roboto, "Helvetica Neue", sans-serif !important;
+}
+
 /* CSS Variables - Material 3 Inspired */
 :root {
     --bg-color: #FDFDF5;
