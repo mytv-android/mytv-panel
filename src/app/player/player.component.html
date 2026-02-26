@@ -7,7 +7,7 @@
       <div class="setting-item">
         <span>{{ 'PLAYER.CORE' | translate }}</span>
         <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
-          <mat-select [(ngModel)]="configs.videoPlayerCore" (selectionChange)="updateConfig()">
+          <mat-select [(ngModel)]="configs.globalVideoPlayerCore" (selectionChange)="updateConfig()">
             @for (core of videoPlayerCores; track core) {
               <mat-option [value]="core">
                 {{ 'SETTINGS.VIDEO_PLAYER_CORE.' + core | translate }}
@@ -32,10 +32,69 @@
 
       <div class="setting-item">
         <div class="setting-label">
+          <span>{{ 'PLAYER.DECODER_CONFIG' | translate }}</span>
+          <span class="setting-desc">{{ 'PLAYER.DECODER_CONFIG_DESC' | translate }}</span>
+        </div>
+        <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
+          <mat-select [(ngModel)]="configs.videoPlayerDecoderConfig" (selectionChange)="updateConfig()">
+            @for (config of videoPlayerDecoderConfigs; track config) {
+              <mat-option [value]="config">
+                {{ 'SETTINGS.VIDEO_PLAYER_DECODER_CONFIG.' + config | translate }}
+              </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="setting-item">
+        <div class="setting-label">
+          <span>{{ 'PLAYER.DECODER_CONFIG_REGEX_LIST' | translate }}</span>
+        </div>
+        <div style="width: 100%; display: flex; flex-direction: column; gap: 10px; margin-top: 10px;">
+            @if (configs.videoPlayerDecoderConfigRegexList?.list) {
+                @for (item of configs.videoPlayerDecoderConfigRegexList!.list; track $index) {
+                    <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+                        <mat-form-field appearance="outline" style="flex: 1; min-width: 200px; margin-bottom: -1.25em;">
+                            <mat-label>{{ 'PLAYER.REGEX_PATTERN' | translate }}</mat-label>
+                            <input matInput [(ngModel)]="item.pattern" (change)="updateConfig()">
+                        </mat-form-field>
+                        
+                        <mat-form-field appearance="outline" style="width: 150px; margin-bottom: -1.25em;">
+                            <mat-label>{{ 'PLAYER.CORE' | translate }}</mat-label>
+                            <mat-select [(ngModel)]="item.core" (selectionChange)="updateConfig()">
+                                @for (core of videoPlayerCores; track core) {
+                                    <mat-option [value]="core">
+                                        {{ 'SETTINGS.VIDEO_PLAYER_CORE.' + core | translate }}
+                                    </mat-option>
+                                }
+                            </mat-select>
+                        </mat-form-field>
+
+                        <div style="display: flex; align-items: center;">
+                            <mat-slide-toggle [(ngModel)]="item.forceSoftDecode" (change)="updateConfig()">
+                                {{ 'PLAYER.FORCE_SOFT_DECODE' | translate }}
+                            </mat-slide-toggle>
+                        </div>
+
+                        <button mat-icon-button (click)="removeDecoderConfig($index)">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </div>
+                }
+            }
+            <button mat-flat-button (click)="addDecoderConfig()">
+                <mat-icon>add</mat-icon>
+                {{ 'PLAYER.ADD_CONFIG' | translate }}
+            </button>
+        </div>
+      </div>
+
+      <div class="setting-item">
+        <div class="setting-label">
           <span>{{ 'PLAYER.FORCE_SOFT_DECODE' | translate }}</span>
           <span class="setting-desc">{{ 'PLAYER.FORCE_SOFT_DECODE_DESC' | translate }}</span>
         </div>
-        <mat-slide-toggle [(ngModel)]="configs.videoPlayerForceSoftDecode" (change)="updateConfig()"></mat-slide-toggle>
+        <mat-slide-toggle [(ngModel)]="configs.globalVideoPlayerForceSoftDecode" (change)="updateConfig()"></mat-slide-toggle>
       </div>
 
       <div class="setting-item">

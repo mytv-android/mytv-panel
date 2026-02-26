@@ -152,7 +152,12 @@
     "LOAD_TIMEOUT_DESC": "Timeout for loading media (ms)",
     "BUFFER_TIME": "Buffer Time",
     "BUFFER_TIME_DESC": "Media3 and VLC: Min buffer time (s); Ijk: Min buffer frames (f)",
-    "RTSP_TRANSPORT": "RTSP Transport"
+    "RTSP_TRANSPORT": "RTSP Transport",
+    "DECODER_CONFIG": "Remember Player/Decoder Config",
+    "DECODER_CONFIG_DESC": "Changing options clears existing memory settings",
+    "DECODER_CONFIG_REGEX_LIST": "Regex Decoder Config",
+    "REGEX_PATTERN": "Regex Pattern",
+    "ADD_CONFIG": "Add Config"
   },
   "LOG": {
     "TITLE": "App Logs",
@@ -224,6 +229,11 @@
         "SURFACE_VIEW": "SurfaceView",
         "TEXTURE_VIEW": "TextureView"
     },
+    "VIDEO_PLAYER_DECODER_CONFIG": {
+        "0": "None (Do not remember)",
+        "1": "Host (By Host)",
+        "2": "URL (By URL)"
+    },
     "VIDEO_PLAYER_DISPLAY_MODE": {
         "ORIGINAL": "Original",
         "FILL": "Fill",
@@ -283,7 +293,7 @@
     "FOLLOW_SOURCE": "Follow Subscription Source",
     "FOLLOW_SOURCE_DESC": "Prioritize EPG defined in subscription source",
     "LOAD_ALL": "Load All EPGs",
-    "LOAD_ALL_DESC": "When enabled, the app will load all custom EPGs regardless of subscription source settings. This may cause memory overflow, long loading times, and loading failures.",
+    "LOAD_ALL_DESC": "When enabled, the app will load all custom EPGs. This may cause memory overflow, long loading times, and loading failures.",
     "CUSTOM_EPG": "Custom EPG",
     "REFRESH_THRESHOLD": "Refresh Time Threshold",
     "REFRESH_THRESHOLD_DESC": "EPG will not refresh before {{time}} every day",

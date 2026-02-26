@@ -142,18 +142,20 @@ export interface AppConfigs {
     keyDownEventLongSelect?: KeyDownAction
     updateForceRemind?: boolean
     updateChannel?: string
-    videoPlayerCore?: VideoPlayerCore
+    globalVideoPlayerCore?: VideoPlayerCore
     webViewCore?: WebViewCore
     replaceSystemWebView?: boolean
     videoPlayerRenderMode?: VideoPlayerRenderMode
     videoPlayerRtspTransport?: RtspTransport
+    videoPlayerDecoderConfig?: number
+    videoPlayerDecoderConfigRegexList?: VideoPlayerDecoderConfigList
     videoPlayerUserAgent?: string
     videoPlayerHeaders?: string
     videoPlayerLoadTimeout?: number
     webViewLoadTimeout?: number
     videoPlayerBufferTime?: number
     videoPlayerDisplayMode?: VideoPlayerDisplayMode
-    videoPlayerForceSoftDecode?: boolean
+    globalVideoPlayerForceSoftDecode?: boolean
     videoPlayerStopPreviousMediaItem?: boolean
     videoPlayerSeekToMode?: VideoPlayerSeekToMode
     videoPlayerSkipMultipleFramesOnSameVSync?: boolean
@@ -210,6 +212,16 @@ export enum KeyDownAction {
     ToChannelLineScreen = 'ToChannelLineScreen',
     ToVideoPlayerControllerScreen = 'ToVideoPlayerControllerScreen',
     NoAction = 'NoAction',
+}
+
+export interface VideoPlayerDecoderConfigList {
+    list: VideoPlayerDecoderConfigs[];
+}
+
+export interface VideoPlayerDecoderConfigs {
+    pattern: string;
+    core: VideoPlayerCore;
+    forceSoftDecode: boolean;
 }
 
 export const KeyDownActionLabels: { [key in KeyDownAction]: string } = {
@@ -325,6 +337,18 @@ export const VideoPlayerCoreLabels: { [key in VideoPlayerCore]: string } = {
     [VideoPlayerCore.MEDIA3]: 'SETTINGS.VIDEO_PLAYER_CORE.MEDIA3',
     [VideoPlayerCore.IJK]: 'SETTINGS.VIDEO_PLAYER_CORE.IJK',
     [VideoPlayerCore.VLC]: 'SETTINGS.VIDEO_PLAYER_CORE.VLC',
+}
+
+export enum VideoPlayerDecoderConfig {
+    NONE = 0,
+    HOST = 1,
+    URL = 2,
+}
+
+export const VideoPlayerDecoderConfigLabels: { [key in VideoPlayerDecoderConfig]: string } = {
+    [VideoPlayerDecoderConfig.NONE]: 'SETTINGS.VIDEO_PLAYER_DECODER_CONFIG.NONE',
+    [VideoPlayerDecoderConfig.HOST]: 'SETTINGS.VIDEO_PLAYER_DECODER_CONFIG.HOST',
+    [VideoPlayerDecoderConfig.URL]: 'SETTINGS.VIDEO_PLAYER_DECODER_CONFIG.URL',
 }
 
 export enum VideoPlayerRenderMode {

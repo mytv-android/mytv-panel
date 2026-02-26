@@ -152,7 +152,12 @@
     "LOAD_TIMEOUT_DESC": "加载媒体的超时时间（毫秒）",
     "BUFFER_TIME": "缓冲时间",
     "BUFFER_TIME_DESC": "Media3 和 VLC：播放前最小缓存时间(秒)；Ijk：播放前最小缓存帧(f)",
-    "RTSP_TRANSPORT": "RTSP传输协议"
+    "RTSP_TRANSPORT": "RTSP传输协议",
+    "DECODER_CONFIG": "记忆播放器和解码配置",
+    "DECODER_CONFIG_DESC": "更改选项会清空现有记忆设置",
+    "DECODER_CONFIG_REGEX_LIST": "正则解码配置",
+    "REGEX_PATTERN": "正则规则",
+    "ADD_CONFIG": "添加配置"
   },
   "LOG": {
     "TITLE": "应用日志",
@@ -224,6 +229,11 @@
         "SURFACE_VIEW": "SurfaceView",
         "TEXTURE_VIEW": "TextureView"
     },
+    "VIDEO_PLAYER_DECODER_CONFIG": {
+        "0": "无 (不记忆)",
+        "1": "Host (根据源的主机名区分)",
+        "2": "URL (根据源的链接区分)"
+    },
     "VIDEO_PLAYER_DISPLAY_MODE": {
         "ORIGINAL": "原始",
         "FILL": "填充",
@@ -283,7 +293,7 @@
     "FOLLOW_SOURCE": "跟随订阅源",
     "FOLLOW_SOURCE_DESC": "优先使用订阅源中定义的节目单",
     "LOAD_ALL": "加载全部节目单",
-    "LOAD_ALL_DESC": "启用后，应用将在不跟随订阅源的设置下，加载所有的自定义节目单，这可能会导致内存溢出、加载事件变长和加载失败等问题。",
+    "LOAD_ALL_DESC": "启用后，应用将加载所有的自定义节目单，这可能会导致内存溢出、加载事件变长和加载失败等问题。",
     "CUSTOM_EPG": "自定义节目单",
     "REFRESH_THRESHOLD": "刷新时间阈值",
     "REFRESH_THRESHOLD_DESC": "每天 {{time}} 之前启动应用将不会刷新节目单",

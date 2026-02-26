@@ -6,8 +6,10 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 import { TranslateModule } from '@ngx-translate/core';
-import { ConfigsService, AppConfigs, VideoPlayerCore, VideoPlayerRenderMode, VideoPlayerDisplayMode, VideoPlayerSeekToMode, RtspTransport } from '../api';
+import { ConfigsService, AppConfigs, VideoPlayerCore, VideoPlayerRenderMode, VideoPlayerDisplayMode, VideoPlayerSeekToMode, RtspTransport, VideoPlayerDecoderConfig, VideoPlayerDecoderConfigs } from '../api';
 import { TextareaWithLinesComponent } from '../common/textarea-with-lines/textarea-with-lines.component';
 
 @Component({
@@ -20,6 +22,8 @@ import { TextareaWithLinesComponent } from '../common/textarea-with-lines/textar
     MatSelectModule,
     MatFormFieldModule,
     MatInputModule,
+    MatButtonModule,
+    MatIconModule,
     TranslateModule,
     TextareaWithLinesComponent
 ],
@@ -35,6 +39,7 @@ export class PlayerComponent {
     videoPlayerDisplayModes = Object.values(VideoPlayerDisplayMode);
     videoPlayerSeekToModes = Object.values(VideoPlayerSeekToMode);
     rtspTransports = Object.values(RtspTransport);
+    videoPlayerDecoderConfigs = Object.values(VideoPlayerDecoderConfig).filter(v => typeof v === 'number');
 
     constructor() {
         effect(() => {
@@ -44,5 +49,27 @@ export class PlayerComponent {
 
     updateConfig() {
         this.configsService.updateData(this.configs);
+    }
+
+    addDecoderConfig() {
+        if (!this.configs.videoPlayerDecoderConfigRegexList) {
+            this.configs.videoPlayerDecoderConfigRegexList = { list: [] };
+        }
+        if (!this.configs.videoPlayerDecoderConfigRegexList.list) {
+            this.configs.videoPlayerDecoderConfigRegexList.list = [];
+        }
+        this.configs.videoPlayerDecoderConfigRegexList.list.push({
+            pattern: '',
+            core: VideoPlayerCore.MEDIA3,
+            forceSoftDecode: false
+        });
+        this.updateConfig();
+    }
+
+    removeDecoderConfig(index: number) {
+        if (this.configs.videoPlayerDecoderConfigRegexList?.list) {
+            this.configs.videoPlayerDecoderConfigRegexList.list.splice(index, 1);
+            this.updateConfig();
+        }
     }
 }
