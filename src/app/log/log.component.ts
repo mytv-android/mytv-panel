@@ -2,7 +2,7 @@ import { Component, OnInit, signal, Renderer2, OnDestroy, ViewChild, AfterViewIn
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatTableModule, MatTableDataSource } from '@angular/material/table';
-import { MatPaginatorModule, MatPaginator, MatPaginatorIntl } from '@angular/material/paginator';
+import { MatPaginatorModule, MatPaginator } from '@angular/material/paginator';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
@@ -11,8 +11,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { AppApi, AppLog } from '../api';
-import { CustomPaginatorIntl } from './custom-paginator-intl';
-
 @Component({
   selector: 'app-log',
   standalone: true,
@@ -28,9 +26,6 @@ import { CustomPaginatorIntl } from './custom-paginator-intl';
     MatIconModule,
     FormsModule,
     TranslateModule
-  ],
-  providers: [
-    { provide: MatPaginatorIntl, useClass: CustomPaginatorIntl }
   ],
   templateUrl: './log.component.html',
   styleUrl: './log.component.css'

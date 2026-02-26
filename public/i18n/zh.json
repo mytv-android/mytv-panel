@@ -296,6 +296,7 @@
   },
   "SUBSCRIBE": {
     "CACHE_TIME": "订阅源缓存时间 (小时)",
+    "NO_CACHE_HINT": "0 = 无缓存",
     "HIDDEN_GROUPS": "频道隐藏分组",
     "MERGE_SIMILAR": "相似频道合并",
     "ICON_OVERRIDE": "频道图标覆盖",
