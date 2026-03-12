@@ -109,9 +109,9 @@
     "CHANNEL": "更新通道",
     "FORCE_REMIND": "更新强提醒",
     "CHANNELS": {
-        "STABLE": "稳定版本",
-        "BETA": "预览版本",
-        "DEV": "开发版本"
+      "STABLE": "稳定版本",
+      "BETA": "预览版本",
+      "DEV": "开发版本"
     }
   },
   "NETWORK": {
@@ -124,13 +124,13 @@
     "BOOT_LAUNCH": "开机自启",
     "STARTUP_SCREEN": "启动页面",
     "STARTUP_SCREENS": {
-        "Dashboard": "首页",
-        "Live": "直播",
-        "EpgGuide": "节目单",
-        "Channels": "全部频道",
-        "Favorites": "收藏",
-        "Search": "搜索",
-        "MultiView": "多屏同播"
+      "Dashboard": "首页",
+      "Live": "直播",
+      "EpgGuide": "节目单",
+      "Channels": "全部频道",
+      "Favorites": "收藏",
+      "Search": "搜索",
+      "MultiView": "多屏同播"
     },
     "PIP": "画中画"
   },
@@ -157,7 +157,12 @@
     "DECODER_CONFIG_DESC": "更改选项会清空现有记忆设置",
     "DECODER_CONFIG_REGEX_LIST": "正则解码配置",
     "REGEX_PATTERN": "正则规则",
-    "ADD_CONFIG": "添加配置"
+    "ADD_CONFIG": "添加配置",
+    "DNS": "自定义DNS",
+    "DNS_DESC": "仅Media3内核生效",
+    "PROXY": "HTTP代理",
+    "PROXY_RULES": "代理规则",
+    "PROXY_RULES_COUNT": "共{{count}}条规则"
   },
   "LOG": {
     "TITLE": "应用日志",
@@ -198,62 +203,62 @@
   },
   "SETTINGS": {
     "IPTV_HYBRID_MODE": {
-        "DISABLE": "禁用",
-        "IPTV_FIRST": "IPTV优先",
-        "HYBRID_FIRST": "网页源优先"
+      "DISABLE": "禁用",
+      "IPTV_FIRST": "IPTV优先",
+      "HYBRID_FIRST": "网页源优先"
     },
     "TIME_SHOW_MODE": {
-        "HIDDEN": "隐藏",
-        "ALWAYS": "常显",
-        "EVERY_HOUR": "整点",
-        "HALF_HOUR": "半点"
+      "HIDDEN": "隐藏",
+      "ALWAYS": "常显",
+      "EVERY_HOUR": "整点",
+      "HALF_HOUR": "半点"
     },
     "VIDEO_PLAYER_CORE": {
-        "MEDIA3": "Media3",
-        "IJK": "IjkPlayer",
-        "VLC": "VLC"
+      "MEDIA3": "Media3",
+      "IJK": "IjkPlayer",
+      "VLC": "VLC"
     },
     "WEB_VIEW_CORE": {
-        "SYSTEM": "Android",
-        "X5": "TBS X5"
+      "SYSTEM": "Android",
+      "X5": "TBS X5"
     },
     "RTSP_TRANSPORT": {
-        "TCP": "TCP",
-        "UDP": "UDP"
+      "TCP": "TCP",
+      "UDP": "UDP"
     },
     "VIDEO_PLAYER_SEEK_TO_MODE": {
-        "RELOAD_URL": "重载URL跳转",
-        "SEEK_TO": "播放器seekTo跳转"
+      "RELOAD_URL": "重载URL跳转",
+      "SEEK_TO": "播放器seekTo跳转"
     },
     "VIDEO_PLAYER_RENDER_MODE": {
-        "SURFACE_VIEW": "SurfaceView",
-        "TEXTURE_VIEW": "TextureView"
+      "SURFACE_VIEW": "SurfaceView",
+      "TEXTURE_VIEW": "TextureView"
     },
     "VIDEO_PLAYER_DECODER_CONFIG": {
-        "0": "无 (不记忆)",
-        "1": "Host (根据源的主机名区分)",
-        "2": "URL (根据源的链接区分)"
+      "0": "无 (不记忆)",
+      "1": "Host (根据源的主机名区分)",
+      "2": "URL (根据源的链接区分)"
     },
     "VIDEO_PLAYER_DISPLAY_MODE": {
-        "ORIGINAL": "原始",
-        "FILL": "填充",
-        "CROP": "裁剪",
-        "FOUR_THREE": "4:3",
-        "SIXTEEN_NINE": "16:9",
-        "WIDE": "2.35:1"
+      "ORIGINAL": "原始",
+      "FILL": "填充",
+      "CROP": "裁剪",
+      "FOUR_THREE": "4:3",
+      "SIXTEEN_NINE": "16:9",
+      "WIDE": "2.35:1"
     },
     "KEY_DOWN_ACTION": {
-        "ChangeCurrentChannelToPrev": "切换上一个频道",
-        "ChangeCurrentChannelToNext": "切换下一个频道",
-        "ChangeCurrentChannelLineIdxToPrev": "切换上一条线路",
-        "ChangeCurrentChannelLineIdxToNext": "切换下一条线路",
-        "ToIptvSourceScreen": "打开直播源设置",
-        "ToChannelScreen": "打开频道列表",
-        "ToQuickOpScreen": "打开快捷操作",
-        "ToEpgScreen": "打开节目单",
-        "ToChannelLineScreen": "打开线路列表",
-        "ToVideoPlayerControllerScreen": "打开播放控制器",
-        "NoAction": "无操作"
+      "ChangeCurrentChannelToPrev": "切换上一个频道",
+      "ChangeCurrentChannelToNext": "切换下一个频道",
+      "ChangeCurrentChannelLineIdxToPrev": "切换上一条线路",
+      "ChangeCurrentChannelLineIdxToNext": "切换下一条线路",
+      "ToIptvSourceScreen": "打开直播源设置",
+      "ToChannelScreen": "打开频道列表",
+      "ToQuickOpScreen": "打开快捷操作",
+      "ToEpgScreen": "打开节目单",
+      "ToChannelLineScreen": "打开线路列表",
+      "ToVideoPlayerControllerScreen": "打开播放控制器",
+      "NoAction": "无操作"
     }
   },
   "UI": {
@@ -308,17 +313,23 @@
     "CACHE_TIME": "订阅源缓存时间 (小时)",
     "NO_CACHE_HINT": "0 = 无缓存",
     "HIDDEN_GROUPS": "频道隐藏分组",
+    "HIDDEN_CHANNELS": "频道隐藏列表",
     "MERGE_SIMILAR": "相似频道合并",
     "ICON_OVERRIDE": "频道图标覆盖",
     "PLTV_TO_TVOD": "PLTV转TVOD",
     "AUTO_ADD_WEB_SOURCE": "自动添加网页源",
     "ADD_HIDDEN_GROUP": "添加隐藏分组",
+    "EDIT_HIDDEN_GROUP": "编辑隐藏分组",
+    "ADD_HIDDEN_CHANNEL": "添加隐藏频道",
+    "EDIT_HIDDEN_CHANNEL": "编辑隐藏频道",
     "GROUP_NAME": "分组名称",
+    "CHANNEL_REGEX": "频道正则",
     "EDIT_SOURCE": "编辑订阅源",
     "ADD_SOURCE": "添加订阅源",
     "MOVE_UP": "上移",
     "MOVE_DOWN": "下移",
-    "DELETE_SOURCE": "删除"
+    "DELETE_SOURCE": "删除",
+    "HTTP_PROXY": "HTTP代理"
   },
   "设置 / 节目单": "设置 / 节目单",
   "THEME_MODE": "主题模式",

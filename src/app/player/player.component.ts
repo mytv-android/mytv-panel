@@ -16,17 +16,17 @@ import { TextareaWithLinesComponent } from '../common/textarea-with-lines/textar
     selector: 'app-player',
     standalone: true,
     imports: [
-    FormsModule,
-    MatCardModule,
-    MatSlideToggleModule,
-    MatSelectModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-    MatIconModule,
-    TranslateModule,
-    TextareaWithLinesComponent
-],
+        FormsModule,
+        MatCardModule,
+        MatSlideToggleModule,
+        MatSelectModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatButtonModule,
+        MatIconModule,
+        TranslateModule,
+        TextareaWithLinesComponent
+    ],
     templateUrl: './player.component.html',
     styleUrl: './player.component.css'
 })
@@ -69,6 +69,27 @@ export class PlayerComponent {
     removeDecoderConfig(index: number) {
         if (this.configs.videoPlayerDecoderConfigRegexList?.list) {
             this.configs.videoPlayerDecoderConfigRegexList.list.splice(index, 1);
+            this.updateConfig();
+        }
+    }
+
+    addProxyRule() {
+        if (!this.configs.videoPlayerProxyRuleList) {
+            this.configs.videoPlayerProxyRuleList = { list: [] };
+        }
+        if (!this.configs.videoPlayerProxyRuleList.list) {
+            this.configs.videoPlayerProxyRuleList.list = [];
+        }
+        this.configs.videoPlayerProxyRuleList.list.push({
+            pattern: '',
+            proxy: ''
+        });
+        this.updateConfig();
+    }
+
+    removeProxyRule(index: number) {
+        if (this.configs.videoPlayerProxyRuleList?.list) {
+            this.configs.videoPlayerProxyRuleList.list.splice(index, 1);
             this.updateConfig();
         }
     }

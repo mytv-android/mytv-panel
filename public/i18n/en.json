@@ -109,9 +109,9 @@
     "CHANNEL": "Update Channel",
     "FORCE_REMIND": "Force Remind",
     "CHANNELS": {
-        "STABLE": "Stable",
-        "BETA": "Beta",
-        "DEV": "Dev"
+      "STABLE": "Stable",
+      "BETA": "Beta",
+      "DEV": "Dev"
     }
   },
   "NETWORK": {
@@ -124,13 +124,13 @@
     "BOOT_LAUNCH": "Start on Boot",
     "STARTUP_SCREEN": "Startup Page",
     "STARTUP_SCREENS": {
-        "Dashboard": "Dashboard",
-        "Live": "Live",
-        "EpgGuide": "EPG Guide",
-        "Channels": "Channels",
-        "Favorites": "Favorites",
-        "Search": "Search",
-        "MultiView": "MultiView"
+      "Dashboard": "Dashboard",
+      "Live": "Live",
+      "EpgGuide": "EPG Guide",
+      "Channels": "Channels",
+      "Favorites": "Favorites",
+      "Search": "Search",
+      "MultiView": "MultiView"
     },
     "PIP": "Picture in Picture"
   },
@@ -157,7 +157,12 @@
     "DECODER_CONFIG_DESC": "Changing options clears existing memory settings",
     "DECODER_CONFIG_REGEX_LIST": "Regex Decoder Config",
     "REGEX_PATTERN": "Regex Pattern",
-    "ADD_CONFIG": "Add Config"
+    "ADD_CONFIG": "Add Config",
+    "DNS": "Custom DNS",
+    "DNS_DESC": "Only effective for Media3 core",
+    "PROXY": "HTTP Proxy",
+    "PROXY_RULES": "Proxy Rules",
+    "PROXY_RULES_COUNT": "{{count}} Rules"
   },
   "LOG": {
     "TITLE": "App Logs",
@@ -198,62 +203,62 @@
   },
   "SETTINGS": {
     "IPTV_HYBRID_MODE": {
-        "DISABLE": "Disabled",
-        "IPTV_FIRST": "IPTV First",
-        "HYBRID_FIRST": "Web Source First"
+      "DISABLE": "Disabled",
+      "IPTV_FIRST": "IPTV First",
+      "HYBRID_FIRST": "Web Source First"
     },
     "TIME_SHOW_MODE": {
-        "HIDDEN": "Hidden",
-        "ALWAYS": "Always",
-        "EVERY_HOUR": "Every Hour",
-        "HALF_HOUR": "Every Half Hour"
+      "HIDDEN": "Hidden",
+      "ALWAYS": "Always",
+      "EVERY_HOUR": "Every Hour",
+      "HALF_HOUR": "Every Half Hour"
     },
     "VIDEO_PLAYER_CORE": {
-        "MEDIA3": "Media3",
-        "IJK": "IjkPlayer",
-        "VLC": "VLC"
+      "MEDIA3": "Media3",
+      "IJK": "IjkPlayer",
+      "VLC": "VLC"
     },
     "WEB_VIEW_CORE": {
-        "SYSTEM": "Android",
-        "X5": "TBS X5"
+      "SYSTEM": "Android",
+      "X5": "TBS X5"
     },
     "RTSP_TRANSPORT": {
-        "TCP": "TCP",
-        "UDP": "UDP"
+      "TCP": "TCP",
+      "UDP": "UDP"
     },
     "VIDEO_PLAYER_SEEK_TO_MODE": {
-        "RELOAD_URL": "Reload URL",
-        "SEEK_TO": "Player seekTo"
+      "RELOAD_URL": "Reload URL",
+      "SEEK_TO": "Player seekTo"
     },
     "VIDEO_PLAYER_RENDER_MODE": {
-        "SURFACE_VIEW": "SurfaceView",
-        "TEXTURE_VIEW": "TextureView"
+      "SURFACE_VIEW": "SurfaceView",
+      "TEXTURE_VIEW": "TextureView"
     },
     "VIDEO_PLAYER_DECODER_CONFIG": {
-        "0": "None (Do not remember)",
-        "1": "Host (By Host)",
-        "2": "URL (By URL)"
+      "0": "None (Do not remember)",
+      "1": "Host (By Host)",
+      "2": "URL (By URL)"
     },
     "VIDEO_PLAYER_DISPLAY_MODE": {
-        "ORIGINAL": "Original",
-        "FILL": "Fill",
-        "CROP": "Crop",
-        "FOUR_THREE": "4:3",
-        "SIXTEEN_NINE": "16:9",
-        "WIDE": "2.35:1"
+      "ORIGINAL": "Original",
+      "FILL": "Fill",
+      "CROP": "Crop",
+      "FOUR_THREE": "4:3",
+      "SIXTEEN_NINE": "16:9",
+      "WIDE": "2.35:1"
     },
     "KEY_DOWN_ACTION": {
-        "ChangeCurrentChannelToPrev": "Previous Channel",
-        "ChangeCurrentChannelToNext": "Next Channel",
-        "ChangeCurrentChannelLineIdxToPrev": "Previous Line",
-        "ChangeCurrentChannelLineIdxToNext": "Next Line",
-        "ToIptvSourceScreen": "Open Source Settings",
-        "ToChannelScreen": "Open Channel List",
-        "ToQuickOpScreen": "Open Quick Actions",
-        "ToEpgScreen": "Open EPG",
-        "ToChannelLineScreen": "Open Line List",
-        "ToVideoPlayerControllerScreen": "Open Player Controller",
-        "NoAction": "No Action"
+      "ChangeCurrentChannelToPrev": "Previous Channel",
+      "ChangeCurrentChannelToNext": "Next Channel",
+      "ChangeCurrentChannelLineIdxToPrev": "Previous Line",
+      "ChangeCurrentChannelLineIdxToNext": "Next Line",
+      "ToIptvSourceScreen": "Open Source Settings",
+      "ToChannelScreen": "Open Channel List",
+      "ToQuickOpScreen": "Open Quick Actions",
+      "ToEpgScreen": "Open EPG",
+      "ToChannelLineScreen": "Open Line List",
+      "ToVideoPlayerControllerScreen": "Open Player Controller",
+      "NoAction": "No Action"
     }
   },
   "UI": {
@@ -308,17 +313,23 @@
     "CACHE_TIME": "Source Cache Time (Hours)",
     "NO_CACHE_HINT": "0 = No Cache",
     "HIDDEN_GROUPS": "Hidden Channel Groups",
+    "HIDDEN_CHANNELS": "Hidden Channels",
     "MERGE_SIMILAR": "Merge Similar Channels",
     "ICON_OVERRIDE": "Channel Icon Override",
     "PLTV_TO_TVOD": "PLTV to TVOD",
     "AUTO_ADD_WEB_SOURCE": "Auto Add Web Source",
     "ADD_HIDDEN_GROUP": "Add Hidden Group",
+    "EDIT_HIDDEN_GROUP": "Edit Hidden Group",
+    "ADD_HIDDEN_CHANNEL": "Add Hidden Channel",
+    "EDIT_HIDDEN_CHANNEL": "Edit Hidden Channel",
     "GROUP_NAME": "Group Name",
+    "CHANNEL_REGEX": "Channel Regex",
     "EDIT_SOURCE": "Edit Source",
     "ADD_SOURCE": "Add Source",
     "MOVE_UP": "Move Up",
     "MOVE_DOWN": "Move Down",
-    "DELETE_SOURCE": "Delete"
+    "DELETE_SOURCE": "Delete",
+    "HTTP_PROXY": "HTTP Proxy"
   },
   "设置 / 节目单": "Settings / EPG",
   "THEME_MODE": "Theme Mode",

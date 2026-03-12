@@ -186,6 +186,57 @@
       </div>
 
       <div class="setting-item">
+        <div class="setting-label">
+          <span>{{ 'PLAYER.DNS' | translate }}</span>
+          <span class="setting-desc">{{ 'PLAYER.DNS_DESC' | translate }}</span>
+        </div>
+        <mat-form-field appearance="outline" style="margin-bottom: -1.25em; width: 100%;">
+          <input matInput [(ngModel)]="configs.videoPlayerDns" (change)="updateConfig()">
+        </mat-form-field>
+      </div>
+
+      <div class="setting-item">
+        <span>{{ 'PLAYER.PROXY' | translate }}</span>
+        <mat-form-field appearance="outline" style="margin-bottom: -1.25em; width: 100%;">
+          <input matInput [(ngModel)]="configs.videoPlayerProxy" (change)="updateConfig()">
+        </mat-form-field>
+      </div>
+
+      <div class="setting-item">
+        <div class="setting-label">
+          <span>{{ 'PLAYER.PROXY_RULES' | translate }}</span>
+          @if (configs.videoPlayerProxyRuleList?.list) {
+            <span class="setting-desc">{{ 'PLAYER.PROXY_RULES_COUNT' | translate: { count: configs.videoPlayerProxyRuleList!.list.length } }}</span>
+          }
+        </div>
+        <div style="width: 100%; display: flex; flex-direction: column; gap: 10px; margin-top: 10px;">
+            @if (configs.videoPlayerProxyRuleList?.list) {
+                @for (item of configs.videoPlayerProxyRuleList!.list; track $index) {
+                    <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+                        <mat-form-field appearance="outline" style="flex: 1; min-width: 200px; margin-bottom: -1.25em;">
+                            <mat-label>{{ 'PLAYER.REGEX_PATTERN' | translate }}</mat-label>
+                            <input matInput [(ngModel)]="item.pattern" (change)="updateConfig()">
+                        </mat-form-field>
+                        
+                        <mat-form-field appearance="outline" style="flex: 1; min-width: 200px; margin-bottom: -1.25em;">
+                            <mat-label>{{ 'PLAYER.PROXY' | translate }}</mat-label>
+                            <input matInput [(ngModel)]="item.proxy" (change)="updateConfig()">
+                        </mat-form-field>
+
+                        <button mat-icon-button (click)="removeProxyRule($index)">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </div>
+                }
+            }
+            <button mat-flat-button (click)="addProxyRule()">
+                <mat-icon>add</mat-icon>
+                {{ 'PLAYER.ADD_CONFIG' | translate }}
+            </button>
+        </div>
+      </div>
+
+      <div class="setting-item">
         <span>{{ 'HOME.USER_AGENT' | translate }}</span>
         <mat-form-field appearance="outline" style="margin-bottom: -1.25em; width: 100%;">
           <input matInput [(ngModel)]="configs.videoPlayerUserAgent" (change)="updateConfig()">

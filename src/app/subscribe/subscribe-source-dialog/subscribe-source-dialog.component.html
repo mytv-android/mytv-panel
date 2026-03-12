@@ -11,9 +11,9 @@
         <mat-label>{{ 'HOME.TYPE' | translate }}</mat-label>
         <mat-select [(ngModel)]="source.sourceType">
           @for (type of sourceTypes; track type) {
-            <mat-option [value]="type.value">
-              {{ type.label | translate }}
-            </mat-option>
+          <mat-option [value]="type.value">
+            {{ type.label | translate }}
+          </mat-option>
           }
         </mat-select>
       </mat-form-field>
@@ -29,45 +29,57 @@
     }
 
     @if (source.sourceType === 2) {
-      <div class="form-row">
-        <mat-form-field appearance="outline" class="half-width">
-          <mat-label>{{ 'HOME.USERNAME' | translate }}</mat-label>
-          <input matInput [(ngModel)]="source.userName">
-        </mat-form-field>
-        <mat-form-field appearance="outline" class="half-width">
-          <mat-label>{{ 'HOME.PASSWORD' | translate }}</mat-label>
-          <input matInput [(ngModel)]="source.password">
-        </mat-form-field>
-      </div>
-      <div class="form-row">
-        <mat-form-field appearance="outline" class="half-width">
-          <mat-label>{{ 'HOME.OUTPUT_TYPE' | translate }}</mat-label>
-          <mat-select [(ngModel)]="source.format">
-            <mat-option value="m3u_plus">M3U Plus</mat-option>
-            <mat-option value="m3u">M3U</mat-option>
-          </mat-select>
-        </mat-form-field>
-        <mat-form-field appearance="outline" class="half-width">
-          <mat-label>{{ 'HOME.USER_AGENT' | translate }}</mat-label>
-          <input matInput [(ngModel)]="source.httpUserAgent">
-        </mat-form-field>
-      </div>
+    <div class="form-row">
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>{{ 'HOME.USERNAME' | translate }}</mat-label>
+        <input matInput [(ngModel)]="source.userName">
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>{{ 'HOME.PASSWORD' | translate }}</mat-label>
+        <input matInput [(ngModel)]="source.password">
+      </mat-form-field>
+    </div>
+    <div class="form-row">
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>{{ 'HOME.OUTPUT_TYPE' | translate }}</mat-label>
+        <mat-select [(ngModel)]="source.format">
+          <mat-option value="m3u_plus">M3U Plus</mat-option>
+          <mat-option value="m3u">M3U</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>{{ 'HOME.USER_AGENT' | translate }}</mat-label>
+        <input matInput [(ngModel)]="source.httpUserAgent">
+      </mat-form-field>
+    </div>
+    <div class="form-row">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>{{ 'SUBSCRIBE.HTTP_PROXY' | translate }}</mat-label>
+        <input matInput [(ngModel)]="source.httpProxy">
+      </mat-form-field>
+    </div>
     }
 
     @if (source.sourceType === 3) {
-      <div class="form-row">
-        <mat-form-field appearance="outline" class="full-width">
-          <mat-label>{{ 'HOME.MAC_ADDRESS' | translate }}</mat-label>
-          <input matInput [(ngModel)]="source.mac">
-        </mat-form-field>
-      </div>
+    <div class="form-row">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>{{ 'HOME.MAC_ADDRESS' | translate }}</mat-label>
+        <input matInput [(ngModel)]="source.mac">
+      </mat-form-field>
+    </div>
     }
 
     @if (source.sourceType !== 1) {
+    <div class="form-row">
       <mat-form-field appearance="outline" class="full-width">
         <mat-label>{{ 'HOME.USER_AGENT' | translate }}</mat-label>
         <input matInput [(ngModel)]="source.httpUserAgent">
       </mat-form-field>
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>{{ 'SUBSCRIBE.HTTP_PROXY' | translate }}</mat-label>
+        <input matInput [(ngModel)]="source.httpProxy">
+      </mat-form-field>
+    </div>
     }
 
     <app-textarea-with-lines class="full-width" [label]="'HOME.TRANSFORM_JS' | translate" [(ngModel)]="source.transformJs" placeholder="function transform(channels) { ... }"></app-textarea-with-lines>

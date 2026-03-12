@@ -109,9 +109,9 @@
     "CHANNEL": "قناة التحديث",
     "FORCE_REMIND": "تذكير إجباري",
     "CHANNELS": {
-        "STABLE": "مستقر",
-        "BETA": "تجريبي",
-        "DEV": "تطوير"
+      "STABLE": "مستقر",
+      "BETA": "تجريبي",
+      "DEV": "تطوير"
     }
   },
   "NETWORK": {
@@ -124,13 +124,13 @@
     "BOOT_LAUNCH": "بدء التشغيل عند الإقلاع",
     "STARTUP_SCREEN": "صفحة البدء",
     "STARTUP_SCREENS": {
-        "Dashboard": "لوحة القيادة",
-        "Live": "بث مباشر",
-        "EpgGuide": "دليل البرامج",
-        "Channels": "القنوات",
-        "Favorites": "المفضلة",
-        "Search": "بحث",
-        "MultiView": "عرض متعدد"
+      "Dashboard": "لوحة القيادة",
+      "Live": "بث مباشر",
+      "EpgGuide": "دليل البرامج",
+      "Channels": "القنوات",
+      "Favorites": "المفضلة",
+      "Search": "بحث",
+      "MultiView": "عرض متعدد"
     },
     "PIP": "صورة داخل صورة"
   },
@@ -157,7 +157,12 @@
     "DECODER_CONFIG_DESC": "تغيير الخيارات سيمسح إعدادات الذاكرة الحالية",
     "DECODER_CONFIG_REGEX_LIST": "تكوين فك التشفير Regex",
     "REGEX_PATTERN": "نمط Regex",
-    "ADD_CONFIG": "إضافة تكوين"
+    "ADD_CONFIG": "إضافة تكوين",
+    "DNS": "Custom DNS",
+    "DNS_DESC": "Only effective for Media3 core",
+    "PROXY": "HTTP Proxy",
+    "PROXY_RULES": "Proxy Rules",
+    "PROXY_RULES_COUNT": "{{count}} Rules"
   },
   "LOG": {
     "TITLE": "سجلات التطبيق",
@@ -198,62 +203,62 @@
   },
   "SETTINGS": {
     "IPTV_HYBRID_MODE": {
-        "DISABLE": "معطل",
-        "IPTV_FIRST": "IPTV أولاً",
-        "HYBRID_FIRST": "مصدر الويب أولاً"
+      "DISABLE": "معطل",
+      "IPTV_FIRST": "IPTV أولاً",
+      "HYBRID_FIRST": "مصدر الويب أولاً"
     },
     "TIME_SHOW_MODE": {
-        "HIDDEN": "مخفي",
-        "ALWAYS": "دائماً",
-        "EVERY_HOUR": "كل ساعة",
-        "HALF_HOUR": "كل نصف ساعة"
+      "HIDDEN": "مخفي",
+      "ALWAYS": "دائماً",
+      "EVERY_HOUR": "كل ساعة",
+      "HALF_HOUR": "كل نصف ساعة"
     },
     "VIDEO_PLAYER_CORE": {
-        "MEDIA3": "Media3",
-        "IJK": "IjkPlayer",
-        "VLC": "VLC"
+      "MEDIA3": "Media3",
+      "IJK": "IjkPlayer",
+      "VLC": "VLC"
     },
     "WEB_VIEW_CORE": {
-        "SYSTEM": "Android",
-        "X5": "TBS X5"
+      "SYSTEM": "Android",
+      "X5": "TBS X5"
     },
     "RTSP_TRANSPORT": {
-        "TCP": "TCP",
-        "UDP": "UDP"
+      "TCP": "TCP",
+      "UDP": "UDP"
     },
     "VIDEO_PLAYER_SEEK_TO_MODE": {
-        "RELOAD_URL": "إعادة تحميل الرابط",
-        "SEEK_TO": "توجيه المشغل"
+      "RELOAD_URL": "إعادة تحميل الرابط",
+      "SEEK_TO": "توجيه المشغل"
     },
     "VIDEO_PLAYER_RENDER_MODE": {
-        "SURFACE_VIEW": "SurfaceView",
-        "TEXTURE_VIEW": "TextureView"
+      "SURFACE_VIEW": "SurfaceView",
+      "TEXTURE_VIEW": "TextureView"
     },
     "VIDEO_PLAYER_DECODER_CONFIG": {
-        "0": "لا شيء (لا تتذكر)",
-        "1": "المضيف (حسب المضيف)",
-        "2": "الرابط (حسب الرابط)"
+      "0": "لا شيء (لا تتذكر)",
+      "1": "المضيف (حسب المضيف)",
+      "2": "الرابط (حسب الرابط)"
     },
     "VIDEO_PLAYER_DISPLAY_MODE": {
-        "ORIGINAL": "أصلي",
-        "FILL": "ملء",
-        "CROP": "قص",
-        "FOUR_THREE": "4:3",
-        "SIXTEEN_NINE": "16:9",
-        "WIDE": "2.35:1"
+      "ORIGINAL": "أصلي",
+      "FILL": "ملء",
+      "CROP": "قص",
+      "FOUR_THREE": "4:3",
+      "SIXTEEN_NINE": "16:9",
+      "WIDE": "2.35:1"
     },
     "KEY_DOWN_ACTION": {
-        "ChangeCurrentChannelToPrev": "القناة السابقة",
-        "ChangeCurrentChannelToNext": "القناة التالية",
-        "ChangeCurrentChannelLineIdxToPrev": "الخط السابق",
-        "ChangeCurrentChannelLineIdxToNext": "الخط التالي",
-        "ToIptvSourceScreen": "فتح إعدادات المصدر",
-        "ToChannelScreen": "فتح قائمة القنوات",
-        "ToQuickOpScreen": "فتح الإجراءات السريعة",
-        "ToEpgScreen": "فتح دليل البرامج",
-        "ToChannelLineScreen": "فتح قائمة الخطوط",
-        "ToVideoPlayerControllerScreen": "فتح وحدة تحكم المشغل",
-        "NoAction": "بدون إجراء"
+      "ChangeCurrentChannelToPrev": "القناة السابقة",
+      "ChangeCurrentChannelToNext": "القناة التالية",
+      "ChangeCurrentChannelLineIdxToPrev": "الخط السابق",
+      "ChangeCurrentChannelLineIdxToNext": "الخط التالي",
+      "ToIptvSourceScreen": "فتح إعدادات المصدر",
+      "ToChannelScreen": "فتح قائمة القنوات",
+      "ToQuickOpScreen": "فتح الإجراءات السريعة",
+      "ToEpgScreen": "فتح دليل البرامج",
+      "ToChannelLineScreen": "فتح قائمة الخطوط",
+      "ToVideoPlayerControllerScreen": "فتح وحدة تحكم المشغل",
+      "NoAction": "بدون إجراء"
     }
   },
   "UI": {
@@ -308,17 +313,23 @@
     "CACHE_TIME": "وقت تخزين المصدر (ساعات)",
     "NO_CACHE_HINT": "0 = بدون تخزين مؤقت",
     "HIDDEN_GROUPS": "مجموعات القنوات المخفية",
+    "HIDDEN_CHANNELS": "القنوات المخفية",
     "MERGE_SIMILAR": "دمج القنوات المتشابهة",
     "ICON_OVERRIDE": "تجاوز أيقونة القناة",
     "PLTV_TO_TVOD": "PLTV إلى TVOD",
     "AUTO_ADD_WEB_SOURCE": "إضافة مصدر الويب تلقائياً",
     "ADD_HIDDEN_GROUP": "إضافة مجموعة مخفية",
+    "EDIT_HIDDEN_GROUP": "تحرير مجموعة مخفية",
+    "ADD_HIDDEN_CHANNEL": "إضافة قناة مخفية",
+    "EDIT_HIDDEN_CHANNEL": "تحرير قناة مخفية",
     "GROUP_NAME": "اسم المجموعة",
+    "CHANNEL_REGEX": "تعبير نمطي للقناة",
     "EDIT_SOURCE": "تحرير المصدر",
     "ADD_SOURCE": "إضافة مصدر",
     "MOVE_UP": "تحريك لأعلى",
     "MOVE_DOWN": "تحريك لأسفل",
-    "DELETE_SOURCE": "حذف المصدر"
+    "DELETE_SOURCE": "حذف المصدر",
+    "HTTP_PROXY": "HTTP Proxy"
   },
   "设置 / 节目单": "الإعدادات / دليل البرامج",
   "THEME_MODE": "وضع المظهر",

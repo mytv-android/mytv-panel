@@ -1,8 +1,8 @@
-<h2 mat-dialog-title>{{ 'SUBSCRIBE.ADD_HIDDEN_GROUP' | translate }}</h2>
+<h2 mat-dialog-title>{{ title | translate }}</h2>
 <mat-dialog-content>
   <div class="form-container">
     <mat-form-field appearance="outline" class="full-width">
-      <mat-label>{{ 'SUBSCRIBE.GROUP_NAME' | translate }}</mat-label>
+      <mat-label>{{ label | translate }}</mat-label>
       <input matInput [(ngModel)]="groupName" required>
     </mat-form-field>
   </div>
@@ -10,6 +10,6 @@
 <mat-dialog-actions align="end">
   <button mat-button (click)="onCancel()">{{ 'HOME.CLOSE' | translate }}</button>
   <button mat-flat-button color="primary" (click)="onSave()" [disabled]="!groupName">
-    {{ 'HOME.ADD' | translate }}
+    {{ (data?.value ? 'HOME.SAVE' : 'HOME.ADD') | translate }}
   </button>
 </mat-dialog-actions>

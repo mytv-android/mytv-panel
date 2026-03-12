@@ -38,19 +38,24 @@ import { TextareaWithLinesComponent } from '../common/textarea-with-lines/textar
     styleUrl: './home.component.css'
 })
 export class HomeComponent {
-    
+
     configsService = inject(ConfigsService);
     snackBar = inject(MatSnackBar);
     breakpointObserver = inject(BreakpointObserver);
     translate = inject(TranslateService);
 
     isSmallScreen = false;
+    isSubscriptionNameTouched = false;
+    isEpgSourceNameTouched = false;
 
-    initName = this.translate.instant('添加于', { date: new Date().toLocaleString() });
+    private getDefaultName(lang?: string) {
+        const l = lang || this.translate.currentLang || 'en';
+        return this.translate.instant('HOME.ADDED_AT', { date: new Date().toLocaleString(l) });
+    }
 
     subscription = {
         type: 'remote',
-        name: this.initName,
+        name: '',
         userName: '',
         password: '',
         format: 'm3u_plus',
@@ -60,7 +65,7 @@ export class HomeComponent {
     };
 
     epgSource = {
-        name: this.initName,
+        name: '',
         url: ''
     };
 
@@ -104,9 +109,21 @@ export class HomeComponent {
         if (isPlatformBrowser(this.platformId)) {
             AppApi.getChannelAlias().then(alias => {
                 this.channelAlias = alias;
-            }); 
+            });
             AppApi.getAbout().then(info => {
                 this.info = info;
+            });
+
+            this.subscription.name = this.getDefaultName();
+            this.epgSource.name = this.getDefaultName();
+
+            this.translate.onLangChange.subscribe((event) => {
+                if (!this.isSubscriptionNameTouched) {
+                    this.subscription.name = this.getDefaultName(event.lang);
+                }
+                if (!this.isEpgSourceNameTouched) {
+                    this.epgSource.name = this.getDefaultName(event.lang);
+                }
             });
         }
     }
@@ -134,8 +151,7 @@ export class HomeComponent {
             mac = this.subscription.mac;
         }
         if (!this.subscription.name) {
-            const dateStr = new Date().toLocaleString();
-            this.subscription.name = this.translate.instant('HOME.ADDED_AT', { date: dateStr });
+            this.subscription.name = this.getDefaultName();
         }
         if (this.subscription.type === 'content') {
             this.subscription.url = (await AppApi.writeFileContentWithDir('file', `iptv_source_local_${Date.now()}.txt`, this.subscription.url)) as unknown as string;
@@ -168,14 +184,14 @@ export class HomeComponent {
     pushAlias() {
         AppApi.changeChannelAlias(this.channelAlias).then(() => {
             this.snackBar.open(
-                this.translate.instant('HOME.PUSH_SUCCESS'), 
-                this.translate.instant('HOME.CLOSE'), 
+                this.translate.instant('HOME.PUSH_SUCCESS'),
+                this.translate.instant('HOME.CLOSE'),
                 { duration: 3000 }
             );
         }).catch(() => {
             this.snackBar.open(
-                this.translate.instant('HOME.PUSH_FAILED'), 
-                this.translate.instant('HOME.CLOSE'), 
+                this.translate.instant('HOME.PUSH_FAILED'),
+                this.translate.instant('HOME.CLOSE'),
                 { duration: 3000 }
             );
         });
@@ -202,8 +218,9 @@ export class HomeComponent {
         const reader = new FileReader();
         reader.onload = () => {
             this.subscription.url = reader.result as string || '';
-            if (this.subscription.name === this.initName) {
+            if (!this.isSubscriptionNameTouched) {
                 this.subscription.name = file.name;
+                this.isSubscriptionNameTouched = true;
             }
         };
         reader.onerror = (err) => {
@@ -225,12 +242,12 @@ export class HomeComponent {
 
     async uploadApk() {
         if (!this.selectedFile) return;
-        
+
         try {
             await AppApi.uploadApk(this.selectedFile);
             this.snackBar.open(
-                this.translate.instant('HOME.UPLOAD_SUCCESS'), 
-                this.translate.instant('HOME.CLOSE'), 
+                this.translate.instant('HOME.UPLOAD_SUCCESS'),
+                this.translate.instant('HOME.CLOSE'),
                 { duration: 3000 }
             );
             this.selectedFile = null;
@@ -238,8 +255,8 @@ export class HomeComponent {
         } catch (e) {
             console.error(e);
             this.snackBar.open(
-                this.translate.instant('HOME.UPLOAD_FAILED'), 
-                this.translate.instant('HOME.CLOSE'), 
+                this.translate.instant('HOME.UPLOAD_FAILED'),
+                this.translate.instant('HOME.CLOSE'),
                 { duration: 3000 }
             );
         }

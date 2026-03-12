@@ -91,6 +91,7 @@ export interface AppConfigs {
     iptvSourceCurrentIdx?: number
     iptvSourceList?: IptvSourceList
     iptvChannelGroupHiddenList?: Set<string>
+    iptvChannelHiddenList?: Set<string>
     iptvHybridMode?: IptvHybridMode
     iptvHybridYangshipinCookie?: string
     iptvSimilarChannelMerge?: boolean
@@ -149,6 +150,9 @@ export interface AppConfigs {
     videoPlayerRtspTransport?: RtspTransport
     videoPlayerDecoderConfig?: number
     videoPlayerDecoderConfigRegexList?: VideoPlayerDecoderConfigList
+    videoPlayerDns?: string
+    videoPlayerProxy?: string
+    videoPlayerProxyRuleList?: VideoPlayerProxyRuleList
     videoPlayerUserAgent?: string
     videoPlayerHeaders?: string
     videoPlayerLoadTimeout?: number
@@ -286,6 +290,7 @@ export interface IptvSource {
     format?: string
     transformJs?: string
     httpUserAgent?: string
+    httpProxy?: string
     mac?: string
 }
 
@@ -349,6 +354,15 @@ export const VideoPlayerDecoderConfigLabels: { [key in VideoPlayerDecoderConfig]
     [VideoPlayerDecoderConfig.NONE]: 'SETTINGS.VIDEO_PLAYER_DECODER_CONFIG.NONE',
     [VideoPlayerDecoderConfig.HOST]: 'SETTINGS.VIDEO_PLAYER_DECODER_CONFIG.HOST',
     [VideoPlayerDecoderConfig.URL]: 'SETTINGS.VIDEO_PLAYER_DECODER_CONFIG.URL',
+}
+
+export interface VideoPlayerProxyRule {
+    pattern: string
+    proxy: string
+}
+
+export interface VideoPlayerProxyRuleList {
+    list: VideoPlayerProxyRule[]
 }
 
 export enum VideoPlayerRenderMode {

@@ -184,12 +184,30 @@ export class SubscribeComponent {
     // Hidden Group Management
     addHiddenGroup() {
         const dialogRef = this.dialog.open(HiddenGroupDialogComponent, {
-            width: '300px'
+            width: '300px',
+            data: { title: 'SUBSCRIBE.ADD_HIDDEN_GROUP', label: 'SUBSCRIBE.GROUP_NAME' }
         });
 
         dialogRef.afterClosed().subscribe(result => {
             if (result) {
                 const set = new Set(this.configs.iptvChannelGroupHiddenList || []);
+                set.add(result);
+                this.configs.iptvChannelGroupHiddenList = set;
+                this.updateConfig();
+            }
+        });
+    }
+
+    editHiddenGroup(group: string) {
+        const dialogRef = this.dialog.open(HiddenGroupDialogComponent, {
+            width: '300px',
+            data: { title: 'SUBSCRIBE.EDIT_HIDDEN_GROUP', label: 'SUBSCRIBE.GROUP_NAME', value: group }
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+            if (result && result !== group) {
+                const set = new Set(this.configs.iptvChannelGroupHiddenList || []);
+                set.delete(group);
                 set.add(result);
                 this.configs.iptvChannelGroupHiddenList = set;
                 this.updateConfig();
@@ -206,6 +224,51 @@ export class SubscribeComponent {
 
     get hiddenGroups(): string[] {
         return Array.from(this.configs.iptvChannelGroupHiddenList || []);
+    }
+
+    // Hidden Channel Management
+    addHiddenChannel() {
+        const dialogRef = this.dialog.open(HiddenGroupDialogComponent, {
+            width: '300px',
+            data: { title: 'SUBSCRIBE.ADD_HIDDEN_CHANNEL', label: 'SUBSCRIBE.CHANNEL_REGEX' }
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+            if (result) {
+                const set = new Set(this.configs.iptvChannelHiddenList || []);
+                set.add(result);
+                this.configs.iptvChannelHiddenList = set;
+                this.updateConfig();
+            }
+        });
+    }
+
+    editHiddenChannel(channel: string) {
+        const dialogRef = this.dialog.open(HiddenGroupDialogComponent, {
+            width: '300px',
+            data: { title: 'SUBSCRIBE.EDIT_HIDDEN_CHANNEL', label: 'SUBSCRIBE.CHANNEL_REGEX', value: channel }
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+            if (result && result !== channel) {
+                const set = new Set(this.configs.iptvChannelHiddenList || []);
+                set.delete(channel);
+                set.add(result);
+                this.configs.iptvChannelHiddenList = set;
+                this.updateConfig();
+            }
+        });
+    }
+
+    removeHiddenChannel(channel: string) {
+        const set = new Set(this.configs.iptvChannelHiddenList || []);
+        set.delete(channel);
+        this.configs.iptvChannelHiddenList = set;
+        this.updateConfig();
+    }
+
+    get hiddenChannels(): string[] {
+        return Array.from(this.configs.iptvChannelHiddenList || []);
     }
 
     getSourceTypeLabel(type: number): string {
