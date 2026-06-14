@@ -12,7 +12,11 @@ import { ConfigsService, AppApi } from '../api';
   standalone: true,
   imports: [FormsModule, MatCardModule, MatSlideToggleModule, MatIconModule, TranslateModule],
   templateUrl: './debug.component.html',
-  styleUrl: './debug.component.css'
+  styleUrl: './debug.component.css',
+  host: {
+    'animate.enter': 'enter',
+    'animate.leave': 'leave'
+  }
 })
 export class DebugComponent {
   configs = inject(ConfigsService);

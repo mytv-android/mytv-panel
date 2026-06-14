@@ -33,7 +33,11 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
     MatSnackBarModule
 ],
     templateUrl: './backup.component.html',
-    styleUrl: './backup.component.css'
+    styleUrl: './backup.component.css',
+    host: {
+        'animate.enter': 'enter',
+        'animate.leave': 'leave'
+    }
 })
 export class BackupComponent {
     configsService = inject(ConfigsService);

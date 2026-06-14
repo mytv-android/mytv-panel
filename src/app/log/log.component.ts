@@ -28,7 +28,11 @@ import { AppApi, AppLog } from '../api';
     TranslateModule
   ],
   templateUrl: './log.component.html',
-  styleUrl: './log.component.css'
+  styleUrl: './log.component.css',
+  host: {
+    'animate.enter': 'enter',
+    'animate.leave': 'leave'
+  }
 })
 export class LogComponent implements OnInit, OnDestroy, AfterViewInit {
   dataSource = new MatTableDataSource<AppLog>([]);

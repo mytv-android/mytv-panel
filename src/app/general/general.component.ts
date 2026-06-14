@@ -20,7 +20,11 @@ import { ConfigsService, AppConfigs, AppStartupScreen, AppStartupScreenLabels } 
     TranslateModule
 ],
     templateUrl: './general.component.html',
-    styleUrl: './general.component.css'
+    styleUrl: './general.component.css',
+    host: {
+        'animate.enter': 'enter',
+        'animate.leave': 'leave'
+    }
 })
 export class GeneralComponent {
     configsService = inject(ConfigsService);

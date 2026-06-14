@@ -22,7 +22,11 @@ import { ConfigsService, AppConfigs, WebViewCore, WebViewCoreLabels } from '../a
     TranslateModule
 ],
     templateUrl: './webview.component.html',
-    styleUrl: './webview.component.css'
+    styleUrl: './webview.component.css',
+    host: {
+        'animate.enter': 'enter',
+        'animate.leave': 'leave'
+    }
 })
 export class WebviewComponent {
     configsService = inject(ConfigsService);

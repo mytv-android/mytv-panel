@@ -18,7 +18,11 @@ import { ConfigsService, AppConfigs } from '../api';
     TranslateModule
 ],
     templateUrl: './update.component.html',
-    styleUrl: './update.component.css'
+    styleUrl: './update.component.css',
+    host: {
+        'animate.enter': 'enter',
+        'animate.leave': 'leave'
+    }
 })
 export class UpdateComponent {
     configsService = inject(ConfigsService);

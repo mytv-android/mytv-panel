@@ -20,7 +20,11 @@ import { ConfigsService, AppConfigs, KeyDownAction, KeyDownActionLabels } from '
     TranslateModule
 ],
     templateUrl: './control.component.html',
-    styleUrl: './control.component.css'
+    styleUrl: './control.component.css',
+    host: {
+        'animate.enter': 'enter',
+        'animate.leave': 'leave'
+    }
 })
 export class ControlComponent {
     configsService = inject(ConfigsService);

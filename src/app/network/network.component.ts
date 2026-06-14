@@ -18,7 +18,11 @@ import { ConfigsService, AppConfigs } from '../api';
     TranslateModule
 ],
     templateUrl: './network.component.html',
-    styleUrl: './network.component.css'
+    styleUrl: './network.component.css',
+    host: {
+        'animate.enter': 'enter',
+        'animate.leave': 'leave'
+    }
 })
 export class NetworkComponent {
     configsService = inject(ConfigsService);

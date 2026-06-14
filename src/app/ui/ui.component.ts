@@ -22,7 +22,11 @@ import { ConfigsService, AppConfigs, UiTimeShowMode, UiTimeShowModeLabels } from
     TranslateModule
 ],
     templateUrl: './ui.component.html',
-    styleUrl: './ui.component.css'
+    styleUrl: './ui.component.css',
+    host: {
+        'animate.enter': 'enter',
+        'animate.leave': 'leave'
+    }
 })
 export class UiComponent {
     configsService = inject(ConfigsService);

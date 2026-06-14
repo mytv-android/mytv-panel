@@ -5,6 +5,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { ConfigsService, AppConfigs } from '../api';
 import { EpgManagerComponent } from './epg-manager/epg-manager.component';
@@ -19,15 +20,21 @@ import { EpgThresholdDialogComponent } from './epg-threshold-dialog/epg-threshol
     MatSlideToggleModule,
     MatIconModule,
     MatDialogModule,
+    MatSnackBarModule,
     TranslateModule
 ],
     templateUrl: './epg.component.html',
-    styleUrl: './epg.component.css'
+    styleUrl: './epg.component.css',
+    host: {
+        'animate.enter': 'enter',
+        'animate.leave': 'leave'
+    }
 })
 export class EpgComponent {
     configsService = inject(ConfigsService);
     dialog = inject(MatDialog);
     translate = inject(TranslateService);
+    snackBar = inject(MatSnackBar);
     configs: AppConfigs = {};
 
     constructor() {
@@ -68,6 +75,11 @@ export class EpgComponent {
                 this.configs.epgSourceList = { value: result.sources };
                 this.configs.epgSourceCurrent = result.currentSource;
                 this.updateConfig();
+                this.snackBar.open(
+                    this.translate.instant('HOME.UPDATE_SUCCESS'),
+                    this.translate.instant('HOME.CLOSE'),
+                    { duration: 3000 }
+                );
             }
         });
     }

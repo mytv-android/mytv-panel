@@ -35,7 +35,11 @@ import { TextareaWithLinesComponent } from '../common/textarea-with-lines/textar
         TextareaWithLinesComponent
     ],
     templateUrl: './home.component.html',
-    styleUrl: './home.component.css'
+    styleUrl: './home.component.css',
+    host: {
+        'animate.enter': 'enter',
+        'animate.leave': 'leave'
+    }
 })
 export class HomeComponent {
 
@@ -173,6 +177,11 @@ export class HomeComponent {
             this.configs.iptvSourceList = { value: [...this.configs.iptvSourceList.value, iptvsource] };
         }
         this.configsService.updateData(this.configs);
+        this.snackBar.open(
+            this.translate.instant('HOME.ADD_SUCCESS'),
+            this.translate.instant('HOME.CLOSE'),
+            { duration: 3000 }
+        );
         window.location.reload();
     }
 
@@ -208,6 +217,11 @@ export class HomeComponent {
             this.configs.epgSourceList = { value: [...this.configs.epgSourceList.value, epgSource] };
         }
         this.configsService.updateData(this.configs);
+        this.snackBar.open(
+            this.translate.instant('HOME.ADD_SUCCESS'),
+            this.translate.instant('HOME.CLOSE'),
+            { duration: 3000 }
+        );
     }
 
     onSubscriptionFileSelected(event: Event): void {

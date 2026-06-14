@@ -92,7 +92,7 @@
         <button mat-stroked-button type="button" (click)="subFileInput.click()">{{ 'HOME.SELECT_FILE' | translate
           }}</button>
         <span style="margin-left: 10px;" *ngIf="subscriptionFileName">{{ subscriptionFileName }}</span>
-        <input #subFileInput type="file" style="display:none" (change)="onSubscriptionFileSelected($event)" />
+        <input #subFileInput type="file" style="display:none" accept=".m3u,.m3u8,.txt" (change)="onSubscriptionFileSelected($event)" />
       </div>
       <div class="form-row">
         <app-textarea-with-lines class="full-width" [(ngModel)]="subscription.url" [rows]="5"

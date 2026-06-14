@@ -22,7 +22,11 @@ import { ConfigsService, AppConfigs, AppThemeDef } from '../api';
     TranslateModule
 ],
     templateUrl: './theme.component.html',
-    styleUrl: './theme.component.css'
+    styleUrl: './theme.component.css',
+    host: {
+        'animate.enter': 'enter',
+        'animate.leave': 'leave'
+    }
 })
 export class ThemeComponent {
     configsService = inject(ConfigsService);

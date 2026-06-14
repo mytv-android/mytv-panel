@@ -14,7 +14,8 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { MatMenuModule } from '@angular/material/menu';
-import { TranslateModule } from '@ngx-translate/core';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { ConfigsService, AppConfigs, AppApi, IptvSource, IptvHybridMode, IptvHybridModeLabels } from '../api';
 import { SubscribeSourceDialogComponent } from './subscribe-source-dialog/subscribe-source-dialog.component';
 import { HiddenGroupDialogComponent } from './hidden-group-dialog/hidden-group-dialog.component';
@@ -40,14 +41,21 @@ import { TextareaWithLinesComponent } from '../common/textarea-with-lines/textar
         MatPaginatorModule,
         MatMenuModule,
         TranslateModule,
+        MatSnackBarModule,
         TextareaWithLinesComponent
     ],
     templateUrl: './subscribe.component.html',
-    styleUrl: './subscribe.component.css'
+    styleUrl: './subscribe.component.css',
+    host: {
+        'animate.enter': 'enter',
+        'animate.leave': 'leave'
+    }
 })
 export class SubscribeComponent {
     configsService = inject(ConfigsService);
     dialog = inject(MatDialog);
+    snackBar = inject(MatSnackBar);
+    translate = inject(TranslateService);
     configs: AppConfigs = {};
 
     channelAliasExample = JSON.stringify({
@@ -116,6 +124,7 @@ export class SubscribeComponent {
                 const list = this.configs.iptvSourceList?.value || [];
                 this.configs.iptvSourceList = { value: [...list, result] };
                 this.updateConfig();
+                this.showSuccess(this.translate.instant('HOME.ADD_SUCCESS'));
             }
         });
     }
@@ -132,6 +141,7 @@ export class SubscribeComponent {
                 list[index] = result;
                 this.configs.iptvSourceList = { value: list };
                 this.updateConfig();
+                this.showSuccess(this.translate.instant('HOME.UPDATE_SUCCESS'));
             }
         });
     }
@@ -151,6 +161,7 @@ export class SubscribeComponent {
         }
 
         this.updateConfig();
+        this.showSuccess(this.translate.instant('HOME.DELETE_SUCCESS'));
     }
 
     moveSource(index: number, direction: 'up' | 'down') {
@@ -194,6 +205,7 @@ export class SubscribeComponent {
                 set.add(result);
                 this.configs.iptvChannelGroupHiddenList = set;
                 this.updateConfig();
+                this.showSuccess(this.translate.instant('HOME.ADD_SUCCESS'));
             }
         });
     }
@@ -211,6 +223,7 @@ export class SubscribeComponent {
                 set.add(result);
                 this.configs.iptvChannelGroupHiddenList = set;
                 this.updateConfig();
+                this.showSuccess(this.translate.instant('HOME.UPDATE_SUCCESS'));
             }
         });
     }
@@ -220,6 +233,7 @@ export class SubscribeComponent {
         set.delete(group);
         this.configs.iptvChannelGroupHiddenList = set;
         this.updateConfig();
+        this.showSuccess(this.translate.instant('HOME.DELETE_SUCCESS'));
     }
 
     get hiddenGroups(): string[] {
@@ -239,6 +253,7 @@ export class SubscribeComponent {
                 set.add(result);
                 this.configs.iptvChannelHiddenList = set;
                 this.updateConfig();
+                this.showSuccess(this.translate.instant('HOME.ADD_SUCCESS'));
             }
         });
     }
@@ -256,6 +271,7 @@ export class SubscribeComponent {
                 set.add(result);
                 this.configs.iptvChannelHiddenList = set;
                 this.updateConfig();
+                this.showSuccess(this.translate.instant('HOME.UPDATE_SUCCESS'));
             }
         });
     }
@@ -265,6 +281,7 @@ export class SubscribeComponent {
         set.delete(channel);
         this.configs.iptvChannelHiddenList = set;
         this.updateConfig();
+        this.showSuccess(this.translate.instant('HOME.DELETE_SUCCESS'));
     }
 
     get hiddenChannels(): string[] {
@@ -298,5 +315,9 @@ export class SubscribeComponent {
     set cacheTimeInHours(value: number) {
         this.configs.iptvSourceCacheTime = value * 1000 * 60 * 60;
         this.updateConfig();
+    }
+
+    showSuccess(message: string) {
+        this.snackBar.open(message, this.translate.instant('HOME.CLOSE'), { duration: 3000 });
     }
 }

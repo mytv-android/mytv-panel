@@ -44,7 +44,7 @@ export const AppApi = {
     },
 
     getChannelAlias() {
-        return RequestUtil.get<string>(`${prefix}api/channel-alias`)
+        return RequestUtil.getText(`${prefix}api/channel-alias`)
     },
     changeChannelAlias(alias: string) {
         return RequestUtil.post(`${prefix}api/channel-alias`, alias, undefined, false)

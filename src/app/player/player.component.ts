@@ -28,7 +28,11 @@ import { TextareaWithLinesComponent } from '../common/textarea-with-lines/textar
         TextareaWithLinesComponent
     ],
     templateUrl: './player.component.html',
-    styleUrl: './player.component.css'
+    styleUrl: './player.component.css',
+    host: {
+        'animate.enter': 'enter',
+        'animate.leave': 'leave'
+    }
 })
 export class PlayerComponent {
     configsService = inject(ConfigsService);
