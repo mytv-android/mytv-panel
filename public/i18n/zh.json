@@ -266,7 +266,19 @@
       "ToEpgScreen": "打开节目单",
       "ToChannelLineScreen": "打开线路列表",
       "ToVideoPlayerControllerScreen": "打开播放控制器",
-      "NoAction": "无操作"
+      "NoAction": "无操作",
+      "SeekForward": "快进",
+      "SeekBackward": "快退"
+    },
+    "AUDIO_BALANCE_LEVEL": {
+      "Off": "关闭",
+      "Low": "低",
+      "Medium": "中",
+      "High": "高"
+    },
+    "ASR_MODE": {
+      "RENDERER_ONLY": "标准（渲染器）",
+      "SOURCE_TAP_PREFERRED": "实验性领先（HLS）"
     }
   },
   "UI": {

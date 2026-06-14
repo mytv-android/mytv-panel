@@ -83,6 +83,7 @@ export interface AppConfigs {
     appLastLatestVersion?: string
     appAgreementAgreed?: boolean
     appStartupScreen?: string
+    appBackupEnable?: boolean  // NEW: 启用系统备份
     debugDeveloperMode?: boolean
     debugShowFps?: boolean
     debugShowVideoPlayerMetadata?: boolean
@@ -92,6 +93,7 @@ export interface AppConfigs {
     iptvSourceList?: IptvSourceList
     iptvChannelGroupHiddenList?: Set<string>
     iptvChannelHiddenList?: Set<string>
+    iptvChannelGroupEncrypted?: boolean  // NEW: 订阅源分组加密
     iptvHybridMode?: IptvHybridMode
     iptvHybridYangshipinCookie?: string
     iptvSimilarChannelMerge?: boolean
@@ -104,11 +106,13 @@ export interface AppConfigs {
     iptvChannelFavoriteList?: ChannelFavoriteList
     iptvChannelHistoryList?: ChannelList
     iptvChannelLastPlay?: Channel
+    iptvChannelLastPlayLineIdx?: number  // NEW: 上一次播放频道线路索引
     iptvChannelLinePlayableHostList?: Set<string>
     iptvChannelLinePlayableUrlList?: Set<string>
     iptvChannelNoSelectEnable?: boolean
     iptvChannelChangeListLoop?: boolean
     iptvChannelChangeCrossGroup?: boolean
+    iptvChannelChangeShowInfoPanel?: boolean  // NEW: 换台时显示频道信息面板
     epgEnable?: boolean
     epgSourceCurrent?: EpgSource
     epgSourceList?: EpgSourceList
@@ -120,6 +124,7 @@ export interface AppConfigs {
     uiShowEpgProgrammeProgress?: boolean
     uiShowEpgProgrammePermanentProgress?: boolean
     uiShowChannelLogo?: boolean
+    uiShowReplayBadge?: boolean  // NEW: 显示回放标志
     uiShowChannelPreview?: boolean
     uiUseClassicPanelScreen?: boolean
     uiDensityScaleRatio?: number
@@ -128,9 +133,11 @@ export interface AppConfigs {
     uiTimeShowMode?: UiTimeShowMode
     uiClassicShowSourceList?: boolean
     uiClassicShowChannelInfo?: boolean
+    uiClassicShowChannelNo?: boolean  // NEW: 经典选台界面单独显示频道号
     uiClassicShowAllChannels?: boolean
     uiFocusOptimize?: boolean
     uiScreenAutoCloseDelay?: number
+    uiMultiViewSchemeList?: MultiViewSchemeList  // NEW: 多屏同播方案列表
     keyDownEventUp?: KeyDownAction
     keyDownEventDown?: KeyDownAction
     keyDownEventLeft?: KeyDownAction
@@ -150,6 +157,7 @@ export interface AppConfigs {
     videoPlayerRtspTransport?: RtspTransport
     videoPlayerDecoderConfig?: number
     videoPlayerDecoderConfigRegexList?: VideoPlayerDecoderConfigList
+    videoPlayerDecoderConfigDeviceList?: VideoPlayerDecoderConfigList  // NEW: 播放器设备解码配置列表
     videoPlayerDns?: string
     videoPlayerProxy?: string
     videoPlayerProxyRuleList?: VideoPlayerProxyRuleList
@@ -166,7 +174,21 @@ export interface AppConfigs {
     videoPlayerFitFrameRate?: boolean
     videoPlayerApplyBetterDetection?: boolean
     videoPlayerExtractHeaderFromLink?: boolean
-    videoPlayerVolumeNormalization?: boolean
+    videoPlayerVolumeNormalization?: boolean  // 保留向后兼容的布尔值
+    videoPlayerVolumeBalanceLevel?: AudioBalanceLevel  // NEW: 音量均衡等级（替代简单布尔值）
+    videoPlayerRealTimeASR?: boolean  // NEW: 实时ASR语音识别
+    videoPlayerASRModel?: string  // NEW: ASR识别模型
+    videoPlayerASRTranslationEngine?: string  // NEW: ASR翻译引擎 (Tencent/Baidu/MTranServer)
+    videoPlayerASRTranslationTargetLang?: string  // NEW: ASR翻译目标语言
+    videoPlayerASRTranslationTencentSecretId?: string  // NEW: ASR翻译腾讯 SecretId
+    videoPlayerASRTranslationTencentSecretKey?: string  // NEW: ASR翻译腾讯 SecretKey
+    videoPlayerASRTranslationBaiduAppId?: string  // NEW: ASR翻译百度 AppId
+    videoPlayerASRTranslationBaiduSecretKey?: string  // NEW: ASR翻译百度 SecretKey
+    videoPlayerASRTranslationMTranServerURL?: string  // NEW: ASR翻译MTranServer URL
+    videoPlayerASRTranslationMTranServerToken?: string  // NEW: ASR翻译MTranServer Token
+    videoPlayerASRMode?: ASRMode  // NEW: ASR 模式
+    videoPlayerASRLeadTimeMs?: number  // NEW: ASR 领先字幕显示提前量（毫秒）
+    videoPlayerASRSilenceThresholdMs?: number  // NEW: ASR 断句静音阈值（毫秒）
     themeAppCurrent?: AppThemeDef
     themeMode?: number
     themeColorProvider?: number
@@ -194,6 +216,7 @@ export interface VideoPlayerSubtitleStyle {
     useSystemDefault: boolean
     isApplyEmbeddedStyles: boolean
     textSize: number
+    bottomPaddingFraction?: number  // 字幕底部留白占视频高度的比例 (0.0 = 贴底, 0.5 = 屏幕中部)
     style: CaptionStyleCompat
 }
 
@@ -216,6 +239,8 @@ export enum KeyDownAction {
     ToChannelLineScreen = 'ToChannelLineScreen',
     ToVideoPlayerControllerScreen = 'ToVideoPlayerControllerScreen',
     NoAction = 'NoAction',
+    SeekForward = 'SeekForward',
+    SeekBackward = 'SeekBackward',
 }
 
 export interface VideoPlayerDecoderConfigList {
@@ -240,6 +265,8 @@ export const KeyDownActionLabels: { [key in KeyDownAction]: string } = {
     [KeyDownAction.ToChannelLineScreen]: 'SETTINGS.KEY_DOWN_ACTION.ToChannelLineScreen',
     [KeyDownAction.ToVideoPlayerControllerScreen]: 'SETTINGS.KEY_DOWN_ACTION.ToVideoPlayerControllerScreen',
     [KeyDownAction.NoAction]: 'SETTINGS.KEY_DOWN_ACTION.NoAction',
+    [KeyDownAction.SeekForward]: 'SETTINGS.KEY_DOWN_ACTION.SeekForward',
+    [KeyDownAction.SeekBackward]: 'SETTINGS.KEY_DOWN_ACTION.SeekBackward',
 }
 export enum WebViewCore {
     SYSTEM = 'SYSTEM',
@@ -445,6 +472,41 @@ export interface CloudSyncData {
     version: string
     syncAt: number
     syncFrom: string
+}
+
+export enum AudioBalanceLevel {
+    Off = 'Off',
+    Low = 'Low',
+    Medium = 'Medium',
+    High = 'High',
+}
+
+export const AudioBalanceLevelLabels: { [key in AudioBalanceLevel]: string } = {
+    [AudioBalanceLevel.Off]: 'SETTINGS.AUDIO_BALANCE_LEVEL.Off',
+    [AudioBalanceLevel.Low]: 'SETTINGS.AUDIO_BALANCE_LEVEL.Low',
+    [AudioBalanceLevel.Medium]: 'SETTINGS.AUDIO_BALANCE_LEVEL.Medium',
+    [AudioBalanceLevel.High]: 'SETTINGS.AUDIO_BALANCE_LEVEL.High',
+}
+
+export enum ASRMode {
+    RENDERER_ONLY = 'RENDERER_ONLY',
+    SOURCE_TAP_PREFERRED = 'SOURCE_TAP_PREFERRED',
+}
+
+export const ASRModeLabels: { [key in ASRMode]: string } = {
+    [ASRMode.RENDERER_ONLY]: 'SETTINGS.ASR_MODE.RENDERER_ONLY',
+    [ASRMode.SOURCE_TAP_PREFERRED]: 'SETTINGS.ASR_MODE.SOURCE_TAP_PREFERRED',
+}
+
+export interface MultiViewScheme {
+    id: string
+    name: string
+    channelList: Channel[]
+    updatedAt: number
+}
+
+export interface MultiViewSchemeList {
+    value: MultiViewScheme[]
 }
 
 

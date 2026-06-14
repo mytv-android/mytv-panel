@@ -266,7 +266,19 @@
       "ToEpgScreen": "فتح دليل البرامج",
       "ToChannelLineScreen": "فتح قائمة الخطوط",
       "ToVideoPlayerControllerScreen": "فتح وحدة تحكم المشغل",
-      "NoAction": "بدون إجراء"
+      "NoAction": "بدون إجراء",
+      "SeekForward": "التقديم السريع",
+      "SeekBackward": "الترجيع"
+    },
+    "AUDIO_BALANCE_LEVEL": {
+      "Off": "معطل",
+      "Low": "منخفض",
+      "Medium": "متوسط",
+      "High": "عالي"
+    },
+    "ASR_MODE": {
+      "RENDERER_ONLY": "قياسي (العارض)",
+      "SOURCE_TAP_PREFERRED": "تجريبي متقدم (HLS)"
     }
   },
   "UI": {

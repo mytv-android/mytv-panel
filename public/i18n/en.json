@@ -266,7 +266,19 @@
       "ToEpgScreen": "Open EPG",
       "ToChannelLineScreen": "Open Line List",
       "ToVideoPlayerControllerScreen": "Open Player Controller",
-      "NoAction": "No Action"
+      "NoAction": "No Action",
+      "SeekForward": "Seek Forward",
+      "SeekBackward": "Seek Backward"
+    },
+    "AUDIO_BALANCE_LEVEL": {
+      "Off": "Off",
+      "Low": "Low",
+      "Medium": "Medium",
+      "High": "High"
+    },
+    "ASR_MODE": {
+      "RENDERER_ONLY": "Standard (Renderer)",
+      "SOURCE_TAP_PREFERRED": "Experimental Leading (HLS)"
     }
   },
   "UI": {
