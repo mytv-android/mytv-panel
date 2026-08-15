@@ -38,6 +38,17 @@ mat-card-content {
     border-bottom: none;
 }
 
+.setting-label {
+    display: flex;
+    flex-direction: column;
+}
+
+.setting-desc {
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-top: 4px;
+}
+
 @media (max-width: 600px) {
     .container {
         padding: 8px;

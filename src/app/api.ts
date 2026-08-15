@@ -80,6 +80,7 @@ export interface AppLog {
 export interface AppConfigs {
     appBootLaunch?: boolean
     appPipEnable?: boolean
+    appBackgroundPlayEnable?: boolean  // NEW: 后台播放（听电视），与画中画互斥
     appLastLatestVersion?: string
     appAgreementAgreed?: boolean
     appStartupScreen?: string

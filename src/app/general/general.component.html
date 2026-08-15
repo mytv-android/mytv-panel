@@ -24,6 +24,13 @@
         <span>{{ 'GENERAL.PIP' | translate }}</span>
         <mat-slide-toggle [(ngModel)]="configs.appPipEnable" (change)="updateConfig()"></mat-slide-toggle>
       </div>
+      <div class="setting-item">
+        <div class="setting-label">
+          <span>{{ 'GENERAL.BACKGROUND_PLAY' | translate }}</span>
+          <span class="setting-desc">{{ 'GENERAL.BACKGROUND_PLAY_DESC' | translate }}</span>
+        </div>
+        <mat-slide-toggle [(ngModel)]="configs.appBackgroundPlayEnable" (change)="updateConfig()"></mat-slide-toggle>
+      </div>
     </mat-card-content>
   </mat-card>
 </div>

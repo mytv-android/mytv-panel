@@ -140,7 +140,9 @@
       "Search": "搜索",
       "MultiView": "多屏同播"
     },
-    "PIP": "画中画"
+    "PIP": "画中画",
+    "BACKGROUND_PLAY": "后台播放",
+    "BACKGROUND_PLAY_DESC": "切换至后台后继续播放音频（听电视），与画中画互斥"
   },
   "PLAYER": {
     "CORE": "视频播放器内核",

@@ -140,7 +140,9 @@
       "Search": "Search",
       "MultiView": "MultiView"
     },
-    "PIP": "Picture in Picture"
+    "PIP": "Picture in Picture",
+    "BACKGROUND_PLAY": "Background Playback",
+    "BACKGROUND_PLAY_DESC": "Keep playing audio after switching to background (listen to TV); mutually exclusive with Picture-in-Picture"
   },
   "PLAYER": {
     "CORE": "Player Core",
