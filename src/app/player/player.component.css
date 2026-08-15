@@ -35,6 +35,35 @@
     margin-top: 4px;
 }
 
+.asr-card {
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    border-radius: 12px;
+    padding: 8px 16px;
+    margin: 8px 0;
+}
+
+.asr-card-title {
+    font-weight: 600;
+    font-size: 15px;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.form-row {
+    display: flex;
+    flex-direction: column;
+    padding: 12px 0;
+}
+
+.action-container {
+    text-align: right;
+    margin: 16px 0;
+}
+
+.full-width {
+    width: 100%;
+}
+
 mat-form-field {
     width: 200px;
 }

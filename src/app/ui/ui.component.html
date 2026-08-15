@@ -28,11 +28,65 @@
         <mat-slide-toggle [(ngModel)]="configs.uiShowChannelLogo" (change)="updateConfig()"></mat-slide-toggle>
       </div>
 
+      <!-- uiShowReplayBadge -->
+      <div class="setting-item">
+        <div class="setting-text">
+          <span class="setting-title">{{ 'UI.SHOW_REPLAY_BADGE' | translate }}</span>
+          <span class="setting-desc">{{ 'UI.SHOW_REPLAY_BADGE_DESC' | translate }}</span>
+        </div>
+        <mat-slide-toggle [(ngModel)]="configs.uiShowReplayBadge" (change)="updateConfig()"></mat-slide-toggle>
+      </div>
+
       <!-- uiShowChannelPreview -->
       <div class="setting-item">
         <span>{{ 'UI.SHOW_CHANNEL_PREVIEW' | translate }}</span>
         <mat-slide-toggle [(ngModel)]="configs.uiShowChannelPreview" (change)="updateConfig()"></mat-slide-toggle>
       </div>
+
+      <!-- channelPreviewParallelCount -->
+      <div class="setting-item">
+        <div class="setting-text">
+          <span class="setting-title">{{ 'UI.CHANNEL_PREVIEW_PARALLEL_COUNT' | translate }}</span>
+          <span class="setting-desc">{{ 'UI.CHANNEL_PREVIEW_PARALLEL_COUNT_DESC' | translate }}</span>
+        </div>
+        <mat-form-field appearance="outline" style="margin-bottom: -1.25em; width: 100px;">
+          <input matInput type="number" [(ngModel)]="configs.channelPreviewParallelCount" (change)="updateConfig()">
+        </mat-form-field>
+      </div>
+
+      <!-- uiListAnimation -->
+      <div class="setting-item">
+        <div class="setting-text">
+          <span class="setting-title">{{ 'UI.LIST_ANIMATION' | translate }}</span>
+          <span class="setting-desc">{{ 'UI.LIST_ANIMATION_DESC' | translate }}</span>
+        </div>
+        <mat-slide-toggle [(ngModel)]="configs.uiListAnimation" (change)="updateConfig()"></mat-slide-toggle>
+      </div>
+
+      <!-- uiLazyRender -->
+      <div class="setting-item">
+        <div class="setting-text">
+          <span class="setting-title">{{ 'UI.LAZY_RENDER' | translate }}</span>
+          <span class="setting-desc">{{ 'UI.LAZY_RENDER_DESC' | translate }}</span>
+        </div>
+        <mat-slide-toggle [(ngModel)]="configs.uiLazyRender" (change)="updateConfig()"></mat-slide-toggle>
+      </div>
+
+      @if (configs.uiLazyRender) {
+        <div class="setting-item">
+          <span>{{ 'UI.LAZY_RENDER_PARALLEL_COUNT' | translate }}</span>
+          <mat-form-field appearance="outline" style="margin-bottom: -1.25em; width: 100px;">
+            <input matInput type="number" [(ngModel)]="configs.uiLazyRenderParallelCount" (change)="updateConfig()">
+          </mat-form-field>
+        </div>
+        <div class="setting-item">
+          <span>{{ 'UI.LAZY_RENDER_INTERVAL' | translate }}</span>
+          <mat-form-field appearance="outline" style="margin-bottom: -1.25em; width: 100px;">
+            <input matInput type="number" [(ngModel)]="configs.uiLazyRenderInterval" (change)="updateConfig()">
+            <span matTextSuffix>ms</span>
+          </mat-form-field>
+        </div>
+      }
 
       <!-- uiUseClassicPanelScreen -->
       <div class="setting-item">
@@ -58,6 +112,13 @@
             <span class="setting-desc">{{ 'UI.CLASSIC_SHOW_CHANNEL_INFO_DESC' | translate }}</span>
           </div>
           <mat-slide-toggle [(ngModel)]="configs.uiClassicShowChannelInfo" (change)="updateConfig()"></mat-slide-toggle>
+        </div>
+        <div class="setting-item">
+          <div class="setting-text">
+            <span class="setting-title">{{ 'UI.CLASSIC_SHOW_CHANNEL_NO' | translate }}</span>
+            <span class="setting-desc">{{ 'UI.CLASSIC_SHOW_CHANNEL_NO_DESC' | translate }}</span>
+          </div>
+          <mat-slide-toggle [(ngModel)]="configs.uiClassicShowChannelNo" (change)="updateConfig()"></mat-slide-toggle>
         </div>
         <div class="setting-item">
           <div class="setting-text">

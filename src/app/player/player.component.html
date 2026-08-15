@@ -110,6 +110,24 @@
         <mat-slide-toggle [(ngModel)]="configs.videoPlayerFitFrameRate" (change)="updateConfig()"></mat-slide-toggle>
       </div>
 
+      @if (configs.videoPlayerFitFrameRate) {
+        <div class="setting-item">
+          <div class="setting-label">
+            <span>{{ 'PLAYER.FRAME_RATE_FALLBACK' | translate }}</span>
+            <span class="setting-desc">{{ 'PLAYER.FRAME_RATE_FALLBACK_DESC' | translate }}</span>
+          </div>
+          <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
+            <mat-select [(ngModel)]="configs.videoPlayerFrameRateFallback" (selectionChange)="updateConfig()">
+              @for (fallback of frameRateFallbacks; track fallback) {
+                <mat-option [value]="fallback">
+                  {{ frameRateFallbackLabels[fallback] | translate }}
+                </mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+        </div>
+      }
+
       <div class="setting-item">
         <div class="setting-label">
           <span>{{ 'PLAYER.BETTER_DETECTION' | translate }}</span>
@@ -183,6 +201,227 @@
             }
           </mat-select>
         </mat-form-field>
+      </div>
+
+      <!-- Audio Balance Level -->
+      <div class="setting-item">
+        <div class="setting-label">
+          <span>{{ 'PLAYER.VOLUME_BALANCE_LEVEL' | translate }}</span>
+          <span class="setting-desc">{{ 'PLAYER.VOLUME_BALANCE_LEVEL_DESC' | translate }}</span>
+        </div>
+        <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
+          <mat-select [(ngModel)]="configs.videoPlayerVolumeBalanceLevel" (selectionChange)="updateConfig()">
+            @for (level of audioBalanceLevels; track level) {
+              <mat-option [value]="level">
+                {{ audioBalanceLevelLabels[level] | translate }}
+              </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <!-- ASR Card -->
+      <div class="asr-card">
+        <div class="asr-card-title">{{ 'PLAYER.ASR_CARD_TITLE' | translate }}</div>
+
+        <!-- Real-time ASR Toggle -->
+        <div class="setting-item">
+          <div class="setting-label">
+            <span>{{ 'PLAYER.ASR_REAL_TIME' | translate }}</span>
+            <span class="setting-desc">{{ 'PLAYER.ASR_REAL_TIME_DESC' | translate }}</span>
+          </div>
+          <mat-slide-toggle [(ngModel)]="configs.videoPlayerRealTimeASR"></mat-slide-toggle>
+        </div>
+
+        @if (configs.videoPlayerRealTimeASR) {
+          <!-- ASR Model -->
+          <div class="setting-item">
+            <div class="setting-label">
+              <span>{{ 'PLAYER.ASR_MODEL' | translate }}</span>
+              <span class="setting-desc">{{ 'PLAYER.ASR_MODEL_DESC' | translate }}</span>
+            </div>
+            <mat-form-field appearance="outline" style="margin-bottom: -1.25em; width: 100%;">
+              <input matInput [(ngModel)]="configs.videoPlayerASRModel" placeholder="/storage/emulated/0/sherpa-onnx-streaming-zipformer-zh-14M-2023-02-23">
+            </mat-form-field>
+          </div>
+
+          <!-- ASR Mode -->
+          <div class="setting-item">
+            <div class="setting-label">
+              <span>{{ 'PLAYER.ASR_MODE' | translate }}</span>
+              <span class="setting-desc">{{ 'PLAYER.ASR_MODE_DESC' | translate }}</span>
+            </div>
+            <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
+              <mat-select [(ngModel)]="configs.videoPlayerASRMode">
+                @for (mode of asrModes; track mode) {
+                  <mat-option [value]="mode">
+                    {{ asrModeLabels[mode] | translate }}
+                  </mat-option>
+                }
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <!-- ASR Lead Time -->
+          <div class="setting-item">
+            <div class="setting-label">
+              <span>{{ 'PLAYER.ASR_LEAD_TIME' | translate }}</span>
+              <span class="setting-desc">{{ 'PLAYER.ASR_LEAD_TIME_DESC' | translate }}</span>
+            </div>
+            <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
+              <input matInput type="number" [(ngModel)]="configs.videoPlayerASRLeadTimeMs" placeholder="500">
+              <span matTextSuffix>ms</span>
+            </mat-form-field>
+          </div>
+
+          <!-- ASR Silence Threshold -->
+          <div class="setting-item">
+            <div class="setting-label">
+              <span>{{ 'PLAYER.ASR_SILENCE_THRESHOLD' | translate }}</span>
+              <span class="setting-desc">{{ 'PLAYER.ASR_SILENCE_THRESHOLD_DESC' | translate }}</span>
+            </div>
+            <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
+              <input matInput type="number" [(ngModel)]="configs.videoPlayerASRSilenceThresholdMs" placeholder="650">
+              <span matTextSuffix>ms</span>
+            </mat-form-field>
+          </div>
+
+          <!-- ASR VAD Type -->
+          <div class="setting-item">
+            <div class="setting-label">
+              <span>{{ 'PLAYER.ASR_VAD_TYPE' | translate }}</span>
+              <span class="setting-desc">{{ 'PLAYER.ASR_VAD_TYPE_DESC' | translate }}</span>
+            </div>
+            <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
+              <mat-select [(ngModel)]="configs.videoPlayerASRVadType" (selectionChange)="updateConfig()">
+                @for (vad of asrVadTypes; track vad) {
+                  <mat-option [value]="vad">
+                    {{ asrVadTypeLabels[vad] | translate }}
+                  </mat-option>
+                }
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <!-- ASR Auto Streaming Fallback -->
+          <div class="setting-item">
+            <div class="setting-label">
+              <span>{{ 'PLAYER.ASR_AUTO_STREAMING_FALLBACK' | translate }}</span>
+              <span class="setting-desc">{{ 'PLAYER.ASR_AUTO_STREAMING_FALLBACK_DESC' | translate }}</span>
+            </div>
+            <mat-slide-toggle [(ngModel)]="configs.videoPlayerASRAutoStreamingFallback" (change)="updateConfig()"></mat-slide-toggle>
+          </div>
+
+          <!-- Gemini Live Translate -->
+          @if (configs.videoPlayerASRModel === 'gemini-live-translate') {
+            <div class="setting-item">
+              <div class="setting-label">
+                <span>{{ 'PLAYER.ASR_GEMINI_API_KEY' | translate }}</span>
+                <span class="setting-desc">{{ 'PLAYER.ASR_GEMINI_API_KEY_DESC' | translate }}</span>
+              </div>
+              <mat-form-field appearance="outline" class="full-width" style="margin-bottom: -1.25em;">
+                <input matInput [(ngModel)]="configs.videoPlayerASRGeminiApiKey" type="password" (change)="updateConfig()">
+              </mat-form-field>
+            </div>
+            <div class="setting-item">
+              <div class="setting-label">
+                <span>{{ 'PLAYER.ASR_GEMINI_ENDPOINT' | translate }}</span>
+                <span class="setting-desc">{{ 'PLAYER.ASR_GEMINI_ENDPOINT_DESC' | translate }}</span>
+              </div>
+              <mat-form-field appearance="outline" class="full-width" style="margin-bottom: -1.25em;">
+                <input matInput [(ngModel)]="configs.videoPlayerASRGeminiEndpoint" (change)="updateConfig()" placeholder="">
+              </mat-form-field>
+            </div>
+          }
+
+          <!-- Translation Engine Button Toggle -->
+          <div class="form-row">
+            <label>{{ 'PLAYER.ASR_TRANSLATION_ENGINE' | translate }}</label>
+            <span class="setting-desc" style="margin-bottom: 8px;">{{ 'PLAYER.ASR_TRANSLATION_ENGINE_DESC' | translate }}</span>
+            <mat-button-toggle-group [(ngModel)]="configs.videoPlayerASRTranslationEngine" [vertical]="isSmallScreen">
+              @for (eng of asrTranslationEngines; track eng) {
+                <mat-button-toggle [value]="eng">{{ asrTranslationEngineLabels[eng] | translate }}</mat-button-toggle>
+              }
+            </mat-button-toggle-group>
+          </div>
+
+          @if (configs.videoPlayerASRTranslationEngine) {
+            <!-- Target Language -->
+            <div class="setting-item">
+              <div class="setting-label">
+                <span>{{ 'PLAYER.ASR_TARGET_LANG' | translate }}</span>
+                <span class="setting-desc">{{ 'PLAYER.ASR_TARGET_LANG_DESC' | translate }}</span>
+              </div>
+              <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
+                <input matInput [(ngModel)]="configs.videoPlayerASRTranslationTargetLang" placeholder="en">
+              </mat-form-field>
+            </div>
+          }
+
+          @if (configs.videoPlayerASRTranslationEngine === asrTranslationEngine.TENCENT) {
+            <!-- Tencent Cloud Credentials -->
+            <div class="setting-item">
+              <span>{{ 'PLAYER.ASR_TENCENT_SECRET_ID' | translate }}</span>
+            </div>
+            <div class="setting-item">
+              <mat-form-field appearance="outline" class="full-width" style="margin-bottom: -1.25em;">
+                <input matInput [(ngModel)]="configs.videoPlayerASRTranslationTencentSecretId" type="password">
+              </mat-form-field>
+            </div>
+            <div class="setting-item">
+              <span>{{ 'PLAYER.ASR_TENCENT_SECRET_KEY' | translate }}</span>
+            </div>
+            <div class="setting-item">
+              <mat-form-field appearance="outline" class="full-width" style="margin-bottom: -1.25em;">
+                <input matInput [(ngModel)]="configs.videoPlayerASRTranslationTencentSecretKey" type="password">
+              </mat-form-field>
+            </div>
+          }
+
+          @if (configs.videoPlayerASRTranslationEngine === asrTranslationEngine.BAIDU) {
+            <!-- Baidu Translation Credentials -->
+            <div class="setting-item">
+              <span>{{ 'PLAYER.ASR_BAIDU_APP_ID' | translate }}</span>
+            </div>
+            <div class="setting-item">
+              <mat-form-field appearance="outline" class="full-width" style="margin-bottom: -1.25em;">
+                <input matInput [(ngModel)]="configs.videoPlayerASRTranslationBaiduAppId">
+              </mat-form-field>
+            </div>
+            <div class="setting-item">
+              <span>{{ 'PLAYER.ASR_BAIDU_SECRET_KEY' | translate }}</span>
+            </div>
+            <div class="setting-item">
+              <mat-form-field appearance="outline" class="full-width" style="margin-bottom: -1.25em;">
+                <input matInput [(ngModel)]="configs.videoPlayerASRTranslationBaiduSecretKey" type="password">
+              </mat-form-field>
+            </div>
+          }
+
+          @if (configs.videoPlayerASRTranslationEngine === asrTranslationEngine.MTRANSERVER) {
+            <!-- MTranServer Configuration -->
+            <div class="setting-item">
+              <span>{{ 'PLAYER.ASR_MTRANSERVER_URL' | translate }}</span>
+            </div>
+            <div class="setting-item">
+              <mat-form-field appearance="outline" class="full-width" style="margin-bottom: -1.25em;">
+                <input matInput [(ngModel)]="configs.videoPlayerASRTranslationMTranServerUrl" placeholder="http://your-server:port">
+              </mat-form-field>
+            </div>
+            <div class="setting-item">
+              <span>{{ 'PLAYER.ASR_MTRANSERVER_TOKEN' | translate }}</span>
+            </div>
+            <div class="setting-item">
+              <mat-form-field appearance="outline" class="full-width" style="margin-bottom: -1.25em;">
+                <input matInput [(ngModel)]="configs.videoPlayerASRTranslationMTranServerToken" type="password">
+              </mat-form-field>
+            </div>
+          }
+        }
+
+        <div class="action-container">
+          <button mat-raised-button color="primary" (click)="saveAsr()">{{ 'PLAYER.ASR_SAVE' | translate }}</button>
+        </div>
       </div>
 
       <div class="setting-item">

@@ -1,4 +1,4 @@
-import { Component, inject, effect } from '@angular/core';
+import { Component, effect, inject } from '@angular/core';
 
 import { FormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
@@ -8,8 +8,11 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { TranslateModule } from '@ngx-translate/core';
-import { ConfigsService, AppConfigs, VideoPlayerCore, VideoPlayerRenderMode, VideoPlayerDisplayMode, VideoPlayerSeekToMode, RtspTransport, VideoPlayerDecoderConfig, VideoPlayerDecoderConfigs } from '../api';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { TranslateService, TranslateModule } from '@ngx-translate/core';
+import { ConfigsService, AppConfigs, VideoPlayerCore, VideoPlayerRenderMode, VideoPlayerDisplayMode, VideoPlayerSeekToMode, RtspTransport, VideoPlayerDecoderConfig, VideoPlayerDecoderConfigs, AudioBalanceLevel, ASRMode, AudioBalanceLevelLabels, ASRModeLabels, ASRTranslationEngine, ASRTranslationEngineLabels, VideoPlayerFrameRateFallback, VideoPlayerFrameRateFallbackLabels, ASRVadType, ASRVadTypeLabels } from '../api';
 import { TextareaWithLinesComponent } from '../common/textarea-with-lines/textarea-with-lines.component';
 
 @Component({
@@ -24,6 +27,8 @@ import { TextareaWithLinesComponent } from '../common/textarea-with-lines/textar
         MatInputModule,
         MatButtonModule,
         MatIconModule,
+        MatButtonToggleModule,
+        MatSnackBarModule,
         TranslateModule,
         TextareaWithLinesComponent
     ],
@@ -36,6 +41,9 @@ import { TextareaWithLinesComponent } from '../common/textarea-with-lines/textar
 })
 export class PlayerComponent {
     configsService = inject(ConfigsService);
+    snackBar = inject(MatSnackBar);
+    translate = inject(TranslateService);
+    breakpointObserver = inject(BreakpointObserver);
     configs: AppConfigs = {};
 
     videoPlayerCores = Object.values(VideoPlayerCore);
@@ -44,15 +52,40 @@ export class PlayerComponent {
     videoPlayerSeekToModes = Object.values(VideoPlayerSeekToMode);
     rtspTransports = Object.values(RtspTransport);
     videoPlayerDecoderConfigs = Object.values(VideoPlayerDecoderConfig).filter(v => typeof v === 'number');
+    audioBalanceLevels = Object.values(AudioBalanceLevel);
+    audioBalanceLevelLabels = AudioBalanceLevelLabels;
+    asrModes = Object.values(ASRMode);
+    asrModeLabels = ASRModeLabels;
+    asrTranslationEngines = Object.values(ASRTranslationEngine);
+    asrTranslationEngineLabels = ASRTranslationEngineLabels;
+    asrTranslationEngine = ASRTranslationEngine;
+    frameRateFallbacks = Object.values(VideoPlayerFrameRateFallback);
+    frameRateFallbackLabels = VideoPlayerFrameRateFallbackLabels;
+    asrVadTypes = Object.values(ASRVadType);
+    asrVadTypeLabels = ASRVadTypeLabels;
+    isSmallScreen = false;
 
     constructor() {
         effect(() => {
             this.configs = this.configsService.data();
         });
+        this.breakpointObserver.observe([Breakpoints.Handset, Breakpoints.Small, '(max-width: 600px)'])
+            .subscribe(result => {
+                this.isSmallScreen = result.matches;
+            });
     }
 
-    updateConfig() {
-        this.configsService.updateData(this.configs);
+    updateConfig(): Promise<void> {
+        return this.configsService.updateData(this.configs);
+    }
+
+    async saveAsr() {
+        try {
+            await this.updateConfig();
+            this.snackBar.open(this.translate.instant('PLAYER.ASR_SAVED'), undefined, { duration: 3000 });
+        } catch {
+            this.snackBar.open(this.translate.instant('PLAYER.ASR_SAVE_FAILED'), undefined, { duration: 3000 });
+        }
     }
 
     addDecoderConfig() {

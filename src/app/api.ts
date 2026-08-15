@@ -126,6 +126,11 @@ export interface AppConfigs {
     uiShowChannelLogo?: boolean
     uiShowReplayBadge?: boolean  // NEW: 显示回放标志
     uiShowChannelPreview?: boolean
+    channelPreviewParallelCount?: number  // NEW: 频道预览并行抓帧数
+    uiLazyRender?: boolean  // NEW: 列表懒渲染
+    uiLazyRenderParallelCount?: number  // NEW: 列表懒渲染并行数
+    uiLazyRenderInterval?: number  // NEW: 列表懒渲染间隔(ms)
+    uiListAnimation?: boolean  // NEW: 列表项动画
     uiUseClassicPanelScreen?: boolean
     uiDensityScaleRatio?: number
     uiFontScaleRatio?: number
@@ -172,23 +177,28 @@ export interface AppConfigs {
     videoPlayerSeekToMode?: VideoPlayerSeekToMode
     videoPlayerSkipMultipleFramesOnSameVSync?: boolean
     videoPlayerFitFrameRate?: boolean
+    videoPlayerFrameRateFallback?: VideoPlayerFrameRateFallback  // NEW: 帧率适配回退刷新率
     videoPlayerApplyBetterDetection?: boolean
     videoPlayerExtractHeaderFromLink?: boolean
     videoPlayerVolumeNormalization?: boolean  // 保留向后兼容的布尔值
     videoPlayerVolumeBalanceLevel?: AudioBalanceLevel  // NEW: 音量均衡等级（替代简单布尔值）
     videoPlayerRealTimeASR?: boolean  // NEW: 实时ASR语音识别
     videoPlayerASRModel?: string  // NEW: ASR识别模型
-    videoPlayerASRTranslationEngine?: string  // NEW: ASR翻译引擎 (Tencent/Baidu/MTranServer)
+    videoPlayerASRTranslationEngine?: ASRTranslationEngine  // NEW: ASR翻译引擎 (Tencent/Baidu/MTranServer)
     videoPlayerASRTranslationTargetLang?: string  // NEW: ASR翻译目标语言
     videoPlayerASRTranslationTencentSecretId?: string  // NEW: ASR翻译腾讯 SecretId
     videoPlayerASRTranslationTencentSecretKey?: string  // NEW: ASR翻译腾讯 SecretKey
     videoPlayerASRTranslationBaiduAppId?: string  // NEW: ASR翻译百度 AppId
     videoPlayerASRTranslationBaiduSecretKey?: string  // NEW: ASR翻译百度 SecretKey
-    videoPlayerASRTranslationMTranServerURL?: string  // NEW: ASR翻译MTranServer URL
+    videoPlayerASRTranslationMTranServerUrl?: string  // NEW: ASR翻译MTranServer URL
     videoPlayerASRTranslationMTranServerToken?: string  // NEW: ASR翻译MTranServer Token
     videoPlayerASRMode?: ASRMode  // NEW: ASR 模式
     videoPlayerASRLeadTimeMs?: number  // NEW: ASR 领先字幕显示提前量（毫秒）
+    videoPlayerASRAutoStreamingFallback?: boolean  // NEW: ASR 非领先路径自动优先流式模型
     videoPlayerASRSilenceThresholdMs?: number  // NEW: ASR 断句静音阈值（毫秒）
+    videoPlayerASRVadType?: string  // NEW: ASR VAD 后端类型 (silero/ten)
+    videoPlayerASRGeminiApiKey?: string  // NEW: ASR Gemini Live Translate API Key
+    videoPlayerASRGeminiEndpoint?: string  // NEW: ASR Gemini Live Translate 端点
     themeAppCurrent?: AppThemeDef
     themeMode?: number
     themeColorProvider?: number
@@ -420,6 +430,20 @@ export const VideoPlayerDisplayModeLabels: { [key in VideoPlayerDisplayMode]: st
     [VideoPlayerDisplayMode.WIDE]: 'SETTINGS.VIDEO_PLAYER_DISPLAY_MODE.WIDE',
 }
 
+export enum VideoPlayerFrameRateFallback {
+    SYSTEM_DEFAULT = 'SYSTEM_DEFAULT',
+    HZ_50 = 'HZ_50',
+    HZ_59_94 = 'HZ_59_94',
+    HZ_60 = 'HZ_60',
+}
+
+export const VideoPlayerFrameRateFallbackLabels: { [key in VideoPlayerFrameRateFallback]: string } = {
+    [VideoPlayerFrameRateFallback.SYSTEM_DEFAULT]: 'SETTINGS.VIDEO_PLAYER_FRAME_RATE_FALLBACK.SYSTEM_DEFAULT',
+    [VideoPlayerFrameRateFallback.HZ_50]: 'SETTINGS.VIDEO_PLAYER_FRAME_RATE_FALLBACK.HZ_50',
+    [VideoPlayerFrameRateFallback.HZ_59_94]: 'SETTINGS.VIDEO_PLAYER_FRAME_RATE_FALLBACK.HZ_59_94',
+    [VideoPlayerFrameRateFallback.HZ_60]: 'SETTINGS.VIDEO_PLAYER_FRAME_RATE_FALLBACK.HZ_60',
+}
+
 export enum CloudSyncProvider {
     GITHUB_GIST = 'GITHUB_GIST',
     GITEE_GIST = 'GITEE_GIST',
@@ -496,6 +520,30 @@ export enum ASRMode {
 export const ASRModeLabels: { [key in ASRMode]: string } = {
     [ASRMode.RENDERER_ONLY]: 'SETTINGS.ASR_MODE.RENDERER_ONLY',
     [ASRMode.SOURCE_TAP_PREFERRED]: 'SETTINGS.ASR_MODE.SOURCE_TAP_PREFERRED',
+}
+
+export enum ASRVadType {
+    SILERO = 'silero',
+    TEN = 'ten',
+}
+
+export const ASRVadTypeLabels: { [key in ASRVadType]: string } = {
+    [ASRVadType.SILERO]: 'SETTINGS.ASR_VAD_TYPE.SILERO',
+    [ASRVadType.TEN]: 'SETTINGS.ASR_VAD_TYPE.TEN',
+}
+
+export enum ASRTranslationEngine {
+    NONE = '',
+    TENCENT = 'tencent',
+    BAIDU = 'baidu',
+    MTRANSERVER = 'mtranserver',
+}
+
+export const ASRTranslationEngineLabels: { [key in ASRTranslationEngine]: string } = {
+    [ASRTranslationEngine.NONE]: 'PLAYER.ASR_NO_TRANSLATION',
+    [ASRTranslationEngine.TENCENT]: 'PLAYER.ASR_TENCENT',
+    [ASRTranslationEngine.BAIDU]: 'PLAYER.ASR_BAIDU',
+    [ASRTranslationEngine.MTRANSERVER]: 'PLAYER.ASR_MTRANSERVER',
 }
 
 export interface MultiViewScheme {
