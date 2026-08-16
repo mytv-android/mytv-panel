@@ -43,4 +43,18 @@ export class GeneralComponent {
     updateConfig() {
         this.configsService.updateData(this.configs);
     }
+
+    onPipChange() {
+        if (this.configs.appPipEnable && this.configs.appBackgroundPlayEnable) {
+            this.configs.appBackgroundPlayEnable = false;
+        }
+        this.updateConfig();
+    }
+
+    onBackgroundPlayChange() {
+        if (this.configs.appBackgroundPlayEnable && this.configs.appPipEnable) {
+            this.configs.appPipEnable = false;
+        }
+        this.updateConfig();
+    }
 }

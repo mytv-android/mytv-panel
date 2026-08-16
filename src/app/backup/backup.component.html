@@ -8,6 +8,13 @@
         <span>{{ 'SYNC.AUTO_PULL' | translate }}</span>
         <mat-slide-toggle [(ngModel)]="configs.cloudSyncAutoPull" (change)="updateConfig()"></mat-slide-toggle>
       </div>
+      <div class="setting-item">
+        <div class="setting-label">
+          <span>{{ 'SYNC.BACKUP_ENABLE' | translate }}</span>
+          <span class="setting-desc">{{ 'SYNC.BACKUP_ENABLE_DESC' | translate }}</span>
+        </div>
+        <mat-slide-toggle [(ngModel)]="configs.appBackupEnable" (change)="updateConfig()"></mat-slide-toggle>
+      </div>
       <div class="form-row">
         <label>{{ 'HOME.PROVIDER' | translate }}</label>
         <mat-button-toggle-group [(ngModel)]="configs.cloudSyncProvider" [vertical]="isSmallScreen">

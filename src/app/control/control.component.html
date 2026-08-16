@@ -16,6 +16,13 @@
         <span>{{ 'CONTROL.CROSS_GROUP' | translate }}</span>
         <mat-slide-toggle [(ngModel)]="configs.iptvChannelChangeCrossGroup" (change)="updateConfig()"></mat-slide-toggle>
       </div>
+      <div class="setting-item">
+        <div class="setting-label">
+          <span>{{ 'CONTROL.CHANNEL_CHANGE_SHOW_INFO' | translate }}</span>
+          <span class="setting-desc">{{ 'CONTROL.CHANNEL_CHANGE_SHOW_INFO_DESC' | translate }}</span>
+        </div>
+        <mat-slide-toggle [(ngModel)]="configs.iptvChannelChangeShowInfoPanel" (change)="updateConfig()"></mat-slide-toggle>
+      </div>
 
       <h3>{{ 'CONTROL.KEY_BEHAVIOR' | translate }}</h3>
 
