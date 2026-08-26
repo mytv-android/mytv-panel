@@ -43,13 +43,6 @@ export const AppApi = {
         return RequestUtil.post(`${prefix}api/upload/apk`, formData, undefined, false)
     },
 
-    getChannelAlias() {
-        return RequestUtil.getText(`${prefix}api/channel-alias`)
-    },
-    changeChannelAlias(alias: string) {
-        return RequestUtil.post(`${prefix}api/channel-alias`, alias, undefined, false)
-    },
-
     getCloudSyncData() {
         return RequestUtil.get<CloudSyncData>(`${prefix}api/cloud-sync/data`)
     },
@@ -100,10 +93,12 @@ export interface AppConfigs {
     iptvSimilarChannelMerge?: boolean
     iptvChannelLogoProvider?: string
     iptvChannelLogoOverride?: boolean
+    iptvChannelNameAlias?: string  // 频道名映射表（JSON 字符串，默认 R.raw.channel_name_alias）
     iptvPLTVToTVOD?: boolean
     iptvChannelFavoriteEnable?: boolean
     iptvChannelHistoryEnable?: boolean
     iptvChannelFavoriteListVisible?: boolean
+    iptvChannelHistoryListVisible?: boolean
     iptvChannelFavoriteList?: ChannelFavoriteList
     iptvChannelHistoryList?: ChannelList
     iptvChannelLastPlay?: Channel
