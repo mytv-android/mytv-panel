@@ -174,6 +174,8 @@ export interface AppConfigs {
     globalVideoPlayerSuperResolutionMode?: VideoPlayerSuperResolutionMode
     globalVideoPlayerFrameInterpolation?: boolean
     globalVideoPlayerFrameInterpolationMode?: VideoPlayerFrameInterpolationMode
+    globalVideoPlayerInterpolationTargetFps?: VideoPlayerInterpolationTargetFps
+    globalVideoPlayerAiExecutionBackend?: VideoPlayerAiExecutionBackend
     videoPlayerStopPreviousMediaItem?: boolean
     videoPlayerSeekToMode?: VideoPlayerSeekToMode
     videoPlayerSkipMultipleFramesOnSameVSync?: boolean
@@ -428,11 +430,27 @@ export enum VideoPlayerSuperResolutionMode {
     ANIME4K = 'ANIME4K',
     GPU_FSR = 'GPU_FSR',
     AI_LITE = 'AI_LITE',
+    REAL_ESRGAN_VULKAN = 'REAL_ESRGAN_VULKAN',
 }
 
 export enum VideoPlayerFrameInterpolationMode {
     OFF = 'OFF',
     GPU_BLEND = 'GPU_BLEND',
+    RIFE_VULKAN = 'RIFE_VULKAN',
+}
+
+export enum VideoPlayerInterpolationTargetFps {
+    AUTO = 'AUTO',
+    FPS_30 = 'FPS_30',
+    FPS_50 = 'FPS_50',
+    FPS_60 = 'FPS_60',
+    FPS_120 = 'FPS_120',
+}
+
+export enum VideoPlayerAiExecutionBackend {
+    AUTO = 'AUTO',
+    NNAPI = 'NNAPI',
+    CPU = 'CPU',
 }
 
 export const VideoPlayerDisplayModeLabels: { [key in VideoPlayerDisplayMode]: string } = {

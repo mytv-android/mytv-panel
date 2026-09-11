@@ -138,6 +138,38 @@
       </div>
 
       <div class="setting-item">
+        <div class="setting-label">
+          <span>{{ 'PLAYER.INTERPOLATION_TARGET_FPS' | translate }}</span>
+          <span class="setting-desc">{{ 'PLAYER.INTERPOLATION_TARGET_FPS_DESC' | translate }}</span>
+        </div>
+        <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
+          <mat-select [(ngModel)]="configs.globalVideoPlayerInterpolationTargetFps" (selectionChange)="updateConfig()">
+            @for (targetFps of interpolationTargetFps; track targetFps) {
+              <mat-option [value]="targetFps">
+                {{ 'SETTINGS.VIDEO_PLAYER_INTERPOLATION_TARGET_FPS.' + targetFps | translate }}
+              </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="setting-item">
+        <div class="setting-label">
+          <span>{{ 'PLAYER.AI_EXECUTION_BACKEND' | translate }}</span>
+          <span class="setting-desc">{{ 'PLAYER.AI_EXECUTION_BACKEND_DESC' | translate }}</span>
+        </div>
+        <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
+          <mat-select [(ngModel)]="configs.globalVideoPlayerAiExecutionBackend" (selectionChange)="updateConfig()">
+            @for (backend of aiExecutionBackends; track backend) {
+              <mat-option [value]="backend">
+                {{ 'SETTINGS.VIDEO_PLAYER_AI_EXECUTION_BACKEND.' + backend | translate }}
+              </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="setting-item">
         <span>{{ 'PLAYER.STOP_PREVIOUS_MEDIA_ITEM' | translate }}</span>
         <mat-slide-toggle [(ngModel)]="configs.videoPlayerStopPreviousMediaItem" (change)="updateConfig()"></mat-slide-toggle>
       </div>

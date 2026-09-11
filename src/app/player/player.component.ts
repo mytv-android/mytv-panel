@@ -12,7 +12,7 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { TranslateService, TranslateModule } from '@ngx-translate/core';
-import { ConfigsService, AppConfigs, VideoPlayerCore, VideoPlayerRenderMode, VideoPlayerDisplayMode, VideoPlayerSeekToMode, RtspTransport, VideoPlayerDecoderConfig, VideoPlayerDecoderConfigs, AudioBalanceLevel, ASRMode, AudioBalanceLevelLabels, ASRModeLabels, ASRTranslationEngine, ASRTranslationEngineLabels, VideoPlayerFrameRateFallback, VideoPlayerFrameRateFallbackLabels, ASRVadType, ASRVadTypeLabels, VideoPlayerSuperResolutionMode, VideoPlayerFrameInterpolationMode } from '../api';
+import { ConfigsService, AppConfigs, VideoPlayerCore, VideoPlayerRenderMode, VideoPlayerDisplayMode, VideoPlayerSeekToMode, RtspTransport, VideoPlayerDecoderConfig, VideoPlayerDecoderConfigs, AudioBalanceLevel, ASRMode, AudioBalanceLevelLabels, ASRModeLabels, ASRTranslationEngine, ASRTranslationEngineLabels, VideoPlayerFrameRateFallback, VideoPlayerFrameRateFallbackLabels, ASRVadType, ASRVadTypeLabels, VideoPlayerSuperResolutionMode, VideoPlayerFrameInterpolationMode, VideoPlayerInterpolationTargetFps, VideoPlayerAiExecutionBackend } from '../api';
 import { TextareaWithLinesComponent } from '../common/textarea-with-lines/textarea-with-lines.component';
 
 @Component({
@@ -63,6 +63,8 @@ export class PlayerComponent {
     frameRateFallbackLabels = VideoPlayerFrameRateFallbackLabels;
     superResolutionModes = Object.values(VideoPlayerSuperResolutionMode);
     frameInterpolationModes = Object.values(VideoPlayerFrameInterpolationMode);
+    interpolationTargetFps = Object.values(VideoPlayerInterpolationTargetFps);
+    aiExecutionBackends = Object.values(VideoPlayerAiExecutionBackend);
     asrVadTypes = Object.values(ASRVadType);
     asrVadTypeLabels = ASRVadTypeLabels;
     isSmallScreen = false;
@@ -79,6 +81,12 @@ export class PlayerComponent {
                 this.configs.globalVideoPlayerFrameInterpolationMode = this.configs.globalVideoPlayerFrameInterpolation
                     ? VideoPlayerFrameInterpolationMode.GPU_BLEND
                     : VideoPlayerFrameInterpolationMode.OFF;
+            }
+            if (this.configs.globalVideoPlayerInterpolationTargetFps === undefined) {
+                this.configs.globalVideoPlayerInterpolationTargetFps = VideoPlayerInterpolationTargetFps.AUTO;
+            }
+            if (this.configs.globalVideoPlayerAiExecutionBackend === undefined) {
+                this.configs.globalVideoPlayerAiExecutionBackend = VideoPlayerAiExecutionBackend.AUTO;
             }
         });
         this.breakpointObserver.observe([Breakpoints.Handset, Breakpoints.Small, '(max-width: 600px)'])

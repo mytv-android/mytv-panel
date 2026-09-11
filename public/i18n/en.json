@@ -155,9 +155,13 @@
       "MEDIA3_SOFT_DECODE_AUDIO_ONLY": "Software Decode for Audio Only",
       "MEDIA3_SOFT_DECODE_AUDIO_ONLY_DESC": "Only applies to the Media3 core: forced software decoding affects audio only, video remains hardware-decoded;\nIJK/VLC always decode audio with ffmpeg, so this switch is not needed for them",
       "SUPER_RESOLUTION": "Video Super-Resolution Path",
-      "SUPER_RESOLUTION_DESC": "Choose a real-time super-resolution path: GPU spatial enhancement, the Anime4K shader, an FSR/CAS-style GPU path, and an online AI Lite model process frames after decoding. QuickOP opens a selection panel for this setting.",
+      "SUPER_RESOLUTION_DESC": "Choose a real-time super-resolution path: GPU spatial enhancement, the Anime4K shader, an FSR/CAS-style GPU path, an online AI Lite model, or the Real-ESRGAN Vulkan runtime. QuickOP opens a selection panel for this setting.",
       "FRAME_INTERPOLATION": "Video Frame-Interpolation Path",
-      "FRAME_INTERPOLATION_DESC": "Choose a real-time interpolation path: GPU frame blending creates intermediate display frames after decoding during playback. QuickOP opens a selection panel for this setting.",
+      "FRAME_INTERPOLATION_DESC": "Choose a real-time interpolation path: GPU frame blending or the RIFE Vulkan runtime creates intermediate display frames after decoding during playback. QuickOP opens a selection panel for this setting.",
+      "INTERPOLATION_TARGET_FPS": "Interpolation Target Frame Rate",
+      "INTERPOLATION_TARGET_FPS_DESC": "Request a target refresh rate for the enhancement output Surface; actual output depends on display refresh, source cadence, and processing capacity.",
+      "AI_EXECUTION_BACKEND": "AI Super-Resolution Execution Backend",
+      "AI_EXECUTION_BACKEND_DESC": "Choose automatic selection, NNAPI device acceleration, or CPU execution for AI Lite.",
       "STOP_PREVIOUS_MEDIA_ITEM": "Stop Previous Media Item",
     "FIT_FRAME_RATE": "Match Video Frame Rate",
     "FIT_FRAME_RATE_DESC": "Match display refresh rate to video frame rate",
@@ -313,11 +317,25 @@
       "GPU_SPATIAL": "GPU Spatial Enhancement (Real Time)",
       "ANIME4K": "Anime4K Shader (Real Time)",
       "GPU_FSR": "GPU FSR/CAS Style (Real Time)",
-      "AI_LITE": "AI Lite Super Resolution (Online Model)"
+      "AI_LITE": "AI Lite Super Resolution (Online Model)",
+      "REAL_ESRGAN_VULKAN": "Real-ESRGAN Vulkan (Online Runtime)"
     },
     "VIDEO_PLAYER_FRAME_INTERPOLATION_MODE": {
       "OFF": "Video Frame Interpolation: Off",
-      "GPU_BLEND": "GPU Frame Blend (Real Time)"
+      "GPU_BLEND": "GPU Frame Blend (Real Time)",
+      "RIFE_VULKAN": "RIFE Vulkan (Online Runtime)"
+    },
+    "VIDEO_PLAYER_INTERPOLATION_TARGET_FPS": {
+      "AUTO": "Follow Source Frame Rate",
+      "FPS_30": "Target 30 FPS",
+      "FPS_50": "Target 50 FPS",
+      "FPS_60": "Target 60 FPS",
+      "FPS_120": "Target 120 FPS"
+    },
+    "VIDEO_PLAYER_AI_EXECUTION_BACKEND": {
+      "AUTO": "Automatic",
+      "NNAPI": "NNAPI Device Acceleration",
+      "CPU": "CPU"
     },
     "KEY_DOWN_ACTION": {
       "ChangeCurrentChannelToPrev": "Previous Channel",
