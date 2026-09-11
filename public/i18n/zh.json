@@ -152,7 +152,13 @@
     "RENDER_MODE": "渲染方式",
     "FORCE_SOFT_DECODE": "强制软解",
     "FORCE_SOFT_DECODE_DESC": "对于Media3，使用设备和扩展软解码器;\n对于IJK和VLC，将禁用MediaCodec解码（使用ffmpeg）",
-    "STOP_PREVIOUS_MEDIA_ITEM": "停止上一媒体项",
+      "MEDIA3_SOFT_DECODE_AUDIO_ONLY": "软解仅用于音频",
+      "MEDIA3_SOFT_DECODE_AUDIO_ONLY_DESC": "仅对Media3内核生效：开启后强制软解只作用于音频解码，视频仍使用硬解；\nIJK/VLC的音频始终使用ffmpeg解码，无需此开关",
+      "SUPER_RESOLUTION": "视频超分路径",
+      "SUPER_RESOLUTION_DESC": "选择实时超分路径：GPU 空间增强、Anime4K Shader、GPU FSR/CAS 风格处理和在线 AI Lite 模型都在解码后处理画面；QuickOP 通过弹出面板选择。",
+      "FRAME_INTERPOLATION": "视频插帧路径",
+      "FRAME_INTERPOLATION_DESC": "选择实时插帧路径：GPU 帧混合在解码后生成中间显示帧；QuickOP 通过弹出面板选择。",
+      "STOP_PREVIOUS_MEDIA_ITEM": "停止上一媒体项",
     "FIT_FRAME_RATE": "适配视频内容帧率",
     "FIT_FRAME_RATE_DESC": "启用后，播放器将尝试适配视频内容的帧率\n需要启用系统设置和渲染模式为SufaceView，系统版本大于 11\n在切换期间，你可能会观察到屏幕闪烁，部分视频源可能不适用或出现问题",
     "FRAME_RATE_FALLBACK": "使用兜底刷新率",
@@ -302,6 +308,17 @@
       "SIXTEEN_NINE": "16:9",
       "WIDE": "2.35:1"
     },
+    "VIDEO_PLAYER_SUPER_RESOLUTION_MODE": {
+      "OFF": "关闭视频超分",
+      "GPU_SPATIAL": "GPU 空间增强（实时）",
+      "ANIME4K": "Anime4K Shader（实时）",
+      "GPU_FSR": "GPU FSR/CAS 风格（实时）",
+      "AI_LITE": "AI Lite 超分（在线模型）"
+    },
+    "VIDEO_PLAYER_FRAME_INTERPOLATION_MODE": {
+      "OFF": "关闭视频插帧",
+      "GPU_BLEND": "GPU 帧混合（实时）"
+    },
     "KEY_DOWN_ACTION": {
       "ChangeCurrentChannelToPrev": "切换上一个频道",
       "ChangeCurrentChannelToNext": "切换下一个频道",
@@ -420,7 +437,8 @@
     "MOVE_UP": "上移",
     "MOVE_DOWN": "下移",
     "DELETE_SOURCE": "删除",
-    "HTTP_PROXY": "HTTP代理"
+    "HTTP_PROXY": "HTTP代理",
+    "USER_AGENT": "UA"
   },
   "设置 / 节目单": "设置 / 节目单",
   "THEME_MODE": "主题模式",

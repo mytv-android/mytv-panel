@@ -12,7 +12,7 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { TranslateService, TranslateModule } from '@ngx-translate/core';
-import { ConfigsService, AppConfigs, VideoPlayerCore, VideoPlayerRenderMode, VideoPlayerDisplayMode, VideoPlayerSeekToMode, RtspTransport, VideoPlayerDecoderConfig, VideoPlayerDecoderConfigs, AudioBalanceLevel, ASRMode, AudioBalanceLevelLabels, ASRModeLabels, ASRTranslationEngine, ASRTranslationEngineLabels, VideoPlayerFrameRateFallback, VideoPlayerFrameRateFallbackLabels, ASRVadType, ASRVadTypeLabels } from '../api';
+import { ConfigsService, AppConfigs, VideoPlayerCore, VideoPlayerRenderMode, VideoPlayerDisplayMode, VideoPlayerSeekToMode, RtspTransport, VideoPlayerDecoderConfig, VideoPlayerDecoderConfigs, AudioBalanceLevel, ASRMode, AudioBalanceLevelLabels, ASRModeLabels, ASRTranslationEngine, ASRTranslationEngineLabels, VideoPlayerFrameRateFallback, VideoPlayerFrameRateFallbackLabels, ASRVadType, ASRVadTypeLabels, VideoPlayerSuperResolutionMode, VideoPlayerFrameInterpolationMode } from '../api';
 import { TextareaWithLinesComponent } from '../common/textarea-with-lines/textarea-with-lines.component';
 
 @Component({
@@ -61,6 +61,8 @@ export class PlayerComponent {
     asrTranslationEngine = ASRTranslationEngine;
     frameRateFallbacks = Object.values(VideoPlayerFrameRateFallback);
     frameRateFallbackLabels = VideoPlayerFrameRateFallbackLabels;
+    superResolutionModes = Object.values(VideoPlayerSuperResolutionMode);
+    frameInterpolationModes = Object.values(VideoPlayerFrameInterpolationMode);
     asrVadTypes = Object.values(ASRVadType);
     asrVadTypeLabels = ASRVadTypeLabels;
     isSmallScreen = false;
@@ -68,6 +70,16 @@ export class PlayerComponent {
     constructor() {
         effect(() => {
             this.configs = this.configsService.data();
+            if (this.configs.globalVideoPlayerSuperResolutionMode === undefined) {
+                this.configs.globalVideoPlayerSuperResolutionMode = this.configs.globalVideoPlayerSuperResolution
+                    ? VideoPlayerSuperResolutionMode.GPU_SPATIAL
+                    : VideoPlayerSuperResolutionMode.OFF;
+            }
+            if (this.configs.globalVideoPlayerFrameInterpolationMode === undefined) {
+                this.configs.globalVideoPlayerFrameInterpolationMode = this.configs.globalVideoPlayerFrameInterpolation
+                    ? VideoPlayerFrameInterpolationMode.GPU_BLEND
+                    : VideoPlayerFrameInterpolationMode.OFF;
+            }
         });
         this.breakpointObserver.observe([Breakpoints.Handset, Breakpoints.Small, '(max-width: 600px)'])
             .subscribe(result => {

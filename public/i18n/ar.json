@@ -152,7 +152,13 @@
     "RENDER_MODE": "وضع العرض",
     "FORCE_SOFT_DECODE": "فرض فك التشفير البرمجي",
     "FORCE_SOFT_DECODE_DESC": "فرض فك التشفير البرمجي لتشغيل الفيديو",
-    "STOP_PREVIOUS_MEDIA_ITEM": "إيقاف عنصر الوسائط السابق",
+      "MEDIA3_SOFT_DECODE_AUDIO_ONLY": "فك التشفير البرمجي للصوت فقط",
+      "MEDIA3_SOFT_DECODE_AUDIO_ONLY_DESC": "ينطبق فقط على نواة Media3: يقتصر فك التشفير البرمجي القسري على الصوت ويبقى الفيديو على فك تشفير الأجهزة؛\nيقوم IJK/VLC دائمًا بفك تشفير الصوت عبر ffmpeg، لذا لا حاجة لهذا المفتاح معهما",
+      "SUPER_RESOLUTION": "مسار تحسين دقة الفيديو",
+      "SUPER_RESOLUTION_DESC": "اختر مسارًا فوريًا لتحسين الدقة: يعالج مسار GPU المكاني ومظلل Anime4K ومسار GPU بأسلوب FSR/CAS ونموذج AI Lite عبر الإنترنت الإطارات بعد فك التشفير. يفتح QuickOP لوحة اختيار لهذا الإعداد.",
+      "FRAME_INTERPOLATION": "مسار استيفاء إطارات الفيديو",
+      "FRAME_INTERPOLATION_DESC": "اختر مسارًا فوريًا لاستيفاء الإطارات: ينشئ دمج الإطارات عبر GPU إطارات عرض وسيطة بعد فك التشفير أثناء التشغيل. يفتح QuickOP لوحة اختيار لهذا الإعداد.",
+      "STOP_PREVIOUS_MEDIA_ITEM": "إيقاف عنصر الوسائط السابق",
     "FIT_FRAME_RATE": "مطابقة معدل إطارات الفيديو",
     "FIT_FRAME_RATE_DESC": "مطابقة معدل تحديث الشاشة مع معدل إطارات الفيديو",
     "FRAME_RATE_FALLBACK": "استخدام معدل تحديث احتياطي",
@@ -302,6 +308,17 @@
       "SIXTEEN_NINE": "16:9",
       "WIDE": "2.35:1"
     },
+    "VIDEO_PLAYER_SUPER_RESOLUTION_MODE": {
+      "OFF": "تحسين دقة الفيديو: إيقاف",
+      "GPU_SPATIAL": "تحسين مكاني عبر GPU (فوري)",
+      "ANIME4K": "مظلل Anime4K (فوري)",
+      "GPU_FSR": "GPU بأسلوب FSR/CAS (فوري)",
+      "AI_LITE": "تحسين دقة AI Lite (نموذج عبر الإنترنت)"
+    },
+    "VIDEO_PLAYER_FRAME_INTERPOLATION_MODE": {
+      "OFF": "استيفاء إطارات الفيديو: إيقاف",
+      "GPU_BLEND": "دمج الإطارات عبر GPU (فوري)"
+    },
     "KEY_DOWN_ACTION": {
       "ChangeCurrentChannelToPrev": "القناة السابقة",
       "ChangeCurrentChannelToNext": "القناة التالية",
@@ -420,7 +437,8 @@
     "MOVE_UP": "تحريك لأعلى",
     "MOVE_DOWN": "تحريك لأسفل",
     "DELETE_SOURCE": "حذف المصدر",
-    "HTTP_PROXY": "HTTP Proxy"
+    "HTTP_PROXY": "HTTP Proxy",
+    "USER_AGENT": "وكيل المستخدم (UA)"
   },
   "设置 / 节目单": "الإعدادات / دليل البرامج",
   "THEME_MODE": "وضع المظهر",

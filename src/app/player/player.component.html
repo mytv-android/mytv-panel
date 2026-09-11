@@ -98,6 +98,46 @@
       </div>
 
       <div class="setting-item">
+        <div class="setting-label">
+          <span>{{ 'PLAYER.MEDIA3_SOFT_DECODE_AUDIO_ONLY' | translate }}</span>
+          <span class="setting-desc">{{ 'PLAYER.MEDIA3_SOFT_DECODE_AUDIO_ONLY_DESC' | translate }}</span>
+        </div>
+        <mat-slide-toggle [(ngModel)]="configs.globalVideoPlayerMedia3SoftDecodeAudioOnly" (change)="updateConfig()"></mat-slide-toggle>
+      </div>
+
+      <div class="setting-item">
+        <div class="setting-label">
+          <span>{{ 'PLAYER.SUPER_RESOLUTION' | translate }}</span>
+          <span class="setting-desc">{{ 'PLAYER.SUPER_RESOLUTION_DESC' | translate }}</span>
+        </div>
+        <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
+          <mat-select [(ngModel)]="configs.globalVideoPlayerSuperResolutionMode" (selectionChange)="updateConfig()">
+            @for (mode of superResolutionModes; track mode) {
+              <mat-option [value]="mode">
+                {{ 'SETTINGS.VIDEO_PLAYER_SUPER_RESOLUTION_MODE.' + mode | translate }}
+              </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="setting-item">
+        <div class="setting-label">
+          <span>{{ 'PLAYER.FRAME_INTERPOLATION' | translate }}</span>
+          <span class="setting-desc">{{ 'PLAYER.FRAME_INTERPOLATION_DESC' | translate }}</span>
+        </div>
+        <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
+          <mat-select [(ngModel)]="configs.globalVideoPlayerFrameInterpolationMode" (selectionChange)="updateConfig()">
+            @for (mode of frameInterpolationModes; track mode) {
+              <mat-option [value]="mode">
+                {{ 'SETTINGS.VIDEO_PLAYER_FRAME_INTERPOLATION_MODE.' + mode | translate }}
+              </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="setting-item">
         <span>{{ 'PLAYER.STOP_PREVIOUS_MEDIA_ITEM' | translate }}</span>
         <mat-slide-toggle [(ngModel)]="configs.videoPlayerStopPreviousMediaItem" (change)="updateConfig()"></mat-slide-toggle>
       </div>

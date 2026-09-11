@@ -169,6 +169,11 @@ export interface AppConfigs {
     videoPlayerBufferTime?: number
     videoPlayerDisplayMode?: VideoPlayerDisplayMode
     globalVideoPlayerForceSoftDecode?: boolean
+    globalVideoPlayerMedia3SoftDecodeAudioOnly?: boolean  // NEW: Media3软解仅用于音频
+    globalVideoPlayerSuperResolution?: boolean
+    globalVideoPlayerSuperResolutionMode?: VideoPlayerSuperResolutionMode
+    globalVideoPlayerFrameInterpolation?: boolean
+    globalVideoPlayerFrameInterpolationMode?: VideoPlayerFrameInterpolationMode
     videoPlayerStopPreviousMediaItem?: boolean
     videoPlayerSeekToMode?: VideoPlayerSeekToMode
     videoPlayerSkipMultipleFramesOnSameVSync?: boolean
@@ -415,6 +420,19 @@ export enum VideoPlayerDisplayMode {
     FOUR_THREE = 'FOUR_THREE',
     SIXTEEN_NINE = 'SIXTEEN_NINE',
     WIDE = 'WIDE',
+}
+
+export enum VideoPlayerSuperResolutionMode {
+    OFF = 'OFF',
+    GPU_SPATIAL = 'GPU_SPATIAL',
+    ANIME4K = 'ANIME4K',
+    GPU_FSR = 'GPU_FSR',
+    AI_LITE = 'AI_LITE',
+}
+
+export enum VideoPlayerFrameInterpolationMode {
+    OFF = 'OFF',
+    GPU_BLEND = 'GPU_BLEND',
 }
 
 export const VideoPlayerDisplayModeLabels: { [key in VideoPlayerDisplayMode]: string } = {
