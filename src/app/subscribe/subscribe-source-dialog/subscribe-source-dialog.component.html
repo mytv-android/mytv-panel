@@ -47,40 +47,21 @@
           <mat-option value="m3u">M3U</mat-option>
         </mat-select>
       </mat-form-field>
-      <mat-form-field appearance="outline" class="half-width">
-        <mat-label>{{ 'HOME.USER_AGENT' | translate }}</mat-label>
+    </div>
+    }
+
+    <div class="form-row">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>{{ 'SUBSCRIBE.USER_AGENT' | translate }}</mat-label>
         <input matInput [(ngModel)]="source.httpUserAgent">
       </mat-form-field>
     </div>
     <div class="form-row">
       <mat-form-field appearance="outline" class="full-width">
-        <mat-label>{{ 'SUBSCRIBE.HTTP_PROXY' | translate }}</mat-label>
-        <input matInput [(ngModel)]="source.httpProxy">
+        <mat-label>{{ 'SUBSCRIBE.PROXY' | translate }}</mat-label>
+        <input matInput [(ngModel)]="source.httpProxy" placeholder="http://host:port / socks5://host:port">
       </mat-form-field>
     </div>
-    }
-
-    @if (source.sourceType === 3) {
-    <div class="form-row">
-      <mat-form-field appearance="outline" class="full-width">
-        <mat-label>{{ 'HOME.MAC_ADDRESS' | translate }}</mat-label>
-        <input matInput [(ngModel)]="source.mac">
-      </mat-form-field>
-    </div>
-    }
-
-    @if (source.sourceType !== 1) {
-    <div class="form-row">
-      <mat-form-field appearance="outline" class="full-width">
-        <mat-label>{{ 'HOME.USER_AGENT' | translate }}</mat-label>
-        <input matInput [(ngModel)]="source.httpUserAgent">
-      </mat-form-field>
-      <mat-form-field appearance="outline" class="full-width">
-        <mat-label>{{ 'SUBSCRIBE.HTTP_PROXY' | translate }}</mat-label>
-        <input matInput [(ngModel)]="source.httpProxy">
-      </mat-form-field>
-    </div>
-    }
 
     <app-textarea-with-lines class="full-width" [label]="'HOME.TRANSFORM_JS' | translate" [(ngModel)]="source.transformJs" placeholder="function transform(channels) { ... }"></app-textarea-with-lines>
 

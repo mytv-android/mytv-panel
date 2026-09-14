@@ -186,11 +186,11 @@
       <mat-card-title>{{ 'HOME.CHANNEL_ALIAS' | translate }}</mat-card-title>
     </mat-card-header>
     <mat-card-content>
-      <app-textarea-with-lines class="full-width" [(ngModel)]="channelAlias"
+      <app-textarea-with-lines class="full-width" [(ngModel)]="configs.iptvChannelNameAlias"
         placeholder="{{channelAliasExample}}"></app-textarea-with-lines>
     </mat-card-content>
     <mat-card-actions align="end">
-      <button mat-raised-button color="primary" (click)="pushAlias()">{{ 'HOME.PUSH' | translate }}</button>
+      <button mat-raised-button color="primary" (click)="updateConfig()">{{ 'HOME.PUSH' | translate }}</button>
     </mat-card-actions>
   </mat-card>
 

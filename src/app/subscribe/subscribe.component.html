@@ -107,8 +107,8 @@
         <!-- Channel Alias -->
         <div class="setting-block">
           <span class="setting-label">{{ 'HOME.CHANNEL_ALIAS' | translate }}</span>
-          <app-textarea-with-lines placeholder="{{channelAliasExample}}" class="full-width" [(ngModel)]="channelAlias"
-            (change)="updateChannelAlias()"></app-textarea-with-lines>
+          <app-textarea-with-lines placeholder="{{channelAliasExample}}" class="full-width" [(ngModel)]="configs.iptvChannelNameAlias"
+            (change)="updateConfig()"></app-textarea-with-lines>
         </div>
 
         <!-- Merge Similar Channels -->

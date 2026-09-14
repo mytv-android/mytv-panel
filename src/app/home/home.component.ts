@@ -86,8 +86,6 @@ export class HomeComponent {
 
     cookie = '';
 
-    channelAlias = '';
-
     configs: AppConfigs = {};
 
     channelAliasExample = JSON.stringify({
@@ -111,9 +109,6 @@ export class HomeComponent {
         });
 
         if (isPlatformBrowser(this.platformId)) {
-            AppApi.getChannelAlias().then(alias => {
-                this.channelAlias = alias;
-            });
             AppApi.getAbout().then(info => {
                 this.info = info;
             });
@@ -188,22 +183,6 @@ export class HomeComponent {
     updateConfig() {
         this.configsService.updateData(this.configs);
         window.location.reload();
-    }
-
-    pushAlias() {
-        AppApi.changeChannelAlias(this.channelAlias).then(() => {
-            this.snackBar.open(
-                this.translate.instant('HOME.PUSH_SUCCESS'),
-                this.translate.instant('HOME.CLOSE'),
-                { duration: 3000 }
-            );
-        }).catch(() => {
-            this.snackBar.open(
-                this.translate.instant('HOME.PUSH_FAILED'),
-                this.translate.instant('HOME.CLOSE'),
-                { duration: 3000 }
-            );
-        });
     }
 
     pushEpgSource() {

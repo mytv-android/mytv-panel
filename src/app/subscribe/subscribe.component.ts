@@ -1,5 +1,5 @@
 import { Component, inject, effect, Inject, PLATFORM_ID } from '@angular/core';
-import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatListModule } from '@angular/material/list';
@@ -16,7 +16,7 @@ import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { ConfigsService, AppConfigs, AppApi, IptvSource, IptvHybridMode, IptvHybridModeLabels } from '../api';
+import { ConfigsService, AppConfigs, IptvSource, IptvHybridMode, IptvHybridModeLabels } from '../api';
 import { SubscribeSourceDialogComponent } from './subscribe-source-dialog/subscribe-source-dialog.component';
 import { HiddenGroupDialogComponent } from './hidden-group-dialog/hidden-group-dialog.component';
 import { TextareaWithLinesComponent } from '../common/textarea-with-lines/textarea-with-lines.component';
@@ -67,8 +67,6 @@ export class SubscribeComponent {
     iptvHybridModeLabels = IptvHybridModeLabels;
     hybridModes = Object.values(IptvHybridMode);
 
-    channelAlias = '';
-
     // Pagination
     pageSize = 10;
     pageIndex = 0;
@@ -77,11 +75,6 @@ export class SubscribeComponent {
         effect(() => {
             this.configs = this.configsService.data();
         });
-        if (isPlatformBrowser(this.platformId)) {
-            AppApi.getChannelAlias().then(alias => {
-                this.channelAlias = alias;
-            });
-        }
     }
 
     handlePageEvent(e: PageEvent) {
@@ -106,10 +99,6 @@ export class SubscribeComponent {
 
     updateConfig() {
         this.configsService.updateData(this.configs);
-    }
-
-    updateChannelAlias() {
-        AppApi.changeChannelAlias(this.channelAlias);
     }
 
     // Subscription Source Management
