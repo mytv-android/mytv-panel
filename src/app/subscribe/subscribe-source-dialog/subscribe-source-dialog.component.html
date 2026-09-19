@@ -63,6 +63,24 @@
       </mat-form-field>
     </div>
 
+    <div class="form-row">
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>{{ 'SUBSCRIBE.EPG_URL' | translate }}</mat-label>
+        <input matInput [(ngModel)]="source.epg" placeholder="https://example.com/epg.xml">
+        <mat-hint>{{ 'SUBSCRIBE.EPG_URL_HINT' | translate }}</mat-hint>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>{{ 'SUBSCRIBE.AUTO_REFRESH' | translate }}</mat-label>
+        <input matInput type="number" min="0" step="1" [(ngModel)]="source.autoRefresh">
+        <mat-hint>{{ 'SUBSCRIBE.AUTO_REFRESH_HINT' | translate }}</mat-hint>
+      </mat-form-field>
+    </div>
+
+    <div class="form-row toggle-row">
+      <mat-slide-toggle [(ngModel)]="source.disableChannelPreview">{{ 'SUBSCRIBE.DISABLE_PREVIEW' | translate }}</mat-slide-toggle>
+      <mat-slide-toggle [(ngModel)]="source.disableDelayDetection">{{ 'SUBSCRIBE.DISABLE_DELAY_DETECT' | translate }}</mat-slide-toggle>
+    </div>
+
     <app-textarea-with-lines class="full-width" [label]="'HOME.TRANSFORM_JS' | translate" [(ngModel)]="source.transformJs" placeholder="function transform(channels) { ... }"></app-textarea-with-lines>
 
   </div>

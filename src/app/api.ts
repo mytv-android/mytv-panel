@@ -332,6 +332,10 @@ export interface IptvSource {
     httpUserAgent?: string
     httpProxy?: string
     mac?: string
+    epg?: string
+    disableChannelPreview?: boolean
+    disableDelayDetection?: boolean
+    autoRefresh?: number
 }
 
 export interface IptvSourceList {

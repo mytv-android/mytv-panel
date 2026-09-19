@@ -456,7 +456,13 @@
     "MOVE_DOWN": "下移",
     "DELETE_SOURCE": "删除",
     "USER_AGENT": "UA",
-    "PROXY": "代理"
+    "PROXY": "代理",
+    "EPG_URL": "EPG 地址",
+    "EPG_URL_HINT": "节目单开启「跟随订阅源」时优先使用",
+    "AUTO_REFRESH": "自动刷新 (小时)",
+    "AUTO_REFRESH_HINT": "0 = 关闭；运行期间按间隔静默刷新当前源",
+    "DISABLE_PREVIEW": "关闭预览图",
+    "DISABLE_DELAY_DETECT": "关闭延迟检测"
   },
   "设置 / 节目单": "设置 / 节目单",
   "THEME_MODE": "主题模式",

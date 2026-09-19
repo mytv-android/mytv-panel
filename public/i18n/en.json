@@ -456,7 +456,13 @@
     "MOVE_DOWN": "Move Down",
     "DELETE_SOURCE": "Delete",
     "USER_AGENT": "User Agent",
-    "PROXY": "Proxy"
+    "PROXY": "Proxy",
+    "EPG_URL": "EPG URL",
+    "EPG_URL_HINT": "Used first when EPG is set to follow the source",
+    "AUTO_REFRESH": "Auto Refresh (Hours)",
+    "AUTO_REFRESH_HINT": "0 = Off; silently refreshes the current source at this interval",
+    "DISABLE_PREVIEW": "Disable Channel Preview",
+    "DISABLE_DELAY_DETECT": "Disable Delay Detection"
   },
   "设置 / 节目单": "Settings / EPG",
   "THEME_MODE": "Theme Mode",
