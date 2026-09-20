@@ -24,10 +24,6 @@
       <input matInput [(ngModel)]="source.url" required>
     </mat-form-field>
 
-    @if (source.sourceType === 1) {
-      <app-textarea-with-lines class="full-width" [label]="'HOME.CONTENT_LABEL' | translate" [(ngModel)]="content"></app-textarea-with-lines>
-    }
-
     @if (source.sourceType === 2) {
     <div class="form-row">
       <mat-form-field appearance="outline" class="half-width">
@@ -82,6 +78,10 @@
     </div>
 
     <app-textarea-with-lines class="full-width" [label]="'HOME.TRANSFORM_JS' | translate" [(ngModel)]="source.transformJs" placeholder="function transform(channels) { ... }"></app-textarea-with-lines>
+
+    @if (source.sourceType === 1) {
+      <app-textarea-with-lines class="full-width" [label]="'HOME.CONTENT_LABEL' | translate" [(ngModel)]="content"></app-textarea-with-lines>
+    }
 
   </div>
 </mat-dialog-content>
