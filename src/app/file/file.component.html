@@ -1,0 +1,121 @@
+<div class="container">
+  <mat-card class="card">
+    <mat-card-header>
+      <mat-card-title>{{ '文件' | translate }}</mat-card-title>
+      <mat-card-subtitle>{{ 'FILE.SUBTITLE' | translate }}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <!-- 面包屑 -->
+      <div class="breadcrumb">
+        <button mat-icon-button [disabled]="!parentPath || loading" (click)="up()" [matTooltip]="'FILE.UP' | translate">
+          <mat-icon>arrow_upward</mat-icon>
+        </button>
+        @for (crumb of breadcrumbs; track crumb.path) {
+          <span class="crumb-sep">/</span>
+          <span class="crumb">{{ crumb.name }}</span>
+        }
+      </div>
+
+      <!-- 工具栏 -->
+      <div class="toolbar">
+        <mat-form-field appearance="outline" class="folder-input">
+          <mat-label>{{ 'FILE.NEW_FOLDER' | translate }}</mat-label>
+          <input matInput [(ngModel)]="newFolderName" (keyup.enter)="createFolder()">
+        </mat-form-field>
+        <button mat-stroked-button color="primary" [disabled]="!newFolderName.trim() || loading" (click)="createFolder()">
+          <mat-icon>create_new_folder</mat-icon>
+          {{ 'FILE.CREATE' | translate }}
+        </button>
+        <button mat-stroked-button (click)="fileInput.click()" [disabled]="loading">
+          <mat-icon>upload</mat-icon>
+          {{ 'FILE.UPLOAD' | translate }}
+        </button>
+        <input #fileInput type="file" style="display:none" (change)="onUploadSelected($event)" />
+        <button mat-icon-button [disabled]="loading" (click)="load(currentPath)">
+          <mat-icon>refresh</mat-icon>
+        </button>
+      </div>
+
+      @if (uploadTarget) {
+        <div class="uploading">{{ 'FILE.UPLOADING' | translate: { name: uploadTarget } }}</div>
+      }
+
+      <!-- 列表 -->
+      <table class="file-table">
+        <thead>
+          <tr>
+            <th class="col-name" (click)="sortBy('name')">
+              {{ 'FILE.NAME' | translate }}
+              @if (sortKey === 'name') { <mat-icon>{{ sortAsc ? 'arrow_upward' : 'arrow_downward' }}</mat-icon> }
+            </th>
+            <th class="col-size" (click)="sortBy('size')">
+              {{ 'FILE.SIZE' | translate }}
+              @if (sortKey === 'size') { <mat-icon>{{ sortAsc ? 'arrow_upward' : 'arrow_downward' }}</mat-icon> }
+            </th>
+            <th class="col-time" (click)="sortBy('mtime')">
+              {{ 'FILE.MTIME' | translate }}
+              @if (sortKey === 'mtime') { <mat-icon>{{ sortAsc ? 'arrow_upward' : 'arrow_downward' }}</mat-icon> }
+            </th>
+            <th class="col-actions"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @if (loading) {
+            <tr><td colspan="4" class="empty">{{ 'FILE.LOADING' | translate }}</td></tr>
+          } @else if (sortedEntries.length === 0) {
+            <tr><td colspan="4" class="empty">{{ 'FILE.EMPTY' | translate }}</td></tr>
+          } @else {
+            @for (entry of sortedEntries; track entry.name) {
+              <tr>
+                <td class="col-name">
+                  @if (renamingEntry === entry) {
+                    <mat-form-field appearance="outline" class="rename-input">
+                      <input matInput [(ngModel)]="renameValue" (keyup.enter)="confirmRename()" (keyup.escape)="cancelRename()">
+                    </mat-form-field>
+                  } @else {
+                    <mat-icon class="entry-icon">{{ entry.isDir ? 'folder' : 'insert_drive_file' }}</mat-icon>
+                    @if (entry.isDir) {
+                      <a class="entry-name" (click)="open(entry)">{{ entry.name }}</a>
+                    } @else {
+                      <span class="entry-name">{{ entry.name }}</span>
+                    }
+                  }
+                </td>
+                <td class="col-size">{{ entry.isDir ? '-' : formatSize(entry.size) }}</td>
+                <td class="col-time">{{ formatTime(entry.mtime) }}</td>
+                <td class="col-actions">
+                  @if (renamingEntry === entry) {
+                    <button mat-icon-button color="primary" (click)="confirmRename()">
+                      <mat-icon>check</mat-icon>
+                    </button>
+                    <button mat-icon-button (click)="cancelRename()">
+                      <mat-icon>close</mat-icon>
+                    </button>
+                  } @else if (deletingEntry === entry) {
+                    <span class="confirm-text">{{ 'FILE.DELETE_CONFIRM' | translate: { name: entry.name } }}</span>
+                    <button mat-icon-button color="warn" (click)="confirmDelete()">
+                      <mat-icon>check</mat-icon>
+                    </button>
+                    <button mat-icon-button (click)="cancelDelete()">
+                      <mat-icon>close</mat-icon>
+                    </button>
+                  } @else {
+                    @if (!entry.isDir) {
+                      <button mat-button color="primary" (click)="use(entry)">{{ 'FILE.USE' | translate }}</button>
+                    }
+                    <button mat-icon-button (click)="startRename(entry)">
+                      <mat-icon>edit</mat-icon>
+                    </button>
+                    <button mat-icon-button color="warn" (click)="startDelete(entry)">
+                      <mat-icon>delete</mat-icon>
+                    </button>
+                  }
+                </td>
+              </tr>
+            }
+          }
+        </tbody>
+      </table>
+    </mat-card-content>
+  </mat-card>
+</div>

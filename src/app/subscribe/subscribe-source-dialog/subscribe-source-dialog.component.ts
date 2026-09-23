@@ -7,7 +7,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { TranslateModule } from '@ngx-translate/core';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { AppApi, IptvSource } from '../../api';
 import { TextareaWithLinesComponent } from '../../common/textarea-with-lines/textarea-with-lines.component';
 
@@ -22,6 +23,7 @@ import { TextareaWithLinesComponent } from '../../common/textarea-with-lines/tex
     MatButtonModule,
     MatSelectModule,
     MatSlideToggleModule,
+    MatSnackBarModule,
     TranslateModule,
     TextareaWithLinesComponent
 ],
@@ -41,7 +43,9 @@ export class SubscribeSourceDialogComponent {
 
   constructor(
     public dialogRef: MatDialogRef<SubscribeSourceDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { source?: IptvSource }
+    @Inject(MAT_DIALOG_DATA) public data: { source?: IptvSource },
+    private snackBar: MatSnackBar,
+    private translate: TranslateService
   ) {
     this.isEdit = !!data.source;
     this.source = data.source ? { ...data.source } : {
@@ -60,6 +64,12 @@ export class SubscribeSourceDialogComponent {
         this.content = content;
       }).catch(err => {
         console.error('Failed to get file content', err);
+        // 文件内容接口仅允许访问电视端 fileDir / cacheDir 内的路径
+        this.snackBar.open(
+          this.translate.instant('SUBSCRIBE.FILE_CONTENT_OUT_OF_SANDBOX'),
+          this.translate.instant('HOME.CLOSE'),
+          { duration: 5000 }
+        );
       });
     }
   }
@@ -70,7 +80,14 @@ export class SubscribeSourceDialogComponent {
 
   onSave(): void {
     if (this.source.sourceType === 1) {
-      AppApi.writeFileContent(this.source.url, this.content);
+      AppApi.writeFileContent(this.source.url, this.content).catch(err => {
+        console.error('Failed to write file content', err);
+        this.snackBar.open(
+          this.translate.instant('SUBSCRIBE.FILE_CONTENT_OUT_OF_SANDBOX'),
+          this.translate.instant('HOME.CLOSE'),
+          { duration: 5000 }
+        );
+      });
     }
     // 归一化：EPG 空串视为未配置；自动刷新仅接受正整数小时，非法输入回落为关闭
     this.source.epg = this.source.epg?.trim() || undefined;

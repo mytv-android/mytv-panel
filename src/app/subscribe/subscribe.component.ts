@@ -16,7 +16,7 @@ import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { ConfigsService, AppConfigs, IptvSource, IptvHybridMode, IptvHybridModeLabels } from '../api';
+import { ConfigsService, AppConfigs, IptvSource, IptvHybridMode, IptvHybridModeLabels, UiGroupParsStyleLabels } from '../api';
 import { SubscribeSourceDialogComponent } from './subscribe-source-dialog/subscribe-source-dialog.component';
 import { HiddenGroupDialogComponent } from './hidden-group-dialog/hidden-group-dialog.component';
 import { TextareaWithLinesComponent } from '../common/textarea-with-lines/textarea-with-lines.component';
@@ -66,6 +66,8 @@ export class SubscribeComponent {
     iptvHybridMode = IptvHybridMode;
     iptvHybridModeLabels = IptvHybridModeLabels;
     hybridModes = Object.values(IptvHybridMode);
+    groupParsStyleOptions = [0, 1, 2, 3];
+    uiGroupParsStyleLabels = UiGroupParsStyleLabels;
 
     // Pagination
     pageSize = 10;

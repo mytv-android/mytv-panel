@@ -9,6 +9,30 @@
       <mat-label>{{ 'HOME.LINK' | translate }}</mat-label>
       <input matInput [(ngModel)]="source.url" required>
     </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>{{ 'EPG.FORMAT' | translate }}</mat-label>
+      <mat-select [(ngModel)]="source.format">
+        @for (format of formats; track format.value) {
+          <mat-option [value]="format.value">
+            {{ format.label | translate }}
+          </mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>{{ 'EPG.CACHE_HOUR' | translate }}</mat-label>
+      <input matInput type="number" [(ngModel)]="source.cacheHour">
+      <mat-hint>{{ 'EPG.CACHE_HOUR_HINT' | translate }}</mat-hint>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>{{ 'EPG.TIME_ZONE_OFFSET' | translate }}</mat-label>
+      <input matInput type="number" [(ngModel)]="source.timeZoneOffset" min="-12" max="12">
+      <mat-hint>{{ 'EPG.TIME_ZONE_OFFSET_HINT' | translate }}</mat-hint>
+    </mat-form-field>
+    <div class="toggle-row">
+      <span>{{ 'EPG.EXTERNAL_STORAGE' | translate }}</span>
+      <mat-slide-toggle [(ngModel)]="source.externalStorage"></mat-slide-toggle>
+    </div>
   </div>
 </mat-dialog-content>
 <mat-dialog-actions align="end">

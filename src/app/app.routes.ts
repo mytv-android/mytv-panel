@@ -13,6 +13,8 @@ import { ControlComponent } from './control/control.component';
 import { UiComponent } from './ui/ui.component';
 import { EpgComponent } from './epg/epg.component';
 import { SubscribeComponent } from './subscribe/subscribe.component';
+import { FileComponent } from './file/file.component';
+import { BackupManagerComponent } from './backupmanager/backup-manager.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full', data: { title: '首页' } },
@@ -29,4 +31,6 @@ export const routes: Routes = [
   { path: 'network', component: NetworkComponent, data: { title: '网络' } },
   { path: 'webview', component: WebviewComponent, data: { title: 'WebView' } },
   { path: 'player', component: PlayerComponent, data: { title: '播放器' } },
+  { path: 'file', component: FileComponent, data: { title: '文件' } },
+  { path: 'backup', component: BackupManagerComponent, data: { title: '备份管理' } },
 ];

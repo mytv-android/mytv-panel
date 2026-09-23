@@ -1,0 +1,78 @@
+<div class="container">
+  <mat-card class="card">
+    <mat-card-header>
+      <mat-card-title>{{ '备份管理' | translate }}</mat-card-title>
+      <mat-card-subtitle>{{ 'BACKUP.SUBTITLE' | translate }}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="warning">{{ 'BACKUP.RESTORE_WARNING' | translate }}</div>
+
+      <div class="toolbar">
+        <mat-form-field appearance="outline" class="name-input">
+          <mat-label>{{ 'BACKUP.NAME' | translate }}</mat-label>
+          <input matInput [(ngModel)]="newName" (keyup.enter)="create()"
+            placeholder="{{ 'BACKUP.NAME_HINT' | translate }}">
+        </mat-form-field>
+        <button mat-raised-button color="primary" [disabled]="!newName.trim() || loading" (click)="create()">
+          <mat-icon>add</mat-icon>
+          {{ 'BACKUP.CREATE' | translate }}
+        </button>
+        <button mat-icon-button [disabled]="loading" (click)="refresh()">
+          <mat-icon>refresh</mat-icon>
+        </button>
+      </div>
+
+      <table class="backup-table">
+        <thead>
+          <tr>
+            <th>{{ 'BACKUP.NAME' | translate }}</th>
+            <th>{{ 'BACKUP.TIME' | translate }}</th>
+            <th>{{ 'BACKUP.SIZE' | translate }}</th>
+            <th class="col-actions"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @if (loading && items.length === 0) {
+            <tr><td colspan="4" class="empty">{{ 'BACKUP.LOADING' | translate }}</td></tr>
+          } @else if (items.length === 0) {
+            <tr><td colspan="4" class="empty">{{ 'BACKUP.EMPTY' | translate }}</td></tr>
+          } @else {
+            @for (item of items; track item.name) {
+              <tr>
+                <td class="col-name">{{ item.name }}</td>
+                <td class="col-time">{{ formatTime(item.time) }}</td>
+                <td class="col-size">{{ formatSize(item.size) }}</td>
+                <td class="col-actions">
+                  @if (restoringName === item.name) {
+                    <span class="confirm-text">{{ 'BACKUP.RESTORE_CONFIRM' | translate: { name: item.name } }}</span>
+                    <button mat-icon-button color="primary" (click)="confirmRestore()">
+                      <mat-icon>check</mat-icon>
+                    </button>
+                    <button mat-icon-button (click)="cancelRestore()">
+                      <mat-icon>close</mat-icon>
+                    </button>
+                  } @else if (deletingName === item.name) {
+                    <span class="confirm-text">{{ 'BACKUP.DELETE_CONFIRM' | translate: { name: item.name } }}</span>
+                    <button mat-icon-button color="warn" (click)="confirmDelete()">
+                      <mat-icon>check</mat-icon>
+                    </button>
+                    <button mat-icon-button (click)="cancelDelete()">
+                      <mat-icon>close</mat-icon>
+                    </button>
+                  } @else {
+                    <button mat-button color="primary" (click)="startRestore(item.name)">
+                      {{ 'BACKUP.RESTORE' | translate }}
+                    </button>
+                    <button mat-icon-button color="warn" (click)="startDelete(item.name)">
+                      <mat-icon>delete</mat-icon>
+                    </button>
+                  }
+                </td>
+              </tr>
+            }
+          }
+        </tbody>
+      </table>
+    </mat-card-content>
+  </mat-card>
+</div>

@@ -37,6 +37,44 @@ export const AppApi = {
         return RequestUtil.post<string>(`${prefix}api/file/content-with-dir`, { dir, filename, content }, undefined, false)
     },
 
+    getFileList(path: string) {
+        return RequestUtil.get<FileListResult>(`${prefix}api/file/list`, { path })
+    },
+
+    createFileDir(path: string) {
+        return RequestUtil.post(`${prefix}api/file/mkdir`, { path })
+    },
+
+    renameFile(path: string, newName: string) {
+        return RequestUtil.post(`${prefix}api/file/rename`, { path, newName })
+    },
+
+    deleteFile(path: string) {
+        return RequestUtil.post(`${prefix}api/file/delete`, { path })
+    },
+
+    uploadFile(path: string, file: File) {
+        const formData = new FormData()
+        formData.append('filename', file)
+        return RequestUtil.post(`${prefix}api/file/upload`, formData, { params: { path } }, false)
+    },
+
+    getBackupList() {
+        return RequestUtil.get<BackupListResult>(`${prefix}api/backup/list`)
+    },
+
+    createBackup(name: string) {
+        return RequestUtil.post(`${prefix}api/backup/create`, { name })
+    },
+
+    restoreBackup(name: string) {
+        return RequestUtil.post(`${prefix}api/backup/restore`, { name })
+    },
+
+    deleteBackup(name: string) {
+        return RequestUtil.post(`${prefix}api/backup/delete`, { name })
+    },
+
     uploadApk(file: File) {
         const formData = new FormData()
         formData.append('filename', file)
@@ -109,6 +147,11 @@ export interface AppConfigs {
     iptvChannelChangeListLoop?: boolean
     iptvChannelChangeCrossGroup?: boolean
     iptvChannelChangeShowInfoPanel?: boolean  // NEW: 换台时显示频道信息面板
+    uiGroupParsStyle?: number | null             // NEW: 列表风格 0传统分组 1列表分组 2二级分组1 3二级分组2
+    iptvChannelNoAbbrev?: boolean | null         // NEW: 序号缩写模式
+    iptvChannelLogoInitial?: boolean | null      // NEW: 图标首字
+    iptvM3uLogoPriority?: boolean | null         // NEW: m3u 图标优先于 epg 图标
+    iptvChannelGroupConfigEnable?: boolean | null // NEW: 分组级参数配置开关
     epgEnable?: boolean
     epgSourceCurrent?: EpgSource
     epgSourceList?: EpgSourceList
@@ -159,6 +202,22 @@ export interface AppConfigs {
     videoPlayerDecoderConfig?: number
     videoPlayerDecoderConfigRegexList?: VideoPlayerDecoderConfigList
     videoPlayerDecoderConfigDeviceList?: VideoPlayerDecoderConfigList  // NEW: 播放器设备解码配置列表
+    videoPlayerAudioScreensaver?: boolean | null  // NEW: 音频屏保
+    videoPlayerKeepLastFrame?: boolean | null     // NEW: 画面锁定
+    videoPlayerAacPrefer?: boolean | null         // NEW: AAC 优先
+    videoPlayerIjkAnalyzeduration?: number | null // NEW: IJK 探测时长（微秒）
+    videoPlayerIjkProbesize?: number | null       // NEW: IJK 探测大小（字节）
+    videoPlayerIjkCacheMs?: number | null         // NEW: IJK 缓存时长（ms），-1 关闭
+    videoPlayerIjkAudioSoft?: boolean | null      // NEW: IJK 音频软解
+    videoPlayerExoTunneled?: boolean | null       // NEW: EXO 隧道解码
+    videoPlayerExoAudioSoft?: boolean | null      // NEW: EXO 音频软解
+    videoPlayerExoBufferPlaybackMs?: number | null  // NEW: EXO 播放缓冲（ms）
+    videoPlayerExoBufferRebufferMs?: number | null  // NEW: EXO 重缓冲（ms），-1 关闭
+    webViewLoadingStyle?: number | null           // NEW: WebView 加载风格 0默认 1百分比 2黑屏
+    webViewResolution?: number | null             // NEW: WebView 分辨率 0自适应 1 100% 2 75% 3 50%
+    webViewUaPreset?: number | null               // NEW: WebView UA 0系统 1Windows 2macOS 3iPad
+    webViewLoadImage?: boolean | null             // NEW: WebView 加载图片
+    webViewLayerAccel?: number | null             // NEW: WebView 图层加速 0关 1硬件 2软件
     videoPlayerDns?: string
     videoPlayerProxy?: string
     videoPlayerProxyRuleList?: VideoPlayerProxyRuleList
@@ -218,6 +277,8 @@ export interface AppConfigs {
     cloudSyncWebDavPassword?: string
     networkRetryCount?: number
     networkRetryInterval?: number
+    networkIpv6Enable?: boolean | null  // NEW: 启用 IPv6
+    cachePathExternal?: boolean | null  // NEW: 缓存写入外部存储
     classicPanelLastSelectedGroupName?: string
 }
 
@@ -345,6 +406,10 @@ export interface IptvSourceList {
 export interface EpgSource {
     name: string
     url: string
+    format?: string | null        // XML / DIYP / SPTV / LOVETV；null = 按 URL 探测
+    cacheHour?: number | null     // -1 跟随全局，0 不缓存
+    timeZoneOffset?: number | null // -12~12
+    externalStorage?: boolean | null
 }
 
 export interface EpgSourceList {
@@ -361,6 +426,69 @@ export interface EpgProgrammeReserve {
 export interface EpgProgrammeReserveList {
     value: EpgProgrammeReserve[]
 }
+
+export interface FileEntry {
+    name: string
+    isDir: boolean
+    size: number
+    mtime: number
+}
+
+export interface FileListResult {
+    code: number
+    data?: {
+        path: string
+        parent: string | null
+        entries: FileEntry[]
+    }
+    message?: string
+}
+
+export interface BackupItem {
+    name: string
+    time: number
+    size: number
+}
+
+export interface BackupListResult {
+    code: number
+    data?: BackupItem[]
+    message?: string
+}
+
+export const WebViewLoadingStyleLabels: { [key: number]: string } = {
+    0: 'SETTINGS.WEB_VIEW_LOADING_STYLE.DEFAULT',
+    1: 'SETTINGS.WEB_VIEW_LOADING_STYLE.PERCENT',
+    2: 'SETTINGS.WEB_VIEW_LOADING_STYLE.BLACK',
+}
+
+export const WebViewResolutionLabels: { [key: number]: string } = {
+    0: 'SETTINGS.WEB_VIEW_RESOLUTION.AUTO',
+    1: 'SETTINGS.WEB_VIEW_RESOLUTION.FULL',
+    2: 'SETTINGS.WEB_VIEW_RESOLUTION.P75',
+    3: 'SETTINGS.WEB_VIEW_RESOLUTION.P50',
+}
+
+export const WebViewUaPresetLabels: { [key: number]: string } = {
+    0: 'SETTINGS.WEB_VIEW_UA_PRESET.SYSTEM',
+    1: 'SETTINGS.WEB_VIEW_UA_PRESET.WINDOWS',
+    2: 'SETTINGS.WEB_VIEW_UA_PRESET.MACOS',
+    3: 'SETTINGS.WEB_VIEW_UA_PRESET.IPAD',
+}
+
+export const WebViewLayerAccelLabels: { [key: number]: string } = {
+    0: 'SETTINGS.WEB_VIEW_LAYER_ACCEL.OFF',
+    1: 'SETTINGS.WEB_VIEW_LAYER_ACCEL.HARDWARE',
+    2: 'SETTINGS.WEB_VIEW_LAYER_ACCEL.SOFTWARE',
+}
+
+export const UiGroupParsStyleLabels: { [key: number]: string } = {
+    0: 'SETTINGS.UI_GROUP_PARS_STYLE.CLASSIC',
+    1: 'SETTINGS.UI_GROUP_PARS_STYLE.LIST',
+    2: 'SETTINGS.UI_GROUP_PARS_STYLE.TWO_LEVEL_1',
+    3: 'SETTINGS.UI_GROUP_PARS_STYLE.TWO_LEVEL_2',
+}
+
 
 export enum UiTimeShowMode {
     HIDDEN = 'HIDDEN',

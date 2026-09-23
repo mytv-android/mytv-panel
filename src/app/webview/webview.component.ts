@@ -7,7 +7,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { TranslateModule } from '@ngx-translate/core';
-import { ConfigsService, AppConfigs, WebViewCore, WebViewCoreLabels } from '../api';
+import { ConfigsService, AppConfigs, WebViewCore, WebViewCoreLabels, WebViewLoadingStyleLabels, WebViewResolutionLabels, WebViewUaPresetLabels, WebViewLayerAccelLabels } from '../api';
 
 @Component({
     selector: 'app-webview',
@@ -31,10 +31,19 @@ import { ConfigsService, AppConfigs, WebViewCore, WebViewCoreLabels } from '../a
 export class WebviewComponent {
     configsService = inject(ConfigsService);
     configs: AppConfigs = {};
-    
+
     webViewCore = WebViewCore;
     webViewCoreLabels = WebViewCoreLabels;
     webViewCores = Object.values(WebViewCore);
+
+    webViewLoadingStyles = [0, 1, 2];
+    webViewLoadingStyleLabels = WebViewLoadingStyleLabels;
+    webViewResolutions = [0, 1, 2, 3];
+    webViewResolutionLabels = WebViewResolutionLabels;
+    webViewUaPresets = [0, 1, 2, 3];
+    webViewUaPresetLabels = WebViewUaPresetLabels;
+    webViewLayerAccels = [0, 1, 2];
+    webViewLayerAccelLabels = WebViewLayerAccelLabels;
 
     constructor() {
         effect(() => {

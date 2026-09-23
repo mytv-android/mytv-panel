@@ -1,0 +1,100 @@
+.container {
+    padding: 20px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.card {
+    max-width: 900px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.warning {
+    background-color: rgba(255, 152, 0, 0.12);
+    border-left: 4px solid #ff9800;
+    border-radius: 4px;
+    padding: 12px 16px;
+    margin-bottom: 16px;
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--text-color);
+}
+
+.toolbar {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.name-input {
+    width: 260px;
+}
+
+.backup-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+.backup-table th {
+    text-align: left;
+    padding: 8px;
+    border-bottom: 1px solid var(--border-color);
+    white-space: nowrap;
+}
+
+.backup-table td {
+    padding: 4px 8px;
+    border-bottom: 1px solid var(--border-color);
+    vertical-align: middle;
+}
+
+.col-name {
+    width: 45%;
+    word-break: break-all;
+}
+
+.col-time {
+    width: 30%;
+    white-space: nowrap;
+}
+
+.col-size {
+    width: 15%;
+    white-space: nowrap;
+}
+
+.col-actions {
+    width: 10%;
+    white-space: nowrap;
+    text-align: right;
+}
+
+.confirm-text {
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin-right: 8px;
+}
+
+.empty {
+    text-align: center;
+    color: var(--text-secondary);
+    padding: 24px 0;
+}
+
+@media (max-width: 600px) {
+    .container {
+        padding: 8px;
+    }
+
+    .col-time {
+        display: none;
+    }
+
+    .col-name {
+        width: 70%;
+    }
+}

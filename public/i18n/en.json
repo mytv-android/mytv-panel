@@ -15,6 +15,8 @@
   "权限": "Permission",
   "调试": "Debug",
   "日志": "Log",
+  "文件": "Files",
+  "备份管理": "Backups",
   "添加于": "Added at {{date}}",
   "THEME_SETTINGS": "Theme Settings",
   "CONTROL": {
@@ -114,7 +116,16 @@
     "CORE": "WebView Core",
     "REPLACE_SYSTEM": "Replace System WebView",
     "REPLACE_SYSTEM_HINT": "Use the application with package name com.google.android.webview to replace the System WebView kernel (requires restart)",
-    "LOAD_TIMEOUT": "WebView Load Timeout"
+    "LOAD_TIMEOUT": "WebView Load Timeout",
+    "LOADING_STYLE": "Loading style",
+    "LOADING_STYLE_HINT": "How the page is displayed while loading",
+    "RESOLUTION": "Page resolution",
+    "RESOLUTION_HINT": "Lower resolution reduces rendering cost; some site layouts may be affected",
+    "UA_PRESET": "User-Agent preset",
+    "UA_PRESET_HINT": "Desktop / tablet UA used by the WebView",
+    "LOAD_IMAGE": "Load images",
+    "LAYER_ACCEL": "Layer acceleration",
+    "LAYER_ACCEL_HINT": "WebView render layer type; switch this when artifacts or black screen occur"
   },
   "UPDATE": {
     "CHANNEL": "Update Channel",
@@ -129,7 +140,9 @@
     "RETRY_COUNT": "Request Retry Count",
     "RETRY_COUNT_HINT": "Affects fetching subscription and EPG data",
     "RETRY_INTERVAL": "Request Retry Interval",
-    "RETRY_INTERVAL_HINT": "Affects fetching subscription and EPG data"
+    "RETRY_INTERVAL_HINT": "Affects fetching subscription and EPG data",
+    "IPV6_ENABLE": "Enable IPv6",
+    "IPV6_ENABLE_HINT": "Allow requesting sources and EPG over IPv6 addresses"
   },
   "GENERAL": {
     "BOOT_LAUNCH": "Start on Boot",
@@ -145,7 +158,9 @@
     },
     "PIP": "Picture in Picture",
     "BACKGROUND_PLAY": "Background Playback",
-    "BACKGROUND_PLAY_DESC": "Keep playing audio after switching to background (listen to TV); mutually exclusive with Picture-in-Picture"
+    "BACKGROUND_PLAY_DESC": "Keep playing audio after switching to background (listen to TV); mutually exclusive with Picture-in-Picture",
+    "CACHE_PATH_EXTERNAL": "Store cache on external storage",
+    "CACHE_PATH_EXTERNAL_DESC": "Move the cache directory to external storage. Requires all-files access; takes effect after restart"
   },
   "PLAYER": {
     "CORE": "Player Core",
@@ -225,7 +240,30 @@
     "ASR_CARD_TITLE": "ASR Speech Recognition",
     "ASR_SAVE": "Save",
     "ASR_SAVED": "Settings saved",
-    "ASR_SAVE_FAILED": "Failed to save settings"
+    "ASR_SAVE_FAILED": "Failed to save settings",
+    "AUDIO_SCREENSAVER": "Audio screensaver",
+    "AUDIO_SCREENSAVER_DESC": "Hide the picture on audio-only channels (radio) and keep playing audio",
+    "KEEP_LAST_FRAME": "Keep last frame",
+    "KEEP_LAST_FRAME_DESC": "Keep the last frame on screen after playback stops instead of showing black",
+    "AAC_PREFER": "Prefer AAC",
+    "AAC_PREFER_DESC": "Prefer the AAC audio track, useful on devices where AAC hardware decoding is more stable",
+    "DECODE_PARAMS": "Decode parameters (IJK / EXO)",
+    "IJK_ANALYZEDURATION": "IJK analyze duration",
+    "IJK_ANALYZEDURATION_DESC": "analyzeduration in microseconds; too small may fail to detect the video format",
+    "IJK_PROBESIZE": "IJK probe size",
+    "IJK_PROBESIZE_DESC": "probesize in bytes; too small may fail to start playback",
+    "IJK_CACHE_MS": "IJK cache duration",
+    "IJK_CACHE_MS_DESC": "In milliseconds; -1 disables it (use the player default cache policy)",
+    "IJK_AUDIO_SOFT": "IJK audio software decode",
+    "IJK_AUDIO_SOFT_DESC": "Force audio through FFmpeg software decoding, for devices with broken audio hardware decoding",
+    "EXO_TUNNELED": "EXO tunneled playback",
+    "EXO_TUNNELED_DESC": "Tunneled playback reduces power and latency; may cause artifacts or no audio on some devices",
+    "EXO_AUDIO_SOFT": "EXO audio software decode",
+    "EXO_AUDIO_SOFT_DESC": "Force Media3/ExoPlayer audio software decoding",
+    "EXO_BUFFER_PLAYBACK_MS": "EXO playback buffer",
+    "EXO_BUFFER_PLAYBACK_MS_DESC": "Minimum buffer required before playback starts, in milliseconds",
+    "EXO_BUFFER_REBUFFER_MS": "EXO rebuffer",
+    "EXO_BUFFER_REBUFFER_MS_DESC": "Buffer target after a rebuffer, in milliseconds; -1 disables it"
   },
   "LOG": {
     "TITLE": "App Logs",
@@ -371,6 +409,34 @@
       "HZ_50": "50 Hz",
       "HZ_59_94": "59.94 Hz",
       "HZ_60": "60 Hz"
+    },
+    "WEB_VIEW_LOADING_STYLE": {
+      "DEFAULT": "Default",
+      "PERCENT": "Percentage",
+      "BLACK": "Black screen"
+    },
+    "WEB_VIEW_RESOLUTION": {
+      "AUTO": "Adaptive",
+      "FULL": "100%",
+      "P75": "75%",
+      "P50": "50%"
+    },
+    "WEB_VIEW_UA_PRESET": {
+      "SYSTEM": "System default",
+      "WINDOWS": "Windows",
+      "MACOS": "macOS",
+      "IPAD": "iPad"
+    },
+    "WEB_VIEW_LAYER_ACCEL": {
+      "OFF": "Off",
+      "HARDWARE": "Hardware",
+      "SOFTWARE": "Software"
+    },
+    "UI_GROUP_PARS_STYLE": {
+      "CLASSIC": "Classic groups",
+      "LIST": "Flat list",
+      "TWO_LEVEL_1": "Two-level 1",
+      "TWO_LEVEL_2": "Two-level 2"
     }
   },
   "UI": {
@@ -431,7 +497,18 @@
     "ADD_SOURCE": "Add EPG",
     "THRESHOLD_ALWAYS": "Always",
     "HOURS": "Hours",
-    "CUSTOM": "Custom"
+    "CUSTOM": "Custom",
+    "FORMAT": "Data format",
+    "FORMAT_AUTO": "Detect from URL",
+    "FORMAT_XML": "XML (XMLTV)",
+    "FORMAT_DIYP": "DIYP",
+    "FORMAT_SPTV": "SPTV",
+    "FORMAT_LOVETV": "LOVETV",
+    "CACHE_HOUR": "Cache duration (hours)",
+    "CACHE_HOUR_HINT": "-1 = follow global, 0 = no cache",
+    "TIME_ZONE_OFFSET": "Time zone offset",
+    "TIME_ZONE_OFFSET_HINT": "Time zone of the programme times, -12 to 12",
+    "EXTERNAL_STORAGE": "Cache on external storage"
   },
   "SUBSCRIBE": {
     "CACHE_TIME": "Source Cache Time (Hours)",
@@ -462,7 +539,18 @@
     "AUTO_REFRESH": "Auto Refresh (Hours)",
     "AUTO_REFRESH_HINT": "0 = Off; silently refreshes the current source at this interval",
     "DISABLE_PREVIEW": "Disable Channel Preview",
-    "DISABLE_DELAY_DETECT": "Disable Delay Detection"
+    "DISABLE_DELAY_DETECT": "Disable Delay Detection",
+    "GROUP_PARS_STYLE": "List style",
+    "GROUP_PARS_STYLE_DESC": "How groups are nested in the channel picker",
+    "CHANNEL_NO_ABBREV": "Abbreviate channel numbers",
+    "CHANNEL_NO_ABBREV_DESC": "Use a shortened form when the channel number is too long",
+    "CHANNEL_LOGO_INITIAL": "Logo from first letter",
+    "CHANNEL_LOGO_INITIAL_DESC": "Generate a logo from the channel name initial when no logo is available",
+    "M3U_LOGO_PRIORITY": "m3u logo priority",
+    "M3U_LOGO_PRIORITY_DESC": "tvg-logo from the m3u source takes precedence over the logo from the EPG source",
+    "GROUP_CONFIG_ENABLE": "Per-group parameters",
+    "GROUP_CONFIG_ENABLE_DESC": "Allow per-group player parameters in m3u via #genre#,#EXTKU9OPT:",
+    "FILE_CONTENT_OUT_OF_SANDBOX": "Only files inside the TV file / cache directory can be read. For other paths use the Files page to upload."
   },
   "设置 / 节目单": "Settings / EPG",
   "THEME_MODE": "Theme Mode",
@@ -472,5 +560,40 @@
   "THEME_MODE_SYSTEM": "System",
   "THEME_COLOR_PROVIDER_BUILTIN": "Built-in",
   "THEME_COLOR_PROVIDER_WALLPAPER": "Wallpaper Based",
-  "THEME_COLOR_PROVIDER_PLAIN": "Plain"
+  "THEME_COLOR_PROVIDER_PLAIN": "Plain",
+  "FILE": {
+    "SUBTITLE": "Browse the TV app directories (files / cache). Create, rename, delete, upload, or use a local file directly as a subscription source.",
+    "UP": "Up one level",
+    "NAME": "Name",
+    "SIZE": "Size",
+    "MTIME": "Modified",
+    "NEW_FOLDER": "New folder name",
+    "CREATE": "Create folder",
+    "CREATE_SUCCESS": "Folder created",
+    "UPLOAD": "Upload file",
+    "UPLOADING": "Uploading {{name}} ...",
+    "UPLOAD_SUCCESS": "Uploaded",
+    "USE": "Use",
+    "DELETE_CONFIRM": "Delete {{name}}?",
+    "LOADING": "Loading...",
+    "EMPTY": "Empty directory",
+    "OPERATION_FAILED": "Operation failed"
+  },
+  "BACKUP": {
+    "SUBTITLE": "Create / restore local snapshots (app settings + database) on the TV. Stored under the backup folder of the app file directory.",
+    "RESTORE_WARNING": "Restoring overwrites the current app settings and database on the TV. A restart is required for all settings to take effect. Proceed with caution.",
+    "NAME": "Name",
+    "NAME_HINT": "Letters, digits, dot, underscore and dash only",
+    "TIME": "Time",
+    "SIZE": "Size",
+    "CREATE": "Create backup",
+    "CREATE_SUCCESS": "Backup created",
+    "RESTORE": "Restore",
+    "RESTORE_CONFIRM": "Overwrite current data with {{name}}?",
+    "RESTORE_SUCCESS": "Restored. Restart the app for all settings to take effect.",
+    "DELETE_CONFIRM": "Delete backup {{name}}?",
+    "LOADING": "Loading...",
+    "EMPTY": "No backups yet",
+    "OPERATION_FAILED": "Operation failed"
+  }
 }

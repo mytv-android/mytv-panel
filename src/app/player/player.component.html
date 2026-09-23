@@ -107,6 +107,114 @@
 
       <div class="setting-item">
         <div class="setting-label">
+          <span>{{ 'PLAYER.AUDIO_SCREENSAVER' | translate }}</span>
+          <span class="setting-desc">{{ 'PLAYER.AUDIO_SCREENSAVER_DESC' | translate }}</span>
+        </div>
+        <mat-slide-toggle [(ngModel)]="configs.videoPlayerAudioScreensaver" (change)="updateConfig()"></mat-slide-toggle>
+      </div>
+
+      <div class="setting-item">
+        <div class="setting-label">
+          <span>{{ 'PLAYER.KEEP_LAST_FRAME' | translate }}</span>
+          <span class="setting-desc">{{ 'PLAYER.KEEP_LAST_FRAME_DESC' | translate }}</span>
+        </div>
+        <mat-slide-toggle [(ngModel)]="configs.videoPlayerKeepLastFrame" (change)="updateConfig()"></mat-slide-toggle>
+      </div>
+
+      <div class="setting-item">
+        <div class="setting-label">
+          <span>{{ 'PLAYER.AAC_PREFER' | translate }}</span>
+          <span class="setting-desc">{{ 'PLAYER.AAC_PREFER_DESC' | translate }}</span>
+        </div>
+        <mat-slide-toggle [(ngModel)]="configs.videoPlayerAacPrefer" (change)="updateConfig()"></mat-slide-toggle>
+      </div>
+
+      <!-- 解码参数（IJK / EXO） -->
+      <div class="asr-card">
+        <div class="asr-card-title">{{ 'PLAYER.DECODE_PARAMS' | translate }}</div>
+
+        <div class="setting-item">
+          <div class="setting-label">
+            <span>{{ 'PLAYER.IJK_ANALYZEDURATION' | translate }}</span>
+            <span class="setting-desc">{{ 'PLAYER.IJK_ANALYZEDURATION_DESC' | translate }}</span>
+          </div>
+          <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
+            <input matInput type="number" [(ngModel)]="configs.videoPlayerIjkAnalyzeduration" (change)="updateConfig()" placeholder="1000000">
+            <span matTextSuffix>μs</span>
+          </mat-form-field>
+        </div>
+
+        <div class="setting-item">
+          <div class="setting-label">
+            <span>{{ 'PLAYER.IJK_PROBESIZE' | translate }}</span>
+            <span class="setting-desc">{{ 'PLAYER.IJK_PROBESIZE_DESC' | translate }}</span>
+          </div>
+          <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
+            <input matInput type="number" [(ngModel)]="configs.videoPlayerIjkProbesize" (change)="updateConfig()" placeholder="1048576">
+            <span matTextSuffix>B</span>
+          </mat-form-field>
+        </div>
+
+        <div class="setting-item">
+          <div class="setting-label">
+            <span>{{ 'PLAYER.IJK_CACHE_MS' | translate }}</span>
+            <span class="setting-desc">{{ 'PLAYER.IJK_CACHE_MS_DESC' | translate }}</span>
+          </div>
+          <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
+            <input matInput type="number" [(ngModel)]="configs.videoPlayerIjkCacheMs" (change)="updateConfig()" placeholder="-1">
+            <span matTextSuffix>ms</span>
+          </mat-form-field>
+        </div>
+
+        <div class="setting-item">
+          <div class="setting-label">
+            <span>{{ 'PLAYER.IJK_AUDIO_SOFT' | translate }}</span>
+            <span class="setting-desc">{{ 'PLAYER.IJK_AUDIO_SOFT_DESC' | translate }}</span>
+          </div>
+          <mat-slide-toggle [(ngModel)]="configs.videoPlayerIjkAudioSoft" (change)="updateConfig()"></mat-slide-toggle>
+        </div>
+
+        <div class="setting-item">
+          <div class="setting-label">
+            <span>{{ 'PLAYER.EXO_TUNNELED' | translate }}</span>
+            <span class="setting-desc">{{ 'PLAYER.EXO_TUNNELED_DESC' | translate }}</span>
+          </div>
+          <mat-slide-toggle [(ngModel)]="configs.videoPlayerExoTunneled" (change)="updateConfig()"></mat-slide-toggle>
+        </div>
+
+        <div class="setting-item">
+          <div class="setting-label">
+            <span>{{ 'PLAYER.EXO_AUDIO_SOFT' | translate }}</span>
+            <span class="setting-desc">{{ 'PLAYER.EXO_AUDIO_SOFT_DESC' | translate }}</span>
+          </div>
+          <mat-slide-toggle [(ngModel)]="configs.videoPlayerExoAudioSoft" (change)="updateConfig()"></mat-slide-toggle>
+        </div>
+
+        <div class="setting-item">
+          <div class="setting-label">
+            <span>{{ 'PLAYER.EXO_BUFFER_PLAYBACK_MS' | translate }}</span>
+            <span class="setting-desc">{{ 'PLAYER.EXO_BUFFER_PLAYBACK_MS_DESC' | translate }}</span>
+          </div>
+          <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
+            <input matInput type="number" [(ngModel)]="configs.videoPlayerExoBufferPlaybackMs" (change)="updateConfig()" placeholder="2500">
+            <span matTextSuffix>ms</span>
+          </mat-form-field>
+        </div>
+
+        <div class="setting-item">
+          <div class="setting-label">
+            <span>{{ 'PLAYER.EXO_BUFFER_REBUFFER_MS' | translate }}</span>
+            <span class="setting-desc">{{ 'PLAYER.EXO_BUFFER_REBUFFER_MS_DESC' | translate }}</span>
+          </div>
+          <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
+            <input matInput type="number" [(ngModel)]="configs.videoPlayerExoBufferRebufferMs" (change)="updateConfig()" placeholder="-1">
+            <span matTextSuffix>ms</span>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="setting-item">
+        <div class="setting-label">
           <span>{{ 'PLAYER.SUPER_RESOLUTION' | translate }}</span>
           <span class="setting-desc">{{ 'PLAYER.SUPER_RESOLUTION_DESC' | translate }}</span>
         </div>

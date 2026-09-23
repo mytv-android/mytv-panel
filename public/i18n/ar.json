@@ -15,6 +15,8 @@
   "权限": "الأذونات",
   "调试": "تصحيح الأخطاء",
   "日志": "السجل",
+  "文件": "الملفات",
+  "备份管理": "النسخ الاحتياطية",
   "添加于": "أُضيف في {{date}}",
   "THEME_SETTINGS": "إعدادات المظهر",
   "CONTROL": {
@@ -114,7 +116,16 @@
     "CORE": "أساس عرض الويب",
     "REPLACE_SYSTEM": "استبدال عرض الويب النظامي",
     "REPLACE_SYSTEM_HINT": "استبدال أساس النظام بعرض الويب من Google (com.google.android.webview). يتطلب إعادة تشغيل الجهاز.",
-    "LOAD_TIMEOUT": "مهلة التحميل"
+    "LOAD_TIMEOUT": "مهلة التحميل",
+    "LOADING_STYLE": "نمط التحميل",
+    "LOADING_STYLE_HINT": "طريقة عرض الصفحة أثناء التحميل",
+    "RESOLUTION": "دقة الصفحة",
+    "RESOLUTION_HINT": "تقليل الدقة يقلل تكلفة الرسم؛ قد تتأثر بعض تخطيطات المواقع",
+    "UA_PRESET": "قالب User-Agent",
+    "UA_PRESET_HINT": "قالب سطح المكتب / اللوحي الذي يستخدمه عرض الويب",
+    "LOAD_IMAGE": "تحميل الصور",
+    "LAYER_ACCEL": "تسريع الطبقة",
+    "LAYER_ACCEL_HINT": "نوع طبقة الرسم لعرض الويب؛ بدّله عند ظهور تشويش أو شاشة سوداء"
   },
   "UPDATE": {
     "CHANNEL": "قناة التحديث",
@@ -129,7 +140,9 @@
     "RETRY_COUNT": "عدد محاولات إعادة الطلب",
     "RETRY_COUNT_HINT": "عدد المحاولات لطلبات دليل البرامج ومصادر الاشتراك",
     "RETRY_INTERVAL": "الفاصل الزمني لإعادة الطلب",
-    "RETRY_INTERVAL_HINT": "الفاصل الزمني للمحاولات لطلبات دليل البرامج ومصادر الاشتراك"
+    "RETRY_INTERVAL_HINT": "الفاصل الزمني للمحاولات لطلبات دليل البرامج ومصادر الاشتراك",
+    "IPV6_ENABLE": "تمكين IPv6",
+    "IPV6_ENABLE_HINT": "السماح بطلب المصادر ودليل البرامج عبر عناوين IPv6"
   },
   "GENERAL": {
     "BOOT_LAUNCH": "بدء التشغيل عند الإقلاع",
@@ -145,7 +158,9 @@
     },
     "PIP": "صورة داخل صورة",
     "BACKGROUND_PLAY": "التشغيل في الخلفية",
-    "BACKGROUND_PLAY_DESC": "متابعة تشغيل الصوت بعد الانتقال إلى الخلفية (الاستماع إلى التلفزيون)، لا يمكن استخدامه مع صورة داخل صورة"
+    "BACKGROUND_PLAY_DESC": "متابعة تشغيل الصوت بعد الانتقال إلى الخلفية (الاستماع إلى التلفزيون)، لا يمكن استخدامه مع صورة داخل صورة",
+    "CACHE_PATH_EXTERNAL": "تخزين الذاكرة المؤقتة على التخزين الخارجي",
+    "CACHE_PATH_EXTERNAL_DESC": "نقل مجلد الذاكرة إلى التخزين الخارجي. يتطلب صلاحية جميع الملفات؛ يسري بعد إعادة التشغيل"
   },
   "PLAYER": {
     "CORE": "أساس المشغل",
@@ -225,7 +240,30 @@
     "ASR_CARD_TITLE": "التعرّف الصوتي ASR",
     "ASR_SAVE": "حفظ",
     "ASR_SAVED": "تم حفظ الإعدادات",
-    "ASR_SAVE_FAILED": "فشل حفظ الإعدادات"
+    "ASR_SAVE_FAILED": "فشل حفظ الإعدادات",
+    "AUDIO_SCREENSAVER": "شاشة توقف للصوت",
+    "AUDIO_SCREENSAVER_DESC": "إخفاء الصورة في القنوات الصوتية (الإذاعة) مع استمرار تشغيل الصوت",
+    "KEEP_LAST_FRAME": "تثبيت آخر إطار",
+    "KEEP_LAST_FRAME_DESC": "الإبقاء على آخر إطار بعد إيقاف التشغيل بدلاً من الشاشة السوداء",
+    "AAC_PREFER": "تفضيل AAC",
+    "AAC_PREFER_DESC": "تفضيل مسار الصوت AAC، مفيد للأجهزة التي يكون فك ترميز AAC العتادي أكثر استقراراً",
+    "DECODE_PARAMS": "معاملات الفك (IJK / EXO)",
+    "IJK_ANALYZEDURATION": "مدة التحليل IJK",
+    "IJK_ANALYZEDURATION_DESC": "analyzeduration بالميكروثانية؛ قيمة صغيرة جداً قد تفشل في التعرف على صيغة الفيديو",
+    "IJK_PROBESIZE": "حجم الفحص IJK",
+    "IJK_PROBESIZE_DESC": "probesize بالبايت؛ قيمة صغيرة جداً قد تفشل في بدء التشغيل",
+    "IJK_CACHE_MS": "مدة التخزين IJK",
+    "IJK_CACHE_MS_DESC": "بالميلي ثانية؛ -1 لتعطيله (استخدام سياسة التخزين الافتراضية)",
+    "IJK_AUDIO_SOFT": "فك صوت IJK برمجي",
+    "IJK_AUDIO_SOFT_DESC": "إجبار الصوت على الفك البرمجي عبر FFmpeg، للأجهزة ذات فك الصوت العتادي المعطوب",
+    "EXO_TUNNELED": "التشغيل النفقي EXO",
+    "EXO_TUNNELED_DESC": "يقلل الاستهلاك وزمن التأخير؛ قد يسبب تشويشاً أو انعدام الصوت على بعض الأجهزة",
+    "EXO_AUDIO_SOFT": "فك صوت EXO برمجي",
+    "EXO_AUDIO_SOFT_DESC": "إجبار صوت Media3/ExoPlayer على الفك البرمجي",
+    "EXO_BUFFER_PLAYBACK_MS": "مخزن تشغيل EXO",
+    "EXO_BUFFER_PLAYBACK_MS_DESC": "أقل مخزن مطلوب قبل بدء التشغيل، بالميلي ثانية",
+    "EXO_BUFFER_REBUFFER_MS": "إعادة تخزين EXO",
+    "EXO_BUFFER_REBUFFER_MS_DESC": "هدف المخزن بعد إعادة التخزين، بالميلي ثانية؛ -1 لتعطيله"
   },
   "LOG": {
     "TITLE": "سجلات التطبيق",
@@ -371,6 +409,34 @@
       "HZ_50": "50 هرتز",
       "HZ_59_94": "59.94 هرتز",
       "HZ_60": "60 هرتز"
+    },
+    "WEB_VIEW_LOADING_STYLE": {
+      "DEFAULT": "افتراضي",
+      "PERCENT": "نسبة مئوية",
+      "BLACK": "شاشة سوداء"
+    },
+    "WEB_VIEW_RESOLUTION": {
+      "AUTO": "تلقائي",
+      "FULL": "100%",
+      "P75": "75%",
+      "P50": "50%"
+    },
+    "WEB_VIEW_UA_PRESET": {
+      "SYSTEM": "افتراضي النظام",
+      "WINDOWS": "Windows",
+      "MACOS": "macOS",
+      "IPAD": "iPad"
+    },
+    "WEB_VIEW_LAYER_ACCEL": {
+      "OFF": "إيقاف",
+      "HARDWARE": "عتادي",
+      "SOFTWARE": "برمجي"
+    },
+    "UI_GROUP_PARS_STYLE": {
+      "CLASSIC": "مجموعات كلاسيكية",
+      "LIST": "قائمة مسطحة",
+      "TWO_LEVEL_1": "مستويان 1",
+      "TWO_LEVEL_2": "مستويان 2"
     }
   },
   "UI": {
@@ -431,7 +497,18 @@
     "ADD_SOURCE": "إضافة دليل البرامج",
     "THRESHOLD_ALWAYS": "دائماً",
     "HOURS": "ساعات",
-    "CUSTOM": "مخصص"
+    "CUSTOM": "مخصص",
+    "FORMAT": "صيغة البيانات",
+    "FORMAT_AUTO": "استنتاج من الرابط",
+    "FORMAT_XML": "XML (XMLTV)",
+    "FORMAT_DIYP": "DIYP",
+    "FORMAT_SPTV": "SPTV",
+    "FORMAT_LOVETV": "LOVETV",
+    "CACHE_HOUR": "مدة التخزين (ساعات)",
+    "CACHE_HOUR_HINT": "-1 = اتبع العام، 0 = بدون تخزين",
+    "TIME_ZONE_OFFSET": "إزاحة المنطقة الزمنية",
+    "TIME_ZONE_OFFSET_HINT": "المنطقة الزمنية لأوقات البرامج، من -12 إلى 12",
+    "EXTERNAL_STORAGE": "التخزين على الذاكرة الخارجية"
   },
   "SUBSCRIBE": {
     "CACHE_TIME": "وقت تخزين المصدر (ساعات)",
@@ -462,7 +539,18 @@
     "AUTO_REFRESH": "التحديث التلقائي (ساعات)",
     "AUTO_REFRESH_HINT": "0 = إيقاف؛ تحديث المصدر الحالي بصمت وفق هذا الفاصل",
     "DISABLE_PREVIEW": "تعطيل معاينة القناة",
-    "DISABLE_DELAY_DETECT": "تعطيل فحص التأخير"
+    "DISABLE_DELAY_DETECT": "تعطيل فحص التأخير",
+    "GROUP_PARS_STYLE": "نمط القائمة",
+    "GROUP_PARS_STYLE_DESC": "كيفية تداخل المجموعات في شاشة اختيار القنوات",
+    "CHANNEL_NO_ABBREV": "اختصار أرقام القنوات",
+    "CHANNEL_NO_ABBREV_DESC": "استخدام صيغة مختصرة عندما يكون رقم القناة طويلاً",
+    "CHANNEL_LOGO_INITIAL": "شعار من الحرف الأول",
+    "CHANNEL_LOGO_INITIAL_DESC": "توليد شعار من الحرف الأول لاسم القناة عند عدم توفر شعار",
+    "M3U_LOGO_PRIORITY": "أولوية شعار m3u",
+    "M3U_LOGO_PRIORITY_DESC": "شعار tvg-logo من مصدر m3u يتقدم على الشعار القادم من مصدر دليل البرامج",
+    "GROUP_CONFIG_ENABLE": "معاملات لكل مجموعة",
+    "GROUP_CONFIG_ENABLE_DESC": "السماح بمعاملات مشغل خاصة بكل مجموعة في m3u عبر #genre#,#EXTKU9OPT:",
+    "FILE_CONTENT_OUT_OF_SANDBOX": "لا يمكن قراءة إلا الملفات داخل مجلد الملفات / الذاكرة المؤقتة للتلفزيون. للمسارات الأخرى استخدم صفحة الملفات للتحميل."
   },
   "设置 / 节目单": "الإعدادات / دليل البرامج",
   "THEME_MODE": "وضع المظهر",
@@ -472,5 +560,40 @@
   "THEME_MODE_SYSTEM": "النظام",
   "THEME_COLOR_PROVIDER_BUILTIN": "مدمج",
   "THEME_COLOR_PROVIDER_WALLPAPER": "بناءً على الخلفية",
-  "THEME_COLOR_PROVIDER_PLAIN": "عادي"
+  "THEME_COLOR_PROVIDER_PLAIN": "عادي",
+  "FILE": {
+    "SUBTITLE": "استعرض مجلدات التطبيق على التلفزيون (الملفات / الذاكرة المؤقتة). يمكنك الإنشاء وإعادة التسمية والحذف والتحميل، أو استخدام ملف محلي كمصدر اشتراك.",
+    "UP": "مستوى أعلى",
+    "NAME": "الاسم",
+    "SIZE": "الحجم",
+    "MTIME": "وقت التعديل",
+    "NEW_FOLDER": "اسم المجلد الجديد",
+    "CREATE": "إنشاء مجلد",
+    "CREATE_SUCCESS": "تم إنشاء المجلد",
+    "UPLOAD": "تحميل ملف",
+    "UPLOADING": "جارٍ تحميل {{name}} ...",
+    "UPLOAD_SUCCESS": "تم التحميل",
+    "USE": "استخدام",
+    "DELETE_CONFIRM": "حذف {{name}}؟",
+    "LOADING": "جارٍ التحميل...",
+    "EMPTY": "المجلد فارغ",
+    "OPERATION_FAILED": "فشلت العملية"
+  },
+  "BACKUP": {
+    "SUBTITLE": "إنشاء / استعادة نسخ محلية (إعدادات التطبيق + قاعدة البيانات) على التلفزيون. تُحفظ داخل مجلد backup في مجلد ملفات التطبيق.",
+    "RESTORE_WARNING": "الاستعادة تستبدل إعدادات التطبيق وقاعدة البيانات الحالية على التلفزيون. يلزم إعادة تشغيل التطبيق لتطبيق جميع الإعدادات. يرجى الحذر.",
+    "NAME": "الاسم",
+    "NAME_HINT": "حروف وأرقام ونقطة وشرطة سفلية وشرطة فقط",
+    "TIME": "الوقت",
+    "SIZE": "الحجم",
+    "CREATE": "إنشاء نسخة",
+    "CREATE_SUCCESS": "تم إنشاء النسخة",
+    "RESTORE": "استعادة",
+    "RESTORE_CONFIRM": "استبدال البيانات الحالية بـ {{name}}؟",
+    "RESTORE_SUCCESS": "تمت الاستعادة. أعد تشغيل التطبيق لتطبيق جميع الإعدادات.",
+    "DELETE_CONFIRM": "حذف النسخة {{name}}؟",
+    "LOADING": "جارٍ التحميل...",
+    "EMPTY": "لا توجد نسخ بعد",
+    "OPERATION_FAILED": "فشلت العملية"
+  }
 }

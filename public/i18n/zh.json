@@ -15,6 +15,8 @@
   "权限": "权限",
   "调试": "调试",
   "日志": "日志",
+  "文件": "文件",
+  "备份管理": "备份管理",
   "添加于": "添加于 {{date}}",
   "THEME_SETTINGS": "主题设置",
   "CONTROL": {
@@ -110,11 +112,55 @@
     "ADDED_AT": "添加于 {{date}}",
     "CLOSE": "关闭"
   },
+  "FILE": {
+    "SUBTITLE": "浏览电视端应用目录（文件目录 / 缓存目录），支持新建、重命名、删除、上传，并可直接把本地文件用作订阅源",
+    "UP": "上一级",
+    "NAME": "名称",
+    "SIZE": "大小",
+    "MTIME": "修改时间",
+    "NEW_FOLDER": "新建文件夹名称",
+    "CREATE": "新建文件夹",
+    "CREATE_SUCCESS": "文件夹创建成功",
+    "UPLOAD": "上传文件",
+    "UPLOADING": "正在上传 {{name}} ...",
+    "UPLOAD_SUCCESS": "上传成功",
+    "USE": "使用",
+    "DELETE_CONFIRM": "确认删除 {{name}}？",
+    "LOADING": "加载中...",
+    "EMPTY": "目录为空",
+    "OPERATION_FAILED": "操作失败"
+  },
+  "BACKUP": {
+    "SUBTITLE": "在电视端本地创建 / 恢复数据快照（应用设置 + 数据库），仅保存在电视端文件目录的 backup 子目录下",
+    "RESTORE_WARNING": "恢复会覆盖电视端当前的应用设置与数据库，恢复完成后需重启应用才能完全生效；请谨慎操作。",
+    "NAME": "名称",
+    "NAME_HINT": "仅支持字母、数字、点、下划线、中划线",
+    "TIME": "时间",
+    "SIZE": "大小",
+    "CREATE": "创建备份",
+    "CREATE_SUCCESS": "备份创建成功",
+    "RESTORE": "恢复",
+    "RESTORE_CONFIRM": "确认用 {{name}} 覆盖当前数据？",
+    "RESTORE_SUCCESS": "恢复成功，请重启应用使全部设置生效",
+    "DELETE_CONFIRM": "确认删除备份 {{name}}？",
+    "LOADING": "加载中...",
+    "EMPTY": "暂无备份",
+    "OPERATION_FAILED": "操作失败"
+  },
   "WEBVIEW": {
     "CORE": "WebView内核",
     "REPLACE_SYSTEM": "替换系统WebView",
     "REPLACE_SYSTEM_HINT": "使用下包名为com.google.android.webview的应用替换系统WebView内核（重启生效）",
-    "LOAD_TIMEOUT": "WebView 加载超时"
+    "LOAD_TIMEOUT": "WebView 加载超时",
+    "LOADING_STYLE": "加载风格",
+    "LOADING_STYLE_HINT": "页面加载过程中的显示方式",
+    "RESOLUTION": "页面分辨率",
+    "RESOLUTION_HINT": "降低分辨率可减少渲染开销，部分站点布局可能受影响",
+    "UA_PRESET": "User-Agent 预设",
+    "UA_PRESET_HINT": "指定 WebView 使用的桌面 / 平板 UA",
+    "LOAD_IMAGE": "加载图片",
+    "LAYER_ACCEL": "图层加速",
+    "LAYER_ACCEL_HINT": "WebView 渲染图层类型，花屏或黑屏时可尝试切换"
   },
   "UPDATE": {
     "CHANNEL": "更新通道",
@@ -129,7 +175,9 @@
     "RETRY_COUNT": "请求重试次数",
     "RETRY_COUNT_HINT": "影响订阅源、节目单数据获取",
     "RETRY_INTERVAL": "请求重试间隔",
-    "RETRY_INTERVAL_HINT": "影响订阅源、节目单数据获取"
+    "RETRY_INTERVAL_HINT": "影响订阅源、节目单数据获取",
+    "IPV6_ENABLE": "启用 IPv6",
+    "IPV6_ENABLE_HINT": "允许通过 IPv6 地址请求订阅源与节目单"
   },
   "GENERAL": {
     "BOOT_LAUNCH": "开机自启",
@@ -145,7 +193,9 @@
     },
     "PIP": "画中画",
     "BACKGROUND_PLAY": "后台播放",
-    "BACKGROUND_PLAY_DESC": "切换至后台后继续播放音频（听电视），与画中画互斥"
+    "BACKGROUND_PLAY_DESC": "切换至后台后继续播放音频（听电视），与画中画互斥",
+    "CACHE_PATH_EXTERNAL": "缓存写入外部存储",
+    "CACHE_PATH_EXTERNAL_DESC": "把缓存目录放到外部存储，需授予「所有文件访问权限」，重启生效"
   },
   "PLAYER": {
     "CORE": "视频播放器内核",
@@ -154,6 +204,29 @@
     "FORCE_SOFT_DECODE_DESC": "对于Media3，使用设备和扩展软解码器;\n对于IJK和VLC，将禁用MediaCodec解码（使用ffmpeg）",
     "MEDIA3_SOFT_DECODE_AUDIO_ONLY": "软解仅用于音频",
     "MEDIA3_SOFT_DECODE_AUDIO_ONLY_DESC": "仅对Media3内核生效：开启后强制软解只作用于音频解码，视频仍使用硬解；\nIJK/VLC的音频始终使用ffmpeg解码，无需此开关",
+    "AUDIO_SCREENSAVER": "音频屏保",
+    "AUDIO_SCREENSAVER_DESC": "切换到音频频道（如广播）时隐藏画面，仅播放音频",
+    "KEEP_LAST_FRAME": "画面锁定",
+    "KEEP_LAST_FRAME_DESC": "停止播放后保留最后一帧画面，不再黑屏",
+    "AAC_PREFER": "AAC 优先",
+    "AAC_PREFER_DESC": "音轨选择时优先使用 AAC，适合部分设备 AAC 硬解更稳定的场景",
+    "DECODE_PARAMS": "解码参数（IJK / EXO）",
+    "IJK_ANALYZEDURATION": "IJK 探测时长",
+    "IJK_ANALYZEDURATION_DESC": "analyzeduration，单位微秒；过小可能导致无法识别视频格式",
+    "IJK_PROBESIZE": "IJK 探测大小",
+    "IJK_PROBESIZE_DESC": "probesize，单位字节；过小可能导致起播失败",
+    "IJK_CACHE_MS": "IJK 缓存时长",
+    "IJK_CACHE_MS_DESC": "单位毫秒，-1 表示关闭（使用播放器默认缓存策略）",
+    "IJK_AUDIO_SOFT": "IJK 音频软解",
+    "IJK_AUDIO_SOFT_DESC": "强制音频使用 FFmpeg 软解，适合音频硬解异常的设备",
+    "EXO_TUNNELED": "EXO 隧道解码",
+    "EXO_TUNNELED_DESC": "开启隧道解码可降低功耗与延迟，部分设备可能花屏或无声",
+    "EXO_AUDIO_SOFT": "EXO 音频软解",
+    "EXO_AUDIO_SOFT_DESC": "Media3/ExoPlayer 音频强制软解",
+    "EXO_BUFFER_PLAYBACK_MS": "EXO 播放缓冲",
+    "EXO_BUFFER_PLAYBACK_MS_DESC": "起播所需的最小缓冲时长，单位毫秒",
+    "EXO_BUFFER_REBUFFER_MS": "EXO 重缓冲",
+    "EXO_BUFFER_REBUFFER_MS_DESC": "卡顿后重新缓冲的时长，单位毫秒，-1 表示关闭",
     "SUPER_RESOLUTION": "视频超分路径",
     "SUPER_RESOLUTION_DESC": "选择实时超分路径：GPU 空间增强、Anime4K Shader、GPU FSR/CAS 风格处理、在线 AI Lite 模型和 Real-ESRGAN Vulkan 运行库都在解码后处理画面；QuickOP 通过弹出面板选择。",
     "FRAME_INTERPOLATION": "视频插帧路径",
@@ -371,6 +444,34 @@
       "HZ_50": "50 Hz",
       "HZ_59_94": "59.94 Hz",
       "HZ_60": "60 Hz"
+    },
+    "WEB_VIEW_LOADING_STYLE": {
+      "DEFAULT": "默认",
+      "PERCENT": "百分比",
+      "BLACK": "黑屏"
+    },
+    "WEB_VIEW_RESOLUTION": {
+      "AUTO": "自适应",
+      "FULL": "100%",
+      "P75": "75%",
+      "P50": "50%"
+    },
+    "WEB_VIEW_UA_PRESET": {
+      "SYSTEM": "系统默认",
+      "WINDOWS": "Windows",
+      "MACOS": "macOS",
+      "IPAD": "iPad"
+    },
+    "WEB_VIEW_LAYER_ACCEL": {
+      "OFF": "关闭",
+      "HARDWARE": "硬件加速",
+      "SOFTWARE": "软件加速"
+    },
+    "UI_GROUP_PARS_STYLE": {
+      "CLASSIC": "传统分组",
+      "LIST": "列表分组",
+      "TWO_LEVEL_1": "二级分组1",
+      "TWO_LEVEL_2": "二级分组2"
     }
   },
   "UI": {
@@ -431,7 +532,18 @@
     "ADD_SOURCE": "添加节目单",
     "THRESHOLD_ALWAYS": "每次启动",
     "HOURS": "小时",
-    "CUSTOM": "自定义"
+    "CUSTOM": "自定义",
+    "FORMAT": "数据格式",
+    "FORMAT_AUTO": "按链接自动探测",
+    "FORMAT_XML": "XML（XMLTV）",
+    "FORMAT_DIYP": "DIYP",
+    "FORMAT_SPTV": "SPTV",
+    "FORMAT_LOVETV": "LOVETV（超级直播）",
+    "CACHE_HOUR": "缓存时长（小时）",
+    "CACHE_HOUR_HINT": "-1 = 跟随全局，0 = 不缓存",
+    "TIME_ZONE_OFFSET": "时区偏移",
+    "TIME_ZONE_OFFSET_HINT": "节目单时间所在时区，-12 ~ 12",
+    "EXTERNAL_STORAGE": "缓存到外部存储"
   },
   "SUBSCRIBE": {
     "CACHE_TIME": "订阅源缓存时间 (小时)",
@@ -462,7 +574,18 @@
     "AUTO_REFRESH": "自动刷新 (小时)",
     "AUTO_REFRESH_HINT": "0 = 关闭；运行期间按间隔静默刷新当前源",
     "DISABLE_PREVIEW": "关闭预览图",
-    "DISABLE_DELAY_DETECT": "关闭延迟检测"
+    "DISABLE_DELAY_DETECT": "关闭延迟检测",
+    "GROUP_PARS_STYLE": "列表风格",
+    "GROUP_PARS_STYLE_DESC": "分组在选台界面中的展示层级",
+    "CHANNEL_NO_ABBREV": "序号缩写模式",
+    "CHANNEL_NO_ABBREV_DESC": "频道号过长时使用缩写显示",
+    "CHANNEL_LOGO_INITIAL": "图标首字",
+    "CHANNEL_LOGO_INITIAL_DESC": "没有台标时使用频道名首字生成图标",
+    "M3U_LOGO_PRIORITY": "m3u 图标优先",
+    "M3U_LOGO_PRIORITY_DESC": "订阅源 m3u 中的 tvg-logo 优先于 EPG 源提供的台标",
+    "GROUP_CONFIG_ENABLE": "分组级参数配置",
+    "GROUP_CONFIG_ENABLE_DESC": "允许在 m3u 中用 #genre#,#EXTKU9OPT: 为每个分组单独配置播放参数",
+    "FILE_CONTENT_OUT_OF_SANDBOX": "只能读取电视端文件目录 / 缓存目录内的文件，其他路径请改用「文件」页上传"
   },
   "设置 / 节目单": "设置 / 节目单",
   "THEME_MODE": "主题模式",

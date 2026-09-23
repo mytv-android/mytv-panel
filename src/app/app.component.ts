@@ -38,6 +38,8 @@ export class AppComponent implements OnInit {
     { name: '控制', route: '/control' },
     { name: '播放器', route: '/player' },
     { name: 'WebView', route: '/webview' },
+    { name: '文件', route: '/file' },
+    { name: '备份管理', route: '/backup' },
     { name: '更新', route: '/update' },
     { name: '网络', route: '/network' },
     { name: '云同步', route: '/sync' },

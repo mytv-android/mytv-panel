@@ -30,6 +30,70 @@
           <span matSuffix>ms</span>
         </mat-form-field>
       </div>
+      <div class="setting-item">
+        <div class="setting-label">
+          <span>{{ 'WEBVIEW.LOADING_STYLE' | translate }}</span>
+          <div class="setting-hint">{{ 'WEBVIEW.LOADING_STYLE_HINT' | translate }}</div>
+        </div>
+        <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
+          <mat-select [(ngModel)]="configs.webViewLoadingStyle" (selectionChange)="updateConfig()">
+            @for (option of webViewLoadingStyles; track option) {
+              <mat-option [value]="option">
+                {{ webViewLoadingStyleLabels[option] | translate }}
+              </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="setting-item">
+        <div class="setting-label">
+          <span>{{ 'WEBVIEW.RESOLUTION' | translate }}</span>
+          <div class="setting-hint">{{ 'WEBVIEW.RESOLUTION_HINT' | translate }}</div>
+        </div>
+        <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
+          <mat-select [(ngModel)]="configs.webViewResolution" (selectionChange)="updateConfig()">
+            @for (option of webViewResolutions; track option) {
+              <mat-option [value]="option">
+                {{ webViewResolutionLabels[option] | translate }}
+              </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="setting-item">
+        <div class="setting-label">
+          <span>{{ 'WEBVIEW.UA_PRESET' | translate }}</span>
+          <div class="setting-hint">{{ 'WEBVIEW.UA_PRESET_HINT' | translate }}</div>
+        </div>
+        <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
+          <mat-select [(ngModel)]="configs.webViewUaPreset" (selectionChange)="updateConfig()">
+            @for (option of webViewUaPresets; track option) {
+              <mat-option [value]="option">
+                {{ webViewUaPresetLabels[option] | translate }}
+              </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="setting-item">
+        <span>{{ 'WEBVIEW.LOAD_IMAGE' | translate }}</span>
+        <mat-slide-toggle [(ngModel)]="configs.webViewLoadImage" (change)="updateConfig()"></mat-slide-toggle>
+      </div>
+      <div class="setting-item">
+        <div class="setting-label">
+          <span>{{ 'WEBVIEW.LAYER_ACCEL' | translate }}</span>
+          <div class="setting-hint">{{ 'WEBVIEW.LAYER_ACCEL_HINT' | translate }}</div>
+        </div>
+        <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
+          <mat-select [(ngModel)]="configs.webViewLayerAccel" (selectionChange)="updateConfig()">
+            @for (option of webViewLayerAccels; track option) {
+              <mat-option [value]="option">
+                {{ webViewLayerAccelLabels[option] | translate }}
+              </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+      </div>
     </mat-card-content>
   </mat-card>
 </div>

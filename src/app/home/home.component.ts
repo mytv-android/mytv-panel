@@ -15,6 +15,7 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { ConfigsService, AppApi, IptvSource, IptvSourceList, AppConfigs, EpgSource, CloudSyncProvider } from '../api';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { TextareaWithLinesComponent } from '../common/textarea-with-lines/textarea-with-lines.component';
+import { FILE_PICKER_KEY } from '../file/file.component';
 @Component({
     selector: 'app-home',
     standalone: true,
@@ -115,6 +116,15 @@ export class HomeComponent {
 
             this.subscription.name = this.getDefaultName();
             this.epgSource.name = this.getDefaultName();
+
+            // 从「文件」页「使用」带回来的本地文件路径
+            const pickedPath = sessionStorage.getItem(FILE_PICKER_KEY);
+            if (pickedPath) {
+                sessionStorage.removeItem(FILE_PICKER_KEY);
+                this.subscription.type = 'file';
+                this.subscription.url = pickedPath;
+                this.isSubscriptionNameTouched = true;
+            }
 
             this.translate.onLangChange.subscribe((event) => {
                 if (!this.isSubscriptionNameTouched) {

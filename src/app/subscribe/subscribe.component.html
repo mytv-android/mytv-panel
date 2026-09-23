@@ -132,6 +132,59 @@
           <mat-slide-toggle [(ngModel)]="configs.iptvChannelLogoOverride" (change)="updateConfig()"></mat-slide-toggle>
         </div>
 
+        <!-- 列表风格 -->
+        <div class="setting-item">
+          <div class="setting-label">
+            <span>{{ 'SUBSCRIBE.GROUP_PARS_STYLE' | translate }}</span>
+            <span class="setting-desc">{{ 'SUBSCRIBE.GROUP_PARS_STYLE_DESC' | translate }}</span>
+          </div>
+          <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
+            <mat-select [(ngModel)]="configs.uiGroupParsStyle" (selectionChange)="updateConfig()">
+              @for (option of groupParsStyleOptions; track option) {
+                <mat-option [value]="option">
+                  {{ uiGroupParsStyleLabels[option] | translate }}
+                </mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <!-- 序号缩写模式 -->
+        <div class="setting-item">
+          <div class="setting-label">
+            <span>{{ 'SUBSCRIBE.CHANNEL_NO_ABBREV' | translate }}</span>
+            <span class="setting-desc">{{ 'SUBSCRIBE.CHANNEL_NO_ABBREV_DESC' | translate }}</span>
+          </div>
+          <mat-slide-toggle [(ngModel)]="configs.iptvChannelNoAbbrev" (change)="updateConfig()"></mat-slide-toggle>
+        </div>
+
+        <!-- 图标首字 -->
+        <div class="setting-item">
+          <div class="setting-label">
+            <span>{{ 'SUBSCRIBE.CHANNEL_LOGO_INITIAL' | translate }}</span>
+            <span class="setting-desc">{{ 'SUBSCRIBE.CHANNEL_LOGO_INITIAL_DESC' | translate }}</span>
+          </div>
+          <mat-slide-toggle [(ngModel)]="configs.iptvChannelLogoInitial" (change)="updateConfig()"></mat-slide-toggle>
+        </div>
+
+        <!-- m3u 图标优先 -->
+        <div class="setting-item">
+          <div class="setting-label">
+            <span>{{ 'SUBSCRIBE.M3U_LOGO_PRIORITY' | translate }}</span>
+            <span class="setting-desc">{{ 'SUBSCRIBE.M3U_LOGO_PRIORITY_DESC' | translate }}</span>
+          </div>
+          <mat-slide-toggle [(ngModel)]="configs.iptvM3uLogoPriority" (change)="updateConfig()"></mat-slide-toggle>
+        </div>
+
+        <!-- 分组级参数配置 -->
+        <div class="setting-item">
+          <div class="setting-label">
+            <span>{{ 'SUBSCRIBE.GROUP_CONFIG_ENABLE' | translate }}</span>
+            <span class="setting-desc">{{ 'SUBSCRIBE.GROUP_CONFIG_ENABLE_DESC' | translate }}</span>
+          </div>
+          <mat-slide-toggle [(ngModel)]="configs.iptvChannelGroupConfigEnable" (change)="updateConfig()"></mat-slide-toggle>
+        </div>
+
         <!-- PLTV to TVOD -->
         <div class="setting-item">
           <span class="setting-label">{{ 'SUBSCRIBE.PLTV_TO_TVOD' | translate }}</span>
