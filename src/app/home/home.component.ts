@@ -66,8 +66,23 @@ export class HomeComponent {
         format: 'm3u_plus',
         url: '',
         ua: '',
-        mac: ''
+        mac: '',
+        protocol: 'auto',
+        port: undefined as number | undefined
     };
+
+    /** 网络协议：auto/http 走普通 HTTP，其余走对应协议客户端 */
+    sourceProtocols = [
+        { value: 'auto', label: 'SUBSCRIBE.PROTOCOL_AUTO' },
+        { value: 'http', label: 'SUBSCRIBE.PROTOCOL_HTTP' },
+        { value: 'ftp', label: 'SUBSCRIBE.PROTOCOL_FTP' },
+        { value: 'ftps', label: 'SUBSCRIBE.PROTOCOL_FTPS' },
+        { value: 'smb', label: 'SUBSCRIBE.PROTOCOL_SMB' },
+        { value: 'webdav', label: 'SUBSCRIBE.PROTOCOL_WEBDAV' },
+        { value: 'webdavs', label: 'SUBSCRIBE.PROTOCOL_WEBDAVS' },
+    ];
+    /** 地址 scheme 即为网络协议的订阅源 */
+    private static readonly NETWORK_SCHEME = /^(ftp|ftps|smb|smb2|cifs|webdav|webdavs|dav|davs):\/\//i;
 
     epgSource = {
         name: '',
@@ -137,6 +152,22 @@ export class HomeComponent {
         }
     }
 
+    /** 是否需要显示 FTP/SMB/WebDAV 的账号密码与端口（显式选择协议，或地址 scheme 即网络协议） */
+    get showNetworkProtocolFields(): boolean {
+        if (this.subscription.type !== 'remote') return false;
+        const protocol = (this.subscription.protocol || 'auto').toLowerCase();
+        if (protocol !== 'auto' && protocol !== 'http') return true;
+        return HomeComponent.NETWORK_SCHEME.test(this.subscription.url || '');
+    }
+
+    /** 端口归一化：空值/非法值视为未配置 */
+    private normalizedPort(): number | undefined {
+        const port = Number(this.subscription.port);
+        return Number.isFinite(port) && port >= 1 && port <= 65535
+            ? Math.floor(port)
+            : undefined;
+    }
+
     async pushSubscription() {
         var type = 0;
         if (this.subscription.type === 'remote')
@@ -174,7 +205,9 @@ export class HomeComponent {
             format: format,
             transformJs: undefined,
             httpUserAgent: this.subscription.ua,
-            mac: mac
+            mac: mac,
+            protocol: this.subscription.protocol?.trim() || undefined,
+            port: this.normalizedPort()
         };
         if (this.configs.iptvSourceList === undefined) {
             this.configs.iptvSourceList = { value: [iptvsource] };

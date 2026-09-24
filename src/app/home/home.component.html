@@ -67,6 +67,47 @@
         <mat-form-field appearance="outline" class="full-width">
           <mat-label>{{ 'HOME.LINK' | translate }}</mat-label>
           <input matInput [(ngModel)]="subscription.url" placeholder="{{ 'HOME.LINK' | translate }}">
+          @if (showNetworkProtocolFields) {
+          <mat-hint>{{ 'SUBSCRIBE.NETWORK_URL_HINT' | translate }}</mat-hint>
+          }
+        </mat-form-field>
+      </div>
+      }
+
+      @if (subscription.type === 'remote') {
+      <div class="form-row">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>{{ 'SUBSCRIBE.PROTOCOL' | translate }}</mat-label>
+          <mat-select [(ngModel)]="subscription.protocol">
+            @for (protocol of sourceProtocols; track protocol) {
+            <mat-option [value]="protocol.value">
+              {{ protocol.label | translate }}
+            </mat-option>
+            }
+          </mat-select>
+          <mat-hint>{{ 'SUBSCRIBE.PROTOCOL_HINT' | translate }}</mat-hint>
+        </mat-form-field>
+      </div>
+      }
+
+      @if (showNetworkProtocolFields) {
+      <div class="form-row">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>{{ 'SUBSCRIBE.PORT' | translate }}</mat-label>
+          <input matInput type="number" min="1" max="65535" [(ngModel)]="subscription.port">
+          <mat-hint>{{ 'SUBSCRIBE.PORT_HINT' | translate }}</mat-hint>
+        </mat-form-field>
+      </div>
+      <div class="form-row">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>{{ 'SUBSCRIBE.ACCOUNT' | translate }}</mat-label>
+          <input matInput [(ngModel)]="subscription.userName" placeholder="{{ 'HOME.USERNAME' | translate }}">
+        </mat-form-field>
+      </div>
+      <div class="form-row">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>{{ 'HOME.PASSWORD' | translate }}</mat-label>
+          <input matInput [(ngModel)]="subscription.password" placeholder="{{ 'HOME.PASSWORD' | translate }}">
         </mat-form-field>
       </div>
       }

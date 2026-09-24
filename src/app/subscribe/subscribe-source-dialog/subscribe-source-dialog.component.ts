@@ -40,6 +40,18 @@ export class SubscribeSourceDialogComponent {
     { value: 1, label: 'HOME.FILE' },
     { value: 3, label: 'HOME.STALKER' },
   ];
+  /** 网络协议：auto/http 走普通 HTTP，其余走对应协议客户端 */
+  sourceProtocols = [
+    { value: 'auto', label: 'SUBSCRIBE.PROTOCOL_AUTO' },
+    { value: 'http', label: 'SUBSCRIBE.PROTOCOL_HTTP' },
+    { value: 'ftp', label: 'SUBSCRIBE.PROTOCOL_FTP' },
+    { value: 'ftps', label: 'SUBSCRIBE.PROTOCOL_FTPS' },
+    { value: 'smb', label: 'SUBSCRIBE.PROTOCOL_SMB' },
+    { value: 'webdav', label: 'SUBSCRIBE.PROTOCOL_WEBDAV' },
+    { value: 'webdavs', label: 'SUBSCRIBE.PROTOCOL_WEBDAVS' },
+  ];
+  /** 地址 scheme 即为网络协议的订阅源 */
+  private static readonly NETWORK_SCHEME = /^(ftp|ftps|smb|smb2|cifs|webdav|webdavs|dav|davs):\/\//i;
 
   constructor(
     public dialogRef: MatDialogRef<SubscribeSourceDialogComponent>,
@@ -52,9 +64,11 @@ export class SubscribeSourceDialogComponent {
         name: '',
         url: '',
         sourceType: 0,
+        protocol: 'auto',
         format: 'm3u_plus'
     };
     // 新字段在旧设备数据里可能缺失，补默认值避免表单绑定 undefined
+    this.source.protocol ??= 'auto';
     this.source.epg ??= '';
     this.source.disableChannelPreview ??= false;
     this.source.disableDelayDetection ??= false;
@@ -78,6 +92,14 @@ export class SubscribeSourceDialogComponent {
     this.dialogRef.close();
   }
 
+  /** 是否需要显示 FTP/SMB/WebDAV 的账号密码与端口（显式选择协议，或地址 scheme 即网络协议） */
+  get showNetworkProtocolFields(): boolean {
+    if (this.source.sourceType !== 0) return false;
+    const protocol = (this.source.protocol || 'auto').toLowerCase();
+    if (protocol !== 'auto' && protocol !== 'http') return true;
+    return SubscribeSourceDialogComponent.NETWORK_SCHEME.test(this.source.url || '');
+  }
+
   onSave(): void {
     if (this.source.sourceType === 1) {
       AppApi.writeFileContent(this.source.url, this.content).catch(err => {
@@ -89,7 +111,12 @@ export class SubscribeSourceDialogComponent {
         );
       });
     }
-    // 归一化：EPG 空串视为未配置；自动刷新仅接受正整数小时，非法输入回落为关闭
+    // 归一化：协议/端口空值视为未配置；EPG 空串视为未配置；自动刷新仅接受正整数小时，非法输入回落为关闭
+    this.source.protocol = this.source.protocol?.trim() || undefined;
+    const port = Number(this.source.port);
+    this.source.port = Number.isFinite(port) && port >= 1 && port <= 65535
+      ? Math.floor(port)
+      : undefined;
     this.source.epg = this.source.epg?.trim() || undefined;
     const autoRefresh = Number(this.source.autoRefresh);
     this.source.autoRefresh = Number.isFinite(autoRefresh) && autoRefresh > 0

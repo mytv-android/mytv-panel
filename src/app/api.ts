@@ -210,7 +210,6 @@ export interface AppConfigs {
     videoPlayerIjkCacheMs?: number | null         // NEW: IJK 缓存时长（ms），-1 关闭
     videoPlayerIjkAudioSoft?: boolean | null      // NEW: IJK 音频软解
     videoPlayerExoTunneled?: boolean | null       // NEW: EXO 隧道解码
-    videoPlayerExoAudioSoft?: boolean | null      // NEW: EXO 音频软解
     videoPlayerExoBufferPlaybackMs?: number | null  // NEW: EXO 播放缓冲（ms）
     videoPlayerExoBufferRebufferMs?: number | null  // NEW: EXO 重缓冲（ms），-1 关闭
     webViewLoadingStyle?: number | null           // NEW: WebView 加载风格 0默认 1百分比 2黑屏
@@ -393,6 +392,10 @@ export interface IptvSource {
     httpUserAgent?: string
     httpProxy?: string
     mac?: string
+    /** 网络协议：auto/http 或留空按 url 识别；ftp/ftps/smb/webdav/webdavs 强制走对应协议 */
+    protocol?: string
+    /** FTP/SMB/WebDAV 端口，留空按协议默认值 */
+    port?: number
     epg?: string
     disableChannelPreview?: boolean
     disableDelayDetection?: boolean

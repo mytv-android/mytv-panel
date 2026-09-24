@@ -22,7 +22,47 @@
     <mat-form-field appearance="outline" class="full-width">
       <mat-label>{{ (source.sourceType === 1 ? 'HOME.FILE_PATH' : 'HOME.LINK') | translate }}</mat-label>
       <input matInput [(ngModel)]="source.url" required>
+      @if (showNetworkProtocolFields) {
+      <mat-hint>{{ 'SUBSCRIBE.NETWORK_URL_HINT' | translate }}</mat-hint>
+      }
     </mat-form-field>
+
+    @if (source.sourceType === 0) {
+    <div class="form-row">
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>{{ 'SUBSCRIBE.PROTOCOL' | translate }}</mat-label>
+        <mat-select [(ngModel)]="source.protocol">
+          @for (protocol of sourceProtocols; track protocol) {
+          <mat-option [value]="protocol.value">
+            {{ protocol.label | translate }}
+          </mat-option>
+          }
+        </mat-select>
+        <mat-hint>{{ 'SUBSCRIBE.PROTOCOL_HINT' | translate }}</mat-hint>
+      </mat-form-field>
+
+      @if (showNetworkProtocolFields) {
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>{{ 'SUBSCRIBE.PORT' | translate }}</mat-label>
+        <input matInput type="number" min="1" max="65535" [(ngModel)]="source.port">
+        <mat-hint>{{ 'SUBSCRIBE.PORT_HINT' | translate }}</mat-hint>
+      </mat-form-field>
+      }
+    </div>
+    }
+
+    @if (showNetworkProtocolFields) {
+    <div class="form-row">
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>{{ 'SUBSCRIBE.ACCOUNT' | translate }}</mat-label>
+        <input matInput [(ngModel)]="source.userName">
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>{{ 'HOME.PASSWORD' | translate }}</mat-label>
+        <input matInput [(ngModel)]="source.password">
+      </mat-form-field>
+    </div>
+    }
 
     @if (source.sourceType === 2) {
     <div class="form-row">
