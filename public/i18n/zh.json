@@ -250,6 +250,8 @@
     "LOAD_TIMEOUT_DESC": "影响超时换源、断线重连",
     "BUFFER_TIME": "播放缓冲",
     "BUFFER_TIME_DESC": "对于Media3和VLC, 为播放前的最小缓存加载时间（秒）  \n对于Ijk，为播放前的最小缓存加载帧（f）",
+    "STALL_RETRY": "停滞重试",
+    "STALL_RETRY_DESC": "播放位置长时间不变时，自动重试当前线路；默认关闭",
     "RTSP_TRANSPORT": "RTSP 传输方式",
     "DECODER_CONFIG": "记忆播放器和解码配置",
     "DECODER_CONFIG_DESC": "更改选项会清空现有记忆设置",

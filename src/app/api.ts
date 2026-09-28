@@ -225,6 +225,7 @@ export interface AppConfigs {
     videoPlayerLoadTimeout?: number
     webViewLoadTimeout?: number
     videoPlayerBufferTime?: number
+    videoPlayerStallRetryTimeout?: number
     videoPlayerDisplayMode?: VideoPlayerDisplayMode
     globalVideoPlayerForceSoftDecode?: boolean
     globalVideoPlayerMedia3SoftDecodeAudioOnly?: boolean  // NEW: Media3软解仅用于音频

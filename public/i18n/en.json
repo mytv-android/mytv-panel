@@ -192,6 +192,8 @@
     "LOAD_TIMEOUT_DESC": "Affects source switching and reconnection on timeout",
     "BUFFER_TIME": "Buffer Time",
     "BUFFER_TIME_DESC": "For Media3 and VLC, it is minimum buffer load time before playback (seconds);\n For Ijk, it is minimum buffer load frames (f) before playback",
+    "STALL_RETRY": "Stall Retry",
+    "STALL_RETRY_DESC": "Automatically retry the current line when the playback position stops advancing; off by default",
     "RTSP_TRANSPORT": "RTSP Transport",
     "DECODER_CONFIG": "Remember Player/Decoder Config",
     "DECODER_CONFIG_DESC": "Changing options clears existing memory settings",

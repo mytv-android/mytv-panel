@@ -363,6 +363,16 @@
       </div>
 
       <div class="setting-item">
+        <div class="setting-label">
+          <span>{{ 'PLAYER.STALL_RETRY' | translate }}</span>
+          <span class="setting-desc">{{ 'PLAYER.STALL_RETRY_DESC' | translate }}</span>
+        </div>
+        <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
+          <input matInput type="number" [(ngModel)]="configs.videoPlayerStallRetryTimeout" (change)="updateConfig()">
+        </mat-form-field>
+      </div>
+
+      <div class="setting-item">
         <span>{{ 'PLAYER.RTSP_TRANSPORT' | translate }}</span>
         <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
           <mat-select [(ngModel)]="configs.videoPlayerRtspTransport" (selectionChange)="updateConfig()">
