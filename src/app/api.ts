@@ -254,6 +254,7 @@ export interface AppConfigs {
     videoPlayerASRTranslationBaiduSecretKey?: string  // NEW: ASR翻译百度 SecretKey
     videoPlayerASRTranslationMTranServerUrl?: string  // NEW: ASR翻译MTranServer URL
     videoPlayerASRTranslationMTranServerToken?: string  // NEW: ASR翻译MTranServer Token
+    videoPlayerASRTranslationFontScale?: number  // NEW: 字幕翻译译文缩放比例（相对原文）
     videoPlayerASRMode?: ASRMode  // NEW: ASR 模式
     videoPlayerASRLeadTimeMs?: number  // NEW: ASR 领先字幕显示提前量（毫秒）
     videoPlayerASRAutoStreamingFallback?: boolean  // NEW: ASR 非领先路径自动优先流式模型
