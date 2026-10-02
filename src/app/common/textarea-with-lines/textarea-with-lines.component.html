@@ -11,14 +11,13 @@
   </div>
   <textarea matInput
     #textarea
-    [rows]="rows"
     [placeholder]="placeholder"
     [value]="value"
     (input)="onInput($event)"
     (scroll)="onScroll($event)"
     (blur)="onBlur()"
     [required]="required"
-    [rows]="lines.length"
+    [rows]="visibleRows()"
     class="custom-textarea">
   </textarea>
 </mat-form-field>

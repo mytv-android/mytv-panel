@@ -20,6 +20,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 })
 export class TextareaWithLinesComponent implements ControlValueAccessor, AfterViewInit {
   @Input() rows = 5;
+  @Input() maxRows = 10;
   @Input() placeholder = '';
   @Input() label = '';
   @Input() required = false;
@@ -69,6 +70,10 @@ export class TextareaWithLinesComponent implements ControlValueAccessor, AfterVi
   updateLines() {
     const lineCount = this.value.split('\n').length;
     this.lines = Array(Math.max(lineCount, 1)).fill(0).map((x, i) => i + 1);
+  }
+
+  visibleRows() {
+    return Math.min(this.lines.length, this.maxRows);
   }
 
   ngAfterViewInit() {
