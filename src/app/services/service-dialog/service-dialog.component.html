@@ -24,23 +24,82 @@
   </div>
 
   <!-- 代码来源 -->
+  <mat-radio-group class="source-group" [(ngModel)]="codeSource">
+    <mat-radio-button [value]="0">{{ 'SERVICES.CODE_SOURCE_URL' | translate }}</mat-radio-button>
+    <mat-radio-button [value]="1">{{ 'SERVICES.CODE_SOURCE_FILE' | translate }}</mat-radio-button>
+  </mat-radio-group>
+
+  @if (isRemote) {
   <div class="code-source">
     <mat-form-field appearance="outline" class="full-width">
       <mat-label>{{ 'SERVICES.CODE_URL' | translate }}</mat-label>
       <input matInput [(ngModel)]="codeUrl" placeholder="https://example.com/ysp-live.py">
+      <mat-hint>{{ 'SERVICES.CODE_URL_HINT' | translate }}</mat-hint>
     </mat-form-field>
     <button mat-button color="primary" (click)="loadCode()" [disabled]="loading">
       <mat-icon>cloud_download</mat-icon> {{ 'SERVICES.LOAD_CODE' | translate }}
     </button>
   </div>
+  } @else {
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>{{ 'SERVICES.CODE_FILE_PATH' | translate }}</mat-label>
+    <input matInput [(ngModel)]="codeUrl"
+      placeholder="/data/user/0/&lt;包名&gt;/files/myscript.py">
+    <mat-hint>{{ 'SERVICES.CODE_FILE_HINT' | translate }}</mat-hint>
+  </mat-form-field>
+  }
+
+  <mat-form-field appearance="outline" style="width: 180px;">
+    <mat-label>{{ 'SERVICES.REFRESH_INTERVAL' | translate }}</mat-label>
+    <input matInput type="number" [(ngModel)]="refreshIntervalHours" min="0">
+    <mat-hint>{{ 'SERVICES.REFRESH_INTERVAL_HINT' | translate }}</mat-hint>
+  </mat-form-field>
 
   @if (loading) {
   <mat-progress-bar mode="indeterminate"></mat-progress-bar>
   }
 
+  <mat-accordion class="advanced">
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ 'SERVICES.ADVANCED' | translate }}</mat-panel-title>
+        <mat-panel-description>{{ 'SERVICES.ADVANCED_DESC' | translate }}</mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>{{ 'SERVICES.HTTP_UA' | translate }}</mat-label>
+        <input matInput [(ngModel)]="httpUserAgent" placeholder="Mozilla/5.0 ...">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>{{ 'SERVICES.HTTP_PROXY' | translate }}</mat-label>
+        <input matInput [(ngModel)]="httpProxy" placeholder="socks5://127.0.0.1:1080">
+        <mat-hint>{{ 'SERVICES.HTTP_PROXY_HINT' | translate }}</mat-hint>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>{{ 'SERVICES.EXTRA_ARGS' | translate }}</mat-label>
+        <input matInput [(ngModel)]="extraArgs" placeholder="--no-4k">
+        <mat-hint>{{ 'SERVICES.EXTRA_ARGS_HINT' | translate }}</mat-hint>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>{{ 'SERVICES.ENV_VARS' | translate }}</mat-label>
+        <textarea matInput [(ngModel)]="envVars" rows="3" placeholder="TOKEN=abc&#10;REGION=cn"></textarea>
+        <mat-hint>{{ 'SERVICES.ENV_VARS_HINT' | translate }}</mat-hint>
+      </mat-form-field>
+
+      <div class="toggle-field">
+        <span>{{ 'SERVICES.AUTO_RESTART' | translate }}</span>
+        <mat-slide-toggle [(ngModel)]="autoRestart"></mat-slide-toggle>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+
   <mat-form-field appearance="outline" class="full-width code-field">
     <mat-label>{{ 'SERVICES.CODE_PASTE' | translate }}</mat-label>
-    <textarea matInput [(ngModel)]="code" rows="12" spellcheck="false"></textarea>
+    <textarea matInput [(ngModel)]="code" rows="10" spellcheck="false"></textarea>
+    <mat-hint>{{ 'SERVICES.CODE_PASTE_HINT' | translate }}</mat-hint>
   </mat-form-field>
 
   <!-- 检查结果 -->

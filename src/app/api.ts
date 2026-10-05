@@ -107,8 +107,13 @@ export const AppApi = {
         return RequestUtil.post<PythonSelfTestResponse>(`${prefix}api/python/selftest`, {})
     },
 
-    fetchPythonCode(url: string) {
-        return RequestUtil.post<PythonFetchCodeResponse>(`${prefix}api/python/fetch-code`, { url })
+    fetchPythonCode(url: string, httpUserAgent?: string, httpProxy?: string) {
+        return RequestUtil.post<PythonFetchCodeResponse>(
+            `${prefix}api/python/fetch-code`, { url, httpUserAgent, httpProxy })
+    },
+
+    refreshPythonService(id: string) {
+        return RequestUtil.post(`${prefix}api/python/service/refresh`, { id })
     },
 
     checkPythonCode(payload: { id?: string, code?: string }) {
@@ -813,7 +818,16 @@ export interface PythonServiceInfo {
     state: string
     ready: boolean
     scriptExists: boolean
+    // 0=远程链接 1=本地文件
+    codeSource: number
     codeUrl: string
+    httpUserAgent: string
+    httpProxy: string
+    refreshIntervalHours: number
+    extraArgs: string
+    envVars: string
+    autoRestart: boolean
+    lastFetchedAt: number
     localUrl: string
     lanUrl: string
     error?: string
@@ -877,7 +891,15 @@ export interface PythonServiceSaveRequest {
     port: number
     lanShare: boolean
     enabled: boolean
+    /** 0=远程链接 1=本地文件 */
+    codeSource: number
     codeUrl?: string
+    httpUserAgent?: string
+    httpProxy?: string
+    refreshIntervalHours?: number
+    extraArgs?: string
+    envVars?: string
+    autoRestart?: boolean
     code?: string
 }
 

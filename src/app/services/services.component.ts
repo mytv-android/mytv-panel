@@ -186,7 +186,14 @@ export class ServicesComponent implements OnInit, OnDestroy {
                 port: svc.port,
                 lanShare: svc.lanShare,
                 enabled: !svc.enabled,
+                codeSource: svc.codeSource,
                 codeUrl: svc.codeUrl,
+                httpUserAgent: svc.httpUserAgent,
+                httpProxy: svc.httpProxy,
+                refreshIntervalHours: svc.refreshIntervalHours,
+                extraArgs: svc.extraArgs,
+                envVars: svc.envVars,
+                autoRestart: svc.autoRestart,
             });
             if (!svc.enabled && !this.runtimeReady) {
                 this.showSuccess(this.translate.instant('SERVICES.NEED_RUNTIME'));
@@ -205,7 +212,14 @@ export class ServicesComponent implements OnInit, OnDestroy {
                 port: svc.port,
                 lanShare: !svc.lanShare,
                 enabled: svc.enabled,
+                codeSource: svc.codeSource,
                 codeUrl: svc.codeUrl,
+                httpUserAgent: svc.httpUserAgent,
+                httpProxy: svc.httpProxy,
+                refreshIntervalHours: svc.refreshIntervalHours,
+                extraArgs: svc.extraArgs,
+                envVars: svc.envVars,
+                autoRestart: svc.autoRestart,
             });
             await this.refreshStatus();
         } catch (e) {
@@ -229,6 +243,33 @@ export class ServicesComponent implements OnInit, OnDestroy {
         } catch (e) {
             this.showError(e);
         }
+    }
+
+    /** 立即拉取/同步脚本（不受更新间隔限制） */
+    async refreshService(svc: PythonServiceInfo) {
+        try {
+            await AppApi.refreshPythonService(svc.id);
+            this.showSuccess(this.translate.instant('SERVICES.REFRESH_DONE'));
+            await this.refreshStatus();
+        } catch (e) {
+            this.showError(e);
+        }
+    }
+
+    /** 代码来源展示文本 */
+    sourceText(svc: PythonServiceInfo): string {
+        const label = svc.codeSource === 1
+            ? this.translate.instant('SERVICES.CODE_SOURCE_FILE')
+            : this.translate.instant('SERVICES.CODE_SOURCE_URL');
+        return `${label}: ${svc.codeUrl || '-'}`;
+    }
+
+    /** 脚本最后更新时间（仅远程来源） */
+    lastFetchText(svc: PythonServiceInfo): string {
+        if (svc.codeSource === 1 || !svc.lastFetchedAt) return '';
+        return this.translate.instant('SERVICES.LAST_FETCHED', {
+            time: new Date(svc.lastFetchedAt).toLocaleString(),
+        });
     }
 
     async deleteService(svc: PythonServiceInfo) {

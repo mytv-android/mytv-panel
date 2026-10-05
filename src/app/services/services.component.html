@@ -93,6 +93,12 @@
             <span class="badge badge-running">{{ 'SERVICES.SERVICE_LAN' | translate }}</span>
             }
           </div>
+          <div matListItemLine class="url-line source-line">
+            <span class="url-text">{{ sourceText(svc) }}</span>
+            @if (lastFetchText(svc)) {
+            <span class="fetch-time">{{ lastFetchText(svc) }}</span>
+            }
+          </div>
           @if (svc.error) {
           <div matListItemLine class="error-text">{{ svc.error }}</div>
           }
@@ -122,6 +128,12 @@
                 <mat-icon>lan</mat-icon>
                 <span>{{ (svc.lanShare ? 'SERVICES.LAN_DISABLE' : 'SERVICES.LAN_ENABLE') | translate }}</span>
               </button>
+              @if (svc.codeUrl) {
+              <button mat-menu-item (click)="refreshService(svc)">
+                <mat-icon>sync</mat-icon>
+                <span>{{ 'SERVICES.REFRESH_NOW' | translate }}</span>
+              </button>
+              }
               <button mat-menu-item (click)="showLog(svc)">
                 <mat-icon>article</mat-icon>
                 <span>{{ 'SERVICES.VIEW_LOG' | translate }}</span>
