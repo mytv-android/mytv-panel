@@ -129,7 +129,7 @@
         <mat-slide-toggle [(ngModel)]="configs.videoPlayerAacPrefer" (change)="updateConfig()"></mat-slide-toggle>
       </div>
 
-      <!-- 解码参数（IJK / EXO） -->
+      <!-- 解码参数（IJK / Media3） -->
       <div class="asr-card">
         <div class="asr-card-title">{{ 'PLAYER.DECODE_PARAMS' | translate }}</div>
 
@@ -176,30 +176,30 @@
 
         <div class="setting-item">
           <div class="setting-label">
-            <span>{{ 'PLAYER.EXO_TUNNELED' | translate }}</span>
-            <span class="setting-desc">{{ 'PLAYER.EXO_TUNNELED_DESC' | translate }}</span>
+            <span>{{ 'PLAYER.MEDIA3_TUNNELED' | translate }}</span>
+            <span class="setting-desc">{{ 'PLAYER.MEDIA3_TUNNELED_DESC' | translate }}</span>
           </div>
-          <mat-slide-toggle [(ngModel)]="configs.videoPlayerExoTunneled" (change)="updateConfig()"></mat-slide-toggle>
+          <mat-slide-toggle [(ngModel)]="configs.videoPlayerMedia3Tunneled" (change)="updateConfig()"></mat-slide-toggle>
         </div>
 
         <div class="setting-item">
           <div class="setting-label">
-            <span>{{ 'PLAYER.EXO_BUFFER_PLAYBACK_MS' | translate }}</span>
-            <span class="setting-desc">{{ 'PLAYER.EXO_BUFFER_PLAYBACK_MS_DESC' | translate }}</span>
+            <span>{{ 'PLAYER.MEDIA3_BUFFER_PLAYBACK_MS' | translate }}</span>
+            <span class="setting-desc">{{ 'PLAYER.MEDIA3_BUFFER_PLAYBACK_MS_DESC' | translate }}</span>
           </div>
           <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
-            <input matInput type="number" [(ngModel)]="configs.videoPlayerExoBufferPlaybackMs" (change)="updateConfig()" placeholder="2500">
+            <input matInput type="number" [(ngModel)]="configs.videoPlayerMedia3BufferPlaybackMs" (change)="updateConfig()" placeholder="2500">
             <span matTextSuffix>ms</span>
           </mat-form-field>
         </div>
 
         <div class="setting-item">
           <div class="setting-label">
-            <span>{{ 'PLAYER.EXO_BUFFER_REBUFFER_MS' | translate }}</span>
-            <span class="setting-desc">{{ 'PLAYER.EXO_BUFFER_REBUFFER_MS_DESC' | translate }}</span>
+            <span>{{ 'PLAYER.MEDIA3_BUFFER_REBUFFER_MS' | translate }}</span>
+            <span class="setting-desc">{{ 'PLAYER.MEDIA3_BUFFER_REBUFFER_MS_DESC' | translate }}</span>
           </div>
           <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
-            <input matInput type="number" [(ngModel)]="configs.videoPlayerExoBufferRebufferMs" (change)="updateConfig()" placeholder="-1">
+            <input matInput type="number" [(ngModel)]="configs.videoPlayerMedia3BufferRebufferMs" (change)="updateConfig()" placeholder="-1">
             <span matTextSuffix>ms</span>
           </mat-form-field>
         </div>

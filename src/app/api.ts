@@ -1,5 +1,7 @@
-import { Injectable, signal, Inject, PLATFORM_ID } from '@angular/core';
+import { Injectable, inject, signal, Inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { TranslateService } from '@ngx-translate/core';
 import { RequestUtil } from './request';
 
 const prefix = '/' //  'http://192.168.6.124:10591/' //
@@ -179,8 +181,9 @@ export interface AppConfigs {
     iptvSourceCurrentIdx?: number
     iptvSourceList?: IptvSourceList
     pythonServiceList?: PythonServiceList  // Python 服务（脚本文件在设备侧，此处仅元数据）
-    iptvChannelGroupHiddenList?: Set<string>
-    iptvChannelHiddenList?: Set<string>
+    // 注意：虽然 Kotlin 侧是 Set<String>，但 JSON 线上格式是数组，此处必须用 string[]
+    iptvChannelGroupHiddenList?: string[]
+    iptvChannelHiddenList?: string[]
     iptvChannelGroupEncrypted?: boolean  // NEW: 订阅源分组加密
     iptvHybridMode?: IptvHybridMode
     iptvHybridYangshipinCookie?: string
@@ -265,9 +268,9 @@ export interface AppConfigs {
     videoPlayerIjkProbesize?: number | null       // NEW: IJK 探测大小（字节）
     videoPlayerIjkCacheMs?: number | null         // NEW: IJK 缓存时长（ms），-1 关闭
     videoPlayerIjkAudioSoft?: boolean | null      // NEW: IJK 音频软解
-    videoPlayerExoTunneled?: boolean | null       // NEW: EXO 隧道解码
-    videoPlayerExoBufferPlaybackMs?: number | null  // NEW: EXO 播放缓冲（ms）
-    videoPlayerExoBufferRebufferMs?: number | null  // NEW: EXO 重缓冲（ms），-1 关闭
+    videoPlayerMedia3Tunneled?: boolean | null    // NEW: Media3 隧道解码
+    videoPlayerMedia3BufferPlaybackMs?: number | null  // NEW: Media3 播放缓冲（ms）
+    videoPlayerMedia3BufferRebufferMs?: number | null  // NEW: Media3 重缓冲（ms），-1 关闭
     webViewLoadingStyle?: number | null           // NEW: WebView 加载风格 0默认 1百分比 2黑屏
     webViewResolution?: number | null             // NEW: WebView 分辨率 0自适应 1 100% 2 75% 3 50%
     webViewUaPreset?: number | null               // NEW: WebView UA 0系统 1Windows 2macOS 3iPad
@@ -919,13 +922,28 @@ export class ConfigsService {
         await this.update()
     }
     async update() {
-        await AppApi.changeConfig(this.data())
+        try {
+            await AppApi.changeConfig(this.data())
+        } catch (e) {
+            // 整包配置保存失败必须提示：否则用户以为已保存，刷新后改动全部丢失
+            this.snackBar.open(this.translate.instant('HOME.SAVE_FAILED'), undefined, { duration: 3000 })
+            throw e
+        }
         await this.refresh()
     }
+
+    private snackBar = inject(MatSnackBar);
+    private translate = inject(TranslateService);
 
     constructor(@Inject(PLATFORM_ID) private platformId: Object) {
         if (isPlatformBrowser(this.platformId)) {
             this.refresh()
+            // 标签页重新可见时拉取最新配置，避免用旧缓存整包覆盖设备端新改动
+            document.addEventListener('visibilitychange', () => {
+                if (document.visibilityState === 'visible') {
+                    this.refresh()
+                }
+            })
         }
     }
 }

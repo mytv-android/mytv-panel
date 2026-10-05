@@ -100,7 +100,7 @@ export class SubscribeComponent {
     }
 
     updateConfig() {
-        this.configsService.updateData(this.configs);
+        return this.configsService.updateData(this.configs);
     }
 
     // Subscription Source Management
@@ -110,12 +110,14 @@ export class SubscribeComponent {
             width: '500px'
         });
 
-        dialogRef.afterClosed().subscribe(result => {
+        dialogRef.afterClosed().subscribe(async result => {
             if (result) {
                 const list = this.configs.iptvSourceList?.value || [];
                 this.configs.iptvSourceList = { value: [...list, result] };
-                this.updateConfig();
-                this.showSuccess(this.translate.instant('HOME.ADD_SUCCESS'));
+                try {
+                    await this.updateConfig();
+                    this.showSuccess(this.translate.instant('HOME.ADD_SUCCESS'));
+                } catch { /* update() 已提示失败 */ }
             }
         });
     }
@@ -126,13 +128,15 @@ export class SubscribeComponent {
             width: '500px'
         });
 
-        dialogRef.afterClosed().subscribe(result => {
+        dialogRef.afterClosed().subscribe(async result => {
             if (result) {
                 const list = [...(this.configs.iptvSourceList?.value || [])];
                 list[index] = result;
                 this.configs.iptvSourceList = { value: list };
-                this.updateConfig();
-                this.showSuccess(this.translate.instant('HOME.UPDATE_SUCCESS'));
+                try {
+                    await this.updateConfig();
+                    this.showSuccess(this.translate.instant('HOME.UPDATE_SUCCESS'));
+                } catch { /* update() 已提示失败 */ }
             }
         });
     }
@@ -151,8 +155,10 @@ export class SubscribeComponent {
             }
         }
 
-        this.updateConfig();
-        this.showSuccess(this.translate.instant('HOME.DELETE_SUCCESS'));
+        this.updateConfig().then(
+            () => this.showSuccess(this.translate.instant('HOME.DELETE_SUCCESS')),
+            () => { /* update() 已提示失败 */ }
+        );
     }
 
     moveSource(index: number, direction: 'up' | 'down') {
@@ -194,7 +200,8 @@ export class SubscribeComponent {
             if (result) {
                 const set = new Set(this.configs.iptvChannelGroupHiddenList || []);
                 set.add(result);
-                this.configs.iptvChannelGroupHiddenList = set;
+                // 必须回写数组：JSON.stringify(Set) 会得到 {}，导致应用端解析失败、整包配置保存不生效
+                this.configs.iptvChannelGroupHiddenList = Array.from(set);
                 this.updateConfig();
                 this.showSuccess(this.translate.instant('HOME.ADD_SUCCESS'));
             }
@@ -212,7 +219,7 @@ export class SubscribeComponent {
                 const set = new Set(this.configs.iptvChannelGroupHiddenList || []);
                 set.delete(group);
                 set.add(result);
-                this.configs.iptvChannelGroupHiddenList = set;
+                this.configs.iptvChannelGroupHiddenList = Array.from(set);
                 this.updateConfig();
                 this.showSuccess(this.translate.instant('HOME.UPDATE_SUCCESS'));
             }
@@ -222,7 +229,7 @@ export class SubscribeComponent {
     removeHiddenGroup(group: string) {
         const set = new Set(this.configs.iptvChannelGroupHiddenList || []);
         set.delete(group);
-        this.configs.iptvChannelGroupHiddenList = set;
+        this.configs.iptvChannelGroupHiddenList = Array.from(set);
         this.updateConfig();
         this.showSuccess(this.translate.instant('HOME.DELETE_SUCCESS'));
     }
@@ -242,7 +249,7 @@ export class SubscribeComponent {
             if (result) {
                 const set = new Set(this.configs.iptvChannelHiddenList || []);
                 set.add(result);
-                this.configs.iptvChannelHiddenList = set;
+                this.configs.iptvChannelHiddenList = Array.from(set);
                 this.updateConfig();
                 this.showSuccess(this.translate.instant('HOME.ADD_SUCCESS'));
             }
@@ -260,7 +267,7 @@ export class SubscribeComponent {
                 const set = new Set(this.configs.iptvChannelHiddenList || []);
                 set.delete(channel);
                 set.add(result);
-                this.configs.iptvChannelHiddenList = set;
+                this.configs.iptvChannelHiddenList = Array.from(set);
                 this.updateConfig();
                 this.showSuccess(this.translate.instant('HOME.UPDATE_SUCCESS'));
             }
@@ -270,7 +277,7 @@ export class SubscribeComponent {
     removeHiddenChannel(channel: string) {
         const set = new Set(this.configs.iptvChannelHiddenList || []);
         set.delete(channel);
-        this.configs.iptvChannelHiddenList = set;
+        this.configs.iptvChannelHiddenList = Array.from(set);
         this.updateConfig();
         this.showSuccess(this.translate.instant('HOME.DELETE_SUCCESS'));
     }
