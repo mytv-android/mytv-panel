@@ -254,21 +254,8 @@
     "KEEP_LAST_FRAME_DESC": "الإبقاء على آخر إطار بعد إيقاف التشغيل بدلاً من الشاشة السوداء",
     "AAC_PREFER": "تفضيل AAC",
     "AAC_PREFER_DESC": "تفضيل مسار الصوت AAC، مفيد للأجهزة التي يكون فك ترميز AAC العتادي أكثر استقراراً",
-    "DECODE_PARAMS": "معاملات الفك (IJK / Media3)",
-    "IJK_ANALYZEDURATION": "مدة التحليل IJK",
-    "IJK_ANALYZEDURATION_DESC": "analyzeduration بالميكروثانية؛ قيمة صغيرة جداً قد تفشل في التعرف على صيغة الفيديو",
-    "IJK_PROBESIZE": "حجم الفحص IJK",
-    "IJK_PROBESIZE_DESC": "probesize بالبايت؛ قيمة صغيرة جداً قد تفشل في بدء التشغيل",
-    "IJK_CACHE_MS": "مدة التخزين IJK",
-    "IJK_CACHE_MS_DESC": "بالميلي ثانية؛ -1 لتعطيله (استخدام سياسة التخزين الافتراضية)",
-    "IJK_AUDIO_SOFT": "فك صوت IJK برمجي",
-    "IJK_AUDIO_SOFT_DESC": "إجبار الصوت على الفك البرمجي عبر FFmpeg، للأجهزة ذات فك الصوت العتادي المعطوب",
     "MEDIA3_TUNNELED": "التشغيل النفقي Media3",
-    "MEDIA3_TUNNELED_DESC": "يقلل الاستهلاك وزمن التأخير؛ قد يسبب تشويشاً أو انعدام الصوت على بعض الأجهزة",
-    "MEDIA3_BUFFER_PLAYBACK_MS": "مخزن تشغيل Media3",
-    "MEDIA3_BUFFER_PLAYBACK_MS_DESC": "أقل مخزن مطلوب قبل بدء التشغيل، بالميلي ثانية",
-    "MEDIA3_BUFFER_REBUFFER_MS": "إعادة تخزين Media3",
-    "MEDIA3_BUFFER_REBUFFER_MS_DESC": "هدف المخزن بعد إعادة التخزين، بالميلي ثانية؛ -1 لتعطيله"
+    "MEDIA3_TUNNELED_DESC": "يقلل الاستهلاك وزمن التأخير؛ قد يسبب تشويشاً أو انعدام الصوت على بعض الأجهزة"
   },
   "LOG": {
     "TITLE": "سجلات التطبيق",

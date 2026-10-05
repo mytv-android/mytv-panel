@@ -264,13 +264,7 @@ export interface AppConfigs {
     videoPlayerAudioScreensaver?: boolean | null  // NEW: 音频屏保
     videoPlayerKeepLastFrame?: boolean | null     // NEW: 画面锁定
     videoPlayerAacPrefer?: boolean | null         // NEW: AAC 优先
-    videoPlayerIjkAnalyzeduration?: number | null // NEW: IJK 探测时长（微秒）
-    videoPlayerIjkProbesize?: number | null       // NEW: IJK 探测大小（字节）
-    videoPlayerIjkCacheMs?: number | null         // NEW: IJK 缓存时长（ms），-1 关闭
-    videoPlayerIjkAudioSoft?: boolean | null      // NEW: IJK 音频软解
     videoPlayerMedia3Tunneled?: boolean | null    // NEW: Media3 隧道解码
-    videoPlayerMedia3BufferPlaybackMs?: number | null  // NEW: Media3 播放缓冲（ms）
-    videoPlayerMedia3BufferRebufferMs?: number | null  // NEW: Media3 重缓冲（ms），-1 关闭
     webViewLoadingStyle?: number | null           // NEW: WebView 加载风格 0默认 1百分比 2黑屏
     webViewResolution?: number | null             // NEW: WebView 分辨率 0自适应 1 100% 2 75% 3 50%
     webViewUaPreset?: number | null               // NEW: WebView UA 0系统 1Windows 2macOS 3iPad

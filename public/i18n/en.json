@@ -254,21 +254,8 @@
     "KEEP_LAST_FRAME_DESC": "Keep the last frame on screen after playback stops instead of showing black",
     "AAC_PREFER": "Prefer AAC",
     "AAC_PREFER_DESC": "Prefer the AAC audio track, useful on devices where AAC hardware decoding is more stable",
-    "DECODE_PARAMS": "Decode parameters (IJK / Media3)",
-    "IJK_ANALYZEDURATION": "IJK analyze duration",
-    "IJK_ANALYZEDURATION_DESC": "analyzeduration in microseconds; too small may fail to detect the video format",
-    "IJK_PROBESIZE": "IJK probe size",
-    "IJK_PROBESIZE_DESC": "probesize in bytes; too small may fail to start playback",
-    "IJK_CACHE_MS": "IJK cache duration",
-    "IJK_CACHE_MS_DESC": "In milliseconds; -1 disables it (use the player default cache policy)",
-    "IJK_AUDIO_SOFT": "IJK audio software decode",
-    "IJK_AUDIO_SOFT_DESC": "Force audio through FFmpeg software decoding, for devices with broken audio hardware decoding",
     "MEDIA3_TUNNELED": "Media3 tunneled playback",
-    "MEDIA3_TUNNELED_DESC": "Tunneled playback reduces power and latency; may cause artifacts or no audio on some devices",
-    "MEDIA3_BUFFER_PLAYBACK_MS": "Media3 playback buffer",
-    "MEDIA3_BUFFER_PLAYBACK_MS_DESC": "Minimum buffer required before playback starts, in milliseconds",
-    "MEDIA3_BUFFER_REBUFFER_MS": "Media3 rebuffer",
-    "MEDIA3_BUFFER_REBUFFER_MS_DESC": "Buffer target after a rebuffer, in milliseconds; -1 disables it"
+    "MEDIA3_TUNNELED_DESC": "Tunneled playback reduces power and latency; may cause artifacts or no audio on some devices"
   },
   "LOG": {
     "TITLE": "App Logs",

@@ -129,80 +129,12 @@
         <mat-slide-toggle [(ngModel)]="configs.videoPlayerAacPrefer" (change)="updateConfig()"></mat-slide-toggle>
       </div>
 
-      <!-- 解码参数（IJK / Media3） -->
-      <div class="asr-card">
-        <div class="asr-card-title">{{ 'PLAYER.DECODE_PARAMS' | translate }}</div>
-
-        <div class="setting-item">
-          <div class="setting-label">
-            <span>{{ 'PLAYER.IJK_ANALYZEDURATION' | translate }}</span>
-            <span class="setting-desc">{{ 'PLAYER.IJK_ANALYZEDURATION_DESC' | translate }}</span>
-          </div>
-          <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
-            <input matInput type="number" [(ngModel)]="configs.videoPlayerIjkAnalyzeduration" (change)="updateConfig()" placeholder="1000000">
-            <span matTextSuffix>μs</span>
-          </mat-form-field>
+      <div class="setting-item">
+        <div class="setting-label">
+          <span>{{ 'PLAYER.MEDIA3_TUNNELED' | translate }}</span>
+          <span class="setting-desc">{{ 'PLAYER.MEDIA3_TUNNELED_DESC' | translate }}</span>
         </div>
-
-        <div class="setting-item">
-          <div class="setting-label">
-            <span>{{ 'PLAYER.IJK_PROBESIZE' | translate }}</span>
-            <span class="setting-desc">{{ 'PLAYER.IJK_PROBESIZE_DESC' | translate }}</span>
-          </div>
-          <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
-            <input matInput type="number" [(ngModel)]="configs.videoPlayerIjkProbesize" (change)="updateConfig()" placeholder="1048576">
-            <span matTextSuffix>B</span>
-          </mat-form-field>
-        </div>
-
-        <div class="setting-item">
-          <div class="setting-label">
-            <span>{{ 'PLAYER.IJK_CACHE_MS' | translate }}</span>
-            <span class="setting-desc">{{ 'PLAYER.IJK_CACHE_MS_DESC' | translate }}</span>
-          </div>
-          <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
-            <input matInput type="number" [(ngModel)]="configs.videoPlayerIjkCacheMs" (change)="updateConfig()" placeholder="-1">
-            <span matTextSuffix>ms</span>
-          </mat-form-field>
-        </div>
-
-        <div class="setting-item">
-          <div class="setting-label">
-            <span>{{ 'PLAYER.IJK_AUDIO_SOFT' | translate }}</span>
-            <span class="setting-desc">{{ 'PLAYER.IJK_AUDIO_SOFT_DESC' | translate }}</span>
-          </div>
-          <mat-slide-toggle [(ngModel)]="configs.videoPlayerIjkAudioSoft" (change)="updateConfig()"></mat-slide-toggle>
-        </div>
-
-        <div class="setting-item">
-          <div class="setting-label">
-            <span>{{ 'PLAYER.MEDIA3_TUNNELED' | translate }}</span>
-            <span class="setting-desc">{{ 'PLAYER.MEDIA3_TUNNELED_DESC' | translate }}</span>
-          </div>
-          <mat-slide-toggle [(ngModel)]="configs.videoPlayerMedia3Tunneled" (change)="updateConfig()"></mat-slide-toggle>
-        </div>
-
-        <div class="setting-item">
-          <div class="setting-label">
-            <span>{{ 'PLAYER.MEDIA3_BUFFER_PLAYBACK_MS' | translate }}</span>
-            <span class="setting-desc">{{ 'PLAYER.MEDIA3_BUFFER_PLAYBACK_MS_DESC' | translate }}</span>
-          </div>
-          <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
-            <input matInput type="number" [(ngModel)]="configs.videoPlayerMedia3BufferPlaybackMs" (change)="updateConfig()" placeholder="2500">
-            <span matTextSuffix>ms</span>
-          </mat-form-field>
-        </div>
-
-        <div class="setting-item">
-          <div class="setting-label">
-            <span>{{ 'PLAYER.MEDIA3_BUFFER_REBUFFER_MS' | translate }}</span>
-            <span class="setting-desc">{{ 'PLAYER.MEDIA3_BUFFER_REBUFFER_MS_DESC' | translate }}</span>
-          </div>
-          <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
-            <input matInput type="number" [(ngModel)]="configs.videoPlayerMedia3BufferRebufferMs" (change)="updateConfig()" placeholder="-1">
-            <span matTextSuffix>ms</span>
-          </mat-form-field>
-        </div>
+        <mat-slide-toggle [(ngModel)]="configs.videoPlayerMedia3Tunneled" (change)="updateConfig()"></mat-slide-toggle>
       </div>
 
       <div class="setting-item">
