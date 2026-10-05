@@ -13,6 +13,7 @@ import { ControlComponent } from './control/control.component';
 import { UiComponent } from './ui/ui.component';
 import { EpgComponent } from './epg/epg.component';
 import { SubscribeComponent } from './subscribe/subscribe.component';
+import { ServicesComponent } from './services/services.component';
 import { FileComponent } from './file/file.component';
 import { BackupManagerComponent } from './backupmanager/backup-manager.component';
 
@@ -20,6 +21,7 @@ export const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full', data: { title: '首页' } },
   { path: 'general', component: GeneralComponent, data: { title: '通用' } },
   { path: 'sources', component: SubscribeComponent, data: { title: '订阅源' } },
+  { path: 'services', component: ServicesComponent, data: { title: '服务' } },
   { path: 'epg', component: EpgComponent, data: { title: '节目单' } },
   { path: 'ui', component: UiComponent, data: { title: '界面' } },
   { path: 'log', component: LogComponent, data: { title: '日志' } },

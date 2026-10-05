@@ -1,0 +1,20 @@
+.log-view {
+    background: rgba(0, 0, 0, 0.06);
+    border-radius: 8px;
+    padding: 12px;
+    margin: 0;
+    max-height: 480px;
+    overflow: auto;
+    font-family: monospace;
+    font-size: 12px;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-break: break-all;
+    min-width: 560px;
+}
+
+@media (max-width: 600px) {
+    .log-view {
+        min-width: 0;
+    }
+}

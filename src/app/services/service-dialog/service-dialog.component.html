@@ -1,0 +1,74 @@
+<h2 mat-dialog-title>{{ (isEdit ? 'SERVICES.EDIT_SERVICE' : 'SERVICES.ADD_SERVICE') | translate }}</h2>
+
+<mat-dialog-content class="dialog-content">
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>{{ 'SERVICES.SERVICE_NAME' | translate }}</mat-label>
+    <input matInput [(ngModel)]="name" placeholder="央视频直播">
+  </mat-form-field>
+
+  <div class="row">
+    <mat-form-field appearance="outline" style="width: 160px;">
+      <mat-label>{{ 'SERVICES.SERVICE_PORT' | translate }}</mat-label>
+      <input matInput type="number" [(ngModel)]="port" min="1" max="65535">
+    </mat-form-field>
+
+    <div class="toggle-field">
+      <span>{{ 'SERVICES.SERVICE_LAN' | translate }}</span>
+      <mat-slide-toggle [(ngModel)]="lanShare"></mat-slide-toggle>
+    </div>
+
+    <div class="toggle-field">
+      <span>{{ 'SERVICES.SERVICE_ENABLED' | translate }}</span>
+      <mat-slide-toggle [(ngModel)]="enabled"></mat-slide-toggle>
+    </div>
+  </div>
+
+  <!-- 代码来源 -->
+  <div class="code-source">
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>{{ 'SERVICES.CODE_URL' | translate }}</mat-label>
+      <input matInput [(ngModel)]="codeUrl" placeholder="https://example.com/ysp-live.py">
+    </mat-form-field>
+    <button mat-button color="primary" (click)="loadCode()" [disabled]="loading">
+      <mat-icon>cloud_download</mat-icon> {{ 'SERVICES.LOAD_CODE' | translate }}
+    </button>
+  </div>
+
+  @if (loading) {
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  }
+
+  <mat-form-field appearance="outline" class="full-width code-field">
+    <mat-label>{{ 'SERVICES.CODE_PASTE' | translate }}</mat-label>
+    <textarea matInput [(ngModel)]="code" rows="12" spellcheck="false"></textarea>
+  </mat-form-field>
+
+  <!-- 检查结果 -->
+  @if (checkResult) {
+  <div class="check-result" [ngClass]="checkResult.ok ? 'check-ok' : 'check-fail'">
+    <div class="check-title">
+      <mat-icon>{{ checkResult.ok ? 'check_circle' : 'error' }}</mat-icon>
+      {{ (checkResult.ok ? 'SERVICES.CHECK_OK' : 'SERVICES.CHECK_ERRORS') | translate }}
+    </div>
+    @for (err of checkResult.errors; track err) {
+    <div class="error-text">{{ err }}</div>
+    }
+    @for (warn of checkResult.warnings; track warn) {
+    <div class="warn-text">{{ warn }}</div>
+    }
+    @if (checkResult.imports.length) {
+    <div class="imports">{{ 'SERVICES.CHECK_IMPORTS' | translate }}: {{ checkResult.imports.join(', ') }}</div>
+    }
+  </div>
+  }
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="checkCode()" [disabled]="checking">
+    <mat-icon>fact_check</mat-icon> {{ 'SERVICES.CHECK_CODE' | translate }}
+  </button>
+  <button mat-button (click)="close()">{{ 'SERVICES.CANCEL' | translate }}</button>
+  <button mat-flat-button color="primary" (click)="save()" [disabled]="saving">
+    {{ (isEdit ? 'SERVICES.SAVE' : 'SERVICES.ADD_SERVICE') | translate }}
+  </button>
+</mat-dialog-actions>

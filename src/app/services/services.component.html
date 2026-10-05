@@ -1,0 +1,147 @@
+<div class="container">
+  <mat-card class="card">
+    <mat-card-header>
+      <mat-card-title>{{ '服务' | translate }}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+
+      <!-- Python 运行环境 -->
+      <div class="section-header">
+        <h3>{{ 'SERVICES.RUNTIME' | translate }}</h3>
+        <div class="runtime-actions">
+          @if (canDownloadRuntime) {
+          <button mat-button color="primary" (click)="downloadRuntime()">
+            <mat-icon>download</mat-icon> {{ 'SERVICES.RUNTIME_DOWNLOAD' | translate }}
+          </button>
+          }
+          @if (runtimeReady) {
+          <button mat-button (click)="selfTestRuntime()">
+            <mat-icon>fact_check</mat-icon> {{ 'SERVICES.RUNTIME_SELFTEST' | translate }}
+          </button>
+          <button mat-button color="warn" (click)="deleteRuntime()">
+            <mat-icon>delete</mat-icon> {{ 'SERVICES.RUNTIME_DELETE' | translate }}
+          </button>
+          }
+        </div>
+      </div>
+
+      <div class="runtime-state">
+        <span class="badge" [ngClass]="runtimeReady ? 'badge-running' : (runtime?.state === 'error' ? 'badge-error' : 'badge-default')">
+          {{ runtimeStateText }}
+        </span>
+      </div>
+      @if (runtime?.state === 'downloading') {
+      <mat-progress-bar mode="determinate" [value]="runtimeProgress"></mat-progress-bar>
+      }
+
+      @if (showSelfTest && selfTest) {
+      <div class="selftest">
+        <div class="selftest-title">
+          {{ 'SERVICES.SELFTEST_TITLE' | translate }}
+          <button mat-icon-button (click)="showSelfTest = false"><mat-icon>close</mat-icon></button>
+        </div>
+        <div>{{ selfTest.version }}</div>
+        <div>prefix: {{ selfTest.prefix }}</div>
+        @if (selfTest.openssl) { <div>OpenSSL: {{ selfTest.openssl }}</div> }
+        @if (selfTest.sqlite) { <div>SQLite: {{ selfTest.sqlite }}</div> }
+        @if (selfTest.zlib) { <div>zlib: {{ selfTest.zlib }}</div> }
+        <div>CA: {{ selfTest.cacert }} ({{ selfTest.cacertExists ? 'OK' : 'MISSING' }})</div>
+        @if (selfTest.socket) { <div>socket bind: {{ selfTest.socket }} OK</div> }
+        @for (err of selfTest.errors; track err) {
+        <div class="error-text">{{ err }}</div>
+        }
+      </div>
+      }
+
+      <!-- 服务列表 -->
+      <div class="section-header">
+        <h3>{{ 'SERVICES.TITLE' | translate }}</h3>
+        <button mat-button color="primary" (click)="addService()">
+          <mat-icon>add</mat-icon> {{ 'SERVICES.ADD_SERVICE' | translate }}
+        </button>
+      </div>
+
+      @if (services.length === 0) {
+      <p class="empty-hint">{{ 'SERVICES.NO_SERVICES' | translate }}</p>
+      }
+
+      <mat-list>
+        @for (svc of services; track svc.id) {
+        <mat-list-item class="service-item">
+          <div matListItemTitle class="service-title">
+            {{ svc.name }}
+            <span class="badge badge-python">Python</span>
+            <span class="badge" [ngClass]="stateBadgeClass(svc)">{{ stateLabel(svc) }}</span>
+            @if (!svc.scriptExists) {
+            <span class="badge badge-error">{{ 'SERVICES.SCRIPT_MISSING' | translate }}</span>
+            }
+          </div>
+          <div matListItemLine class="url-line">
+            <span class="url-text">{{ 'SERVICES.LOCAL_ADDRESS' | translate }}: {{ subscriptionUrl(svc) }}</span>
+            <button mat-icon-button (click)="copyAddress(subscriptionUrl(svc))"
+              [matTooltip]="'SERVICES.COPY' | translate">
+              <mat-icon>content_copy</mat-icon>
+            </button>
+          </div>
+          <div matListItemLine class="url-line">
+            <span class="url-text">{{ 'SERVICES.LAN_ADDRESS' | translate }}: {{ lanSubscriptionUrl(svc) }}</span>
+            <button mat-icon-button (click)="copyAddress(lanSubscriptionUrl(svc))"
+              [matTooltip]="'SERVICES.COPY' | translate">
+              <mat-icon>content_copy</mat-icon>
+            </button>
+            @if (svc.lanShare) {
+            <span class="badge badge-running">{{ 'SERVICES.SERVICE_LAN' | translate }}</span>
+            }
+          </div>
+          @if (svc.error) {
+          <div matListItemLine class="error-text">{{ svc.error }}</div>
+          }
+          <div matListItemMeta class="service-meta">
+            <mat-slide-toggle [checked]="svc.enabled" (change)="toggleEnabled(svc)">
+            </mat-slide-toggle>
+            <button mat-icon-button [matMenuTriggerFor]="menu">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item (click)="addAsSubscription(svc)">
+                <mat-icon>playlist_add</mat-icon>
+                <span>{{ 'SERVICES.ADD_SUBSCRIPTION' | translate }}</span>
+              </button>
+              @if (svc.state === 'running') {
+              <button mat-menu-item (click)="stopService(svc)">
+                <mat-icon>stop</mat-icon>
+                <span>{{ 'SERVICES.STOP' | translate }}</span>
+              </button>
+              } @else {
+              <button mat-menu-item (click)="startService(svc)">
+                <mat-icon>play_arrow</mat-icon>
+                <span>{{ 'SERVICES.START' | translate }}</span>
+              </button>
+              }
+              <button mat-menu-item (click)="toggleLanShare(svc)">
+                <mat-icon>lan</mat-icon>
+                <span>{{ (svc.lanShare ? 'SERVICES.LAN_DISABLE' : 'SERVICES.LAN_ENABLE') | translate }}</span>
+              </button>
+              <button mat-menu-item (click)="showLog(svc)">
+                <mat-icon>article</mat-icon>
+                <span>{{ 'SERVICES.VIEW_LOG' | translate }}</span>
+              </button>
+              <button mat-menu-item (click)="editService(svc)">
+                <mat-icon>edit</mat-icon>
+                <span>{{ 'SERVICES.EDIT_SERVICE' | translate }}</span>
+              </button>
+              <button mat-menu-item (click)="deleteService(svc)">
+                <mat-icon>delete</mat-icon>
+                <span>{{ 'SERVICES.DELETE_SERVICE' | translate }}</span>
+              </button>
+            </mat-menu>
+          </div>
+        </mat-list-item>
+        }
+      </mat-list>
+
+      <p class="hint">{{ 'SERVICES.DESC' | translate }}</p>
+
+    </mat-card-content>
+  </mat-card>
+</div>

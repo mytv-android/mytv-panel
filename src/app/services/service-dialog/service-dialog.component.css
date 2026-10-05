@@ -1,0 +1,79 @@
+.dialog-content {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 520px;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.row {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+
+.toggle-field {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.code-source {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.code-source mat-form-field {
+    flex: 1;
+}
+
+.code-field textarea {
+    font-family: monospace;
+    font-size: 12px;
+}
+
+.check-result {
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-size: 13px;
+    line-height: 1.6;
+    word-break: break-all;
+}
+
+.check-ok {
+    background: rgba(76, 175, 80, 0.12);
+}
+
+.check-fail {
+    background: rgba(244, 67, 54, 0.10);
+}
+
+.check-title {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 500;
+}
+
+.error-text {
+    color: #f44336;
+}
+
+.warn-text {
+    color: #ff9800;
+}
+
+.imports {
+    color: var(--text-color-secondary, #888);
+}
+
+@media (max-width: 600px) {
+    .dialog-content {
+        min-width: 0;
+    }
+}

@@ -1,0 +1,172 @@
+.container {
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.card {
+    max-width: 800px;
+    margin: 0 auto;
+    align-items: center;
+    width: 100%;
+    overflow: hidden;
+}
+
+mat-card-content {
+    width: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.section-header h3 {
+    margin: 0;
+}
+
+.runtime-actions {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.runtime-state {
+    padding: 8px 0;
+}
+
+.selftest {
+    background: var(--surface-color, rgba(0, 0, 0, 0.04));
+    border-radius: 8px;
+    padding: 12px;
+    margin-bottom: 12px;
+    font-size: 13px;
+    line-height: 1.7;
+    word-break: break-all;
+}
+
+.selftest-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 500;
+}
+
+.url-line {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    max-width: 100%;
+    min-width: 0;
+}
+
+.url-text {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 0;
+}
+
+.url-line button {
+    flex: 0 0 auto;
+}
+
+.url-line .mat-icon {
+    font-size: 16px;
+    width: 16px;
+    height: 16px;
+}
+
+.service-item {
+    height: auto;
+    padding: 8px 0;
+}
+
+.service-title {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.service-meta {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.empty-hint {
+    color: var(--text-color-secondary, #888);
+}
+
+.hint {
+    margin-top: 20px;
+    font-size: 13px;
+    color: var(--text-color-secondary, #888);
+}
+
+.error-text {
+    color: #f44336;
+    white-space: pre-wrap;
+    word-break: break-all;
+}
+
+.badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 500;
+    color: white;
+    margin-left: 4px;
+    vertical-align: middle;
+}
+
+.badge-python {
+    background-color: #3776AB;
+}
+
+.badge-running {
+    background-color: #4CAF50;
+}
+
+.badge-error {
+    background-color: #F44336;
+}
+
+.badge-default {
+    background-color: #757575;
+}
+
+mat-list-item {
+    border-bottom: 1px solid var(--border-color);
+}
+
+@media (max-width: 600px) {
+    .container {
+        padding: 8px;
+    }
+
+    .url-line {
+        max-width: 200px;
+    }
+
+    mat-card-content {
+        padding: 0 8px 16px 8px;
+    }
+}
+
+::ng-deep .mat-mdc-list-item-content {
+    min-width: 0;
+}
+
+::ng-deep .mat-mdc-list-item-title {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

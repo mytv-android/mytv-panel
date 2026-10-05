@@ -1,0 +1,12 @@
+<h2 mat-dialog-title>{{ 'SERVICES.LOG_TITLE' | translate }} — {{ data.service.name }}</h2>
+
+<mat-dialog-content>
+  <pre class="log-view">{{ log || ('SERVICES.LOG_EMPTY' | translate) }}</pre>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="refresh()" [disabled]="loading">
+    <mat-icon>refresh</mat-icon> {{ 'SERVICES.REFRESH' | translate }}
+  </button>
+  <button mat-button (click)="close()">{{ 'HOME.CLOSE' | translate }}</button>
+</mat-dialog-actions>

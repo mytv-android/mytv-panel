@@ -88,6 +88,56 @@ export const AppApi = {
     pushCloudSyncData(data: CloudSyncData) {
         return RequestUtil.post(`${prefix}api/cloud-sync/data`, data)
     },
+
+    // ==================== Python 服务 ====================
+
+    getPythonStatus() {
+        return RequestUtil.get<PythonStatusResponse>(`${prefix}api/python/status`)
+    },
+
+    downloadPythonRuntime() {
+        return RequestUtil.post(`${prefix}api/python/runtime/download`, {})
+    },
+
+    deletePythonRuntime() {
+        return RequestUtil.post(`${prefix}api/python/runtime/delete`, {})
+    },
+
+    selfTestPython() {
+        return RequestUtil.post<PythonSelfTestResponse>(`${prefix}api/python/selftest`, {})
+    },
+
+    fetchPythonCode(url: string) {
+        return RequestUtil.post<PythonFetchCodeResponse>(`${prefix}api/python/fetch-code`, { url })
+    },
+
+    checkPythonCode(payload: { id?: string, code?: string }) {
+        return RequestUtil.post<PythonCheckResponse>(`${prefix}api/python/check`, payload)
+    },
+
+    savePythonService(service: PythonServiceSaveRequest) {
+        return RequestUtil.post<PythonSaveResponse>(`${prefix}api/python/service/save`, service)
+    },
+
+    deletePythonService(id: string) {
+        return RequestUtil.post(`${prefix}api/python/service/delete`, { id })
+    },
+
+    startPythonService(id: string) {
+        return RequestUtil.post(`${prefix}api/python/service/start`, { id })
+    },
+
+    stopPythonService(id: string) {
+        return RequestUtil.post(`${prefix}api/python/service/stop`, { id })
+    },
+
+    getPythonServiceLog(id: string) {
+        return RequestUtil.getText(`${prefix}api/python/service/log`, { id })
+    },
+
+    getPythonServiceCode(id: string) {
+        return RequestUtil.getText(`${prefix}api/python/service/code`, { id })
+    },
 }
 
 export interface AppAbout {
@@ -123,6 +173,7 @@ export interface AppConfigs {
     iptvSourceCacheTime?: number
     iptvSourceCurrentIdx?: number
     iptvSourceList?: IptvSourceList
+    pythonServiceList?: PythonServiceList  // Python 服务（脚本文件在设备侧，此处仅元数据）
     iptvChannelGroupHiddenList?: Set<string>
     iptvChannelHiddenList?: Set<string>
     iptvChannelGroupEncrypted?: boolean  // NEW: 订阅源分组加密
@@ -724,6 +775,110 @@ export interface MultiViewScheme {
 
 export interface MultiViewSchemeList {
     value: MultiViewScheme[]
+}
+
+// ==================== Python 服务 ====================
+
+export interface PythonService {
+    id: string
+    name: string
+    enabled: boolean
+    port: number
+    lanShare: boolean
+    codeUrl: string
+    updatedAt: number
+}
+
+export interface PythonServiceList {
+    value: PythonService[]
+}
+
+export interface PythonRuntimeInfo {
+    supported: boolean
+    // notDownloaded / downloading / verifying / extracting / ready / error / unsupported
+    state: string
+    version: string
+    abi: string
+    error?: string
+    progress?: number
+}
+
+export interface PythonServiceInfo {
+    id: string
+    name: string
+    enabled: boolean
+    port: number
+    lanShare: boolean
+    // stopped / starting / running / stopping / error
+    state: string
+    ready: boolean
+    scriptExists: boolean
+    codeUrl: string
+    localUrl: string
+    lanUrl: string
+    error?: string
+}
+
+export interface PythonStatus {
+    runtime: PythonRuntimeInfo
+    services: PythonServiceInfo[]
+}
+
+export interface PythonCheckResult {
+    ok: boolean
+    errors: string[]
+    warnings: string[]
+    imports: string[]
+    missing: string[]
+}
+
+export interface PythonSelfTest {
+    version: string
+    executable: string
+    prefix: string
+    machine?: string
+    openssl?: string
+    cacert?: string
+    cacertExists: boolean
+    socket?: number
+    sqlite?: string
+    zlib?: string
+    errors: string[]
+}
+
+export interface PythonStatusResponse {
+    code: number
+    data: PythonStatus
+}
+
+export interface PythonSelfTestResponse {
+    code: number
+    data: PythonSelfTest
+}
+
+export interface PythonFetchCodeResponse {
+    code: number
+    data: { url: string, content: string }
+}
+
+export interface PythonCheckResponse {
+    code: number
+    data: PythonCheckResult
+}
+
+export interface PythonSaveResponse {
+    code: number
+    data: { id: string }
+}
+
+export interface PythonServiceSaveRequest {
+    id?: string
+    name: string
+    port: number
+    lanShare: boolean
+    enabled: boolean
+    codeUrl?: string
+    code?: string
 }
 
 

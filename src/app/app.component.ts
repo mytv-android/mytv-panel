@@ -32,6 +32,7 @@ export class AppComponent implements OnInit {
     { name: '首页', route: '/' },
     { name: '通用', route: '/general' },
     { name: '订阅源', route: '/sources' },
+    { name: '服务', route: '/services' },
     { name: '节目单', route: '/epg' },
     { name: '界面', route: '/ui' },
     { name: '主题', route: '/theme' },
