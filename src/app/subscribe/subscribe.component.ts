@@ -106,7 +106,7 @@ export class SubscribeComponent {
     // Subscription Source Management
     addSource() {
         const dialogRef = this.dialog.open(SubscribeSourceDialogComponent, {
-            data: { source: null },
+            data: { source: null, sources: this.configs.iptvSourceList?.value || [] },
             width: '500px'
         });
 
@@ -124,7 +124,7 @@ export class SubscribeComponent {
 
     editSource(index: number, source: IptvSource) {
         const dialogRef = this.dialog.open(SubscribeSourceDialogComponent, {
-            data: { source: source },
+            data: { source: source, sources: this.configs.iptvSourceList?.value || [] },
             width: '500px'
         });
 
@@ -292,6 +292,7 @@ export class SubscribeComponent {
             case 2: return 'HOME.XTREAM';
             case 1: return 'HOME.FILE';
             case 3: return 'HOME.STALKER';
+            case 4: return 'HOME.AGGREGATE';
             default: return 'Unknown';
         }
     }
@@ -302,8 +303,15 @@ export class SubscribeComponent {
             case 2: return 'badge-xtream';
             case 1: return 'badge-file';
             case 3: return 'badge-stalker';
+            case 4: return 'badge-aggregate';
             default: return 'badge-default';
         }
+    }
+
+    /** 聚合配置的成员名（按线路优先级顺序）；其余类型返回空串 */
+    aggregateMemberNames(source: IptvSource): string {
+        if (source.sourceType !== 4) return '';
+        return (source.aggregateSources || []).map(ref => ref.name).join('、');
     }
 
     get cacheTimeInHours(): number {

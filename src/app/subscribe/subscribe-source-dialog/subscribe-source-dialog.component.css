@@ -24,3 +24,82 @@
 .half-width {
     flex: 1;
 }
+
+.aggregate-hint {
+    font-size: 12px;
+    opacity: 0.7;
+    margin-bottom: 6px;
+}
+
+.aggregate-empty {
+    font-size: 13px;
+    opacity: 0.7;
+    padding: 8px 0;
+}
+
+.aggregate-list {
+    max-height: 280px;
+    overflow-y: auto;
+    border: 1px solid rgba(128, 128, 128, 0.3);
+    border-radius: 6px;
+}
+
+.aggregate-item {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 2px 8px;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.15);
+}
+
+.aggregate-item:last-child {
+    border-bottom: none;
+}
+
+.aggregate-item-selected {
+    background-color: rgba(0, 150, 136, 0.08);
+}
+
+.aggregate-item mat-checkbox {
+    flex: 1;
+    min-width: 0;
+}
+
+.aggregate-name {
+    font-size: 14px;
+}
+
+.aggregate-url {
+    display: block;
+    font-size: 11px;
+    opacity: 0.6;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.aggregate-order {
+    font-size: 12px;
+    font-weight: 600;
+    color: #009688;
+    min-width: 16px;
+    text-align: center;
+}
+
+.aggregate-actions {
+    display: flex;
+    align-items: center;
+}
+
+.aggregate-actions button {
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    line-height: 32px;
+}
+
+.aggregate-actions mat-icon {
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+}

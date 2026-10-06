@@ -19,6 +19,7 @@
       </mat-form-field>
     </div>
 
+    @if (source.sourceType !== 4) {
     <mat-form-field appearance="outline" class="full-width">
       <mat-label>{{ (source.sourceType === 1 ? 'HOME.FILE_PATH' : 'HOME.LINK') | translate }}</mat-label>
       <input matInput [(ngModel)]="source.url" required>
@@ -26,6 +27,42 @@
       <mat-hint>{{ 'SUBSCRIBE.NETWORK_URL_HINT' | translate }}</mat-hint>
       }
     </mat-form-field>
+    }
+
+    @if (source.sourceType === 4) {
+    <div class="form-row">
+      <div class="full-width">
+        <div class="aggregate-hint">{{ 'SUBSCRIBE.AGGREGATE_HINT' | translate }}</div>
+        @if (aggregateCandidates.length === 0) {
+        <div class="aggregate-empty">{{ 'SUBSCRIBE.AGGREGATE_EMPTY' | translate }}</div>
+        } @else {
+        <div class="aggregate-list">
+          @for (candidate of aggregateCandidates; track candidate) {
+          <div class="aggregate-item" [class.aggregate-item-selected]="aggregateOrder(candidate) > 0">
+            <mat-checkbox [checked]="aggregateOrder(candidate) > 0" (change)="toggleAggregateSource(candidate)">
+              <span class="aggregate-name">{{ candidate.name }}</span>
+              <small class="aggregate-url">{{ candidate.url }}</small>
+            </mat-checkbox>
+            @if (aggregateOrder(candidate) > 0) {
+            <span class="aggregate-order">{{ aggregateOrder(candidate) }}</span>
+            <span class="aggregate-actions">
+              <button mat-icon-button type="button" (click)="moveAggregate(candidate, -1)"
+                [disabled]="aggregateOrder(candidate) === 1">
+                <mat-icon>arrow_upward</mat-icon>
+              </button>
+              <button mat-icon-button type="button" (click)="moveAggregate(candidate, 1)"
+                [disabled]="aggregateOrder(candidate) === source.aggregateSources?.length">
+                <mat-icon>arrow_downward</mat-icon>
+              </button>
+            </span>
+            }
+          </div>
+          }
+        </div>
+        }
+      </div>
+    </div>
+    }
 
     @if (source.sourceType === 0) {
     <div class="form-row">
@@ -127,7 +164,7 @@
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   <button mat-button (click)="onCancel()">{{ 'HOME.CLOSE' | translate }}</button>
-  <button mat-flat-button color="primary" (click)="onSave()" [disabled]="!source.name || !source.url">
+  <button mat-flat-button color="primary" (click)="onSave()" [disabled]="!canSave">
     {{ (isEdit ? 'HOME.SAVE' : 'HOME.ADD') | translate }}
   </button>
 </mat-dialog-actions>

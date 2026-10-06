@@ -26,7 +26,13 @@
                 {{ getSourceTypeLabel(source.sourceType) | translate }}
               </span>
             </div>
-            <div matListItemLine class="url-line">{{ source.url }}</div>
+            <div matListItemLine class="url-line">
+              @if (source.sourceType === 4) {
+              {{ 'SUBSCRIBE.AGGREGATE_MEMBERS' | translate }}: {{ aggregateMemberNames(source) }}
+              } @else {
+              {{ source.url }}
+              }
+            </div>
             <div matListItemMeta>
               <button mat-icon-button [matMenuTriggerFor]="menu">
                 <mat-icon>more_vert</mat-icon>

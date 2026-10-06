@@ -156,6 +156,10 @@ mat-card-content {
     background-color: #FF9800; /* Orange */
 }
 
+.badge-aggregate {
+    background-color: #009688; /* Teal */
+}
+
 .badge-content {
     background-color: #4CAF50; /* Green */
 }

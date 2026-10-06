@@ -431,6 +431,8 @@ export interface IptvSource {
     name: string
     url: string
     sourceType: number
+    /** 聚合配置（sourceType=4）包含的订阅源：按顺序即同名频道线路的优先级顺序 */
+    aggregateSources?: IptvSourceRef[]
     userName?: string
     password?: string
     format?: string
@@ -446,6 +448,12 @@ export interface IptvSource {
     disableChannelPreview?: boolean
     disableDelayDetection?: boolean
     autoRefresh?: number
+}
+
+/** 聚合配置引用的订阅源（按 name+url 身份引用，被引用源编辑后仍能找回） */
+export interface IptvSourceRef {
+    name: string
+    url: string
 }
 
 export interface IptvSourceList {
