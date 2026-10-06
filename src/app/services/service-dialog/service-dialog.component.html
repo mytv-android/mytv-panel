@@ -1,131 +1,119 @@
 <h2 mat-dialog-title>{{ (isEdit ? 'SERVICES.EDIT_SERVICE' : 'SERVICES.ADD_SERVICE') | translate }}</h2>
 
-<mat-dialog-content class="dialog-content">
-  <mat-form-field appearance="outline" class="full-width">
-    <mat-label>{{ 'SERVICES.SERVICE_NAME' | translate }}</mat-label>
-    <input matInput [(ngModel)]="name" placeholder="央视频直播">
-  </mat-form-field>
-
-  <div class="row">
-    <mat-form-field appearance="outline" style="width: 160px;">
-      <mat-label>{{ 'SERVICES.SERVICE_PORT' | translate }}</mat-label>
-      <input matInput type="number" [(ngModel)]="port" min="1" max="65535">
+<mat-dialog-content>
+  <div class="form-container">
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>{{ 'SERVICES.SERVICE_NAME' | translate }}</mat-label>
+      <input matInput [(ngModel)]="name" placeholder="央视频直播">
     </mat-form-field>
 
-    <div class="toggle-field">
-      <span>{{ 'SERVICES.SERVICE_LAN' | translate }}</span>
-      <mat-slide-toggle [(ngModel)]="lanShare"></mat-slide-toggle>
+    <div class="form-row">
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>{{ 'SERVICES.SERVICE_PORT' | translate }}</mat-label>
+        <input matInput type="number" [(ngModel)]="port" min="1" max="65535">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>{{ 'SERVICES.CODE_SOURCE' | translate }}</mat-label>
+        <mat-select [(ngModel)]="codeSource">
+          <mat-option [value]="0">{{ 'SERVICES.CODE_SOURCE_URL' | translate }}</mat-option>
+          <mat-option [value]="1">{{ 'SERVICES.CODE_SOURCE_FILE' | translate }}</mat-option>
+        </mat-select>
+      </mat-form-field>
     </div>
 
-    <div class="toggle-field">
-      <span>{{ 'SERVICES.SERVICE_ENABLED' | translate }}</span>
-      <mat-slide-toggle [(ngModel)]="enabled"></mat-slide-toggle>
-    </div>
-  </div>
-
-  <!-- 代码来源 -->
-  <mat-radio-group class="source-group" [(ngModel)]="codeSource">
-    <mat-radio-button [value]="0">{{ 'SERVICES.CODE_SOURCE_URL' | translate }}</mat-radio-button>
-    <mat-radio-button [value]="1">{{ 'SERVICES.CODE_SOURCE_FILE' | translate }}</mat-radio-button>
-  </mat-radio-group>
-
-  @if (isRemote) {
-  <div class="code-source">
+    @if (isRemote) {
     <mat-form-field appearance="outline" class="full-width">
       <mat-label>{{ 'SERVICES.CODE_URL' | translate }}</mat-label>
       <input matInput [(ngModel)]="codeUrl" placeholder="https://example.com/ysp-live.py">
       <mat-hint>{{ 'SERVICES.CODE_URL_HINT' | translate }}</mat-hint>
     </mat-form-field>
-    <button mat-button color="primary" (click)="loadCode()" [disabled]="loading">
-      <mat-icon>cloud_download</mat-icon> {{ 'SERVICES.LOAD_CODE' | translate }}
-    </button>
-  </div>
-  } @else {
-  <mat-form-field appearance="outline" class="full-width">
-    <mat-label>{{ 'SERVICES.CODE_FILE_PATH' | translate }}</mat-label>
-    <input matInput [(ngModel)]="codeUrl"
-      placeholder="/data/user/0/&lt;包名&gt;/files/myscript.py">
-    <mat-hint>{{ 'SERVICES.CODE_FILE_HINT' | translate }}</mat-hint>
-  </mat-form-field>
-  }
 
-  <mat-form-field appearance="outline" style="width: 180px;">
-    <mat-label>{{ 'SERVICES.REFRESH_INTERVAL' | translate }}</mat-label>
-    <input matInput type="number" [(ngModel)]="refreshIntervalHours" min="0">
-    <mat-hint>{{ 'SERVICES.REFRESH_INTERVAL_HINT' | translate }}</mat-hint>
-  </mat-form-field>
+    <mat-form-field appearance="outline" class="interval-width">
+      <mat-label>{{ 'SERVICES.REFRESH_INTERVAL' | translate }}</mat-label>
+      <input matInput type="number" [(ngModel)]="refreshIntervalHours" min="0">
+      <mat-hint>{{ 'SERVICES.REFRESH_INTERVAL_HINT' | translate }}</mat-hint>
+    </mat-form-field>
+    } @else {
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>{{ 'SERVICES.CODE_FILE_PATH' | translate }}</mat-label>
+      <input matInput [(ngModel)]="codeUrl"
+        placeholder="/data/user/0/&lt;包名&gt;/files/myscript.py">
+      <mat-hint>{{ 'SERVICES.CODE_FILE_HINT' | translate }}</mat-hint>
+    </mat-form-field>
+    }
 
-  @if (loading) {
-  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
-  }
-
-  <mat-accordion class="advanced">
-    <mat-expansion-panel>
-      <mat-expansion-panel-header>
-        <mat-panel-title>{{ 'SERVICES.ADVANCED' | translate }}</mat-panel-title>
-        <mat-panel-description>{{ 'SERVICES.ADVANCED_DESC' | translate }}</mat-panel-description>
-      </mat-expansion-panel-header>
-
-      <mat-form-field appearance="outline" class="full-width">
-        <mat-label>{{ 'SERVICES.HTTP_UA' | translate }}</mat-label>
-        <input matInput [(ngModel)]="httpUserAgent" placeholder="Mozilla/5.0 ...">
-      </mat-form-field>
-
-      <mat-form-field appearance="outline" class="full-width">
-        <mat-label>{{ 'SERVICES.HTTP_PROXY' | translate }}</mat-label>
-        <input matInput [(ngModel)]="httpProxy" placeholder="socks5://127.0.0.1:1080">
-        <mat-hint>{{ 'SERVICES.HTTP_PROXY_HINT' | translate }}</mat-hint>
-      </mat-form-field>
-
-      <mat-form-field appearance="outline" class="full-width">
-        <mat-label>{{ 'SERVICES.EXTRA_ARGS' | translate }}</mat-label>
-        <input matInput [(ngModel)]="extraArgs" placeholder="--no-4k">
-        <mat-hint>{{ 'SERVICES.EXTRA_ARGS_HINT' | translate }}</mat-hint>
-      </mat-form-field>
-
-      <mat-form-field appearance="outline" class="full-width">
-        <mat-label>{{ 'SERVICES.ENV_VARS' | translate }}</mat-label>
-        <textarea matInput [(ngModel)]="envVars" rows="3" placeholder="TOKEN=abc&#10;REGION=cn"></textarea>
-        <mat-hint>{{ 'SERVICES.ENV_VARS_HINT' | translate }}</mat-hint>
-      </mat-form-field>
-
-      <div class="toggle-field">
-        <span>{{ 'SERVICES.AUTO_RESTART' | translate }}</span>
-        <mat-slide-toggle [(ngModel)]="autoRestart"></mat-slide-toggle>
-      </div>
-    </mat-expansion-panel>
-  </mat-accordion>
-
-  <mat-form-field appearance="outline" class="full-width code-field">
-    <mat-label>{{ 'SERVICES.CODE_PASTE' | translate }}</mat-label>
-    <textarea matInput [(ngModel)]="code" rows="10" spellcheck="false"></textarea>
-    <mat-hint>{{ 'SERVICES.CODE_PASTE_HINT' | translate }}</mat-hint>
-  </mat-form-field>
-
-  <!-- 检查结果 -->
-  @if (checkResult) {
-  <div class="check-result" [ngClass]="checkResult.ok ? 'check-ok' : 'check-fail'">
-    <div class="check-title">
-      <mat-icon>{{ checkResult.ok ? 'check_circle' : 'error' }}</mat-icon>
-      {{ (checkResult.ok ? 'SERVICES.CHECK_OK' : 'SERVICES.CHECK_ERRORS') | translate }}
+    <div class="form-row">
+      <mat-slide-toggle [(ngModel)]="enabled">{{ 'SERVICES.SERVICE_ENABLED' | translate }}</mat-slide-toggle>
+      <mat-slide-toggle [(ngModel)]="lanShare">{{ 'SERVICES.SERVICE_LAN' | translate }}</mat-slide-toggle>
     </div>
-    @for (err of checkResult.errors; track err) {
-    <div class="error-text">{{ err }}</div>
+
+    <mat-accordion class="advanced">
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>{{ 'SERVICES.ADVANCED' | translate }}</mat-panel-title>
+          <mat-panel-description>{{ 'SERVICES.ADVANCED_DESC' | translate }}</mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>{{ 'SERVICES.HTTP_UA' | translate }}</mat-label>
+          <input matInput [(ngModel)]="httpUserAgent" placeholder="Mozilla/5.0 ...">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>{{ 'SERVICES.HTTP_PROXY' | translate }}</mat-label>
+          <input matInput [(ngModel)]="httpProxy" placeholder="socks5://127.0.0.1:1080">
+          <mat-hint>{{ 'SERVICES.HTTP_PROXY_HINT' | translate }}</mat-hint>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>{{ 'SERVICES.EXTRA_ARGS' | translate }}</mat-label>
+          <input matInput [(ngModel)]="extraArgs" placeholder="--no-4k">
+          <mat-hint>{{ 'SERVICES.EXTRA_ARGS_HINT' | translate }}</mat-hint>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>{{ 'SERVICES.ENV_VARS' | translate }}</mat-label>
+          <textarea matInput [(ngModel)]="envVars" rows="3" placeholder="TOKEN=abc&#10;REGION=cn"></textarea>
+          <mat-hint>{{ 'SERVICES.ENV_VARS_HINT' | translate }}</mat-hint>
+        </mat-form-field>
+
+        <mat-slide-toggle [(ngModel)]="autoRestart">{{ 'SERVICES.AUTO_RESTART' | translate }}</mat-slide-toggle>
+      </mat-expansion-panel>
+    </mat-accordion>
+
+    @if (checking) {
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
     }
-    @for (warn of checkResult.warnings; track warn) {
-    <div class="warn-text">{{ warn }}</div>
-    }
-    @if (checkResult.imports.length) {
-    <div class="imports">{{ 'SERVICES.CHECK_IMPORTS' | translate }}: {{ checkResult.imports.join(', ') }}</div>
+
+    <!-- 检查结果 -->
+    @if (checkResult) {
+    <div class="check-result" [ngClass]="checkResult.ok ? 'check-ok' : 'check-fail'">
+      <div class="check-title">
+        <mat-icon>{{ checkResult.ok ? 'check_circle' : 'error' }}</mat-icon>
+        {{ (checkResult.ok ? 'SERVICES.CHECK_OK' : 'SERVICES.CHECK_ERRORS') | translate }}
+      </div>
+      @for (err of checkResult.errors; track err) {
+      <div class="error-text">{{ err }}</div>
+      }
+      @for (warn of checkResult.warnings; track warn) {
+      <div class="warn-text">{{ warn }}</div>
+      }
+      @if (checkResult.imports.length) {
+      <div class="imports">{{ 'SERVICES.CHECK_IMPORTS' | translate }}: {{ checkResult.imports.join(', ') }}</div>
+      }
+    </div>
     }
   </div>
-  }
 </mat-dialog-content>
 
 <mat-dialog-actions align="end">
+  @if (isEdit) {
   <button mat-button (click)="checkCode()" [disabled]="checking">
     <mat-icon>fact_check</mat-icon> {{ 'SERVICES.CHECK_CODE' | translate }}
   </button>
+  <span class="actions-spacer"></span>
+  }
   <button mat-button (click)="close()">{{ 'SERVICES.CANCEL' | translate }}</button>
   <button mat-flat-button color="primary" (click)="save()" [disabled]="saving">
     {{ (isEdit ? 'SERVICES.SAVE' : 'SERVICES.ADD_SERVICE') | translate }}

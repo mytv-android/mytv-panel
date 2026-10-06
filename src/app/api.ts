@@ -109,11 +109,6 @@ export const AppApi = {
         return RequestUtil.post<PythonSelfTestResponse>(`${prefix}api/python/selftest`, {})
     },
 
-    fetchPythonCode(url: string, httpUserAgent?: string, httpProxy?: string) {
-        return RequestUtil.post<PythonFetchCodeResponse>(
-            `${prefix}api/python/fetch-code`, { url, httpUserAgent, httpProxy })
-    },
-
     refreshPythonService(id: string) {
         return RequestUtil.post(`${prefix}api/python/service/refresh`, { id })
     },
@@ -140,10 +135,6 @@ export const AppApi = {
 
     getPythonServiceLog(id: string) {
         return RequestUtil.getText(`${prefix}api/python/service/log`, { id })
-    },
-
-    getPythonServiceCode(id: string) {
-        return RequestUtil.getText(`${prefix}api/python/service/code`, { id })
     },
 }
 
@@ -867,11 +858,6 @@ export interface PythonSelfTestResponse {
     data: PythonSelfTest
 }
 
-export interface PythonFetchCodeResponse {
-    code: number
-    data: { url: string, content: string }
-}
-
 export interface PythonCheckResponse {
     code: number
     data: PythonCheckResult
@@ -897,7 +883,6 @@ export interface PythonServiceSaveRequest {
     extraArgs?: string
     envVars?: string
     autoRestart?: boolean
-    code?: string
 }
 
 

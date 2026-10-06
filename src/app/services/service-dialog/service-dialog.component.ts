@@ -4,8 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { MatRadioModule } from '@angular/material/radio';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatExpansionModule } from '@angular/material/expansion';
@@ -15,11 +15,10 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { AppApi, PythonCheckResult, PythonServiceInfo } from '../../api';
 
 /**
- * 添加/编辑 Python 服务：
- * 名称 → 端口 → 代码来源（远程链接 / 本地文件）→ UA/代理 → 更新间隔 →
- * 附加启动参数/环境变量 → 检查代码 → 保存。
- * 远程脚本由应用在后台按更新间隔自动拉取（保存时先拉取一次）；代码框留空即可，
- * 也可粘贴/预览代码后保存。
+ * 添加/编辑 Python 服务：名称 → 端口/代码来源 → 远程链接或本地文件路径 →
+ * 启用/局域网共享 → 高级选项（UA/代理/启动参数/环境变量/自动重启）。
+ * 脚本由应用管理：远程链接在保存时拉取一次，之后按更新间隔自动更新；
+ * 本地文件按内容变化同步。面板不提供手动加载或粘贴代码。
  */
 @Component({
     selector: 'app-service-dialog',
@@ -30,8 +29,8 @@ import { AppApi, PythonCheckResult, PythonServiceInfo } from '../../api';
         MatButtonModule,
         MatInputModule,
         MatFormFieldModule,
+        MatSelectModule,
         MatSlideToggleModule,
-        MatRadioModule,
         MatIconModule,
         MatProgressBarModule,
         MatExpansionModule,
@@ -55,9 +54,7 @@ export class ServiceDialogComponent implements OnInit {
     extraArgs = '';
     envVars = '';
     autoRestart = true;
-    code = '';
 
-    loading = false;
     checking = false;
     saving = false;
     checkResult?: PythonCheckResult;
@@ -72,65 +69,39 @@ export class ServiceDialogComponent implements OnInit {
         private translate: TranslateService,
     ) { }
 
-    async ngOnInit() {
+    ngOnInit() {
         const svc = this.data?.service;
-        if (svc) {
-            this.isEdit = true;
-            this.serviceId = svc.id;
-            this.name = svc.name;
-            this.port = svc.port;
-            this.lanShare = svc.lanShare;
-            this.enabled = svc.enabled;
-            this.codeSource = svc.codeSource ?? 0;
-            this.codeUrl = svc.codeUrl || '';
-            this.httpUserAgent = svc.httpUserAgent || '';
-            this.httpProxy = svc.httpProxy || '';
-            this.refreshIntervalHours = svc.refreshIntervalHours ?? 24;
-            this.extraArgs = svc.extraArgs || '';
-            this.envVars = svc.envVars || '';
-            this.autoRestart = svc.autoRestart ?? true;
-            try {
-                this.code = await AppApi.getPythonServiceCode(svc.id);
-            } catch {
-                // 脚本文件可能尚未拉取，保留空代码等待加载/自动拉取
-            }
+        if (!svc) {
+            return;
         }
+        this.isEdit = true;
+        this.serviceId = svc.id;
+        this.name = svc.name;
+        this.port = svc.port;
+        this.lanShare = svc.lanShare;
+        this.enabled = svc.enabled;
+        this.codeSource = svc.codeSource ?? 0;
+        this.codeUrl = svc.codeUrl || '';
+        this.httpUserAgent = svc.httpUserAgent || '';
+        this.httpProxy = svc.httpProxy || '';
+        this.refreshIntervalHours = svc.refreshIntervalHours ?? 24;
+        this.extraArgs = svc.extraArgs || '';
+        this.envVars = svc.envVars || '';
+        this.autoRestart = svc.autoRestart ?? true;
     }
 
     get isRemote(): boolean {
         return this.codeSource === 0;
     }
 
-    /** 从远程链接拉取代码（由设备端发起请求，带 UA/代理） */
-    async loadCode() {
-        if (!this.isRemote) {
-            return;
-        }
-        if (!this.codeUrl) {
-            this.showMessage(this.translate.instant('SERVICES.NEED_URL'));
-            return;
-        }
-        this.loading = true;
-        try {
-            const res = await AppApi.fetchPythonCode(this.codeUrl, this.httpUserAgent, this.httpProxy);
-            this.code = res.data.content;
-            this.checkResult = undefined;
-            this.showMessage(this.translate.instant('SERVICES.CODE_LOADED'));
-        } catch (e) {
-            this.showError(e);
-        } finally {
-            this.loading = false;
-        }
-    }
-
+    /** 检查设备上该服务已保存的脚本（仅编辑时可用） */
     async checkCode() {
-        if (!this.code) {
-            this.showMessage(this.translate.instant('SERVICES.NEED_CODE'));
+        if (!this.serviceId) {
             return;
         }
         this.checking = true;
         try {
-            const res = await AppApi.checkPythonCode({ id: this.serviceId, code: this.code });
+            const res = await AppApi.checkPythonCode({ id: this.serviceId });
             this.checkResult = res.data;
         } catch (e) {
             this.showError(e);
@@ -168,7 +139,6 @@ export class ServiceDialogComponent implements OnInit {
                 extraArgs: this.extraArgs,
                 envVars: this.envVars,
                 autoRestart: this.autoRestart,
-                code: this.code,
             });
             this.ref.close(res.data);
         } catch (e) {

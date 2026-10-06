@@ -3,7 +3,8 @@
 }
 
 .line-numbers-container {
-    height: 100%;
+    /* 行号列与文本框同高：超出部分随文本框滚动，不能按总行数撑高外部容器 */
+    height: calc(var(--line-height) * var(--visible-rows, 1));
     overflow: hidden;
     margin-right: 8px;
     border-right: 1px solid rgba(0,0,0,0.12);
@@ -11,7 +12,6 @@
     user-select: none;
     display: flex;
     flex-direction: column;
-    align-self: stretch; /* Ensure it stretches to full height of form field content */
 }
 
 .line-numbers {
@@ -21,17 +21,17 @@
     font-family: monospace;
     text-align: right;
     /* Match textarea line-height and font-size */
-    line-height: 1.5; 
-    font-size: 14px; 
+    line-height: 1.5;
+    font-size: 14px;
 }
 
 .line-number {
-    height: 21px; /* 14px * 1.5 */
+    height: var(--line-height);
 }
 
 .custom-textarea {
     font-family: monospace !important;
-    line-height: 1.5 !important;
+    line-height: var(--line-height) !important;
     font-size: 14px !important;
     white-space: pre;
     overflow-x: auto;
@@ -47,4 +47,5 @@
 :host {
     display: block;
     width: 100%;
+    --line-height: 21px; /* 14px * 1.5，与文本框行高、行号行高保持一致 */
 }

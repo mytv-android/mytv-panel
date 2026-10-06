@@ -2,7 +2,7 @@
   @if (label) {
     <mat-label>{{label}}</mat-label>
   }
-  <div matPrefix class="line-numbers-container">
+  <div matPrefix class="line-numbers-container" [style.--visible-rows]="visibleRows()">
     <div class="line-numbers" #lineNumbers>
       @for (line of lines; track line) {
         <div class="line-number">{{line}}</div>
