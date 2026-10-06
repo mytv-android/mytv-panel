@@ -663,10 +663,17 @@
     "NEED_RUNTIME": "请先下载 Python 运行环境",
     "CODE_SOURCE": "代码来源",
     "CODE_SOURCE_URL": "远程链接",
-    "CODE_SOURCE_FILE": "本地文件",
+    "CODE_SOURCE_UPLOAD": "本地上传 / 直接填写",
+    "CODE_SOURCE_FILE": "电视本地路径",
     "CODE_URL_HINT": "保存时自动拉取一次，之后按更新间隔在后台自动更新",
-    "CODE_FILE_PATH": "本地脚本文件路径",
-    "CODE_FILE_HINT": "设备上的文件路径（可在「文件」页上传并用「使用」按钮复制路径）",
+    "CODE_FILE_PATH": "电视上的脚本文件路径",
+    "CODE_FILE_HINT": "设备上的文件路径（也可在「文件」页上传后用「使用」按钮填入）",
+    "SELECT_SCRIPT_FILE": "选择脚本文件",
+    "NO_SCRIPT_FILE": "未选择文件",
+    "SCRIPT_CODE": "脚本代码",
+    "SCRIPT_CODE_HINT": "挑电脑 / 手机上的脚本文件，或把代码整段粘贴进来；保存时推送到电视并存为本地脚本，之后按内容变化同步",
+    "READ_FILE_FAILED": "读取文件失败",
+    "NEED_CODE": "请上传脚本文件或粘贴脚本代码",
     "REFRESH_INTERVAL": "自动更新间隔（小时）",
     "REFRESH_INTERVAL_HINT": "0 = 不自动更新",
     "ADVANCED": "高级选项",
@@ -682,6 +689,6 @@
     "REFRESH_NOW": "立即更新脚本",
     "REFRESH_DONE": "脚本已更新",
     "LAST_FETCHED": "上次更新：{{time}}",
-    "NEED_FILE_PATH": "请填写本地脚本文件路径"
+    "NEED_FILE_PATH": "请填写电视上的脚本文件路径"
   }
 }

@@ -26,8 +26,9 @@
 
       <mat-form-field appearance="outline" class="half-width">
         <mat-label>{{ 'SERVICES.CODE_SOURCE' | translate }}</mat-label>
-        <mat-select [(ngModel)]="codeSource">
+        <mat-select [(ngModel)]="codeSource" (selectionChange)="onCodeSourceChange()">
           <mat-option [value]="0">{{ 'SERVICES.CODE_SOURCE_URL' | translate }}</mat-option>
+          <mat-option [value]="2">{{ 'SERVICES.CODE_SOURCE_UPLOAD' | translate }}</mat-option>
           <mat-option [value]="1">{{ 'SERVICES.CODE_SOURCE_FILE' | translate }}</mat-option>
         </mat-select>
       </mat-form-field>
@@ -45,6 +46,24 @@
       <input matInput type="number" [(ngModel)]="refreshIntervalHours" min="0">
       <mat-hint>{{ 'SERVICES.REFRESH_INTERVAL_HINT' | translate }}</mat-hint>
     </mat-form-field>
+    } @else if (isUpload) {
+    <div class="upload-row">
+      <button mat-stroked-button type="button" (click)="scriptFileInput.click()">
+        <mat-icon>upload_file</mat-icon> {{ 'SERVICES.SELECT_SCRIPT_FILE' | translate }}
+      </button>
+      <span class="upload-filename">{{ scriptFileName || ('SERVICES.NO_SCRIPT_FILE' | translate) }}</span>
+      <input #scriptFileInput type="file" style="display:none" [accept]="isPhp ? '.php' : '.py,.php'"
+        (change)="onScriptFileSelected($event)" />
+    </div>
+
+    @if (loadingCode) {
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    }
+
+    <app-textarea-with-lines class="full-width" [(ngModel)]="code" [rows]="12" [maxRows]="24"
+      [label]="'SERVICES.SCRIPT_CODE' | translate" [placeholder]="isPhp ? '<?php ...' : '#!/usr/bin/env python3'"
+      [required]="true"></app-textarea-with-lines>
+    <p class="field-hint">{{ 'SERVICES.SCRIPT_CODE_HINT' | translate }}</p>
     } @else {
     <mat-form-field appearance="outline" class="full-width">
       <mat-label>{{ 'SERVICES.CODE_FILE_PATH' | translate }}</mat-label>

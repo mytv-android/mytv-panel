@@ -314,15 +314,17 @@ export class ServicesComponent implements OnInit, OnDestroy {
 
     /** 代码来源展示文本 */
     sourceText(svc: PythonServiceInfo): string {
-        const label = svc.codeSource === 1
-            ? this.translate.instant('SERVICES.CODE_SOURCE_FILE')
-            : this.translate.instant('SERVICES.CODE_SOURCE_URL');
-        return `${label}: ${svc.codeUrl || '-'}`;
+        const labelKey = svc.codeSource === 2
+            ? 'SERVICES.CODE_SOURCE_UPLOAD'
+            : svc.codeSource === 1
+                ? 'SERVICES.CODE_SOURCE_FILE'
+                : 'SERVICES.CODE_SOURCE_URL';
+        return `${this.translate.instant(labelKey)}: ${svc.codeUrl || '-'}`;
     }
 
     /** 脚本最后更新时间（仅远程来源） */
     lastFetchText(svc: PythonServiceInfo): string {
-        if (svc.codeSource === 1 || !svc.lastFetchedAt) return '';
+        if (svc.codeSource !== 0 || !svc.lastFetchedAt) return '';
         return this.translate.instant('SERVICES.LAST_FETCHED', {
             time: new Date(svc.lastFetchedAt).toLocaleString(),
         });

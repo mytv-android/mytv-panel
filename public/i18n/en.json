@@ -663,10 +663,17 @@
     "NEED_RUNTIME": "Download the Python runtime first",
     "CODE_SOURCE": "Code source",
     "CODE_SOURCE_URL": "Remote URL",
-    "CODE_SOURCE_FILE": "Local file",
+    "CODE_SOURCE_UPLOAD": "Upload / paste",
+    "CODE_SOURCE_FILE": "Path on TV",
     "CODE_URL_HINT": "Fetched once on save, then refreshed in the background on the interval",
-    "CODE_FILE_PATH": "Local script file path",
-    "CODE_FILE_HINT": "Path on the device (upload via the File page, then copy its path)",
+    "CODE_FILE_PATH": "Script file path on the TV",
+    "CODE_FILE_HINT": "Path on the device (or upload on the File page and fill it in with Use)",
+    "SELECT_SCRIPT_FILE": "Select script file",
+    "NO_SCRIPT_FILE": "No file selected",
+    "SCRIPT_CODE": "Script code",
+    "SCRIPT_CODE_HINT": "Pick a script file from your computer / phone, or paste the whole script; it is pushed on save and stored on the TV as a local script, then synced on change",
+    "READ_FILE_FAILED": "Failed to read the file",
+    "NEED_CODE": "Upload a script file or paste the script code",
     "REFRESH_INTERVAL": "Auto refresh interval (hours)",
     "REFRESH_INTERVAL_HINT": "0 = never auto refresh",
     "ADVANCED": "Advanced",
@@ -682,6 +689,6 @@
     "REFRESH_NOW": "Refresh script now",
     "REFRESH_DONE": "Script updated",
     "LAST_FETCHED": "Updated: {{time}}",
-    "NEED_FILE_PATH": "Enter the local script file path"
+    "NEED_FILE_PATH": "Enter the script file path on the TV"
   }
 }

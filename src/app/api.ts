@@ -148,6 +148,10 @@ export const AppApi = {
     getPythonServiceLog(id: string) {
         return RequestUtil.getText(`${prefix}api/python/service/log`, { id })
     },
+
+    getPythonServiceCode(id: string) {
+        return RequestUtil.getText(`${prefix}api/python/service/code`, { id })
+    },
 }
 
 export interface AppAbout {
@@ -829,7 +833,7 @@ export interface PythonServiceInfo {
     state: string
     ready: boolean
     scriptExists: boolean
-    // 0=远程链接 1=本地文件
+    // 0=远程链接 1=本地文件 2=本地上传/直接填写
     codeSource: number
     codeUrl: string
     httpUserAgent: string
@@ -918,9 +922,11 @@ export interface PythonServiceSaveRequest {
     port: number
     lanShare: boolean
     enabled: boolean
-    /** 0=远程链接 1=本地文件 */
+    /** 0=远程链接 1=本地文件 2=本地上传/直接填写 */
     codeSource: number
     codeUrl?: string
+    /** 本地上传/直接填写时随保存推送的脚本内容 */
+    code?: string
     httpUserAgent?: string
     httpProxy?: string
     refreshIntervalHours?: number
