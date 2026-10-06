@@ -250,11 +250,9 @@
     "ASR_SAVED": "Settings saved",
     "ASR_SAVE_FAILED": "Failed to save settings",
     "AUDIO_SCREENSAVER": "Audio screensaver",
-    "AUDIO_SCREENSAVER_DESC": "Hide the picture on audio-only channels (radio) and keep playing audio",
-    "KEEP_LAST_FRAME": "Keep last frame",
-    "KEEP_LAST_FRAME_DESC": "Keep the last frame on screen after playback stops instead of showing black",
+    "AUDIO_SCREENSAVER_DESC": "On audio-only channels (no video track, e.g. radio) hide the picture and show the current theme background; audio keeps playing",
     "AAC_PREFER": "Prefer AAC",
-    "AAC_PREFER_DESC": "Prefer the AAC audio track, useful on devices where AAC hardware decoding is more stable",
+    "AAC_PREFER_DESC": "Prefer the AAC track when several are available (Media3 and IJK; a manually chosen track is remembered and kept)",
     "MEDIA3_TUNNELED": "Media3 tunneled playback",
     "MEDIA3_TUNNELED_DESC": "Tunneled playback reduces power and latency; may cause artifacts or no audio on some devices"
   },
