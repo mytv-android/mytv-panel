@@ -131,6 +131,10 @@ mat-card-content {
     background-color: #3776AB;
 }
 
+.badge-php {
+    background-color: #8892BF;
+}
+
 .badge-running {
     background-color: #4CAF50;
 }

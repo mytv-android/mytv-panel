@@ -9,6 +9,17 @@
 
     <div class="form-row">
       <mat-form-field appearance="outline" class="half-width">
+        <mat-label>{{ 'SERVICES.SCRIPT_LANGUAGE' | translate }}</mat-label>
+        <mat-select [(ngModel)]="language" [disabled]="isEdit" (selectionChange)="onLanguageChange()">
+          <mat-option value="python">Python</mat-option>
+          <mat-option value="php">PHP</mat-option>
+        </mat-select>
+        <mat-hint>{{ 'SERVICES.SCRIPT_LANGUAGE_HINT' | translate }}</mat-hint>
+      </mat-form-field>
+    </div>
+
+    <div class="form-row">
+      <mat-form-field appearance="outline" class="half-width">
         <mat-label>{{ 'SERVICES.SERVICE_PORT' | translate }}</mat-label>
         <input matInput type="number" [(ngModel)]="port" min="1" max="65535">
       </mat-form-field>
@@ -25,7 +36,7 @@
     @if (isRemote) {
     <mat-form-field appearance="outline" class="full-width">
       <mat-label>{{ 'SERVICES.CODE_URL' | translate }}</mat-label>
-      <input matInput [(ngModel)]="codeUrl" placeholder="https://example.com/ysp-live.py">
+      <input matInput [(ngModel)]="codeUrl" [placeholder]="isPhp ? 'https://example.com/ysp.php' : 'https://example.com/ysp-live.py'">
       <mat-hint>{{ 'SERVICES.CODE_URL_HINT' | translate }}</mat-hint>
     </mat-form-field>
 
@@ -38,7 +49,7 @@
     <mat-form-field appearance="outline" class="full-width">
       <mat-label>{{ 'SERVICES.CODE_FILE_PATH' | translate }}</mat-label>
       <input matInput [(ngModel)]="codeUrl"
-        placeholder="/data/user/0/&lt;包名&gt;/files/myscript.py">
+        [placeholder]="isPhp ? '/data/user/0/<包名>/files/myscript.php' : '/data/user/0/<包名>/files/myscript.py'">
       <mat-hint>{{ 'SERVICES.CODE_FILE_HINT' | translate }}</mat-hint>
     </mat-form-field>
     }
@@ -66,6 +77,7 @@
           <mat-hint>{{ 'SERVICES.HTTP_PROXY_HINT' | translate }}</mat-hint>
         </mat-form-field>
 
+        @if (!isPhp) {
         <mat-form-field appearance="outline" class="full-width">
           <mat-label>{{ 'SERVICES.EXTRA_ARGS' | translate }}</mat-label>
           <input matInput [(ngModel)]="extraArgs" placeholder="--no-4k">
@@ -79,6 +91,7 @@
         </mat-form-field>
 
         <mat-slide-toggle [(ngModel)]="autoRestart">{{ 'SERVICES.AUTO_RESTART' | translate }}</mat-slide-toggle>
+        }
       </mat-expansion-panel>
     </mat-accordion>
 
@@ -108,7 +121,7 @@
 </mat-dialog-content>
 
 <mat-dialog-actions align="end">
-  @if (isEdit) {
+  @if (isEdit && !isPhp) {
   <button mat-button (click)="checkCode()" [disabled]="checking">
     <mat-icon>fact_check</mat-icon> {{ 'SERVICES.CHECK_CODE' | translate }}
   </button>

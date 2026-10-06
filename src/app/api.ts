@@ -105,6 +105,18 @@ export const AppApi = {
         return RequestUtil.post(`${prefix}api/python/runtime/delete`, {})
     },
 
+    downloadPhpRuntime() {
+        return RequestUtil.post(`${prefix}api/php/runtime/download`, {})
+    },
+
+    deletePhpRuntime() {
+        return RequestUtil.post(`${prefix}api/php/runtime/delete`, {})
+    },
+
+    selfTestPhp() {
+        return RequestUtil.post<PhpSelfTestResponse>(`${prefix}api/php/selftest`, {})
+    },
+
     selfTestPython() {
         return RequestUtil.post<PythonSelfTestResponse>(`${prefix}api/python/selftest`, {})
     },
@@ -783,6 +795,8 @@ export interface MultiViewSchemeList {
 export interface PythonService {
     id: string
     name: string
+    /** python / php */
+    language: string
     enabled: boolean
     port: number
     lanShare: boolean
@@ -807,6 +821,8 @@ export interface PythonRuntimeInfo {
 export interface PythonServiceInfo {
     id: string
     name: string
+    /** python / php */
+    language: string
     enabled: boolean
     port: number
     lanShare: boolean
@@ -831,6 +847,7 @@ export interface PythonServiceInfo {
 
 export interface PythonStatus {
     runtime: PythonRuntimeInfo
+    phpRuntime: PythonRuntimeInfo
     services: PythonServiceInfo[]
 }
 
@@ -866,6 +883,25 @@ export interface PythonSelfTestResponse {
     data: PythonSelfTest
 }
 
+export interface PhpSelfTest {
+    version: string
+    sapi: string
+    curl?: string
+    openssl?: string
+    json: boolean
+    mbstring: boolean
+    sockets: boolean
+    sqlite: boolean
+    dom: boolean
+    cacert: boolean
+    errors: string[]
+}
+
+export interface PhpSelfTestResponse {
+    code: number
+    data: PhpSelfTest
+}
+
 export interface PythonCheckResponse {
     code: number
     data: PythonCheckResult
@@ -879,6 +915,7 @@ export interface PythonSaveResponse {
 export interface PythonServiceSaveRequest {
     id?: string
     name: string
+    language?: string
     port: number
     lanShare: boolean
     enabled: boolean

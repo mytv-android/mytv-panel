@@ -12,7 +12,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { AppApi, ConfigsService, AppConfigs, PythonServiceInfo, PythonRuntimeInfo, PythonSelfTest } from '../api';
+import { AppApi, ConfigsService, AppConfigs, PythonServiceInfo, PythonRuntimeInfo, PythonSelfTest, PhpSelfTest } from '../api';
 import { ServiceDialogComponent } from './service-dialog/service-dialog.component';
 import { ServiceLogDialogComponent } from './service-log-dialog/service-log-dialog.component';
 
@@ -50,9 +50,12 @@ export class ServicesComponent implements OnInit, OnDestroy {
     configs: AppConfigs = {};
 
     runtime?: PythonRuntimeInfo;
+    phpRuntime?: PythonRuntimeInfo;
     services: PythonServiceInfo[] = [];
     selfTest?: PythonSelfTest;
     showSelfTest = false;
+    phpSelfTest?: PhpSelfTest;
+    showPhpSelfTest = false;
 
     private timer?: ReturnType<typeof setInterval>;
 
@@ -81,6 +84,7 @@ export class ServicesComponent implements OnInit, OnDestroy {
         try {
             const res = await AppApi.getPythonStatus();
             this.runtime = res.data.runtime;
+            this.phpRuntime = res.data.phpRuntime;
             this.services = res.data.services;
         } catch {
             // 设备离线/服务未启动时保持上一次状态
@@ -88,7 +92,14 @@ export class ServicesComponent implements OnInit, OnDestroy {
     }
 
     get runtimeStateText(): string {
-        const rt = this.runtime;
+        return this.runtimeStateTextFor(this.runtime);
+    }
+
+    get phpRuntimeStateText(): string {
+        return this.runtimeStateTextFor(this.phpRuntime);
+    }
+
+    private runtimeStateTextFor(rt?: PythonRuntimeInfo): string {
         if (!rt) return '';
         switch (rt.state) {
             case 'ready':
@@ -114,12 +125,24 @@ export class ServicesComponent implements OnInit, OnDestroy {
         return Math.round((this.runtime?.progress || 0) * 100);
     }
 
+    get phpRuntimeProgress(): number {
+        return Math.round((this.phpRuntime?.progress || 0) * 100);
+    }
+
     get canDownloadRuntime(): boolean {
         return this.runtime?.state === 'notDownloaded' || this.runtime?.state === 'error';
     }
 
+    get canDownloadPhpRuntime(): boolean {
+        return this.phpRuntime?.state === 'notDownloaded' || this.phpRuntime?.state === 'error';
+    }
+
     get runtimeReady(): boolean {
         return this.runtime?.state === 'ready';
+    }
+
+    get phpRuntimeReady(): boolean {
+        return this.phpRuntime?.state === 'ready';
     }
 
     async downloadRuntime() {
@@ -147,6 +170,36 @@ export class ServicesComponent implements OnInit, OnDestroy {
             const res = await AppApi.selfTestPython();
             this.selfTest = res.data;
             this.showSelfTest = true;
+        } catch (e) {
+            this.showError(e);
+        }
+    }
+
+    async downloadPhpRuntime() {
+        try {
+            await AppApi.downloadPhpRuntime();
+            this.showSuccess(this.translate.instant('SERVICES.RUNTIME_DOWNLOAD_STARTED'));
+            await this.refreshStatus();
+        } catch (e) {
+            this.showError(e);
+        }
+    }
+
+    async deletePhpRuntime() {
+        try {
+            await AppApi.deletePhpRuntime();
+            this.phpSelfTest = undefined;
+            await this.refreshStatus();
+        } catch (e) {
+            this.showError(e);
+        }
+    }
+
+    async selfTestPhpRuntime() {
+        try {
+            const res = await AppApi.selfTestPhp();
+            this.phpSelfTest = res.data;
+            this.showPhpSelfTest = true;
         } catch (e) {
             this.showError(e);
         }
@@ -183,6 +236,7 @@ export class ServicesComponent implements OnInit, OnDestroy {
             await AppApi.savePythonService({
                 id: svc.id,
                 name: svc.name,
+                language: svc.language,
                 port: svc.port,
                 lanShare: svc.lanShare,
                 enabled: !svc.enabled,
@@ -195,7 +249,8 @@ export class ServicesComponent implements OnInit, OnDestroy {
                 envVars: svc.envVars,
                 autoRestart: svc.autoRestart,
             });
-            if (!svc.enabled && !this.runtimeReady) {
+            const ready = svc.language === 'php' ? this.phpRuntimeReady : this.runtimeReady;
+            if (!svc.enabled && !ready) {
                 this.showSuccess(this.translate.instant('SERVICES.NEED_RUNTIME'));
             }
             await this.refreshStatus();
@@ -209,6 +264,7 @@ export class ServicesComponent implements OnInit, OnDestroy {
             await AppApi.savePythonService({
                 id: svc.id,
                 name: svc.name,
+                language: svc.language,
                 port: svc.port,
                 lanShare: !svc.lanShare,
                 enabled: svc.enabled,

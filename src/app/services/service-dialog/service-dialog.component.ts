@@ -43,6 +43,7 @@ import { AppApi, PythonCheckResult, PythonServiceInfo } from '../../api';
 })
 export class ServiceDialogComponent implements OnInit {
     name = '';
+    language = 'python';
     port = 8767;
     lanShare = false;
     enabled = false;
@@ -77,6 +78,7 @@ export class ServiceDialogComponent implements OnInit {
         this.isEdit = true;
         this.serviceId = svc.id;
         this.name = svc.name;
+        this.language = svc.language || 'python';
         this.port = svc.port;
         this.lanShare = svc.lanShare;
         this.enabled = svc.enabled;
@@ -92,6 +94,23 @@ export class ServiceDialogComponent implements OnInit {
 
     get isRemote(): boolean {
         return this.codeSource === 0;
+    }
+
+    get isPhp(): boolean {
+        return this.language === 'php';
+    }
+
+    /** 仅新建时可切换语言；切换时把未改动的默认端口同步到对应语言 */
+    onLanguageChange() {
+        if (this.isEdit) {
+            return;
+        }
+        if (this.language === 'php' && this.port === 8767) {
+            this.port = 8768;
+        }
+        if (this.language === 'python' && this.port === 8768) {
+            this.port = 8767;
+        }
     }
 
     /** 检查设备上该服务已保存的脚本（仅编辑时可用） */
@@ -128,7 +147,8 @@ export class ServiceDialogComponent implements OnInit {
             const res = await AppApi.savePythonService({
                 id: this.serviceId,
                 name: this.name,
-                port: Number(this.port) || 8767,
+                language: this.language,
+                port: Number(this.port) || (this.language === 'php' ? 8768 : 8767),
                 lanShare: this.lanShare,
                 enabled: this.enabled,
                 codeSource: this.codeSource,

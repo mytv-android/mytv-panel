@@ -53,6 +53,51 @@
       </div>
       }
 
+      <!-- PHP 运行环境 -->
+      <div class="section-header">
+        <h3>{{ 'SERVICES.RUNTIME_PHP' | translate }}</h3>
+        <div class="runtime-actions">
+          @if (canDownloadPhpRuntime) {
+          <button mat-button color="primary" (click)="downloadPhpRuntime()">
+            <mat-icon>download</mat-icon> {{ 'SERVICES.RUNTIME_DOWNLOAD' | translate }}
+          </button>
+          }
+          @if (phpRuntimeReady) {
+          <button mat-button (click)="selfTestPhpRuntime()">
+            <mat-icon>fact_check</mat-icon> {{ 'SERVICES.RUNTIME_SELFTEST' | translate }}
+          </button>
+          <button mat-button color="warn" (click)="deletePhpRuntime()">
+            <mat-icon>delete</mat-icon> {{ 'SERVICES.RUNTIME_DELETE' | translate }}
+          </button>
+          }
+        </div>
+      </div>
+
+      <div class="runtime-state">
+        <span class="badge" [ngClass]="phpRuntimeReady ? 'badge-running' : (phpRuntime?.state === 'error' ? 'badge-error' : 'badge-default')">
+          {{ phpRuntimeStateText }}
+        </span>
+      </div>
+      @if (phpRuntime?.state === 'downloading') {
+      <mat-progress-bar mode="determinate" [value]="phpRuntimeProgress"></mat-progress-bar>
+      }
+
+      @if (showPhpSelfTest && phpSelfTest) {
+      <div class="selftest">
+        <div class="selftest-title">
+          {{ 'SERVICES.SELFTEST_TITLE' | translate }}
+          <button mat-icon-button (click)="showPhpSelfTest = false"><mat-icon>close</mat-icon></button>
+        </div>
+        <div>{{ phpSelfTest.version }} ({{ phpSelfTest.sapi }})</div>
+        @if (phpSelfTest.curl) { <div>curl: {{ phpSelfTest.curl }}</div> }
+        @if (phpSelfTest.openssl) { <div>OpenSSL: {{ phpSelfTest.openssl }}</div> }
+        <div>CA: {{ phpSelfTest.cacert ? 'OK' : 'MISSING' }}</div>
+        @for (err of phpSelfTest.errors; track err) {
+        <div class="error-text">{{ err }}</div>
+        }
+      </div>
+      }
+
       <!-- 服务列表 -->
       <div class="section-header">
         <h3>{{ 'SERVICES.TITLE' | translate }}</h3>
@@ -70,7 +115,7 @@
         <mat-list-item class="service-item">
           <div matListItemTitle class="service-title">
             {{ svc.name }}
-            <span class="badge badge-python">Python</span>
+            <span class="badge" [ngClass]="svc.language === 'php' ? 'badge-php' : 'badge-python'">{{ svc.language === 'php' ? 'PHP' : 'Python' }}</span>
             <span class="badge" [ngClass]="stateBadgeClass(svc)">{{ stateLabel(svc) }}</span>
             @if (!svc.scriptExists) {
             <span class="badge badge-error">{{ 'SERVICES.SCRIPT_MISSING' | translate }}</span>
