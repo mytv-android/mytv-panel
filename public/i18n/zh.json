@@ -344,6 +344,11 @@
       "EVERY_HOUR": "整点",
       "HALF_HOUR": "半点"
     },
+    "SCREEN_ORIENTATION": {
+      "AUTO": "自动",
+      "LANDSCAPE": "横屏",
+      "PORTRAIT": "竖屏"
+    },
     "VIDEO_PLAYER_CORE": {
       "MEDIA3": "Media3",
       "IJK": "IjkPlayer",
@@ -499,6 +504,8 @@
     "SCREEN_AUTO_CLOSE_DELAY_NEVER": "不关闭",
     "DENSITY_SCALE_RATIO": "界面整体缩放比例",
     "FONT_SCALE_RATIO": "字体缩放比例",
+    "SCREEN_ORIENTATION": "屏幕方向",
+    "SCREEN_ORIENTATION_DESC": "手机可使用竖屏界面，电视设备始终横屏",
     "FOCUS_OPTIMIZE": "焦点优化",
     "FOCUS_OPTIMIZE_DESC": "关闭后可解决触摸设备在部分场景下闪退"
   },

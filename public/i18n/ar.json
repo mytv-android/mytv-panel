@@ -309,6 +309,11 @@
       "EVERY_HOUR": "كل ساعة",
       "HALF_HOUR": "كل نصف ساعة"
     },
+    "SCREEN_ORIENTATION": {
+      "AUTO": "تلقائي",
+      "LANDSCAPE": "أفقي",
+      "PORTRAIT": "عمودي"
+    },
     "VIDEO_PLAYER_CORE": {
       "MEDIA3": "Media3",
       "IJK": "IjkPlayer",
@@ -464,6 +469,8 @@
     "SCREEN_AUTO_CLOSE_DELAY_NEVER": "أبداً",
     "DENSITY_SCALE_RATIO": "نسبة مقياس الكثافة",
     "FONT_SCALE_RATIO": "نسبة مقياس الخط",
+    "SCREEN_ORIENTATION": "اتجاه الشاشة",
+    "SCREEN_ORIENTATION_DESC": "يمكن للهواتف استخدام الواجهة العمودية، وتبقى أجهزة التلفاز أفقية دائمًا",
     "FOCUS_OPTIMIZE": "تحسين التركيز",
     "FOCUS_OPTIMIZE_DESC": "تحسين حركة تركيز جهاز التحكم عن بعد"
   },

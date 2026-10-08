@@ -173,6 +173,23 @@
         </mat-form-field>
       </div>
 
+      <!-- uiScreenOrientation -->
+      <div class="setting-item">
+        <div class="setting-text">
+          <span class="setting-title">{{ 'UI.SCREEN_ORIENTATION' | translate }}</span>
+          <span class="setting-desc">{{ 'UI.SCREEN_ORIENTATION_DESC' | translate }}</span>
+        </div>
+        <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
+          <mat-select [(ngModel)]="configs.uiScreenOrientation" (selectionChange)="updateConfig()">
+            @for (mode of screenOrientations; track mode) {
+              <mat-option [value]="mode">
+                {{ uiScreenOrientationLabels[mode] | translate }}
+              </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+      </div>
+
       <!-- uiFocusOptimize -->
       <div class="setting-item">
         <div class="setting-text">

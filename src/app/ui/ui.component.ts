@@ -7,7 +7,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { TranslateModule } from '@ngx-translate/core';
-import { ConfigsService, AppConfigs, UiTimeShowMode, UiTimeShowModeLabels } from '../api';
+import { ConfigsService, AppConfigs, UiTimeShowMode, UiTimeShowModeLabels, UiScreenOrientation, UiScreenOrientationLabels } from '../api';
 
 @Component({
     selector: 'app-ui',
@@ -35,6 +35,8 @@ export class UiComponent {
     uiTimeShowMode = UiTimeShowMode;
     uiTimeShowModeLabels = UiTimeShowModeLabels;
     timeShowModes = Object.values(UiTimeShowMode);
+    screenOrientations = Object.values(UiScreenOrientation);
+    uiScreenOrientationLabels = UiScreenOrientationLabels;
 
     // Helper for auto close delay options
     autoCloseDelayOptions = [

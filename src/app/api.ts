@@ -239,6 +239,7 @@ export interface AppConfigs {
     uiUseClassicPanelScreen?: boolean
     uiDensityScaleRatio?: number
     uiFontScaleRatio?: number
+    uiScreenOrientation?: UiScreenOrientation
     uiVideoPlayerSubtitle?: VideoPlayerSubtitleStyle
     uiTimeShowMode?: UiTimeShowMode
     uiClassicShowSourceList?: boolean
@@ -575,6 +576,18 @@ export const UiTimeShowModeLabels: { [key in UiTimeShowMode]: string } = {
     [UiTimeShowMode.ALWAYS]: 'SETTINGS.TIME_SHOW_MODE.ALWAYS',
     [UiTimeShowMode.EVERY_HOUR]: 'SETTINGS.TIME_SHOW_MODE.EVERY_HOUR',
     [UiTimeShowMode.HALF_HOUR]: 'SETTINGS.TIME_SHOW_MODE.HALF_HOUR',
+}
+
+export enum UiScreenOrientation {
+    AUTO = 'AUTO',
+    LANDSCAPE = 'LANDSCAPE',
+    PORTRAIT = 'PORTRAIT',
+}
+
+export const UiScreenOrientationLabels: { [key in UiScreenOrientation]: string } = {
+    [UiScreenOrientation.AUTO]: 'SETTINGS.SCREEN_ORIENTATION.AUTO',
+    [UiScreenOrientation.LANDSCAPE]: 'SETTINGS.SCREEN_ORIENTATION.LANDSCAPE',
+    [UiScreenOrientation.PORTRAIT]: 'SETTINGS.SCREEN_ORIENTATION.PORTRAIT',
 }
 
 export enum VideoPlayerCore {

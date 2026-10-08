@@ -309,6 +309,11 @@
       "EVERY_HOUR": "Every Hour",
       "HALF_HOUR": "Every Half Hour"
     },
+    "SCREEN_ORIENTATION": {
+      "AUTO": "Auto",
+      "LANDSCAPE": "Landscape",
+      "PORTRAIT": "Portrait"
+    },
     "VIDEO_PLAYER_CORE": {
       "MEDIA3": "Media3",
       "IJK": "IjkPlayer",
@@ -464,6 +469,8 @@
     "SCREEN_AUTO_CLOSE_DELAY_NEVER": "Never",
     "DENSITY_SCALE_RATIO": "Density Scale Ratio",
     "FONT_SCALE_RATIO": "Font Scale Ratio",
+    "SCREEN_ORIENTATION": "Screen orientation",
+    "SCREEN_ORIENTATION_DESC": "Phones can use the portrait layout; TV devices always stay landscape",
     "FOCUS_OPTIMIZE": "Focus Optimization",
     "FOCUS_OPTIMIZE_DESC": "Optimize remote control focus movement"
   },
