@@ -191,6 +191,8 @@
     "EXTRACT_HEADER_FROM_LINK_DESC": "Extract HTTP headers from stream URL",
     "DISPLAY_MODE": "Display Mode",
     "SEEK_TO_MODE": "Seek Mode",
+    "EPG_TIMELINE": "EPG Timeline",
+    "EPG_TIMELINE_DESC": "When SeekTo mode is \"Reload URL\", the current line supports catch-up and the channel has EPG, show an EPG timeline instead of the progress bar in the player controls",
     "LOAD_TIMEOUT": "Load Timeout",
     "LOAD_TIMEOUT_DESC": "Affects source switching and reconnection on timeout",
     "BUFFER_TIME": "Buffer Time",

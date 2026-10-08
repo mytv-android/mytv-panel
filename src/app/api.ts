@@ -296,6 +296,7 @@ export interface AppConfigs {
     globalVideoPlayerAiExecutionBackend?: VideoPlayerAiExecutionBackend
     videoPlayerStopPreviousMediaItem?: boolean
     videoPlayerSeekToMode?: VideoPlayerSeekToMode
+    videoPlayerEpgTimeline?: boolean
     videoPlayerSkipMultipleFramesOnSameVSync?: boolean
     videoPlayerFitFrameRate?: boolean
     videoPlayerFrameRateFallback?: VideoPlayerFrameRateFallback  // NEW: 帧率适配回退刷新率

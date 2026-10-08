@@ -232,6 +232,8 @@
     "EXTRACT_HEADER_FROM_LINK_DESC": "支持在链接中提取 以|分隔的 Header 信息",
     "DISPLAY_MODE": "全局显示模式",
     "SEEK_TO_MODE": "SeekTo方式",
+    "EPG_TIMELINE": "EPG时间轴",
+    "EPG_TIMELINE_DESC": "seek方式为「重载URL跳转」、当前线路支持回看且频道有节目单时，播放控制界面以EPG时间轴代替进度条",
     "LOAD_TIMEOUT": "加载超时",
     "LOAD_TIMEOUT_DESC": "影响超时换源、断线重连",
     "BUFFER_TIME": "播放缓冲",
