@@ -23,13 +23,6 @@
                     <span matSuffix>ms</span>
                 </mat-form-field>
             </div>
-            <div class="setting-item">
-                <div class="setting-label">
-                    <span>{{ 'NETWORK.IPV6_ENABLE' | translate }}</span>
-                    <span class="setting-hint">{{ 'NETWORK.IPV6_ENABLE_HINT' | translate }}</span>
-                </div>
-                <mat-slide-toggle [(ngModel)]="configs.networkIpv6Enable" (change)="updateConfig()"></mat-slide-toggle>
-            </div>
         </mat-card-content>
     </mat-card>
 </div>

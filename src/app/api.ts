@@ -178,7 +178,6 @@ export interface AppConfigs {
     appLastLatestVersion?: string
     appAgreementAgreed?: boolean
     appStartupScreen?: string
-    appBackupEnable?: boolean  // NEW: 启用系统备份
     debugDeveloperMode?: boolean
     debugShowFps?: boolean
     debugShowVideoPlayerMetadata?: boolean
@@ -208,14 +207,9 @@ export interface AppConfigs {
     iptvChannelLastPlayLineIdx?: number  // NEW: 上一次播放频道线路索引
     iptvChannelLinePlayableHostList?: Set<string>
     iptvChannelLinePlayableUrlList?: Set<string>
-    iptvChannelNoSelectEnable?: boolean
     iptvChannelChangeListLoop?: boolean
     iptvChannelChangeCrossGroup?: boolean
     iptvChannelChangeShowInfoPanel?: boolean  // NEW: 换台时显示频道信息面板
-    uiGroupParsStyle?: number | null             // NEW: 列表风格 0传统分组 1列表分组 2二级分组1 3二级分组2
-    iptvChannelNoAbbrev?: boolean | null         // NEW: 序号缩写模式
-    iptvChannelLogoInitial?: boolean | null      // NEW: 图标首字
-    iptvM3uLogoPriority?: boolean | null         // NEW: m3u 图标优先于 epg 图标
     iptvChannelGroupConfigEnable?: boolean | null // NEW: 分组级参数配置开关
     epgEnable?: boolean
     epgSourceCurrent?: EpgSource
@@ -246,7 +240,6 @@ export interface AppConfigs {
     uiClassicShowChannelNo?: boolean  // NEW: 经典选台界面单独显示频道号
     uiClassicShowAllChannels?: boolean
     uiFocusOptimize?: boolean
-    uiScreenAutoCloseDelay?: number
     uiMultiViewSchemeList?: MultiViewSchemeList  // NEW: 多屏同播方案列表
     keyDownEventUp?: KeyDownAction
     keyDownEventDown?: KeyDownAction
@@ -338,7 +331,6 @@ export interface AppConfigs {
     cloudSyncWebDavPassword?: string
     networkRetryCount?: number
     networkRetryInterval?: number
-    networkIpv6Enable?: boolean | null  // NEW: 启用 IPv6
     cachePathExternal?: boolean | null  // NEW: 缓存写入外部存储
     classicPanelLastSelectedGroupName?: string
 }
@@ -553,13 +545,6 @@ export const WebViewLayerAccelLabels: { [key: number]: string } = {
     0: 'SETTINGS.WEB_VIEW_LAYER_ACCEL.OFF',
     1: 'SETTINGS.WEB_VIEW_LAYER_ACCEL.HARDWARE',
     2: 'SETTINGS.WEB_VIEW_LAYER_ACCEL.SOFTWARE',
-}
-
-export const UiGroupParsStyleLabels: { [key: number]: string } = {
-    0: 'SETTINGS.UI_GROUP_PARS_STYLE.CLASSIC',
-    1: 'SETTINGS.UI_GROUP_PARS_STYLE.LIST',
-    2: 'SETTINGS.UI_GROUP_PARS_STYLE.TWO_LEVEL_1',
-    3: 'SETTINGS.UI_GROUP_PARS_STYLE.TWO_LEVEL_2',
 }
 
 

@@ -21,7 +21,6 @@
   "添加于": "أُضيف في {{date}}",
   "THEME_SETTINGS": "إعدادات المظهر",
   "CONTROL": {
-    "DIGITAL_SELECT": "اختيار القناة الرقمية",
     "CHANNEL_LOOP": "تكرار قائمة القنوات",
     "CROSS_GROUP": "تغيير القناة عبر المجموعات",
     "CHANNEL_CHANGE_SHOW_INFO": "عرض معلومات القناة عند التبديل",
@@ -142,9 +141,7 @@
     "RETRY_COUNT": "عدد محاولات إعادة الطلب",
     "RETRY_COUNT_HINT": "عدد المحاولات لطلبات دليل البرامج ومصادر الاشتراك",
     "RETRY_INTERVAL": "الفاصل الزمني لإعادة الطلب",
-    "RETRY_INTERVAL_HINT": "الفاصل الزمني للمحاولات لطلبات دليل البرامج ومصادر الاشتراك",
-    "IPV6_ENABLE": "تمكين IPv6",
-    "IPV6_ENABLE_HINT": "السماح بطلب المصادر ودليل البرامج عبر عناوين IPv6"
+    "RETRY_INTERVAL_HINT": "الفاصل الزمني للمحاولات لطلبات دليل البرامج ومصادر الاشتراك"
   },
   "GENERAL": {
     "BOOT_LAUNCH": "بدء التشغيل عند الإقلاع",
@@ -280,8 +277,6 @@
     "IMPORT_FAILED": "فشل استيراد بيانات التطبيق",
     "READ_FAILED": "فشل قراءة بيانات التطبيق",
     "AUTO_PULL": "جلب تلقائي",
-    "BACKUP_ENABLE": "النسخ الاحتياطي للنظام",
-    "BACKUP_ENABLE_DESC": "السماح للنظام بعمل نسخة احتياطية من بيانات التطبيق (الإعدادات، المفضلة، إلخ)، قابلة للاستعادة عند تغيير الجهاز",
     "PROVIDER": "مزود المزامنة السحابية",
     "LOCAL_FILE": "ملف محلي",
     "LOCAL_FILE_PATH": "مسار الملف المحلي",
@@ -428,12 +423,6 @@
       "OFF": "إيقاف",
       "HARDWARE": "عتادي",
       "SOFTWARE": "برمجي"
-    },
-    "UI_GROUP_PARS_STYLE": {
-      "CLASSIC": "مجموعات كلاسيكية",
-      "LIST": "قائمة مسطحة",
-      "TWO_LEVEL_1": "مستويان 1",
-      "TWO_LEVEL_2": "مستويان 2"
     }
   },
   "UI": {
@@ -464,8 +453,6 @@
     "CLASSIC_SHOW_ALL_CHANNELS": "كلاسيكي: إظهار كل القنوات",
     "CLASSIC_SHOW_ALL_CHANNELS_DESC": "إظهار قائمة كل القنوات في الوضع الكلاسيكي",
     "TIME_SHOW_MODE": "وضع عرض الوقت",
-    "SCREEN_AUTO_CLOSE_DELAY": "تأخير الإغلاق التلقائي",
-    "SCREEN_AUTO_CLOSE_DELAY_NEVER": "أبداً",
     "DENSITY_SCALE_RATIO": "نسبة مقياس الكثافة",
     "FONT_SCALE_RATIO": "نسبة مقياس الخط",
     "SCREEN_ORIENTATION": "اتجاه الشاشة",
@@ -542,14 +529,6 @@
     "AUTO_REFRESH_HINT": "0 = إيقاف؛ تحديث المصدر الحالي بصمت وفق هذا الفاصل",
     "DISABLE_PREVIEW": "تعطيل معاينة القناة",
     "DISABLE_DELAY_DETECT": "تعطيل فحص التأخير",
-    "GROUP_PARS_STYLE": "نمط القائمة",
-    "GROUP_PARS_STYLE_DESC": "كيفية تداخل المجموعات في شاشة اختيار القنوات",
-    "CHANNEL_NO_ABBREV": "اختصار أرقام القنوات",
-    "CHANNEL_NO_ABBREV_DESC": "استخدام صيغة مختصرة عندما يكون رقم القناة طويلاً",
-    "CHANNEL_LOGO_INITIAL": "شعار من الحرف الأول",
-    "CHANNEL_LOGO_INITIAL_DESC": "توليد شعار من الحرف الأول لاسم القناة عند عدم توفر شعار",
-    "M3U_LOGO_PRIORITY": "أولوية شعار m3u",
-    "M3U_LOGO_PRIORITY_DESC": "شعار tvg-logo من مصدر m3u يتقدم على الشعار القادم من مصدر دليل البرامج",
     "GROUP_CONFIG_ENABLE": "معاملات لكل مجموعة",
     "GROUP_CONFIG_ENABLE_DESC": "السماح بمعاملات مشغل خاصة بكل مجموعة في m3u عبر #genre#,#EXTKU9OPT:",
     "FILE_CONTENT_OUT_OF_SANDBOX": "لا يمكن قراءة إلا الملفات داخل مجلد الملفات / الذاكرة المؤقتة للتلفزيون. للمسارات الأخرى استخدم صفحة الملفات للتحميل.",

@@ -5,10 +5,6 @@
     </mat-card-header>
     <mat-card-content>
       <div class="setting-item">
-        <span>{{ 'CONTROL.DIGITAL_SELECT' | translate }}</span>
-        <mat-slide-toggle [(ngModel)]="configs.iptvChannelNoSelectEnable" (change)="updateConfig()"></mat-slide-toggle>
-      </div>
-      <div class="setting-item">
         <span>{{ 'CONTROL.CHANNEL_LOOP' | translate }}</span>
         <mat-slide-toggle [(ngModel)]="configs.iptvChannelChangeListLoop" (change)="updateConfig()"></mat-slide-toggle>
       </div>

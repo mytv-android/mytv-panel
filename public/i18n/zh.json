@@ -21,7 +21,6 @@
   "添加于": "添加于 {{date}}",
   "THEME_SETTINGS": "主题设置",
   "CONTROL": {
-    "DIGITAL_SELECT": "数字选台",
     "CHANNEL_LOOP": "频道列表首尾循环",
     "CROSS_GROUP": "频道切换跨分组",
     "CHANNEL_CHANGE_SHOW_INFO": "换台时显示频道信息",
@@ -177,9 +176,7 @@
     "RETRY_COUNT": "请求重试次数",
     "RETRY_COUNT_HINT": "影响订阅源、节目单数据获取",
     "RETRY_INTERVAL": "请求重试间隔",
-    "RETRY_INTERVAL_HINT": "影响订阅源、节目单数据获取",
-    "IPV6_ENABLE": "启用 IPv6",
-    "IPV6_ENABLE_HINT": "允许通过 IPv6 地址请求订阅源与节目单"
+    "RETRY_INTERVAL_HINT": "影响订阅源、节目单数据获取"
   },
   "GENERAL": {
     "BOOT_LAUNCH": "开机自启",
@@ -315,8 +312,6 @@
     "IMPORT_FAILED": "应用数据导入失败",
     "READ_FAILED": "应用数据读取失败",
     "AUTO_PULL": "自动拉取",
-    "BACKUP_ENABLE": "系统备份",
-    "BACKUP_ENABLE_DESC": "允许系统备份应用数据（设置、收藏等），换机时可恢复",
     "PROVIDER": "云同步服务商",
     "LOCAL_FILE": "本地文件",
     "LOCAL_FILE_PATH": "本地文件路径",
@@ -463,12 +458,6 @@
       "OFF": "关闭",
       "HARDWARE": "硬件加速",
       "SOFTWARE": "软件加速"
-    },
-    "UI_GROUP_PARS_STYLE": {
-      "CLASSIC": "传统分组",
-      "LIST": "列表分组",
-      "TWO_LEVEL_1": "二级分组1",
-      "TWO_LEVEL_2": "二级分组2"
     }
   },
   "UI": {
@@ -499,8 +488,6 @@
     "CLASSIC_SHOW_ALL_CHANNELS": "显示全部频道",
     "CLASSIC_SHOW_ALL_CHANNELS_DESC": "是否显示当前订阅源全部频道列表",
     "TIME_SHOW_MODE": "时间显示",
-    "SCREEN_AUTO_CLOSE_DELAY": "超时自动关闭界面",
-    "SCREEN_AUTO_CLOSE_DELAY_NEVER": "不关闭",
     "DENSITY_SCALE_RATIO": "界面整体缩放比例",
     "FONT_SCALE_RATIO": "字体缩放比例",
     "SCREEN_ORIENTATION": "屏幕方向",
@@ -577,14 +564,6 @@
     "AUTO_REFRESH_HINT": "0 = 关闭；运行期间按间隔静默刷新当前源",
     "DISABLE_PREVIEW": "关闭预览图",
     "DISABLE_DELAY_DETECT": "关闭延迟检测",
-    "GROUP_PARS_STYLE": "列表风格",
-    "GROUP_PARS_STYLE_DESC": "分组在选台界面中的展示层级",
-    "CHANNEL_NO_ABBREV": "序号缩写模式",
-    "CHANNEL_NO_ABBREV_DESC": "频道号过长时使用缩写显示",
-    "CHANNEL_LOGO_INITIAL": "图标首字",
-    "CHANNEL_LOGO_INITIAL_DESC": "没有台标时使用频道名首字生成图标",
-    "M3U_LOGO_PRIORITY": "m3u 图标优先",
-    "M3U_LOGO_PRIORITY_DESC": "订阅源 m3u 中的 tvg-logo 优先于 EPG 源提供的台标",
     "GROUP_CONFIG_ENABLE": "分组级参数配置",
     "GROUP_CONFIG_ENABLE_DESC": "允许在 m3u 中用 #genre#,#EXTKU9OPT: 为每个分组单独配置播放参数",
     "FILE_CONTENT_OUT_OF_SANDBOX": "只能读取电视端文件目录 / 缓存目录内的文件，其他路径请改用「文件」页上传",

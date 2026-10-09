@@ -143,20 +143,6 @@
         </mat-form-field>
       </div>
 
-      <!-- uiScreenAutoCloseDelay -->
-      <div class="setting-item">
-        <span>{{ 'UI.SCREEN_AUTO_CLOSE_DELAY' | translate }}</span>
-        <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
-          <mat-select [(ngModel)]="configs.uiScreenAutoCloseDelay" (selectionChange)="updateConfig()">
-            @for (option of autoCloseDelayOptions; track option) {
-              <mat-option [value]="option.value">
-                {{ option.label | translate }}
-              </mat-option>
-            }
-          </mat-select>
-        </mat-form-field>
-      </div>
-
       <!-- uiDensityScaleRatio -->
       <div class="setting-item">
         <span>{{ 'UI.DENSITY_SCALE_RATIO' | translate }}</span>

@@ -21,7 +21,6 @@
   "添加于": "Added at {{date}}",
   "THEME_SETTINGS": "Theme Settings",
   "CONTROL": {
-    "DIGITAL_SELECT": "Digital Channel Selection",
     "CHANNEL_LOOP": "Channel List Loop",
     "CROSS_GROUP": "Cross Group Channel Change",
     "CHANNEL_CHANGE_SHOW_INFO": "Show Channel Info on Switch",
@@ -142,9 +141,7 @@
     "RETRY_COUNT": "Request Retry Count",
     "RETRY_COUNT_HINT": "Affects fetching subscription and EPG data",
     "RETRY_INTERVAL": "Request Retry Interval",
-    "RETRY_INTERVAL_HINT": "Affects fetching subscription and EPG data",
-    "IPV6_ENABLE": "Enable IPv6",
-    "IPV6_ENABLE_HINT": "Allow requesting sources and EPG over IPv6 addresses"
+    "RETRY_INTERVAL_HINT": "Affects fetching subscription and EPG data"
   },
   "GENERAL": {
     "BOOT_LAUNCH": "Start on Boot",
@@ -280,8 +277,6 @@
     "IMPORT_FAILED": "App data import failed",
     "READ_FAILED": "Failed to read app data",
     "AUTO_PULL": "Auto Pull",
-    "BACKUP_ENABLE": "System Backup",
-    "BACKUP_ENABLE_DESC": "Allow system to backup app data (settings, favorites, etc.), restorable when switching devices",
     "PROVIDER": "Cloud Sync Provider",
     "LOCAL_FILE": "Local File",
     "LOCAL_FILE_PATH": "Local File Path",
@@ -428,12 +423,6 @@
       "OFF": "Off",
       "HARDWARE": "Hardware",
       "SOFTWARE": "Software"
-    },
-    "UI_GROUP_PARS_STYLE": {
-      "CLASSIC": "Classic groups",
-      "LIST": "Flat list",
-      "TWO_LEVEL_1": "Two-level 1",
-      "TWO_LEVEL_2": "Two-level 2"
     }
   },
   "UI": {
@@ -464,8 +453,6 @@
     "CLASSIC_SHOW_ALL_CHANNELS": "Classic: Show All Channels",
     "CLASSIC_SHOW_ALL_CHANNELS_DESC": "Show all channels list in classic mode",
     "TIME_SHOW_MODE": "Time Display Mode",
-    "SCREEN_AUTO_CLOSE_DELAY": "Auto Close Delay",
-    "SCREEN_AUTO_CLOSE_DELAY_NEVER": "Never",
     "DENSITY_SCALE_RATIO": "Density Scale Ratio",
     "FONT_SCALE_RATIO": "Font Scale Ratio",
     "SCREEN_ORIENTATION": "Screen orientation",
@@ -542,14 +529,6 @@
     "AUTO_REFRESH_HINT": "0 = Off; silently refreshes the current source at this interval",
     "DISABLE_PREVIEW": "Disable Channel Preview",
     "DISABLE_DELAY_DETECT": "Disable Delay Detection",
-    "GROUP_PARS_STYLE": "List style",
-    "GROUP_PARS_STYLE_DESC": "How groups are nested in the channel picker",
-    "CHANNEL_NO_ABBREV": "Abbreviate channel numbers",
-    "CHANNEL_NO_ABBREV_DESC": "Use a shortened form when the channel number is too long",
-    "CHANNEL_LOGO_INITIAL": "Logo from first letter",
-    "CHANNEL_LOGO_INITIAL_DESC": "Generate a logo from the channel name initial when no logo is available",
-    "M3U_LOGO_PRIORITY": "m3u logo priority",
-    "M3U_LOGO_PRIORITY_DESC": "tvg-logo from the m3u source takes precedence over the logo from the EPG source",
     "GROUP_CONFIG_ENABLE": "Per-group parameters",
     "GROUP_CONFIG_ENABLE_DESC": "Allow per-group player parameters in m3u via #genre#,#EXTKU9OPT:",
     "FILE_CONTENT_OUT_OF_SANDBOX": "Only files inside the TV file / cache directory can be read. For other paths use the Files page to upload.",
