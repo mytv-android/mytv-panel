@@ -162,7 +162,7 @@
     "BACKGROUND_PLAY": "Background Playback",
     "BACKGROUND_PLAY_DESC": "Keep playing audio after switching to background (listen to TV); mutually exclusive with Picture-in-Picture",
     "CACHE_PATH_EXTERNAL": "Store cache on external storage",
-    "CACHE_PATH_EXTERNAL_DESC": "Move the cache directory to external storage. Requires all-files access; takes effect after restart"
+    "CACHE_PATH_EXTERNAL_DESC": "Move the cache directory to the app folder on external storage (Android/data); takes effect after restart"
   },
   "PLAYER": {
     "CORE": "Player Core",
@@ -505,8 +505,8 @@
     "FORMAT_LOVETV": "LOVETV",
     "CACHE_HOUR": "Cache duration (hours)",
     "CACHE_HOUR_HINT": "-1 = follow global, 0 = no cache",
-    "TIME_ZONE_OFFSET": "Time zone offset",
-    "TIME_ZONE_OFFSET_HINT": "Time zone of the programme times, -12 to 12",
+    "TIME_ZONE_OFFSET": "Time offset (hours)",
+    "TIME_ZONE_OFFSET_HINT": "Shift all programme times by this many hours, -12 to 12; 0 = no shift",
     "EXTERNAL_STORAGE": "Cache on external storage"
   },
   "SUBSCRIBE": {
@@ -565,6 +565,7 @@
     "PORT": "Port",
     "PORT_HINT": "Leave empty for the protocol default (FTP 21, SMB 445, WebDAV 80)",
     "ACCOUNT": "Account",
+    "MAC": "MAC Address",
     "NETWORK_URL_HINT": "e.g. ftp://host/dir/tv.m3u, smb://<SECRET_989c54ec>.m3u"
   },
   "设置 / 节目单": "Settings / EPG",

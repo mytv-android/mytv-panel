@@ -47,7 +47,7 @@ export class EpgSourceDialogComponent {
     // 新字段在旧设备数据里可能缺失，补默认值避免表单绑定 undefined
     this.source.format ??= '';
     this.source.cacheHour ??= -1;
-    this.source.timeZoneOffset ??= 8;
+    this.source.timeZoneOffset ??= 0;
     this.source.externalStorage ??= false;
   }
 

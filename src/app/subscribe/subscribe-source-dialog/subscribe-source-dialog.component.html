@@ -101,6 +101,15 @@
     </div>
     }
 
+    @if (source.sourceType === 3) {
+    <div class="form-row">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>{{ 'SUBSCRIBE.MAC' | translate }}</mat-label>
+        <input matInput [(ngModel)]="source.mac" placeholder="00:1A:79:00:00:00">
+      </mat-form-field>
+    </div>
+    }
+
     @if (source.sourceType === 2) {
     <div class="form-row">
       <mat-form-field appearance="outline" class="half-width">

@@ -67,7 +67,11 @@ export class EpgThresholdDialogComponent {
   }
 
   onSave() {
-    this.dialogRef.close(this.threshold);
+    // 设备端按整点小时（0 ~ 23）保存，小数或越界会让整包配置保存失败
+    const threshold = this.threshold === -1
+      ? -1
+      : Math.min(23, Math.max(0, Math.floor(Number(this.threshold) || 0)));
+    this.dialogRef.close(threshold);
   }
 
   onCancel() {
