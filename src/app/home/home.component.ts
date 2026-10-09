@@ -96,7 +96,6 @@ export class HomeComponent {
         versionCode: 1,
         versionName: "",
         deviceName: "",
-        deviceId: ""
     }
     channelIconUrl = '';
 

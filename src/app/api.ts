@@ -161,7 +161,6 @@ export interface AppAbout {
     versionCode: number
     versionName: string
     deviceName: string
-    deviceId: string
 }
 
 export interface AppLog {

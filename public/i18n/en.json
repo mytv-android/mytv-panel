@@ -45,7 +45,6 @@
     "APP_ID": "App ID",
     "VERSION": "Version",
     "DEVICE_NAME": "Device Name",
-    "DEVICE_ID": "Device ID",
     "SUBSCRIPTION_SOURCE": "Subscription Source",
     "SUBSCRIPTION_SUBTITLE": "Custom subscription source, supports m3u, txt formats",
     "TYPE": "Type",

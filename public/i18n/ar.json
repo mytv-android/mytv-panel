@@ -45,7 +45,6 @@
     "APP_ID": "معرف التطبيق",
     "VERSION": "الإصدار",
     "DEVICE_NAME": "اسم الجهاز",
-    "DEVICE_ID": "معرف الجهاز",
     "SUBSCRIPTION_SOURCE": "مصدر الاشتراك",
     "SUBSCRIPTION_SUBTITLE": "مصدر اشتراك مخصص يدعم تنسيقات m3u وtxt",
     "TYPE": "النوع",
