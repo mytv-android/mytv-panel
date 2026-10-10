@@ -63,7 +63,7 @@ npm run build
 
 ### 🚨 发现严重缺陷
 
-**文件**: `tv/src/main/java/top/yogiczy/mytv/tv/ui/utils/Configs.kt`
+**文件**: `tv/src/main/java/com/github/mytv/android/ui/utils/Configs.kt`
 
 #### 问题1: Partial数据类缺少字段
 

@@ -40,7 +40,7 @@ npm run build
 
 ### 修改的文件
 
-**`tv/src/main/java/top/yogiczy/mytv/tv/ui/utils/Configs.kt`**
+**`tv/src/main/java/com/github/mytv/android/ui/utils/Configs.kt`**
 
 #### 修改1: Partial数据类（新增11个字段）
 
@@ -204,7 +204,7 @@ export enum ASRMode {
 2. `src/app/player/player.component.html`
 
 ### Android (mytv-android)
-1. `tv/src/main/java/top/yogiczy/mytv/tv/ui/utils/Configs.kt`
+1. `tv/src/main/java/com/github/mytv/android/ui/utils/Configs.kt`
 
 ---
 
