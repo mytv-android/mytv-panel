@@ -60,7 +60,7 @@
     <mat-progress-bar mode="indeterminate"></mat-progress-bar>
     }
 
-    <app-textarea-with-lines class="full-width" [(ngModel)]="code" [rows]="12" [maxRows]="24"
+    <app-textarea-with-lines class="full-width" [(ngModel)]="code" [rows]="12" [maxRows]="10"
       [label]="'SERVICES.SCRIPT_CODE' | translate" [placeholder]="isPhp ? '<?php ...' : '#!/usr/bin/env python3'"
       [required]="true"></app-textarea-with-lines>
     <p class="field-hint">{{ 'SERVICES.SCRIPT_CODE_HINT' | translate }}</p>
