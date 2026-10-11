@@ -1,24 +1,10 @@
-.container {
-    padding: 20px;
-    max-width: 900px;
-    margin: 0 auto;
-}
-
-.card {
-    max-width: 900px;
-    margin: 0 auto;
-    width: 100%;
-}
-
 .warning {
-    background-color: rgba(255, 152, 0, 0.12);
-    border-left: 4px solid #ff9800;
-    border-radius: 4px;
-    padding: 12px 16px;
     margin-bottom: 16px;
-    font-size: 13px;
-    line-height: 1.6;
-    color: var(--text-color);
+    padding: 12px 16px;
+    border-radius: var(--mytv-radius-card);
+    background-color: color-mix(in srgb, var(--mat-sys-tertiary-container) 55%, transparent);
+    color: var(--mat-sys-on-surface);
+    font: 400 14px / 22px var(--mytv-font-family);
 }
 
 .toolbar {
@@ -26,30 +12,46 @@
     align-items: center;
     flex-wrap: wrap;
     gap: 12px;
-    margin-bottom: 16px;
+    margin-bottom: 8px;
 }
 
 .name-input {
     width: 260px;
 }
 
+/* 表格：卡片底色、16 圆角，只留表头色调与行分隔 */
 .backup-table {
     width: 100%;
-    border-collapse: collapse;
-    font-size: 14px;
+    border-collapse: separate;
+    border-spacing: 0;
+    overflow: hidden;
+    border-radius: var(--mytv-radius-group);
+    background-color: var(--mytv-card);
+    font: 400 14px / 20px var(--mytv-font-family);
 }
 
 .backup-table th {
-    text-align: left;
-    padding: 8px;
-    border-bottom: 1px solid var(--border-color);
+    text-align: start;
+    padding: 12px 8px;
+    border-bottom: 1px solid var(--mytv-divider);
     white-space: nowrap;
+    font-weight: 500;
+    color: var(--mat-sys-on-surface-variant);
 }
 
 .backup-table td {
     padding: 4px 8px;
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--mytv-divider);
     vertical-align: middle;
+}
+
+.backup-table tr:last-child td {
+    border-bottom: none;
+}
+
+.backup-table th:first-child,
+.backup-table td:first-child {
+    padding-inline-start: 16px;
 }
 
 .col-name {
@@ -60,36 +62,34 @@
 .col-time {
     width: 30%;
     white-space: nowrap;
+    font-variant-numeric: tabular-nums;
 }
 
 .col-size {
     width: 15%;
     white-space: nowrap;
+    font-variant-numeric: tabular-nums;
 }
 
 .col-actions {
     width: 10%;
     white-space: nowrap;
-    text-align: right;
+    text-align: end;
 }
 
 .confirm-text {
     font-size: 13px;
-    color: var(--text-secondary);
+    color: var(--mat-sys-on-surface-variant);
     margin-right: 8px;
 }
 
 .empty {
     text-align: center;
-    color: var(--text-secondary);
+    color: var(--mat-sys-on-surface-variant);
     padding: 24px 0;
 }
 
 @media (max-width: 600px) {
-    .container {
-        padding: 8px;
-    }
-
     .col-time {
         display: none;
     }

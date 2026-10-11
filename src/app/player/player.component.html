@@ -82,7 +82,7 @@
                     </div>
                 }
             }
-            <button mat-flat-button (click)="addDecoderConfig()">
+            <button matButton="tonal" class="add-rule" (click)="addDecoderConfig()">
                 <mat-icon>add</mat-icon>
                 {{ 'PLAYER.ADD_CONFIG' | translate }}
             </button>
@@ -451,7 +451,7 @@
         }
 
         <div class="action-container">
-          <button mat-raised-button color="primary" (click)="saveAsr()">{{ 'PLAYER.ASR_SAVE' | translate }}</button>
+          <button mat-flat-button (click)="saveAsr()">{{ 'PLAYER.ASR_SAVE' | translate }}</button>
         </div>
       </div>
 
@@ -460,9 +460,11 @@
         <div class="asr-card-title">{{ 'PLAYER.TRANSLATION_CARD_TITLE' | translate }}</div>
 
         <!-- Translation Engine Button Toggle -->
-        <div class="form-row">
-          <label>{{ 'PLAYER.ASR_TRANSLATION_ENGINE' | translate }}</label>
-          <span class="setting-desc" style="margin-bottom: 8px;">{{ 'PLAYER.ASR_TRANSLATION_ENGINE_DESC' | translate }}</span>
+        <div class="setting-item">
+          <div class="setting-label">
+            <span>{{ 'PLAYER.ASR_TRANSLATION_ENGINE' | translate }}</span>
+            <span class="setting-desc">{{ 'PLAYER.ASR_TRANSLATION_ENGINE_DESC' | translate }}</span>
+          </div>
           <mat-button-toggle-group [(ngModel)]="configs.videoPlayerASRTranslationEngine" [vertical]="isSmallScreen">
             @for (eng of asrTranslationEngines; track eng) {
               <mat-button-toggle [value]="eng">{{ asrTranslationEngineLabels[eng] | translate }}</mat-button-toggle>
@@ -498,16 +500,12 @@
           <!-- Tencent Cloud Credentials -->
           <div class="setting-item">
             <span>{{ 'PLAYER.ASR_TENCENT_SECRET_ID' | translate }}</span>
-          </div>
-          <div class="setting-item">
             <mat-form-field appearance="outline" class="full-width" style="margin-bottom: -1.25em;">
               <input matInput [(ngModel)]="configs.videoPlayerASRTranslationTencentSecretId" type="password">
             </mat-form-field>
           </div>
           <div class="setting-item">
             <span>{{ 'PLAYER.ASR_TENCENT_SECRET_KEY' | translate }}</span>
-          </div>
-          <div class="setting-item">
             <mat-form-field appearance="outline" class="full-width" style="margin-bottom: -1.25em;">
               <input matInput [(ngModel)]="configs.videoPlayerASRTranslationTencentSecretKey" type="password">
             </mat-form-field>
@@ -518,16 +516,12 @@
           <!-- Baidu Translation Credentials -->
           <div class="setting-item">
             <span>{{ 'PLAYER.ASR_BAIDU_APP_ID' | translate }}</span>
-          </div>
-          <div class="setting-item">
             <mat-form-field appearance="outline" class="full-width" style="margin-bottom: -1.25em;">
               <input matInput [(ngModel)]="configs.videoPlayerASRTranslationBaiduAppId">
             </mat-form-field>
           </div>
           <div class="setting-item">
             <span>{{ 'PLAYER.ASR_BAIDU_SECRET_KEY' | translate }}</span>
-          </div>
-          <div class="setting-item">
             <mat-form-field appearance="outline" class="full-width" style="margin-bottom: -1.25em;">
               <input matInput [(ngModel)]="configs.videoPlayerASRTranslationBaiduSecretKey" type="password">
             </mat-form-field>
@@ -538,16 +532,12 @@
           <!-- MTranServer Configuration -->
           <div class="setting-item">
             <span>{{ 'PLAYER.ASR_MTRANSERVER_URL' | translate }}</span>
-          </div>
-          <div class="setting-item">
             <mat-form-field appearance="outline" class="full-width" style="margin-bottom: -1.25em;">
               <input matInput [(ngModel)]="configs.videoPlayerASRTranslationMTranServerUrl" placeholder="http://your-server:port">
             </mat-form-field>
           </div>
           <div class="setting-item">
             <span>{{ 'PLAYER.ASR_MTRANSERVER_TOKEN' | translate }}</span>
-          </div>
-          <div class="setting-item">
             <mat-form-field appearance="outline" class="full-width" style="margin-bottom: -1.25em;">
               <input matInput [(ngModel)]="configs.videoPlayerASRTranslationMTranServerToken" type="password">
             </mat-form-field>
@@ -558,16 +548,12 @@
           <!-- Youdao Configuration -->
           <div class="setting-item">
             <span>{{ 'PLAYER.ASR_YOUDAO_APP_KEY' | translate }}</span>
-          </div>
-          <div class="setting-item">
             <mat-form-field appearance="outline" class="full-width" style="margin-bottom: -1.25em;">
               <input matInput [(ngModel)]="configs.videoPlayerASRTranslationYoudaoAppKey">
             </mat-form-field>
           </div>
           <div class="setting-item">
             <span>{{ 'PLAYER.ASR_YOUDAO_APP_SECRET' | translate }}</span>
-          </div>
-          <div class="setting-item">
             <mat-form-field appearance="outline" class="full-width" style="margin-bottom: -1.25em;">
               <input matInput [(ngModel)]="configs.videoPlayerASRTranslationYoudaoAppSecret" type="password">
             </mat-form-field>
@@ -578,17 +564,15 @@
           <!-- Microsoft Translator Configuration -->
           <div class="setting-item">
             <span>{{ 'PLAYER.ASR_MICROSOFT_KEY' | translate }}</span>
-          </div>
-          <div class="setting-item">
             <mat-form-field appearance="outline" class="full-width" style="margin-bottom: -1.25em;">
               <input matInput [(ngModel)]="configs.videoPlayerASRTranslationMicrosoftKey" type="password">
             </mat-form-field>
           </div>
           <div class="setting-item">
-            <span>{{ 'PLAYER.ASR_MICROSOFT_REGION' | translate }}</span>
-            <span class="setting-desc">{{ 'PLAYER.ASR_MICROSOFT_REGION_DESC' | translate }}</span>
-          </div>
-          <div class="setting-item">
+            <div class="setting-label">
+              <span>{{ 'PLAYER.ASR_MICROSOFT_REGION' | translate }}</span>
+              <span class="setting-desc">{{ 'PLAYER.ASR_MICROSOFT_REGION_DESC' | translate }}</span>
+            </div>
             <mat-form-field appearance="outline" class="full-width" style="margin-bottom: -1.25em;">
               <input matInput [(ngModel)]="configs.videoPlayerASRTranslationMicrosoftRegion" placeholder="eastasia">
             </mat-form-field>
@@ -596,7 +580,7 @@
         }
 
         <div class="action-container">
-          <button mat-raised-button color="primary" (click)="saveAsr()">{{ 'PLAYER.ASR_SAVE' | translate }}</button>
+          <button mat-flat-button (click)="saveAsr()">{{ 'PLAYER.ASR_SAVE' | translate }}</button>
         </div>
       </div>
 
@@ -644,7 +628,7 @@
                     </div>
                 }
             }
-            <button mat-flat-button (click)="addProxyRule()">
+            <button matButton="tonal" class="add-rule" (click)="addProxyRule()">
                 <mat-icon>add</mat-icon>
                 {{ 'PLAYER.ADD_CONFIG' | translate }}
             </button>

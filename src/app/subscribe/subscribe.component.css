@@ -1,70 +1,48 @@
-.container {
-    padding: 20px;
-    max-width: 800px;
-    margin: 0 auto;
+/* 订阅源行：名称 + 类型标签，第二行地址 */
+.select-row {
+    min-height: 72px;
 }
 
-.card {
-    max-width: 800px;
-    margin: 0 auto;
-    align-items: center;
-    width: 100%;
-    overflow: hidden; /* Ensure card doesn't overflow container */
-}
-
-mat-card-content {
-    width: 100%;
-    box-sizing: border-box;
-    overflow: hidden; /* Prevent content from expanding card */
-}
-
-.setting-item {
+.source-title {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    padding: 16px 0;
-    border-bottom: 1px solid var(--border-color);
-    min-height: 56px;
+    gap: 8px;
+    min-width: 0;
 }
 
-.form-container {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    padding-top: 16px;
-}
-
-.url-line {
-    white-space: nowrap;
+.source-name {
+    min-width: 0;
     overflow: hidden;
     text-overflow: ellipsis;
-    display: block;
-    max-width: 500px; /* Limit width to trigger truncation */
+    white-space: nowrap;
+}
+
+.source-title .mytv-tag {
+    flex: none;
+}
+
+.select-row-actions {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+mat-paginator {
+    margin: 4px 0 8px;
+}
+
+.row-chips {
+    flex: 1 1 100%;
+}
+
+.full-width {
+    width: 100%;
 }
 
 @media (max-width: 600px) {
-    .url-line {
-        max-width: 120px; /* Aggressively limit width on mobile */
-    }
-    
-    .container {
-        padding: 8px;
-    }
-    
-    mat-card-content {
-        padding: 0 8px 16px 8px;
-    }
-
     /* Allow wrapping for setting items */
-    .setting-item {
-        flex-wrap: wrap;
-        gap: 8px;
-    }
-
-    /* Make form fields full width in settings */
     .setting-item mat-form-field {
         width: 100%;
-        margin-bottom: 0;
     }
 
     /* Fix Paginator overflow */
@@ -82,96 +60,4 @@ mat-card-content {
     ::ng-deep .mat-mdc-paginator-range-label {
         margin: 0 8px !important;
     }
-}
-
-/* Ensure list content shrinks properly */
-::ng-deep .mat-mdc-list-item-content {
-    min-width: 0;
-}
-
-::ng-deep .mat-mdc-list-item-title {
-    min-width: 0;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.setting-block {
-    padding: 16px 0;
-    border-bottom: 1px solid var(--border-color);
-    display: flex;
-    width: 100%;
-    flex-direction: column;
-    gap: 8px;
-}
-
-.setting-label {
-    font-size: 16px;
-    color: var(--text-color);
-}
-
-.setting-item:last-child, .setting-block:last-child {
-    border-bottom: none;
-}
-
-.full-width {
-    width: 100%;
-}
-
-.section-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 20px;
-    margin-bottom: 10px;
-}
-
-.section-header h3 {
-    margin: 0;
-}
-
-.badge {
-    display: inline-block;
-    padding: 2px 8px;
-    border-radius: 12px;
-    font-size: 12px;
-    font-weight: 500;
-    color: white;
-    margin-left: 8px;
-    vertical-align: middle;
-}
-
-.badge-remote {
-    background-color: #2196F3; /* Blue */
-}
-
-.badge-xtream {
-    background-color: #9C27B0; /* Purple */
-}
-
-.badge-stalker {
-    background-color: #E91E63; /* Pink */
-}
-
-.badge-file {
-    background-color: #FF9800; /* Orange */
-}
-
-.badge-aggregate {
-    background-color: #009688; /* Teal */
-}
-
-.badge-content {
-    background-color: #4CAF50; /* Green */
-}
-
-.badge-default {
-    background-color: #757575; /* Grey */
-}
-
-mat-list-item {
-    border-bottom: 1px solid var(--border-color);
-}
-
-mat-chip-set {
-    margin-bottom: 20px;
 }

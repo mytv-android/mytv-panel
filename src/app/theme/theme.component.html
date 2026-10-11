@@ -4,51 +4,56 @@
         <mat-card-title>{{ '主题' | translate }}</mat-card-title>
     </mat-card-header>
     <mat-card-content>
-      <div class="form-container">
-        <div class="toggles-row">
-          <div class="toggle-block">
-            <label class="toggle-label">{{ 'THEME_MODE' | translate }}</label>
-            <mat-button-toggle-group [(ngModel)]="themeMode" (ngModelChange)="updateConfig()" appearance="standard">
-              <mat-button-toggle [value]="0">{{ 'THEME_MODE_LIGHT' | translate }}</mat-button-toggle>
-              <mat-button-toggle [value]="1">{{ 'THEME_MODE_DARK' | translate }}</mat-button-toggle>
-              <mat-button-toggle [value]="2">{{ 'THEME_MODE_SYSTEM' | translate }}</mat-button-toggle>
-            </mat-button-toggle-group>
-          </div>
+      <div class="setting-item">
+        <span>{{ 'THEME_MODE' | translate }}</span>
+        <mat-button-toggle-group [(ngModel)]="themeMode" (ngModelChange)="updateConfig()" appearance="standard">
+          <mat-button-toggle [value]="0">{{ 'THEME_MODE_LIGHT' | translate }}</mat-button-toggle>
+          <mat-button-toggle [value]="1">{{ 'THEME_MODE_DARK' | translate }}</mat-button-toggle>
+          <mat-button-toggle [value]="2">{{ 'THEME_MODE_SYSTEM' | translate }}</mat-button-toggle>
+        </mat-button-toggle-group>
+      </div>
 
-          <div class="toggle-block">
-            <label class="toggle-label">{{ 'THEME_COLOR_PROVIDER' | translate }}</label>
-            <mat-button-toggle-group [(ngModel)]="themeColorProvider" (ngModelChange)="updateConfig()" appearance="standard">
-              <mat-button-toggle [value]="0">{{ 'THEME_COLOR_PROVIDER_BUILTIN' | translate }}</mat-button-toggle>
-              <mat-button-toggle [value]="1">{{ 'THEME_COLOR_PROVIDER_WALLPAPER' | translate }}</mat-button-toggle>
-              <mat-button-toggle [value]="2">{{ 'THEME_COLOR_PROVIDER_PLAIN' | translate }}</mat-button-toggle>
-            </mat-button-toggle-group>
-          </div>
-        </div>
-        <mat-form-field appearance="outline">
+      <div class="setting-item">
+        <span>{{ 'THEME_COLOR_PROVIDER' | translate }}</span>
+        <mat-button-toggle-group [(ngModel)]="themeColorProvider" (ngModelChange)="updateConfig()" appearance="standard">
+          <mat-button-toggle [value]="0">{{ 'THEME_COLOR_PROVIDER_BUILTIN' | translate }}</mat-button-toggle>
+          <mat-button-toggle [value]="1">{{ 'THEME_COLOR_PROVIDER_WALLPAPER' | translate }}</mat-button-toggle>
+          <mat-button-toggle [value]="2">{{ 'THEME_COLOR_PROVIDER_PLAIN' | translate }}</mat-button-toggle>
+        </mat-button-toggle-group>
+      </div>
+
+      <div class="group-gap" aria-hidden="true"></div>
+
+      <div class="setting-block">
+        <mat-form-field appearance="outline" subscriptSizing="dynamic">
           <mat-label>{{ 'THEME_NAME' | translate }}</mat-label>
           <input matInput [(ngModel)]="theme.name" (ngModelChange)="updateConfig()">
         </mat-form-field>
+      </div>
 
-        <mat-form-field appearance="outline">
+      <div class="setting-block">
+        <mat-form-field appearance="outline" subscriptSizing="dynamic">
           <mat-label>{{ 'THEME_BACKGROUND' | translate }}</mat-label>
           <input matInput [(ngModel)]="theme.background" (ngModelChange)="updateConfig()">
         </mat-form-field>
+      </div>
 
-        <mat-form-field appearance="outline">
+      <div class="setting-block">
+        <mat-form-field appearance="outline" subscriptSizing="dynamic">
           <mat-label>{{ 'THEME_TEXTURE' | translate }}</mat-label>
           <input matInput [(ngModel)]="theme.texture" (ngModelChange)="updateConfig()">
         </mat-form-field>
-
-        <div class="slider-container">
-          <label>{{ 'THEME_TEXTURE_ALPHA' | translate }}</label>
-          <mat-slider min="0" max="1" step="0.01" discrete>
-            <input matSliderThumb [ngModel]="theme.textureAlpha ? +theme.textureAlpha : 0" (ngModelChange)="theme.textureAlpha = $event.toString(); updateConfig()">
-          </mat-slider>
-          <span>{{theme.textureAlpha}}</span>
-        </div>
-
-        <div class="hint-text" [innerHTML]="'THEME_FORMAT_HINT' | translate"></div>
       </div>
+
+      <div class="setting-item slider-container">
+        <label>{{ 'THEME_TEXTURE_ALPHA' | translate }}</label>
+        <mat-slider min="0" max="1" step="0.01" discrete>
+          <input matSliderThumb [ngModel]="theme.textureAlpha ? +theme.textureAlpha : 0" (ngModelChange)="theme.textureAlpha = $event.toString(); updateConfig()">
+        </mat-slider>
+        <span class="slider-value">{{theme.textureAlpha}}</span>
+      </div>
+
+      <div class="hint-text" [innerHTML]="'THEME_FORMAT_HINT' | translate"></div>
     </mat-card-content>
   </mat-card>
 </div>

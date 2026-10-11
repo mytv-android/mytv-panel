@@ -1,8 +1,6 @@
 import { Component, inject, effect, Inject, PLATFORM_ID } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
-import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
@@ -10,7 +8,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSelectModule } from '@angular/material/select';
 import { MatChipsModule } from '@angular/material/chips';
-import { MatRadioModule } from '@angular/material/radio';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { MatMenuModule } from '@angular/material/menu';
@@ -25,10 +22,8 @@ import { TextareaWithLinesComponent } from '../common/textarea-with-lines/textar
     selector: 'app-subscribe',
     standalone: true,
     imports: [
-        CommonModule,
         FormsModule,
         MatCardModule,
-        MatListModule,
         MatIconModule,
         MatButtonModule,
         MatInputModule,
@@ -36,7 +31,6 @@ import { TextareaWithLinesComponent } from '../common/textarea-with-lines/textar
         MatSlideToggleModule,
         MatSelectModule,
         MatChipsModule,
-        MatRadioModule,
         MatDialogModule,
         MatPaginatorModule,
         MatMenuModule,
@@ -292,17 +286,6 @@ export class SubscribeComponent {
             case 3: return 'HOME.STALKER';
             case 4: return 'HOME.AGGREGATE';
             default: return 'Unknown';
-        }
-    }
-
-    getSourceTypeBadgeClass(type: number): string {
-        switch (type) {
-            case 0: return 'badge-remote';
-            case 2: return 'badge-xtream';
-            case 1: return 'badge-file';
-            case 3: return 'badge-stalker';
-            case 4: return 'badge-aggregate';
-            default: return 'badge-default';
         }
     }
 

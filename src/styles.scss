@@ -1,41 +1,100 @@
 @use '@angular/material' as mat;
+@use 'tokens';
 
-// Define Light Theme
-$light-theme: mat.define-theme((
-  color: (
-    theme-type: light,
-    primary: mat.$azure-palette,
-    tertiary: mat.$blue-palette,
-  ),
-  typography: (
-    brand-family: 'Roboto',
-    plain-family: 'Roboto',
-  ),
-  density: (
-    scale: 0
-  )
-));
-
-// Define Dark Theme
-$dark-theme: mat.define-theme((
-  color: (
-    theme-type: dark,
-    primary: mat.$azure-palette,
-    tertiary: mat.$blue-palette,
-  )
-));
+// ========================================
+// 主题：Angular Material 系统变量 + App 内置配色
+// ========================================
 
 html {
-    color-scheme: light;
-    @include mat.all-component-themes($light-theme);
+    // 颜色变量随后被 tokens.light / tokens.dark 全量覆盖，这里的色板只用来生成结构
+    @include mat.theme((
+        color: (
+            primary: mat.$cyan-palette,
+            theme-type: light,
+        ),
+        typography: (
+            plain-family: var(--mytv-font-family),
+            brand-family: var(--mytv-font-family),
+        ),
+        density: 0,
+    ));
+    @include tokens.base;
+
+    // 只引用非颜色变量的组件令牌，声明在 html 上即可
+    @include mat.dialog-overrides((
+        container-shape: var(--mytv-radius-dialog),
+    ));
+    @include mat.form-field-overrides((
+        outlined-container-shape: var(--mytv-radius-chip),
+    ));
+    @include mat.card-overrides((
+        elevated-container-elevation: none,
+        elevated-container-shape: var(--mytv-radius-card),
+        title-text-weight: 700,
+        subtitle-text-size: 14px,
+        subtitle-text-line-height: 20px,
+        subtitle-text-weight: 400,
+    ));
+    @include mat.sidenav-overrides((
+        container-divider-color: transparent,
+    ));
+}
+
+// 颜色及引用了颜色的令牌都放在 body 上：深色模式覆盖 body 上的 --mat-sys-*，
+// 同一元素上声明的派生变量才能跟着变
+body {
+    @include tokens.light;
+
+    // 键盘焦点：2px primary 描边，只在 :focus-visible 时出现
+    @include mat.strong-focus-indicators((
+        border-color: var(--mytv-focus-ring),
+        border-width: var(--mytv-focus-ring-width),
+        border-style: solid,
+    ));
+
+    @include mat.toolbar-overrides((
+        container-background-color: var(--mytv-page),
+        container-text-color: var(--mat-sys-on-surface),
+    ));
+    @include mat.sidenav-overrides((
+        container-background-color: var(--mytv-page),
+        content-background-color: var(--mytv-page),
+        scrim-color: color-mix(in srgb, var(--mat-sys-scrim) 32%, transparent),
+    ));
+    @include mat.card-overrides((
+        elevated-container-color: var(--mytv-card),
+        subtitle-text-color: var(--mat-sys-on-surface-variant),
+    ));
+    @include mat.dialog-overrides((
+        container-color: var(--mat-sys-surface-container-high),
+    ));
+    @include mat.paginator-overrides((
+        container-background-color: transparent,
+    ));
+    @include mat.table-overrides((
+        background-color: transparent,
+        row-item-outline-color: var(--mytv-divider),
+        header-headline-color: var(--mat-sys-on-surface-variant),
+    ));
+
+    // 旧的手写变量，改为引用系统变量（各页样式仍在用）
+    --bg-color: var(--mytv-page);
+    --text-color: var(--mat-sys-on-surface);
+    --text-secondary: var(--mat-sys-on-surface-variant);
+    --text-color-secondary: var(--mat-sys-on-surface-variant);
+    --card-bg: var(--mytv-card);
+    --card-hover-bg: color-mix(in srgb, var(--mat-sys-on-surface) var(--mytv-state-hover-opacity), var(--mytv-card));
+    --border-color: var(--mytv-divider);
 }
 
 body.dark-mode {
-    color-scheme: dark;
-    @include mat.all-component-colors($dark-theme);
+    @include tokens.dark;
 }
 
-/* Global Styles */
+// ========================================
+// 基础
+// ========================================
+
 html,
 body {
     height: 100%;
@@ -43,178 +102,372 @@ body {
 
 body {
     margin: 0;
-    font-family: Roboto, "Helvetica Neue", sans-serif;
+    font: var(--mat-sys-body-medium);
+    background-color: var(--mytv-page);
+    color: var(--mat-sys-on-surface);
+    -webkit-font-smoothing: antialiased;
+    transition: background-color var(--mytv-duration) var(--mytv-easing), color var(--mytv-duration) var(--mytv-easing);
 }
 
 html[lang="ar"],
 html[lang="ar"] body,
 html[lang="ar"] *:not(.mat-icon):not(.material-icons) {
-    font-family: "Tajawal", Roboto, "Helvetica Neue", sans-serif !important;
+    font-family: "Tajawal", var(--mytv-font-family) !important;
 }
 
-/* CSS Variables - Material 3 Inspired */
-:root {
-    --bg-color: #FDFDF5;
-    --text-color: #1A1C1E;
-    --text-secondary: #43474E;
-    --toolbar-bg: #F0F4F8; /* Surface Container Low */
-    --toolbar-text: #1A1C1E; /* On Surface */
-    --sidenav-bg: #FDFDF5;
-    --card-bg: #F0F4F8; /* Surface Container Low */
-    --card-hover-bg: #EBEFF5;
-    --input-bg: #F0F4F8;
-    --border-color: #73777F;
+a {
+    color: var(--mat-sys-primary);
 }
 
-body.dark-mode {
-    --bg-color: #1A1C1E;
-    --text-color: #E2E2E6;
-    --text-secondary: #C3C7CF;
-    --toolbar-bg: #202325; /* Surface Container */
-    --toolbar-text: #E2E2E6;
-    --sidenav-bg: #1A1C1E;
-    --card-bg: #202325; /* Surface Container */
-    --card-hover-bg: #2A2D30;
-    --input-bg: #202325;
-    --border-color: #8D9199;
+// 自定义的可聚焦元素（Material 组件用上面的 strong-focus-indicators）
+a:not([class*="mat-"]):focus-visible,
+.select-row-main:focus-visible {
+    outline: var(--mytv-focus-ring-width) solid var(--mytv-focus-ring);
+    outline-offset: 2px;
 }
 
-body {
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    transition: background-color 0.3s, color 0.3s;
+// 滚动条细一些，颜色跟主题
+.mat-drawer-inner-container,
+.mat-drawer-content,
+.mat-mdc-dialog-content {
+    scrollbar-width: thin;
+    scrollbar-color: var(--mat-sys-outline-variant) transparent;
 }
 
-/* Custom Overrides using CSS Variables */
-
-/* Toolbar */
-.mat-toolbar.mat-primary {
-    background-color: var(--toolbar-bg) !important;
-    color: var(--toolbar-text) !important;
+// 弹窗遮罩：scrim 60%
+.cdk-overlay-container .cdk-overlay-dark-backdrop {
+    background: var(--mytv-scrim);
 }
 
-/* Sidenav */
-.mat-drawer {
-    background-color: var(--sidenav-bg) !important;
-    color: var(--text-color) !important;
+// ========================================
+// 页面：标题左对齐、内容最大宽 760、分组列表
+// 页面根节点沿用各页的 .container > mat-card 结构
+// ========================================
+
+.main-content > * > .container {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: var(--mytv-content-max-width);
+    margin: 0 auto;
+    padding: 0;
 }
 
-.mat-drawer-inner-container {
-    background-color: var(--sidenav-bg) !important;
-}
+// 页面上的 mat-card 只当分组容器：不画底色、不加阴影
+.main-content > * > .container > .mat-mdc-card {
+    background: transparent;
+    border-radius: 0;
+    overflow: visible;
 
-.mat-drawer-container {
-    background-color: var(--bg-color) !important;
-    color: var(--text-color) !important;
-}
+    > .mat-mdc-card-header {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 4px 16px;
+    }
 
-/* Cards */
-.mat-mdc-card {
-    background-color: var(--card-bg) !important;
-    color: var(--text-color) !important;
-}
-
-/* Form Fields */
-.mat-mdc-form-field {
-    --mat-form-field-filled-container-color: var(--input-bg);
-    --mat-form-field-filled-input-text-color: var(--text-color);
-    --mat-form-field-filled-label-text-color: var(--text-secondary);
-    --mat-select-trigger-text-color: var(--text-color);
-    --mat-form-field-outlined-outline-color: var(--border-color);
-    --mat-form-field-outlined-input-text-color: var(--text-color);
-    --mat-form-field-outlined-caret-color: var(--text-color);
-}
-
-/* Select Panel */
-.mat-mdc-select-panel {
-    background-color: var(--card-bg) !important;
-}
-
-.mat-mdc-option {
-    color: var(--text-color) !important;
-}
-
-.mat-mdc-option:hover:not(.mdc-list-item--selected) {
-    background-color: var(--card-hover-bg) !important;
-}
-
-/* Table */
-.mat-mdc-table {
-    background-color: transparent !important;
-}
-
-.mat-mdc-header-cell {
-    color: var(--text-secondary) !important;
-    background-color: var(--bg-color) !important;
-}
-
-.mat-mdc-cell {
-    color: var(--text-color) !important;
-    border-bottom-color: var(--border-color) !important;
-}
-
-.mat-mdc-row:hover {
-    background-color: var(--card-hover-bg) !important;
-}
-
-/* Button Toggle */
-.mat-button-toggle-group {
-    border-color: var(--border-color);
-    background-color: var(--card-bg);
-}
-
-.mat-button-toggle {
-    color: var(--text-color);
-}
-
-.setting-item{
-    width: 550px;
-}
-
-@media (max-width: 600px) {
-    .setting-item{
-        width:300px;
+    > .mat-mdc-card-content {
+        display: flex;
+        flex-direction: column;
+        gap: var(--mytv-group-gap);
+        padding: 0;
     }
 }
 
-@media (max-width: 350px) {
-    .setting-item {
-        width: 100%;
+// 窄屏顶栏已显示页名，页内不再重复标题
+@media (max-width: #{tokens.$nav-breakpoint - 1px}) {
+    .main-content > * > .container > .mat-mdc-card > .mat-mdc-card-header {
+        padding-top: 0;
+        padding-bottom: 12px;
+
+        .mat-mdc-card-title {
+            display: none;
+        }
+
+        &:not(:has(.mat-mdc-card-subtitle, button)) {
+            display: none;
+        }
     }
 }
 
-/* ========================================
-   animate.enter / animate.leave Animations
-   ======================================== */
+// 分组内的一行
+.main-content .setting-item,
+.main-content .setting-block {
+    box-sizing: border-box;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px 16px;
+    min-height: 56px;
+    margin: 0;
+    padding: 10px 16px;
+    border: none;
+    border-radius: var(--mytv-radius-group-inner);
+    background-color: var(--mytv-card);
+    color: var(--mat-sys-on-surface);
+    font: 500 16px / 24px var(--mytv-font-family);
 
-/* Page enter animation - fade in from below */
+    // 左侧文字列可伸缩，控件放不下时整体换到下一行（宽输入框会自动落到标签下方）
+    > :first-child {
+        flex: 1 1 160px;
+        min-width: 0;
+    }
+
+    > :not(:first-child) {
+        flex: 0 1 auto;
+    }
+
+    // 行内输入框：40 高、8 圆角描边
+    @include mat.form-field-overrides((
+        container-height: 40px,
+        container-vertical-padding: 8px,
+    ));
+
+    .mat-mdc-form-field {
+        max-width: 100%;
+        font: var(--mat-sys-body-large);
+    }
+}
+
+.main-content .setting-block {
+    flex-direction: column;
+    align-items: stretch;
+
+    > :first-child {
+        flex: none;
+    }
+}
+
+// 分组首尾：外 16 / 内 4，行距 2
+:is(.main-content .setting-item, .main-content .setting-block):not(:is(.setting-item, .setting-block) + *) {
+    border-top-left-radius: var(--mytv-radius-group);
+    border-top-right-radius: var(--mytv-radius-group);
+}
+
+:is(.main-content .setting-item, .main-content .setting-block):not(:has(+ :is(.setting-item, .setting-block))) {
+    border-bottom-left-radius: var(--mytv-radius-group);
+    border-bottom-right-radius: var(--mytv-radius-group);
+}
+
+// 行内文字
+.setting-label,
+.setting-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.setting-desc,
+.setting-hint {
+    font: 400 14px / 20px var(--mytv-font-family);
+    color: var(--mat-sys-on-surface-variant);
+}
+
+.setting-value {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font: 400 14px / 20px var(--mytv-font-family);
+    color: var(--mat-sys-on-surface-variant);
+}
+
+// 可点击的行：悬停 8% 叠层，不变形、不加阴影
+.main-content .clickable {
+    cursor: pointer;
+    transition: background-color var(--mytv-duration-fast) var(--mytv-easing);
+
+    &:hover {
+        background-image: linear-gradient(var(--mytv-hover-layer), var(--mytv-hover-layer));
+    }
+
+    > .mat-icon {
+        color: var(--mat-sys-on-surface-variant);
+    }
+}
+
+// 分组标题：14px、次要色，与分组拉开距离
+.main-content > * > .container h3 {
+    margin: 22px 4px 6px;
+    font: 500 14px / 20px var(--mytv-font-family);
+    color: var(--mat-sys-on-surface-variant);
+}
+
+.main-content > * > .container .section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin: 22px 0 6px;
+    padding-left: 4px;
+
+    h3 {
+        margin: 0;
+    }
+}
+
+.main-content > * > .container > .mat-mdc-card > .mat-mdc-card-content > :is(h3, .section-header):first-child {
+    margin-top: 0;
+}
+
+// 分组列表样式的 mat-list（订阅源以外仍用 mat-list 的列表）
+.main-content .mat-mdc-list-base {
+    display: flex;
+    flex-direction: column;
+    gap: var(--mytv-group-gap);
+    padding: 0;
+
+    > .mat-mdc-list-item {
+        border: none;
+        border-radius: var(--mytv-radius-group-inner);
+        background-color: var(--mytv-card);
+
+        &:first-child {
+            border-top-left-radius: var(--mytv-radius-group);
+            border-top-right-radius: var(--mytv-radius-group);
+        }
+
+        &:last-child {
+            border-bottom-left-radius: var(--mytv-radius-group);
+            border-bottom-right-radius: var(--mytv-radius-group);
+        }
+    }
+}
+
+// 单选列表的整行选择：已选 = secondaryContainer + ✓
+.select-row {
+    transition: background-color var(--mytv-duration-fast) var(--mytv-easing);
+
+    &:hover {
+        background-image: linear-gradient(var(--mytv-hover-layer), var(--mytv-hover-layer));
+    }
+
+    &.is-selected {
+        background-color: var(--mytv-selected);
+        color: var(--mytv-on-selected);
+
+        .setting-desc,
+        .select-row-desc {
+            color: var(--mytv-on-selected);
+        }
+
+        .mytv-tag {
+            background-color: color-mix(in srgb, var(--mytv-on-selected) 12%, transparent);
+            color: var(--mytv-on-selected);
+        }
+    }
+}
+
+// 行本身不留左内边距，由选择按钮铺满左侧，整块都可点
+.main-content .setting-item.select-row {
+    padding: 0 8px 0 0;
+}
+
+.select-row-main {
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2px;
+    min-width: 0;
+    margin: 0;
+    padding: 12px 0 12px 16px;
+    border: none;
+    border-radius: inherit;
+    background: none;
+    color: inherit;
+    font: inherit;
+    text-align: start;
+    cursor: pointer;
+}
+
+// 键盘焦点描边画在整行上
+@supports selector(:has(a)) {
+    .select-row:has(> .select-row-main:focus-visible) {
+        outline: var(--mytv-focus-ring-width) solid var(--mytv-focus-ring);
+        outline-offset: calc(var(--mytv-focus-ring-width) * -1);
+    }
+
+    button.select-row-main:focus-visible {
+        outline: none;
+    }
+}
+
+.select-row-desc {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font: 400 14px / 20px var(--mytv-font-family);
+    color: var(--mat-sys-on-surface-variant);
+}
+
+.select-row-check {
+    color: var(--mytv-live);
+    flex: none;
+}
+
+// 两个分组之间没有标题时的间隔
+.group-gap {
+    flex: none;
+    height: 20px;
+}
+
+// ========================================
+// 标签：6 圆角、中性底
+// ========================================
+
+.mytv-tag {
+    display: inline-flex;
+    align-items: center;
+    height: 22px;
+    padding: 0 7px;
+    border-radius: var(--mytv-radius-tag);
+    background-color: var(--mytv-tag);
+    color: var(--mytv-on-tag);
+    font: 500 12px / 22px var(--mytv-font-family);
+    white-space: nowrap;
+    vertical-align: middle;
+}
+
+// ========================================
+// 页面进出场：位移 16 + 淡入，退场淡出（遵守 prefers-reduced-motion）
+// ========================================
+
 .enter {
-    animation: fadeInUp 0.3s ease-out;
+    animation: mytv-page-enter var(--mytv-duration) var(--mytv-easing);
 }
 
-/* Page leave animation - fade out to below */
 .leave {
-    animation: fadeOutDown 0.3s ease-out;
+    animation: mytv-page-leave var(--mytv-duration-fast) var(--mytv-easing) forwards;
 }
 
-@keyframes fadeInUp {
+@keyframes mytv-page-enter {
     from {
         opacity: 0;
-        transform: translateY(20px);
+        transform: translateY(var(--mytv-enter-distance));
     }
     to {
         opacity: 1;
-        transform: translateY(0);
+        transform: none;
     }
 }
 
-@keyframes fadeOutDown {
+@keyframes mytv-page-leave {
     from {
         opacity: 1;
-        transform: translateY(0);
     }
     to {
         opacity: 0;
-        transform: translateY(20px);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
     }
 }

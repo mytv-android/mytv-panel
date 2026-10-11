@@ -18,6 +18,9 @@
   "日志": "Log",
   "文件": "Files",
   "备份管理": "Backups",
+  "常用": "General",
+  "播放": "Playback",
+  "系统": "System",
   "添加于": "Added at {{date}}",
   "THEME_SETTINGS": "Theme Settings",
   "CONTROL": {

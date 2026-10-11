@@ -3,6 +3,7 @@
     flex-direction: column;
     gap: 4px;
     min-width: 480px;
+    padding-top: 8px;
 }
 
 .form-row {
@@ -33,14 +34,14 @@
 }
 
 .upload-filename {
-    color: var(--text-color-secondary, #888);
+    color: var(--mat-sys-on-surface-variant);
     font-size: 13px;
     word-break: break-all;
 }
 
 .field-hint {
     margin: 0 0 4px 0;
-    color: var(--text-color-secondary, #888);
+    color: var(--mat-sys-on-surface-variant);
     font-size: 12px;
     line-height: 1.5;
 }
@@ -54,7 +55,7 @@
 }
 
 .check-result {
-    border-radius: 8px;
+    border-radius: var(--mytv-radius-card);
     padding: 10px 12px;
     font-size: 13px;
     line-height: 1.6;
@@ -62,11 +63,11 @@
 }
 
 .check-ok {
-    background: rgba(76, 175, 80, 0.12);
+    background: color-mix(in srgb, var(--mat-sys-secondary-container) 55%, transparent);
 }
 
 .check-fail {
-    background: rgba(244, 67, 54, 0.10);
+    background: color-mix(in srgb, var(--mat-sys-error-container) 55%, transparent);
 }
 
 .check-title {
@@ -77,15 +78,15 @@
 }
 
 .error-text {
-    color: #f44336;
+    color: var(--mat-sys-error);
 }
 
 .warn-text {
-    color: #ff9800;
+    color: var(--mat-sys-tertiary);
 }
 
 .imports {
-    color: var(--text-color-secondary, #888);
+    color: var(--mat-sys-on-surface-variant);
 }
 
 @media (max-width: 600px) {

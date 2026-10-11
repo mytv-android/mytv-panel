@@ -1,0 +1,206 @@
+@use 'sass:meta';
+
+// mytv 网页共享令牌
+//
+// 网页面板（mytv-panel/src/tokens.scss）与文档站（mytv-doc/src/tokens.scss）各放一份，内容保持一致。
+// 配色 = App 内置配色，不随 App 主题变：
+//   深色：mytv-android tv/src/main/java/com/github/mytv/android/ui/theme/Color.kt 的 darkScheme
+//   浅色：Compose expressiveLightColorScheme() 基线值
+// 覆盖 Angular Material 的 --mat-sys-* 颜色变量，另加 --mytv-* 角色、圆角、动效变量。
+//
+// 用法（深色选择器按各仓库自己的写法）：
+//   @use 'tokens';
+//   html { @include mat.theme(...); @include tokens.base; }
+//   body { @include tokens.light; }
+//   body.dark-mode { @include tokens.dark; }
+//
+// 注意：引用了 --mat-sys-* 的变量在声明处就会被解析，所以浅色、深色两套必须声明在同一个元素
+// （上例的 body）上，深色才能覆盖到这些派生值。
+
+// 字体栈：不打包字体文件，装了 HarmonyOS Sans 的系统优先用它
+$font-family: ("HarmonyOS Sans SC", system-ui, "PingFang SC", "Microsoft YaHei", sans-serif);
+
+// 宽屏常驻导航的断点（媒体查询里不能用 CSS 变量，用这个 Sass 变量）
+$nav-breakpoint: 1024px;
+
+// 与颜色无关的令牌，声明一次即可
+@mixin base {
+  --mytv-font-family: #{meta.inspect($font-family)};
+
+  // 圆角
+  --mytv-radius-dialog: 20px;       // 对话框
+  --mytv-radius-hero: 20px;         // 英雄卡、正在播放卡
+  --mytv-radius-card: 12px;         // 卡片、列表行、磁贴
+  --mytv-radius-group: 16px;        // 分组列表外圆角
+  --mytv-radius-group-inner: 4px;   // 分组列表内圆角
+  --mytv-group-gap: 2px;            // 分组列表行距
+  --mytv-radius-chip: 8px;          // 筛选 Chip、取值胶囊、输入框
+  --mytv-radius-plate: 8px;         // 台标底板
+  --mytv-radius-tag: 6px;           // 标签
+  --mytv-radius-full: 999px;        // 按钮、导航胶囊
+
+  // 布局
+  --mytv-content-max-width: 760px;
+  --mytv-nav-width: 248px;
+
+  // 状态
+  --mytv-state-hover-opacity: 8%;
+  --mytv-state-disabled-opacity: 38%;
+  --mytv-scrim-opacity: 60%;
+  --mytv-focus-ring-width: 2px;
+
+  // 动效
+  --mytv-easing: cubic-bezier(0.2, 0, 0, 1);
+  --mytv-duration-fast: 150ms;
+  --mytv-duration: 200ms;
+  --mytv-enter-distance: 16px;
+
+  @media (prefers-reduced-motion: reduce) {
+    --mytv-duration-fast: 0ms;
+    --mytv-duration: 0ms;
+    --mytv-enter-distance: 0px;
+  }
+}
+
+// 由颜色派生的角色：浅色、深色各声明一次
+@mixin _roles {
+  --mytv-page: var(--mat-sys-surface-container-low);                 // 页面底色
+  --mytv-selected: var(--mat-sys-secondary-container);               // 已选 / 当前
+  --mytv-on-selected: var(--mat-sys-on-secondary-container);
+  --mytv-live: var(--mat-sys-primary);                               // 直播、进度、正在播放、主按钮
+  --mytv-focus-ring: var(--mat-sys-primary);                         // 键盘焦点描边
+  --mytv-hover-layer: color-mix(in srgb, var(--mat-sys-on-surface) var(--mytv-state-hover-opacity), transparent);
+  --mytv-tag: color-mix(in srgb, var(--mat-sys-on-surface) 10%, transparent);
+  --mytv-on-tag: var(--mat-sys-on-surface-variant);
+  --mytv-divider: var(--mat-sys-outline-variant);
+  --mytv-scrim: color-mix(in srgb, var(--mat-sys-scrim) var(--mytv-scrim-opacity), transparent);
+}
+
+@mixin light {
+  color-scheme: light;
+
+  --mat-sys-primary: #6750A4;
+  --mat-sys-on-primary: #FFFFFF;
+  --mat-sys-primary-container: #EADDFF;
+  --mat-sys-on-primary-container: #4F378B;
+  --mat-sys-inverse-primary: #D0BCFF;
+  --mat-sys-primary-fixed: #EADDFF;
+  --mat-sys-primary-fixed-dim: #D0BCFF;
+  --mat-sys-on-primary-fixed: #21005D;
+  --mat-sys-on-primary-fixed-variant: #4F378B;
+
+  --mat-sys-secondary: #625B71;
+  --mat-sys-on-secondary: #FFFFFF;
+  --mat-sys-secondary-container: #E8DEF8;
+  --mat-sys-on-secondary-container: #4A4458;
+  --mat-sys-secondary-fixed: #E8DEF8;
+  --mat-sys-secondary-fixed-dim: #CCC2DC;
+  --mat-sys-on-secondary-fixed: #1D192B;
+  --mat-sys-on-secondary-fixed-variant: #4A4458;
+
+  --mat-sys-tertiary: #7D5260;
+  --mat-sys-on-tertiary: #FFFFFF;
+  --mat-sys-tertiary-container: #FFD8E4;
+  --mat-sys-on-tertiary-container: #633B48;
+  --mat-sys-tertiary-fixed: #FFD8E4;
+  --mat-sys-tertiary-fixed-dim: #EFB8C8;
+  --mat-sys-on-tertiary-fixed: #31111D;
+  --mat-sys-on-tertiary-fixed-variant: #633B48;
+
+  --mat-sys-error: #B3261E;
+  --mat-sys-on-error: #FFFFFF;
+  --mat-sys-error-container: #F9DEDC;
+  --mat-sys-on-error-container: #8C1D18;
+
+  --mat-sys-background: #FEF7FF;
+  --mat-sys-on-background: #1D1B20;
+  --mat-sys-surface: #FEF7FF;
+  --mat-sys-on-surface: #1D1B20;
+  --mat-sys-surface-variant: #E7E0EC;
+  --mat-sys-on-surface-variant: #49454F;
+  --mat-sys-surface-dim: #DED8E1;
+  --mat-sys-surface-bright: #FEF7FF;
+  --mat-sys-surface-container-lowest: #FFFFFF;
+  --mat-sys-surface-container-low: #F7F2FA;
+  --mat-sys-surface-container: #F3EDF7;
+  --mat-sys-surface-container-high: #ECE6F0;
+  --mat-sys-surface-container-highest: #E6E0E9;
+  --mat-sys-surface-tint: #6750A4;
+  --mat-sys-inverse-surface: #322F35;
+  --mat-sys-inverse-on-surface: #F5EFF7;
+  --mat-sys-outline: #79747E;
+  --mat-sys-outline-variant: #CAC4D0;
+  --mat-sys-scrim: #000000;
+  --mat-sys-shadow: #000000;
+  --mat-sys-neutral10: #1D1B20;
+  --mat-sys-neutral-variant20: #322F37;
+
+  @include _roles;
+  --mytv-card: var(--mat-sys-surface-container-lowest);              // 卡片、列表行
+  --mytv-plate: var(--mat-sys-inverse-surface);                      // 台标底板（深色固定）
+}
+
+@mixin dark {
+  color-scheme: dark;
+
+  --mat-sys-primary: #9CCDE8;
+  --mat-sys-on-primary: #003547;
+  --mat-sys-primary-container: #004157;
+  --mat-sys-on-primary-container: #7CADC6;
+  --mat-sys-inverse-primary: #32647B;
+  // Color.kt 未定义 fixed 系列，按同一色系的色调推算（组件不使用）
+  --mat-sys-primary-fixed: #C0E8FF;
+  --mat-sys-primary-fixed-dim: #9CCDE8;
+  --mat-sys-on-primary-fixed: #001E2B;
+  --mat-sys-on-primary-fixed-variant: #164C62;
+
+  --mat-sys-secondary: #B7C9D5;
+  --mat-sys-on-secondary: #21333C;
+  --mat-sys-secondary-container: #3A4B55;
+  --mat-sys-on-secondary-container: #A8BBC7;
+  --mat-sys-secondary-fixed: #D2E5F1;
+  --mat-sys-secondary-fixed-dim: #B7C9D5;
+  --mat-sys-on-secondary-fixed: #0B1D26;
+  --mat-sys-on-secondary-fixed-variant: #384953;
+
+  --mat-sys-tertiary: #DCBBEB;
+  --mat-sys-on-tertiary: #3F264D;
+  --mat-sys-tertiary-container: #4B3259;
+  --mat-sys-on-tertiary-container: #BB9BC9;
+  --mat-sys-tertiary-fixed: #F5D9FF;
+  --mat-sys-tertiary-fixed-dim: #DCBBEB;
+  --mat-sys-on-tertiary-fixed: #29103A;
+  --mat-sys-on-tertiary-fixed-variant: #573C65;
+
+  --mat-sys-error: #FFB4AB;
+  --mat-sys-on-error: #690005;
+  --mat-sys-error-container: #93000A;
+  --mat-sys-on-error-container: #FFDAD6;
+
+  --mat-sys-background: #111415;
+  --mat-sys-on-background: #E2E2E4;
+  --mat-sys-surface: #111415;
+  --mat-sys-on-surface: #E2E2E4;
+  --mat-sys-surface-variant: #41484C;
+  --mat-sys-on-surface-variant: #C0C7CD;
+  --mat-sys-surface-dim: #111415;
+  --mat-sys-surface-bright: #37393B;
+  --mat-sys-surface-container-lowest: #0C0F10;
+  --mat-sys-surface-container-low: #191C1D;
+  --mat-sys-surface-container: #1D2022;
+  --mat-sys-surface-container-high: #282A2C;
+  --mat-sys-surface-container-highest: #333537;
+  --mat-sys-surface-tint: #9CCDE8;
+  --mat-sys-inverse-surface: #E2E2E4;
+  --mat-sys-inverse-on-surface: #2E3132;
+  --mat-sys-outline: #8B9297;
+  --mat-sys-outline-variant: #41484C;
+  --mat-sys-scrim: #000000;
+  --mat-sys-shadow: #000000;
+  --mat-sys-neutral10: #191C1D;
+  --mat-sys-neutral-variant20: #2B3135;
+
+  @include _roles;
+  --mytv-card: var(--mat-sys-surface-container-high);                // 卡片、列表行
+  --mytv-plate: var(--mat-sys-surface-container-lowest);             // 台标底板（深色固定）
+}

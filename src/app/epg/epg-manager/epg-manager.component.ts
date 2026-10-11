@@ -8,7 +8,6 @@ import { DragDropModule, CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-
 import { TranslateModule } from '@ngx-translate/core';
 import { EpgSource } from '../../api';
 import { EpgSourceDialogComponent } from '../epg-source-dialog/epg-source-dialog.component';
-import { MatRadioModule } from '@angular/material/radio';
 
 @Component({
   selector: 'app-epg-manager',
@@ -18,7 +17,6 @@ import { MatRadioModule } from '@angular/material/radio';
     MatButtonModule,
     MatIconModule,
     MatListModule,
-    MatRadioModule,
     DragDropModule,
     TranslateModule
 ],

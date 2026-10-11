@@ -7,7 +7,8 @@
     height: calc(var(--line-height) * var(--visible-rows, 1));
     overflow: hidden;
     margin-right: 8px;
-    border-right: 1px solid rgba(0,0,0,0.12);
+    border-right: 1px solid var(--mat-sys-outline-variant);
+    padding-left: 12px;
     padding-right: 8px;
     user-select: none;
     display: flex;
@@ -17,7 +18,7 @@
 .line-numbers {
     display: flex;
     flex-direction: column;
-    color: #999;
+    color: var(--mat-sys-on-surface-variant);
     font-family: monospace;
     text-align: right;
     /* Match textarea line-height and font-size */

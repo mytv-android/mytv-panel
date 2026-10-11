@@ -1,4 +1,7 @@
 .list-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--mytv-group-gap);
   min-width: 400px;
   min-height: 200px;
   max-height: 60vh;
@@ -8,17 +11,17 @@
 .list-item {
   display: flex;
   align-items: center;
-  padding: 8px;
-  border-bottom: 1px solid var(--border-color);
-  background: var(--mat-dialog-container-background-color);
+  gap: 4px;
+  min-height: 64px;
+  padding: 0 4px;
+  border-radius: var(--mytv-radius-card);
 }
 
 .cdk-drag-preview {
   box-sizing: border-box;
-  border-radius: 4px;
-  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
-              0 8px 10px 1px rgba(0, 0, 0, 0.14),
-              0 3px 14px 2px rgba(0, 0, 0, 0.12);
+  border-radius: var(--mytv-radius-card);
+  background-color: var(--mat-sys-surface-container-highest);
+  box-shadow: var(--mat-sys-level3);
 }
 
 .cdk-drag-placeholder {
@@ -26,38 +29,27 @@
 }
 
 .cdk-drag-animating {
-  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+  transition: transform var(--mytv-duration) var(--mytv-easing);
 }
 
 .list-container.cdk-drop-list-dragging .list-item:not(.cdk-drag-placeholder) {
-  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+  transition: transform var(--mytv-duration) var(--mytv-easing);
 }
 
 .drag-handle {
+  display: flex;
   cursor: move;
-  color: #ccc;
-  margin-right: 8px;
-}
-
-.item-radio {
-  margin-right: 8px;
+  color: var(--mat-sys-on-surface-variant);
+  padding: 0 4px;
 }
 
 .item-content {
   flex: 1;
-  overflow: hidden;
+  padding: 10px 8px;
 }
 
 .item-name {
-  font-weight: 500;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.item-url {
-  font-size: 12px;
-  color: #666;
+  font: 500 16px / 24px var(--mytv-font-family);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -71,9 +63,15 @@
 .empty-state {
   padding: 20px;
   text-align: center;
-  color: #666;
+  color: var(--mat-sys-on-surface-variant);
 }
 
 .spacer {
   flex: 1;
+}
+
+@media (max-width: 600px) {
+  .list-container {
+    min-width: 0;
+  }
 }

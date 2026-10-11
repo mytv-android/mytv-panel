@@ -13,7 +13,7 @@
           <input matInput [(ngModel)]="newName" (keyup.enter)="create()"
             placeholder="{{ 'BACKUP.NAME_HINT' | translate }}">
         </mat-form-field>
-        <button mat-raised-button color="primary" [disabled]="!newName.trim() || loading" (click)="create()">
+        <button mat-flat-button [disabled]="!newName.trim() || loading" (click)="create()">
           <mat-icon>add</mat-icon>
           {{ 'BACKUP.CREATE' | translate }}
         </button>

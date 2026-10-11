@@ -1,9 +1,7 @@
-.container {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-    padding: 24px;
-    max-width: 90%;
+.dashboard {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: var(--mytv-content-max-width);
     margin: 0 auto;
 }
 
@@ -24,7 +22,6 @@
 
 mat-card-subtitle {
     margin-bottom: 16px;
-    line-height: 1.5;
 }
 
 label {
@@ -40,8 +37,7 @@ mat-radio-group {
 .info-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
-    gap: 20px;
-    padding: 8px 0;
+    gap: 16px;
 }
 
 @media (max-width: 500px) {
@@ -55,27 +51,18 @@ mat-radio-group {
     flex-direction: column;
     gap: 6px;
     padding: 12px;
-    /* background-color: var(--card-bg); Removed to use mat-card default */
-    /* border-radius: 8px; Removed to use mat-card default (M3 is usually 12px) */
-    transition: background-color 0.2s;
-}
-
-.info-item:hover {
-    background-color: var(--card-hover-bg) !important; /* Force hover effect */
 }
 
 .info-item .label {
-    font-size: 12px;
-    color: var(--text-secondary);
-    font-weight: 500;
+    font: 500 12px / 16px var(--mytv-font-family);
+    color: var(--mat-sys-on-surface-variant);
     text-transform: uppercase;
     letter-spacing: 0.5px;
 }
 
 .info-item .value {
-    font-size: 15px;
-    color: var(--text-color);
-    font-weight: 500;
+    font: 500 16px / 24px var(--mytv-font-family);
+    color: var(--mat-sys-on-surface);
     word-break: break-all;
 }
 

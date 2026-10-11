@@ -1,6 +1,6 @@
 .log-view {
-    background: rgba(0, 0, 0, 0.06);
-    border-radius: 8px;
+    background: var(--mat-sys-surface-container-lowest);
+    border-radius: var(--mytv-radius-card);
     padding: 12px;
     margin: 0;
     max-height: 480px;

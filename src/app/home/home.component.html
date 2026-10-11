@@ -1,4 +1,4 @@
-<div class="container info-grid">
+<div class="dashboard info-grid">
   <mat-card class="card info-item">
     <mat-card-header>
       <mat-card-title>{{ 'HOME.ABOUT_APP' | translate }}</mat-card-title>
@@ -178,7 +178,7 @@
 
     </mat-card-content>
     <mat-card-actions align="end">
-      <button mat-raised-button color="primary" (click)="pushSubscription()">{{ 'HOME.PUSH_SUBSCRIPTION' | translate
+      <button mat-flat-button (click)="pushSubscription()">{{ 'HOME.PUSH_SUBSCRIPTION' | translate
         }}</button>
     </mat-card-actions>
   </mat-card>
@@ -195,7 +195,7 @@
       </mat-form-field>
     </mat-card-content>
     <mat-card-actions align="end">
-      <button mat-raised-button color="primary" (click)="updateConfig()">{{ 'HOME.PUSH' | translate }}</button>
+      <button mat-flat-button (click)="updateConfig()">{{ 'HOME.PUSH' | translate }}</button>
     </mat-card-actions>
   </mat-card>
 
@@ -213,7 +213,7 @@
       </mat-form-field>
     </mat-card-content>
     <mat-card-actions align="end">
-      <button mat-raised-button color="primary" (click)="updateConfig()">{{ 'HOME.PUSH' | translate }}</button>
+      <button mat-flat-button (click)="updateConfig()">{{ 'HOME.PUSH' | translate }}</button>
     </mat-card-actions>
   </mat-card>
 
@@ -227,7 +227,7 @@
         placeholder="{{channelAliasExample}}"></app-textarea-with-lines>
     </mat-card-content>
     <mat-card-actions align="end">
-      <button mat-raised-button color="primary" (click)="updateConfig()">{{ 'HOME.PUSH' | translate }}</button>
+      <button mat-flat-button (click)="updateConfig()">{{ 'HOME.PUSH' | translate }}</button>
     </mat-card-actions>
   </mat-card>
 
@@ -258,7 +258,7 @@
       </div>
     </mat-card-content>
     <mat-card-actions align="end">
-      <button mat-raised-button color="primary" (click)="pushEpgSource()">{{ 'HOME.PUSH_EPG' | translate }}</button>
+      <button mat-flat-button (click)="pushEpgSource()">{{ 'HOME.PUSH_EPG' | translate }}</button>
     </mat-card-actions>
   </mat-card>
 
@@ -277,7 +277,7 @@
         </mat-form-field>
       </div>
       <div class="form-row" style="justify-content: flex-end; display: flex;">
-        <button mat-raised-button color="primary" (click)="updateConfig()">{{ 'HOME.PUSH' | translate }}</button>
+        <button mat-flat-button (click)="updateConfig()">{{ 'HOME.PUSH' | translate }}</button>
       </div>
 
       <div class="form-row">
@@ -288,7 +288,7 @@
           placeholder="Header-Name-1: Header-Value-1&#10;Header-Name-2: Header-Value-2"></app-textarea-with-lines>
       </div>
       <div class="form-row" style="justify-content: flex-end; display: flex;">
-        <button mat-raised-button color="primary" (click)="updateConfig()">{{ 'HOME.PUSH' | translate }}</button>
+        <button mat-flat-button (click)="updateConfig()">{{ 'HOME.PUSH' | translate }}</button>
       </div>
     </mat-card-content>
   </mat-card>
@@ -415,7 +415,7 @@
       }
     </mat-card-content>
     <mat-card-actions align="end">
-      <button mat-raised-button color="primary" (click)="updateConfig()">{{ 'HOME.PUSH' | translate }}</button>
+      <button mat-flat-button (click)="updateConfig()">{{ 'HOME.PUSH' | translate }}</button>
     </mat-card-actions>
   </mat-card>
 
@@ -433,7 +433,7 @@
       </div>
     </mat-card-content>
     <mat-card-actions align="end">
-      <button mat-raised-button color="primary" [disabled]="!selectedFile" (click)="uploadApk()">{{
+      <button mat-flat-button [disabled]="!selectedFile" (click)="uploadApk()">{{
         'HOME.UPLOAD_AND_INSTALL' | translate }}</button>
     </mat-card-actions>
   </mat-card>

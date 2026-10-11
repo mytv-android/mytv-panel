@@ -9,7 +9,6 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
-import { MatDividerModule } from '@angular/material/divider';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { AppConfigs, ConfigsService, AppApi, CloudSyncProvider } from '../api';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
@@ -28,7 +27,6 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
     MatIconModule,
     MatListModule,
     MatButtonToggleModule,
-    MatDividerModule,
     TranslateModule,
     MatSnackBarModule
 ],

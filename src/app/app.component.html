@@ -1,32 +1,49 @@
-<mat-sidenav-container class="sidenav-container">
-  <mat-sidenav #sidenav mode="over">
-    <mat-nav-list>
-      @for (item of menuItems; track item.name) {
-        <a mat-list-item [routerLink]="item.route" (click)="sidenav.close()">{{ item.name | translate }}</a>
-      }
-    </mat-nav-list>
-  </mat-sidenav>
-  <mat-sidenav-content>
-    <mat-toolbar color="primary">
-      <button mat-icon-button (click)="sidenav.toggle()">
+<div class="app-shell">
+  <mat-toolbar class="app-bar">
+    @if (isWide) {
+      <span class="app-brand-mark"><mat-icon>live_tv</mat-icon></span>
+      <span class="app-bar-title">{{ title | translate }}</span>
+    } @else {
+      <button mat-icon-button class="app-bar-menu" (click)="sidenav.toggle()">
         <mat-icon>menu</mat-icon>
       </button>
-      <span>{{ title | translate }}</span>
-      <span class="spacer"></span>
-      <button mat-icon-button (click)="toggleTheme()">
-        <mat-icon>{{ isDarkMode ? 'light_mode' : 'dark_mode' }}</mat-icon>
-      </button>
-      <button mat-icon-button [matMenuTriggerFor]="langMenu">
-        <mat-icon>language</mat-icon>
-      </button>
-      <mat-menu #langMenu="matMenu">
-        <button mat-menu-item (click)="switchLanguage('en')">English</button>
-        <button mat-menu-item (click)="switchLanguage('zh')">中文</button>
-        <button mat-menu-item (click)="switchLanguage('ar')">العربية</button>
-      </mat-menu>
-    </mat-toolbar>
-    <div class="main-content">
-      <router-outlet></router-outlet>
-    </div>
-  </mat-sidenav-content>
-</mat-sidenav-container>
+      <span class="app-bar-title">{{ (currentTitleKey || title) | translate }}</span>
+    }
+    <span class="spacer"></span>
+    <button mat-icon-button (click)="toggleTheme()">
+      <mat-icon>{{ isDarkMode ? 'light_mode' : 'dark_mode' }}</mat-icon>
+    </button>
+    <button mat-icon-button [matMenuTriggerFor]="langMenu">
+      <mat-icon>language</mat-icon>
+    </button>
+    <mat-menu #langMenu="matMenu">
+      <button mat-menu-item (click)="switchLanguage('en')">English</button>
+      <button mat-menu-item (click)="switchLanguage('zh')">中文</button>
+      <button mat-menu-item (click)="switchLanguage('ar')">العربية</button>
+    </mat-menu>
+  </mat-toolbar>
+  <mat-sidenav-container class="sidenav-container">
+    <mat-sidenav #sidenav class="app-nav" [mode]="isWide ? 'side' : 'over'" [opened]="isWide">
+      <nav class="nav-list">
+        @for (group of menuGroups; track group.items[0].route) {
+          @if (group.name) {
+            <div class="nav-header">{{ group.name | translate }}</div>
+          }
+          @for (item of group.items; track item.route) {
+            <a class="nav-item" [routerLink]="item.route" routerLinkActive="is-active"
+              [routerLinkActiveOptions]="activeOptions" ariaCurrentWhenActive="page"
+              (click)="isWide || sidenav.close()">
+              <mat-icon>{{ item.icon }}</mat-icon>
+              <span class="nav-item-label">{{ item.name | translate }}</span>
+            </a>
+          }
+        }
+      </nav>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <div class="main-content">
+        <router-outlet></router-outlet>
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

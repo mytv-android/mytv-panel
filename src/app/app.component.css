@@ -1,24 +1,134 @@
-.sidenav-container {
-    height: 100vh;
+:host {
+    display: block;
+    height: 100%;
 }
 
-mat-sidenav {
-    width: 200px;
+.app-shell {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+/* 顶栏：与页面同底色，宽屏写应用名，窄屏写当前页名 */
+.app-bar {
+    flex: none;
+    gap: 12px;
+    padding: 0 12px 0 16px;
+    --mat-icon-button-icon-color: var(--mat-sys-on-surface-variant);
+}
+
+.app-brand-mark {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: none;
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background-color: var(--mat-sys-primary);
+    color: var(--mat-sys-on-primary);
+}
+
+.app-brand-mark .mat-icon {
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+}
+
+.app-bar-title {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font: 700 22px / 28px var(--mytv-font-family);
+    color: var(--mat-sys-on-surface);
+}
+
+.app-bar-menu {
+    --mat-icon-button-icon-color: var(--mat-sys-on-surface);
 }
 
 .spacer {
     flex: 1 1 auto;
 }
 
-.main-content {
-    padding: 16px;
-    height: calc(100vh - 64px); /* Adjust for toolbar height */
-    overflow: auto;
-    box-sizing: border-box;
+.sidenav-container {
+    flex: 1 1 auto;
+    min-height: 0;
 }
 
-@media (max-width: 600px) {
+/* 侧边导航：≥1024px 常驻，窄屏收进抽屉 */
+.app-nav {
+    width: var(--mytv-nav-width);
+}
+
+.nav-list {
+    display: flex;
+    flex-direction: column;
+    padding: 4px 12px 24px;
+}
+
+.nav-header {
+    padding: 14px 16px 6px;
+    font: 500 12px / 16px var(--mytv-font-family);
+    color: var(--mat-sys-on-surface-variant);
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: none;
+    height: 44px;
+    padding: 0 16px;
+    border-radius: var(--mytv-radius-full);
+    color: var(--mat-sys-on-surface-variant);
+    font: 500 14px / 20px var(--mytv-font-family);
+    text-decoration: none;
+    transition: background-color var(--mytv-duration-fast) var(--mytv-easing),
+        color var(--mytv-duration-fast) var(--mytv-easing);
+}
+
+.nav-item:hover {
+    background-image: linear-gradient(var(--mytv-hover-layer), var(--mytv-hover-layer));
+}
+
+.nav-item.is-active {
+    background-color: var(--mytv-selected);
+    color: var(--mytv-on-selected);
+}
+
+.nav-item:focus-visible {
+    outline-offset: -2px;
+}
+
+.nav-item .mat-icon {
+    flex: none;
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+}
+
+.nav-item-label {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.main-content {
+    box-sizing: border-box;
+    min-height: 100%;
+    padding: 16px 24px 48px;
+}
+
+@media (max-width: 1023px) {
+    .app-bar {
+        gap: 4px;
+        padding: 0 8px 0 4px;
+    }
+
     .main-content {
-        padding: 4px;
+        padding: 8px 16px 32px;
     }
 }

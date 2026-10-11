@@ -1,12 +1,13 @@
 import { Component, inject, PLATFORM_ID, OnInit, DOCUMENT } from '@angular/core';
-import { RouterOutlet, RouterLink, Router, NavigationEnd, ActivatedRoute } from '@angular/router';
+import { RouterOutlet, RouterLink, RouterLinkActive, Router, NavigationEnd, ActivatedRoute, IsActiveMatchOptions } from '@angular/router';
+import { BreakpointObserver } from '@angular/cdk/layout';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { TranslateService, TranslateModule } from '@ngx-translate/core';
 import { isPlatformBrowser } from '@angular/common';
 import { Title } from '@angular/platform-browser';
 import { filter, map, mergeMap } from 'rxjs/operators';
 
 import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatListModule } from '@angular/material/list';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -15,43 +16,70 @@ import { HttpService } from './request';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, RouterLink, MatSidenavModule, MatListModule, TranslateModule, MatButtonModule, MatIconModule, MatToolbarModule, MatMenuModule],
+  imports: [RouterOutlet, RouterLink, RouterLinkActive, MatSidenavModule, TranslateModule, MatButtonModule, MatIconModule, MatToolbarModule, MatMenuModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent implements OnInit {
   title = 'mytv';
   isDarkMode = false;
+  /** ≥1024px：侧边导航常驻；以下收进抽屉，顶栏显示当前页名 */
+  isWide = false;
 
   private router = inject(Router);
   private activatedRoute = inject(ActivatedRoute);
   private titleService = inject(Title);
-  private currentTitleKey: string = '';
+  currentTitleKey: string = '';
 
-  menuItems = [
-    { name: '首页', route: '/' },
-    { name: '通用', route: '/general' },
-    { name: '订阅源', route: '/sources' },
-    { name: '服务', route: '/services' },
-    { name: '节目单', route: '/epg' },
-    { name: '界面', route: '/ui' },
-    { name: '主题', route: '/theme' },
-    { name: '控制', route: '/control' },
-    { name: '播放器', route: '/player' },
-    { name: 'WebView', route: '/webview' },
-    { name: '文件', route: '/file' },
-    { name: '备份管理', route: '/backup' },
-    { name: '更新', route: '/update' },
-    { name: '网络', route: '/network' },
-    { name: '云同步', route: '/sync' },
-    { name: '调试', route: '/debug' },
-    { name: '日志', route: '/log' }
+  // 按路径精确匹配高亮当前页，忽略 ?lang= 等查询参数
+  activeOptions: IsActiveMatchOptions = { paths: 'exact', queryParams: 'ignored', matrixParams: 'ignored', fragment: 'ignored' };
+
+  // 与 App 设置页的“常用 / 播放 / 系统”分组一致；文件、备份管理是面板独有，归入系统
+  menuGroups = [
+    {
+      name: '',
+      items: [
+        { name: '首页', route: '/', icon: 'home' },
+      ]
+    },
+    {
+      name: '常用',
+      items: [
+        { name: '通用', route: '/general', icon: 'devices' },
+        { name: '订阅源', route: '/sources', icon: 'subscriptions' },
+        { name: '服务', route: '/services', icon: 'hub' },
+        { name: '节目单', route: '/epg', icon: 'event_note' },
+        { name: '界面', route: '/ui', icon: 'dashboard_customize' },
+        { name: '主题', route: '/theme', icon: 'palette' },
+      ]
+    },
+    {
+      name: '播放',
+      items: [
+        { name: '播放器', route: '/player', icon: 'play_circle' },
+        { name: '控制', route: '/control', icon: 'gamepad' },
+        { name: 'WebView', route: '/webview', icon: 'web' },
+      ]
+    },
+    {
+      name: '系统',
+      items: [
+        { name: '网络', route: '/network', icon: 'wifi' },
+        { name: '云同步', route: '/sync', icon: 'cloud_sync' },
+        { name: '备份管理', route: '/backup', icon: 'settings_backup_restore' },
+        { name: '文件', route: '/file', icon: 'folder' },
+        { name: '更新', route: '/update', icon: 'system_update' },
+        { name: '调试', route: '/debug', icon: 'bug_report' },
+        { name: '日志', route: '/log', icon: 'receipt_long' },
+      ]
+    },
   ];
 
   private translate = inject(TranslateService);
   private httpService = inject(HttpService);
   private platformId = inject(PLATFORM_ID);
   private document = inject(DOCUMENT);
+  private breakpointObserver = inject(BreakpointObserver);
 
   ngOnInit() {
     this.router.events.pipe(
@@ -87,6 +115,10 @@ export class AppComponent implements OnInit {
   }
 
   constructor() {
+    this.breakpointObserver.observe('(min-width: 1024px)')
+      .pipe(takeUntilDestroyed())
+      .subscribe(state => this.isWide = state.matches);
+
     this.translate.addLangs(['en', 'zh', 'ar']);
     this.translate.setFallbackLang('en');
 

@@ -2,17 +2,19 @@
 <mat-dialog-content>
   <div class="list-container" cdkDropList (cdkDropListDropped)="drop($event)">
     @for (source of sources; track source; let i = $index) {
-      <div class="list-item" cdkDrag>
+      @let current = isCurrent(source);
+      <div class="list-item select-row" cdkDrag [class.is-selected]="current">
         <div class="drag-handle" cdkDragHandle>
           <mat-icon>drag_indicator</mat-icon>
         </div>
-        <div class="item-radio">
-          <mat-radio-button [checked]="isCurrent(source)" (click)="setCurrent(source)"></mat-radio-button>
-        </div>
-        <div class="item-content">
-          <div class="item-name">{{ source.name }}</div>
-          <div class="item-url">{{ source.url }}</div>
-        </div>
+        <button type="button" class="select-row-main item-content" [attr.aria-pressed]="current"
+          (click)="setCurrent(source)">
+          <span class="item-name">{{ source.name }}</span>
+          <span class="select-row-desc">{{ source.url }}</span>
+        </button>
+        @if (current) {
+          <mat-icon class="select-row-check">check_circle</mat-icon>
+        }
         <div class="item-actions">
           <button mat-icon-button (click)="editSource(i, source)">
             <mat-icon>edit</mat-icon>
