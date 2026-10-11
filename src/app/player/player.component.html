@@ -554,6 +554,47 @@
           </div>
         }
 
+        @if (configs.videoPlayerASRTranslationEngine === asrTranslationEngine.YOUDAO) {
+          <!-- Youdao Configuration -->
+          <div class="setting-item">
+            <span>{{ 'PLAYER.ASR_YOUDAO_APP_KEY' | translate }}</span>
+          </div>
+          <div class="setting-item">
+            <mat-form-field appearance="outline" class="full-width" style="margin-bottom: -1.25em;">
+              <input matInput [(ngModel)]="configs.videoPlayerASRTranslationYoudaoAppKey">
+            </mat-form-field>
+          </div>
+          <div class="setting-item">
+            <span>{{ 'PLAYER.ASR_YOUDAO_APP_SECRET' | translate }}</span>
+          </div>
+          <div class="setting-item">
+            <mat-form-field appearance="outline" class="full-width" style="margin-bottom: -1.25em;">
+              <input matInput [(ngModel)]="configs.videoPlayerASRTranslationYoudaoAppSecret" type="password">
+            </mat-form-field>
+          </div>
+        }
+
+        @if (configs.videoPlayerASRTranslationEngine === asrTranslationEngine.MICROSOFT) {
+          <!-- Microsoft Translator Configuration -->
+          <div class="setting-item">
+            <span>{{ 'PLAYER.ASR_MICROSOFT_KEY' | translate }}</span>
+          </div>
+          <div class="setting-item">
+            <mat-form-field appearance="outline" class="full-width" style="margin-bottom: -1.25em;">
+              <input matInput [(ngModel)]="configs.videoPlayerASRTranslationMicrosoftKey" type="password">
+            </mat-form-field>
+          </div>
+          <div class="setting-item">
+            <span>{{ 'PLAYER.ASR_MICROSOFT_REGION' | translate }}</span>
+            <span class="setting-desc">{{ 'PLAYER.ASR_MICROSOFT_REGION_DESC' | translate }}</span>
+          </div>
+          <div class="setting-item">
+            <mat-form-field appearance="outline" class="full-width" style="margin-bottom: -1.25em;">
+              <input matInput [(ngModel)]="configs.videoPlayerASRTranslationMicrosoftRegion" placeholder="eastasia">
+            </mat-form-field>
+          </div>
+        }
+
         <div class="action-container">
           <button mat-raised-button color="primary" (click)="saveAsr()">{{ 'PLAYER.ASR_SAVE' | translate }}</button>
         </div>

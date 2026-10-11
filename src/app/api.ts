@@ -299,7 +299,7 @@ export interface AppConfigs {
     videoPlayerVolumeBalanceLevel?: AudioBalanceLevel  // NEW: 音量均衡等级（替代简单布尔值）
     videoPlayerRealTimeASR?: boolean  // NEW: 实时ASR语音识别
     videoPlayerASRModel?: string  // NEW: ASR识别模型
-    videoPlayerASRTranslationEngine?: ASRTranslationEngine  // NEW: ASR翻译引擎 (Tencent/Baidu/MTranServer)
+    videoPlayerASRTranslationEngine?: ASRTranslationEngine  // NEW: ASR翻译引擎 (Tencent/Baidu/MTranServer/Youdao/Google/Microsoft)
     videoPlayerASRTranslationTargetLang?: string  // NEW: ASR翻译目标语言
     videoPlayerASRTranslationTencentSecretId?: string  // NEW: ASR翻译腾讯 SecretId
     videoPlayerASRTranslationTencentSecretKey?: string  // NEW: ASR翻译腾讯 SecretKey
@@ -307,6 +307,10 @@ export interface AppConfigs {
     videoPlayerASRTranslationBaiduSecretKey?: string  // NEW: ASR翻译百度 SecretKey
     videoPlayerASRTranslationMTranServerUrl?: string  // NEW: ASR翻译MTranServer URL
     videoPlayerASRTranslationMTranServerToken?: string  // NEW: ASR翻译MTranServer Token
+    videoPlayerASRTranslationYoudaoAppKey?: string  // NEW: ASR翻译有道 应用ID
+    videoPlayerASRTranslationYoudaoAppSecret?: string  // NEW: ASR翻译有道 应用密钥
+    videoPlayerASRTranslationMicrosoftKey?: string  // NEW: ASR翻译微软 密钥
+    videoPlayerASRTranslationMicrosoftRegion?: string  // NEW: ASR翻译微软 区域
     videoPlayerASRTranslationFontScale?: number  // NEW: 字幕翻译译文缩放比例（相对原文）
     videoPlayerASRMode?: ASRMode  // NEW: ASR 模式
     videoPlayerASRLeadTimeMs?: number  // NEW: ASR 领先字幕显示提前量（毫秒）
@@ -771,6 +775,9 @@ export enum ASRTranslationEngine {
     TENCENT = 'tencent',
     BAIDU = 'baidu',
     MTRANSERVER = 'mtranserver',
+    YOUDAO = 'youdao',
+    GOOGLE = 'google',
+    MICROSOFT = 'microsoft',
 }
 
 export const ASRTranslationEngineLabels: { [key in ASRTranslationEngine]: string } = {
@@ -778,6 +785,9 @@ export const ASRTranslationEngineLabels: { [key in ASRTranslationEngine]: string
     [ASRTranslationEngine.TENCENT]: 'PLAYER.ASR_TENCENT',
     [ASRTranslationEngine.BAIDU]: 'PLAYER.ASR_BAIDU',
     [ASRTranslationEngine.MTRANSERVER]: 'PLAYER.ASR_MTRANSERVER',
+    [ASRTranslationEngine.YOUDAO]: 'PLAYER.ASR_YOUDAO',
+    [ASRTranslationEngine.GOOGLE]: 'PLAYER.ASR_GOOGLE',
+    [ASRTranslationEngine.MICROSOFT]: 'PLAYER.ASR_MICROSOFT',
 }
 
 export interface MultiViewScheme {
