@@ -1,7 +1,7 @@
 <div class="app-shell">
   <mat-toolbar class="app-bar">
     @if (isWide) {
-      <span class="app-brand-mark"><mat-icon>live_tv</mat-icon></span>
+      <img src="logo.svg" alt="" class="app-icon" />
       <span class="app-bar-title">{{ title | translate }}</span>
     } @else {
       <button mat-icon-button class="app-bar-menu" (click)="sidenav.toggle()">
