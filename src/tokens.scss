@@ -17,8 +17,9 @@
 // 注意：引用了 --mat-sys-* 的变量在声明处就会被解析，所以浅色、深色两套必须声明在同一个元素
 // （上例的 body）上，深色才能覆盖到这些派生值。
 
-// 字体栈：不打包字体文件，装了 HarmonyOS Sans 的系统优先用它
-$font-family: ("HarmonyOS Sans SC", system-ui, "PingFang SC", "Microsoft YaHei", sans-serif);
+// 字体栈：与 App 同用 Google Sans Flex（index.html 从 Google Fonts 加载，构建时内联 @font-face）。
+// 它只含拉丁字符，中文和加载不到时退回后面的系统字体
+$font-family: ("Google Sans Flex", system-ui, "PingFang SC", "Microsoft YaHei", sans-serif);
 
 // 宽屏常驻导航的断点（媒体查询里不能用 CSS 变量，用这个 Sass 变量）
 $nav-breakpoint: 1024px;
