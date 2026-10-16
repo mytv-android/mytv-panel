@@ -319,6 +319,9 @@ export interface AppConfigs {
     videoPlayerASRVadType?: string  // NEW: ASR VAD 后端类型 (silero/ten)
     videoPlayerASRGeminiApiKey?: string  // NEW: ASR Gemini Live Translate API Key
     videoPlayerASRGeminiEndpoint?: string  // NEW: ASR Gemini Live Translate 端点
+    videoPlayerASRAliyunApiKey?: string  // NEW: ASR 阿里云百炼 Qwen-Livetranslate API Key
+    videoPlayerASRAliyunEndpoint?: string  // NEW: ASR 阿里云百炼 Qwen-Livetranslate 端点（含 workspace）
+    videoPlayerASRSonioxApiKey?: string  // NEW: ASR Soniox API Key
     themeAppCurrent?: AppThemeDef
     themeMode?: number
     themeColorProvider?: number
