@@ -359,6 +359,61 @@
             </mat-form-field>
           </div>
 
+          <!-- 云端模型凭据：紧跟在模型选择下面 -->
+          @if (configs.videoPlayerASRModel === 'gemini-live-translate') {
+            <div class="setting-item">
+              <div class="setting-label">
+                <span>{{ 'PLAYER.ASR_GEMINI_API_KEY' | translate }}</span>
+                <span class="setting-desc">{{ 'PLAYER.ASR_GEMINI_API_KEY_DESC' | translate }}</span>
+              </div>
+              <mat-form-field appearance="outline" class="full-width" style="margin-bottom: -1.25em;">
+                <input matInput [(ngModel)]="configs.videoPlayerASRGeminiApiKey" type="password" (change)="updateConfig()">
+              </mat-form-field>
+            </div>
+            <div class="setting-item">
+              <div class="setting-label">
+                <span>{{ 'PLAYER.ASR_GEMINI_ENDPOINT' | translate }}</span>
+                <span class="setting-desc">{{ 'PLAYER.ASR_GEMINI_ENDPOINT_DESC' | translate }}</span>
+              </div>
+              <mat-form-field appearance="outline" class="full-width" style="margin-bottom: -1.25em;">
+                <input matInput [(ngModel)]="configs.videoPlayerASRGeminiEndpoint" (change)="updateConfig()" placeholder="">
+              </mat-form-field>
+            </div>
+          }
+
+          @if (configs.videoPlayerASRModel === 'aliyun-qwen-livetranslate') {
+            <div class="setting-item">
+              <div class="setting-label">
+                <span>{{ 'PLAYER.ASR_ALIYUN_API_KEY' | translate }}</span>
+                <span class="setting-desc">{{ 'PLAYER.ASR_ALIYUN_API_KEY_DESC' | translate }}</span>
+              </div>
+              <mat-form-field appearance="outline" class="full-width" style="margin-bottom: -1.25em;">
+                <input matInput [(ngModel)]="configs.videoPlayerASRAliyunApiKey" type="password" (change)="updateConfig()">
+              </mat-form-field>
+            </div>
+            <div class="setting-item">
+              <div class="setting-label">
+                <span>{{ 'PLAYER.ASR_ALIYUN_ENDPOINT' | translate }}</span>
+                <span class="setting-desc">{{ 'PLAYER.ASR_ALIYUN_ENDPOINT_DESC' | translate }}</span>
+              </div>
+              <mat-form-field appearance="outline" class="full-width" style="margin-bottom: -1.25em;">
+                <input matInput [(ngModel)]="configs.videoPlayerASRAliyunEndpoint" (change)="updateConfig()" placeholder="">
+              </mat-form-field>
+            </div>
+          }
+
+          @if (configs.videoPlayerASRModel === 'soniox-live-translate') {
+            <div class="setting-item">
+              <div class="setting-label">
+                <span>{{ 'PLAYER.ASR_SONIOX_API_KEY' | translate }}</span>
+                <span class="setting-desc">{{ 'PLAYER.ASR_SONIOX_API_KEY_DESC' | translate }}</span>
+              </div>
+              <mat-form-field appearance="outline" class="full-width" style="margin-bottom: -1.25em;">
+                <input matInput [(ngModel)]="configs.videoPlayerASRSonioxApiKey" type="password" (change)="updateConfig()">
+              </mat-form-field>
+            </div>
+          }
+
           <!-- ASR Mode -->
           <div class="setting-item">
             <div class="setting-label">
@@ -425,63 +480,6 @@
             </div>
             <mat-slide-toggle [(ngModel)]="configs.videoPlayerASRAutoStreamingFallback" (change)="updateConfig()"></mat-slide-toggle>
           </div>
-
-          <!-- Gemini Live Translate -->
-          @if (configs.videoPlayerASRModel === 'gemini-live-translate') {
-            <div class="setting-item">
-              <div class="setting-label">
-                <span>{{ 'PLAYER.ASR_GEMINI_API_KEY' | translate }}</span>
-                <span class="setting-desc">{{ 'PLAYER.ASR_GEMINI_API_KEY_DESC' | translate }}</span>
-              </div>
-              <mat-form-field appearance="outline" class="full-width" style="margin-bottom: -1.25em;">
-                <input matInput [(ngModel)]="configs.videoPlayerASRGeminiApiKey" type="password" (change)="updateConfig()">
-              </mat-form-field>
-            </div>
-            <div class="setting-item">
-              <div class="setting-label">
-                <span>{{ 'PLAYER.ASR_GEMINI_ENDPOINT' | translate }}</span>
-                <span class="setting-desc">{{ 'PLAYER.ASR_GEMINI_ENDPOINT_DESC' | translate }}</span>
-              </div>
-              <mat-form-field appearance="outline" class="full-width" style="margin-bottom: -1.25em;">
-                <input matInput [(ngModel)]="configs.videoPlayerASRGeminiEndpoint" (change)="updateConfig()" placeholder="">
-              </mat-form-field>
-            </div>
-          }
-
-          <!-- 阿里云百炼 Qwen-Livetranslate -->
-          @if (configs.videoPlayerASRModel === 'aliyun-qwen-livetranslate') {
-            <div class="setting-item">
-              <div class="setting-label">
-                <span>{{ 'PLAYER.ASR_ALIYUN_API_KEY' | translate }}</span>
-                <span class="setting-desc">{{ 'PLAYER.ASR_ALIYUN_API_KEY_DESC' | translate }}</span>
-              </div>
-              <mat-form-field appearance="outline" class="full-width" style="margin-bottom: -1.25em;">
-                <input matInput [(ngModel)]="configs.videoPlayerASRAliyunApiKey" type="password" (change)="updateConfig()">
-              </mat-form-field>
-            </div>
-            <div class="setting-item">
-              <div class="setting-label">
-                <span>{{ 'PLAYER.ASR_ALIYUN_ENDPOINT' | translate }}</span>
-                <span class="setting-desc">{{ 'PLAYER.ASR_ALIYUN_ENDPOINT_DESC' | translate }}</span>
-              </div>
-              <mat-form-field appearance="outline" class="full-width" style="margin-bottom: -1.25em;">
-                <input matInput [(ngModel)]="configs.videoPlayerASRAliyunEndpoint" (change)="updateConfig()" placeholder="">
-              </mat-form-field>
-            </div>
-          }
-
-          <!-- Soniox -->
-          @if (configs.videoPlayerASRModel === 'soniox-live-translate') {
-            <div class="setting-item">
-              <div class="setting-label">
-                <span>{{ 'PLAYER.ASR_SONIOX_API_KEY' | translate }}</span>
-                <span class="setting-desc">{{ 'PLAYER.ASR_SONIOX_API_KEY_DESC' | translate }}</span>
-              </div>
-              <mat-form-field appearance="outline" class="full-width" style="margin-bottom: -1.25em;">
-                <input matInput [(ngModel)]="configs.videoPlayerASRSonioxApiKey" type="password" (change)="updateConfig()">
-              </mat-form-field>
-            </div>
-          }
 
         }
 
