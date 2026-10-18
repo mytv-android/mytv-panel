@@ -188,6 +188,13 @@ export class SubscribeSourceDialogComponent {
       ? Math.floor(port)
       : undefined;
     this.source.epg = this.source.epg?.trim() || undefined;
+    // Stalker MAC 归一化：去分隔符后补齐冒号并转大写
+    if (this.source.sourceType === 3 && this.source.mac) {
+      const compact = this.source.mac.replace(/[^0-9a-fA-F]/g, '').toUpperCase();
+      this.source.mac = compact.length === 12
+        ? compact.match(/.{2}/g)!.join(':')
+        : this.source.mac.trim();
+    }
     const autoRefresh = Number(this.source.autoRefresh);
     this.source.autoRefresh = Number.isFinite(autoRefresh) && autoRefresh > 0
       ? Math.floor(autoRefresh)

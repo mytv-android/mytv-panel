@@ -108,6 +108,16 @@
         <input matInput [(ngModel)]="source.mac" placeholder="00:1A:79:00:00:00">
       </mat-form-field>
     </div>
+    <div class="form-row">
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>{{ 'HOME.USERNAME' | translate }}</mat-label>
+        <input matInput [(ngModel)]="source.userName">
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>{{ 'HOME.PASSWORD' | translate }}</mat-label>
+        <input matInput [(ngModel)]="source.password">
+      </mat-form-field>
+    </div>
     }
 
     @if (source.sourceType === 2) {
