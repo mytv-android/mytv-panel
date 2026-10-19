@@ -33,6 +33,13 @@
       </div>
       <div class="setting-item">
         <div class="setting-label">
+          <span>{{ 'GENERAL.CAST_RECEIVER' | translate }}</span>
+          <span class="setting-desc">{{ 'GENERAL.CAST_RECEIVER_DESC' | translate }}</span>
+        </div>
+        <mat-slide-toggle [(ngModel)]="configs.castReceiverEnabled" (change)="updateConfig()"></mat-slide-toggle>
+      </div>
+      <div class="setting-item">
+        <div class="setting-label">
           <span>{{ 'GENERAL.CACHE_PATH_EXTERNAL' | translate }}</span>
           <span class="setting-desc">{{ 'GENERAL.CACHE_PATH_EXTERNAL_DESC' | translate }}</span>
         </div>

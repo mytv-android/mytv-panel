@@ -175,6 +175,7 @@ export interface AppConfigs {
     appBootLaunch?: boolean
     appPipEnable?: boolean
     appBackgroundPlayEnable?: boolean  // NEW: 后台播放（听电视），与画中画互斥
+    castReceiverEnabled?: boolean  // NEW: 投屏接收（DLNA DMR，接收手机等设备推送的视频）
     appLastLatestVersion?: string
     appAgreementAgreed?: boolean
     appStartupScreen?: string
