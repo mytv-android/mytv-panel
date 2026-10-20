@@ -197,7 +197,7 @@
     "BACKGROUND_PLAY": "后台播放",
     "BACKGROUND_PLAY_DESC": "切换至后台后继续播放音频（听电视），与画中画互斥",
     "CAST_RECEIVER": "投屏接收",
-    "CAST_RECEIVER_DESC": "DLNA / AirPlay：接收手机推送的视频；AirPlay 屏幕镜像与音频需安装投屏组件（Android 7.0+）；Miracast 在设备支持时可用",
+    "CAST_RECEIVER_DESC": "DLNA / AirPlay：接收手机推送的视频；AirPlay 屏幕镜像与音频需安装投屏组件（Android 7.0+）；Miracast 在设备支持时可用；Google Cast 接收（实验性）",
     "CACHE_PATH_EXTERNAL": "缓存写入外部存储",
     "CACHE_PATH_EXTERNAL_DESC": "把缓存目录放到外部存储的应用专属目录（Android/data），重启应用后生效"
   },

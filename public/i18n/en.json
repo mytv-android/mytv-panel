@@ -162,7 +162,7 @@
     "BACKGROUND_PLAY": "Background Playback",
     "BACKGROUND_PLAY_DESC": "Keep playing audio after switching to background (listen to TV); mutually exclusive with Picture-in-Picture",
     "CAST_RECEIVER": "Cast Receiver",
-    "CAST_RECEIVER_DESC": "DLNA / AirPlay: receive videos pushed from phones; AirPlay screen mirroring and audio require the cast component (Android 7.0+); Miracast when the device supports it",
+    "CAST_RECEIVER_DESC": "DLNA / AirPlay: receive videos pushed from phones; AirPlay screen mirroring and audio require the cast component (Android 7.0+); Miracast when the device supports it; Google Cast receiver (experimental)",
     "CACHE_PATH_EXTERNAL": "Store cache on external storage",
     "CACHE_PATH_EXTERNAL_DESC": "Move the cache directory to the app folder on external storage (Android/data); takes effect after restart"
   },
