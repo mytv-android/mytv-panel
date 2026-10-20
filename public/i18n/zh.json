@@ -197,7 +197,7 @@
     "BACKGROUND_PLAY": "后台播放",
     "BACKGROUND_PLAY_DESC": "切换至后台后继续播放音频（听电视），与画中画互斥",
     "CAST_RECEIVER": "投屏接收",
-    "CAST_RECEIVER_DESC": "DLNA：接收手机等设备推送的视频并在本机播放",
+    "CAST_RECEIVER_DESC": "DLNA / AirPlay（视频）：接收手机等设备推送的视频并在本机播放",
     "CACHE_PATH_EXTERNAL": "缓存写入外部存储",
     "CACHE_PATH_EXTERNAL_DESC": "把缓存目录放到外部存储的应用专属目录（Android/data），重启应用后生效"
   },
