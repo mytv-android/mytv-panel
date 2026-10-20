@@ -517,17 +517,56 @@
             </mat-form-field>
           </div>
 
-          <!-- Translation Font Scale -->
-          <div class="setting-item">
-            <div class="setting-label">
-              <span>{{ 'PLAYER.TRANSLATION_FONT_SCALE' | translate }}</span>
-              <span class="setting-desc">{{ 'PLAYER.TRANSLATION_FONT_SCALE_DESC' | translate }}</span>
-            </div>
-            <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
-              <input matInput type="number" step="0.1" min="0.5" max="2" [(ngModel)]="configs.videoPlayerASRTranslationFontScale" placeholder="1.0">
-            </mat-form-field>
-          </div>
         }
+
+        <!--
+          译文显示样式（关闭原文 / 大小 / 颜色）放在翻译引擎判断之外：
+          ASR-Live 引擎（Gemini、百炼、Soniox）自带译文，videoPlayerASRTranslationEngine
+          为空，若放在 @if 里这些设置对它们不可见。
+        -->
+        <!-- Translation Hide Original -->
+        <div class="setting-item">
+          <div class="setting-label">
+            <span>{{ 'PLAYER.TRANSLATION_HIDE_ORIGINAL' | translate }}</span>
+            <span class="setting-desc">{{ 'PLAYER.TRANSLATION_HIDE_ORIGINAL_DESC' | translate }}</span>
+          </div>
+          <mat-slide-toggle [(ngModel)]="configs.videoPlayerASRTranslationHideOriginal"></mat-slide-toggle>
+        </div>
+
+        <!-- Translation Font Scale -->
+        <div class="setting-item">
+          <div class="setting-label">
+            <span>{{ 'PLAYER.TRANSLATION_FONT_SCALE' | translate }}</span>
+            <span class="setting-desc">{{ 'PLAYER.TRANSLATION_FONT_SCALE_DESC' | translate }}</span>
+          </div>
+          <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
+            <input matInput type="number" step="0.1" min="0.5" max="2" [(ngModel)]="configs.videoPlayerASRTranslationFontScale" placeholder="1.0">
+          </mat-form-field>
+        </div>
+
+        <!-- Translation Color -->
+        <div class="setting-item">
+          <div class="setting-label">
+            <span>{{ 'PLAYER.TRANSLATION_COLOR' | translate }}</span>
+            <span class="setting-desc">{{ 'PLAYER.TRANSLATION_COLOR_DESC' | translate }}</span>
+          </div>
+          <div class="color-swatches">
+            <button type="button" class="swatch swatch-follow"
+                    [class.active]="!configs.videoPlayerASRTranslationColor"
+                    [attr.aria-label]="'PLAYER.TRANSLATION_COLOR_FOLLOW' | translate"
+                    (click)="configs.videoPlayerASRTranslationColor = 0">
+              {{ 'PLAYER.TRANSLATION_COLOR_FOLLOW' | translate }}
+            </button>
+            @for (c of asrTranslationColors; track c.value) {
+              <button type="button" class="swatch"
+                      [class.active]="configs.videoPlayerASRTranslationColor === c.value"
+                      [style.background]="c.css"
+                      [attr.aria-label]="c.css"
+                      [title]="c.css"
+                      (click)="configs.videoPlayerASRTranslationColor = c.value"></button>
+            }
+          </div>
+        </div>
 
         @if (configs.videoPlayerASRTranslationEngine === asrTranslationEngine.TENCENT) {
           <!-- Tencent Cloud Credentials -->

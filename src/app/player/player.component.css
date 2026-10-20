@@ -28,3 +28,36 @@ mat-form-field {
 .add-rule {
     align-self: flex-start;
 }
+
+/* 译文颜色调色板：与 Android 设置页 ColorPicker 的色板一致 */
+.color-swatches {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+}
+
+.swatch {
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    border: 1px solid var(--mat-sys-outline-variant);
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.swatch.active {
+    outline: 2px solid var(--mat-sys-primary);
+    outline-offset: 2px;
+}
+
+/* 「跟随字幕颜色」：色板无法表达 0 值，用文字按钮 */
+.swatch-follow {
+    width: auto;
+    height: auto;
+    padding: 5px 12px;
+    border-radius: 14px;
+    font: 400 12px / 16px var(--mytv-font-family);
+    color: var(--mat-sys-on-surface-variant);
+    background: transparent;
+}

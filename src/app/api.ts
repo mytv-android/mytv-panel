@@ -313,6 +313,8 @@ export interface AppConfigs {
     videoPlayerASRTranslationMicrosoftKey?: string  // NEW: ASR翻译微软 密钥
     videoPlayerASRTranslationMicrosoftRegion?: string  // NEW: ASR翻译微软 区域
     videoPlayerASRTranslationFontScale?: number  // NEW: 字幕翻译译文缩放比例（相对原文）
+    videoPlayerASRTranslationHideOriginal?: boolean  // NEW: 字幕翻译关闭原文（只显示译文）
+    videoPlayerASRTranslationColor?: number  // NEW: 字幕翻译译文颜色（ARGB，0 = 跟随字幕前景色）
     videoPlayerASRMode?: ASRMode  // NEW: ASR 模式
     videoPlayerASRLeadTimeMs?: number  // NEW: ASR 领先字幕显示提前量（毫秒）
     videoPlayerASRAutoStreamingFallback?: boolean  // NEW: ASR 非领先路径自动优先流式模型
@@ -773,6 +775,25 @@ export const ASRVadTypeLabels: { [key in ASRVadType]: string } = {
     [ASRVadType.SILERO]: 'SETTINGS.ASR_VAD_TYPE.SILERO',
     [ASRVadType.TEN]: 'SETTINGS.ASR_VAD_TYPE.TEN',
 }
+
+/**
+ * 译文颜色调色板，与 Android 设置页 ColorPicker 的 12 色一一对应。
+ * value 是 Compose Color.toArgb() 的有符号 32 位整数；0（Transparent）表示
+ * 不设 span，跟随字幕前景色。
+ */
+export const ASRTranslationColors: { value: number, css: string }[] = [
+    { value: -65536, css: '#FF0000' },      // Red
+    { value: -65281, css: '#FF00FF' },      // Magenta
+    { value: -16711936, css: '#00FF00' },   // Green
+    { value: -16776961, css: '#0000FF' },   // Blue
+    { value: -16711681, css: '#00FFFF' },   // Cyan
+    { value: -256, css: '#FFFF00' },        // Yellow
+    { value: -16777216, css: '#000000' },   // Black
+    { value: -12303292, css: '#444444' },   // DarkGray
+    { value: -7829368, css: '#888888' },    // Gray
+    { value: -3355444, css: '#CCCCCC' },    // LightGray
+    { value: -1, css: '#FFFFFF' },          // White
+]
 
 export enum ASRTranslationEngine {
     NONE = '',

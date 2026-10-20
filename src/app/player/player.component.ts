@@ -12,7 +12,7 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { TranslateService, TranslateModule } from '@ngx-translate/core';
-import { ConfigsService, AppConfigs, VideoPlayerCore, VideoPlayerRenderMode, VideoPlayerDisplayMode, VideoPlayerSeekToMode, RtspTransport, VideoPlayerDecoderConfig, VideoPlayerDecoderConfigs, AudioBalanceLevel, ASRMode, AudioBalanceLevelLabels, ASRModeLabels, ASRTranslationEngine, ASRTranslationEngineLabels, VideoPlayerFrameRateFallback, VideoPlayerFrameRateFallbackLabels, ASRVadType, ASRVadTypeLabels, VideoPlayerSuperResolutionMode, VideoPlayerFrameInterpolationMode, VideoPlayerInterpolationTargetFps, VideoPlayerAiExecutionBackend } from '../api';
+import { ConfigsService, AppConfigs, VideoPlayerCore, VideoPlayerRenderMode, VideoPlayerDisplayMode, VideoPlayerSeekToMode, RtspTransport, VideoPlayerDecoderConfig, VideoPlayerDecoderConfigs, AudioBalanceLevel, ASRMode, AudioBalanceLevelLabels, ASRModeLabels, ASRTranslationEngine, ASRTranslationEngineLabels, VideoPlayerFrameRateFallback, VideoPlayerFrameRateFallbackLabels, ASRVadType, ASRVadTypeLabels, ASRTranslationColors, VideoPlayerSuperResolutionMode, VideoPlayerFrameInterpolationMode, VideoPlayerInterpolationTargetFps, VideoPlayerAiExecutionBackend } from '../api';
 import { TextareaWithLinesComponent } from '../common/textarea-with-lines/textarea-with-lines.component';
 
 @Component({
@@ -67,6 +67,7 @@ export class PlayerComponent {
     aiExecutionBackends = Object.values(VideoPlayerAiExecutionBackend);
     asrVadTypes = Object.values(ASRVadType);
     asrVadTypeLabels = ASRVadTypeLabels;
+    asrTranslationColors = ASRTranslationColors;
     isSmallScreen = false;
 
     constructor() {
