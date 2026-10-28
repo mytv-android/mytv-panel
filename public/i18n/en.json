@@ -351,7 +351,8 @@
     },
     "VIDEO_PLAYER_RENDER_MODE": {
       "SURFACE_VIEW": "SurfaceView",
-      "TEXTURE_VIEW": "TextureView"
+      "TEXTURE_VIEW": "TextureView",
+      "GL_SURFACE_VIEW": "GLSurfaceView"
     },
     "VIDEO_PLAYER_DECODER_CONFIG": {
       "0": "None (Do not remember)",

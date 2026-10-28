@@ -620,11 +620,13 @@ export interface VideoPlayerProxyRuleList {
 export enum VideoPlayerRenderMode {
     SURFACE_VIEW = 'SURFACE_VIEW',
     TEXTURE_VIEW = 'TEXTURE_VIEW',
+    GL_SURFACE_VIEW = 'GL_SURFACE_VIEW',
 }
 
 export const VideoPlayerRenderModeLabels: { [key in VideoPlayerRenderMode]: string } = {
     [VideoPlayerRenderMode.SURFACE_VIEW]: 'SETTINGS.VIDEO_PLAYER_RENDER_MODE.SURFACE_VIEW',
     [VideoPlayerRenderMode.TEXTURE_VIEW]: 'SETTINGS.VIDEO_PLAYER_RENDER_MODE.TEXTURE_VIEW',
+    [VideoPlayerRenderMode.GL_SURFACE_VIEW]: 'SETTINGS.VIDEO_PLAYER_RENDER_MODE.GL_SURFACE_VIEW',
 }
 
 export enum VideoPlayerDisplayMode {
