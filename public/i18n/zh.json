@@ -183,6 +183,8 @@
   },
   "GENERAL": {
     "BOOT_LAUNCH": "开机自启",
+    "BOOT_SILENT_SERVICE": "开机静默自启",
+    "BOOT_SILENT_SERVICE_DESC": "开机后仅在后台启动 HTTP 服务（含 Python 等服务），不显示应用界面；节目单与订阅源在打开应用后再加载",
     "STARTUP_SCREEN": "启动页面",
     "STARTUP_SCREENS": {
       "Dashboard": "首页",

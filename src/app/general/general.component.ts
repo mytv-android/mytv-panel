@@ -44,6 +44,20 @@ export class GeneralComponent {
         this.configsService.updateData(this.configs);
     }
 
+    onBootLaunchChange() {
+        if (this.configs.appBootLaunch && this.configs.appBootSilentService) {
+            this.configs.appBootSilentService = false;
+        }
+        this.updateConfig();
+    }
+
+    onBootSilentServiceChange() {
+        if (this.configs.appBootSilentService && this.configs.appBootLaunch) {
+            this.configs.appBootLaunch = false;
+        }
+        this.updateConfig();
+    }
+
     onPipChange() {
         if (this.configs.appPipEnable && this.configs.appBackgroundPlayEnable) {
             this.configs.appBackgroundPlayEnable = false;

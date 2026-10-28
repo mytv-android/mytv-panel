@@ -148,6 +148,8 @@
   },
   "GENERAL": {
     "BOOT_LAUNCH": "Start on Boot",
+    "BOOT_SILENT_SERVICE": "Silent Boot Start",
+    "BOOT_SILENT_SERVICE_DESC": "Starts the HTTP service (including local Python services) in the background on boot without showing the app UI; EPG and sources load when the app is opened",
     "STARTUP_SCREEN": "Startup Page",
     "STARTUP_SCREENS": {
       "Dashboard": "Dashboard",

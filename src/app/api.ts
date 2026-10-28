@@ -173,6 +173,7 @@ export interface AppLog {
 
 export interface AppConfigs {
     appBootLaunch?: boolean
+    appBootSilentService?: boolean  // 开机静默启动后台服务（仅 HTTP/本地服务，不显示界面）
     appPipEnable?: boolean
     appBackgroundPlayEnable?: boolean  // NEW: 后台播放（听电视），与画中画互斥
     castReceiverEnabled?: boolean  // NEW: 投屏接收（DLNA DMR，接收手机等设备推送的视频）

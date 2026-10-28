@@ -6,7 +6,14 @@
     <mat-card-content>
       <div class="setting-item">
         <span>{{ 'GENERAL.BOOT_LAUNCH' | translate }}</span>
-        <mat-slide-toggle [(ngModel)]="configs.appBootLaunch" (change)="updateConfig()"></mat-slide-toggle>
+        <mat-slide-toggle [(ngModel)]="configs.appBootLaunch" (change)="onBootLaunchChange()"></mat-slide-toggle>
+      </div>
+      <div class="setting-item">
+        <div class="setting-label">
+          <span>{{ 'GENERAL.BOOT_SILENT_SERVICE' | translate }}</span>
+          <span class="setting-desc">{{ 'GENERAL.BOOT_SILENT_SERVICE_DESC' | translate }}</span>
+        </div>
+        <mat-slide-toggle [(ngModel)]="configs.appBootSilentService" (change)="onBootSilentServiceChange()"></mat-slide-toggle>
       </div>
       <div class="setting-item">
         <span>{{ 'GENERAL.STARTUP_SCREEN' | translate }}</span>
