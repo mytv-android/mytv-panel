@@ -1,0 +1,70 @@
+.search-content {
+    display: flex;
+    flex-direction: column;
+    min-width: 480px;
+    padding-top: 4px;
+}
+
+.search-field {
+    width: 100%;
+}
+
+.result-list {
+    max-height: 360px;
+    overflow-y: auto;
+    margin: 0 -8px;
+    padding: 0 8px 4px;
+}
+
+.group-title {
+    padding: 14px 8px 6px;
+    font: 500 12px / 16px var(--mytv-font-family);
+    color: var(--mat-sys-on-surface-variant);
+}
+
+.result-row {
+    display: flex;
+    width: 100%;
+    padding: 10px 12px;
+    border: 0;
+    border-radius: var(--mytv-radius-chip);
+    background: transparent;
+    color: var(--mat-sys-on-surface);
+    text-align: start;
+    cursor: pointer;
+}
+
+.result-row:hover {
+    background-image: linear-gradient(var(--mytv-hover-layer), var(--mytv-hover-layer));
+}
+
+.result-row.is-selected {
+    background-color: var(--mytv-selected);
+    color: var(--mytv-on-selected);
+}
+
+.row-main {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+}
+
+.row-label {
+    font: 500 14px / 20px var(--mytv-font-family);
+}
+
+.row-sub {
+    font: 400 12px / 16px var(--mytv-font-family);
+    color: var(--mat-sys-on-surface-variant);
+}
+
+.result-row.is-selected .row-sub {
+    color: var(--mytv-on-selected);
+}
+
+.empty {
+    padding: 28px 8px;
+    color: var(--mat-sys-on-surface-variant);
+    font-size: 14px;
+}

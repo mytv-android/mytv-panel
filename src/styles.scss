@@ -249,6 +249,18 @@ a:not([class*="mat-"]):focus-visible,
     border-bottom-right-radius: var(--mytv-radius-group);
 }
 
+// 设置搜索定位：短暂点亮目标行，颜色沿用“已选”令牌
+:is(.main-content .setting-item, .main-content .setting-block, .main-content .slider-container).is-search-hit {
+    background-color: var(--mytv-selected);
+    color: var(--mytv-on-selected);
+    transition: background-color 0.2s, color 0.2s;
+
+    .setting-desc,
+    .setting-hint {
+        color: var(--mytv-on-selected);
+    }
+}
+
 // 行内文字
 .setting-label,
 .setting-text {

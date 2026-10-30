@@ -1,4 +1,4 @@
-import { Component, inject, PLATFORM_ID, OnInit, DOCUMENT } from '@angular/core';
+import { Component, HostListener, inject, PLATFORM_ID, OnInit, DOCUMENT } from '@angular/core';
 import { RouterOutlet, RouterLink, RouterLinkActive, Router, NavigationEnd, ActivatedRoute, IsActiveMatchOptions } from '@angular/router';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -13,6 +13,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatMenuModule } from '@angular/material/menu';
 import { HttpService } from './request';
+import { SettingsSearchService } from './settings-search/settings-search.service';
 
 @Component({
   selector: 'app-root',
@@ -76,6 +77,7 @@ export class AppComponent implements OnInit {
   ];
 
   private translate = inject(TranslateService);
+  private settingsSearch = inject(SettingsSearchService);
   private httpService = inject(HttpService);
   private platformId = inject(PLATFORM_ID);
   private document = inject(DOCUMENT);
@@ -152,6 +154,21 @@ export class AppComponent implements OnInit {
 
   switchLanguage(lang: string) {
     this.translate.use(lang);
+  }
+
+  openSearch(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      this.settingsSearch.open();
+    }
+  }
+
+  @HostListener('document:keydown', ['$event'])
+  onDocumentKeydown(event: KeyboardEvent): void {
+    if (!isPlatformBrowser(this.platformId)) return;
+    if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === 'k') {
+      event.preventDefault();
+      this.openSearch();
+    }
   }
 
   private updateDirection(lang: string) {

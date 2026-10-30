@@ -10,6 +10,19 @@
       <span class="app-bar-title">{{ (currentTitleKey || title) | translate }}</span>
     }
     <span class="spacer"></span>
+    @if (isWide) {
+      <button class="app-search" type="button" (click)="openSearch()"
+        [attr.aria-label]="'SEARCH.SETTINGS' | translate">
+        <mat-icon>search</mat-icon>
+        <span class="app-search-label">{{ 'SEARCH.SETTINGS' | translate }}</span>
+        <span class="app-search-kbd">Ctrl K</span>
+      </button>
+    } @else {
+      <button mat-icon-button (click)="openSearch()"
+        [attr.aria-label]="'SEARCH.SETTINGS' | translate">
+        <mat-icon>search</mat-icon>
+      </button>
+    }
     <button mat-icon-button (click)="toggleTheme()">
       <mat-icon>{{ isDarkMode ? 'light_mode' : 'dark_mode' }}</mat-icon>
     </button>

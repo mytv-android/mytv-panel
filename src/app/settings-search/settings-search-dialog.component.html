@@ -1,0 +1,29 @@
+<h2 mat-dialog-title>{{ 'SEARCH.SETTINGS' | translate }}</h2>
+<mat-dialog-content class="search-content">
+  <mat-form-field appearance="outline" class="search-field">
+    <mat-icon matPrefix>search</mat-icon>
+    <input matInput #searchInput [ngModel]="query" (ngModelChange)="onQueryChange($event)"
+      [placeholder]="'SEARCH.PLACEHOLDER' | translate" (keydown)="onKeydown($event)">
+  </mat-form-field>
+
+  @if (flat.length === 0) {
+    <div class="empty">{{ 'SEARCH.NO_RESULT' | translate }}</div>
+  } @else {
+    <div class="result-list">
+      @for (group of groups; track group.pageKey) {
+        <div class="group-title">{{ group.pageKey | translate }}</div>
+        @for (entry of group.items; track entry.key) {
+          <button type="button" class="result-row" [class.is-selected]="isSelected(entry)"
+            (click)="choose(entry)" (mouseenter)="selected = flat.indexOf(entry)">
+            <span class="row-main">
+              <span class="row-label">{{ entry.labelKey | translate }}</span>
+              <span class="row-sub">
+                {{ group.pageKey | translate }}@if (entry.descKey) { · {{ entry.descKey | translate }} }
+              </span>
+            </span>
+          </button>
+        }
+      }
+    </div>
+  }
+</mat-dialog-content>

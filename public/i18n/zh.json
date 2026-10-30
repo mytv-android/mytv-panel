@@ -705,5 +705,10 @@
     "REFRESH_DONE": "脚本已更新",
     "LAST_FETCHED": "上次更新：{{time}}",
     "NEED_FILE_PATH": "请填写电视上的脚本文件路径"
+  },
+  "SEARCH": {
+    "SETTINGS": "搜索设置",
+    "PLACEHOLDER": "输入名称、说明或页面",
+    "NO_RESULT": "没有找到匹配的设置"
   }
 }

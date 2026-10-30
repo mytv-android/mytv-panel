@@ -705,5 +705,10 @@
     "REFRESH_DONE": "Script updated",
     "LAST_FETCHED": "Updated: {{time}}",
     "NEED_FILE_PATH": "Enter the script file path on the TV"
+  },
+  "SEARCH": {
+    "SETTINGS": "Search settings",
+    "PLACEHOLDER": "Search by name, description, or page",
+    "NO_RESULT": "No matching settings"
   }
 }
