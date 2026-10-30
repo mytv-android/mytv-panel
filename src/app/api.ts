@@ -212,6 +212,7 @@ export interface AppConfigs {
     iptvChannelChangeListLoop?: boolean
     iptvChannelChangeCrossGroup?: boolean
     iptvChannelChangeShowInfoPanel?: boolean  // NEW: 换台时显示频道信息面板
+    iptvChannelChangeBlackScreen?: boolean  // NEW: 换台时黑屏
     iptvChannelGroupConfigEnable?: boolean | null // NEW: 分组级参数配置开关
     epgEnable?: boolean
     epgSourceCurrent?: EpgSource
@@ -253,6 +254,10 @@ export interface AppConfigs {
     keyDownEventLongLeft?: KeyDownAction
     keyDownEventLongRight?: KeyDownAction
     keyDownEventLongSelect?: KeyDownAction
+    gestureZoneLeftAction?: GestureZoneAction
+    gestureZoneMiddleAction?: GestureZoneAction
+    gestureZoneRightAction?: GestureZoneAction
+    gestureReverseChannelDirection?: boolean
     updateForceRemind?: boolean
     updateChannel?: string
     globalVideoPlayerCore?: VideoPlayerCore
@@ -389,6 +394,20 @@ export interface VideoPlayerDecoderConfigs {
     pattern: string;
     core: VideoPlayerCore;
     forceSoftDecode: boolean;
+}
+
+export enum GestureZoneAction {
+    Brightness = 'Brightness',
+    Volume = 'Volume',
+    ChangeChannel = 'ChangeChannel',
+    NoAction = 'NoAction',
+}
+
+export const GestureZoneActionLabels: { [key in GestureZoneAction]: string } = {
+    [GestureZoneAction.Brightness]: 'SETTINGS.GESTURE_ZONE_ACTION.Brightness',
+    [GestureZoneAction.Volume]: 'SETTINGS.GESTURE_ZONE_ACTION.Volume',
+    [GestureZoneAction.ChangeChannel]: 'SETTINGS.GESTURE_ZONE_ACTION.ChangeChannel',
+    [GestureZoneAction.NoAction]: 'SETTINGS.KEY_DOWN_ACTION.NoAction',
 }
 
 export const KeyDownActionLabels: { [key in KeyDownAction]: string } = {

@@ -28,7 +28,16 @@
     "CROSS_GROUP": "تغيير القناة عبر المجموعات",
     "CHANNEL_CHANGE_SHOW_INFO": "عرض معلومات القناة عند التبديل",
     "CHANNEL_CHANGE_SHOW_INFO_DESC": "عرض معلومات تفصيلية للقناة الحالية في أسفل الشاشة عند تبديل القنوات",
-    "KEY_BEHAVIOR": "سلوك المفتاح/الإيماءة",
+    "CHANNEL_CHANGE_BLACK_SCREEN": "شاشة سوداء عند تبديل القناة",
+    "CHANNEL_CHANGE_BLACK_SCREEN_DESC": "تغطية القناة السابقة بشاشة سوداء حتى تصبح القناة الجديدة جاهزة",
+    "GESTURE_ZONES": "التمرير بملء الشاشة",
+    "GESTURE_ZONES_DESC": "تعيين إجراء تمرير رأسي لكل من المنطقة اليسرى والوسطى واليمنى",
+    "GESTURE_ZONE_LEFT": "المنطقة اليسرى",
+    "GESTURE_ZONE_MIDDLE": "المنطقة الوسطى",
+    "GESTURE_ZONE_RIGHT": "المنطقة اليمنى",
+    "GESTURE_REVERSE_CHANNEL": "عكس اتجاه تبديل القناة",
+    "GESTURE_REVERSE_CHANNEL_DESC": "عند التمكين، يتم عكس اتجاه القناة بين التمرير لأعلى والتمرير لأسفل",
+    "KEY_BEHAVIOR": "سلوك الأزرار",
     "LONG_KEY_BEHAVIOR": "سلوك الضغط الطويل",
     "KEY_UP": "مفتاح لأعلى",
     "KEY_DOWN": "مفتاح لأسفل",
@@ -393,6 +402,12 @@
       "AUTO": "تلقائي",
       "NNAPI": "تسريع الجهاز عبر NNAPI",
       "CPU": "CPU"
+    },
+    "GESTURE_ZONE_ACTION": {
+      "Brightness": "السطوع",
+      "Volume": "مستوى الصوت",
+      "ChangeChannel": "تبديل القناة",
+      "NoAction": "بدون إجراء"
     },
     "KEY_DOWN_ACTION": {
       "ChangeCurrentChannelToPrev": "القناة السابقة",

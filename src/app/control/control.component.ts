@@ -6,7 +6,14 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { TranslateModule } from '@ngx-translate/core';
-import { ConfigsService, AppConfigs, KeyDownAction, KeyDownActionLabels } from '../api';
+import {
+    ConfigsService,
+    AppConfigs,
+    KeyDownAction,
+    KeyDownActionLabels,
+    GestureZoneAction,
+    GestureZoneActionLabels,
+} from '../api';
 
 @Component({
     selector: 'app-control',
@@ -32,6 +39,8 @@ export class ControlComponent {
 
     keyDownActions = Object.values(KeyDownAction);
     keyDownActionLabels = KeyDownActionLabels;
+    gestureZoneActions = Object.values(GestureZoneAction);
+    gestureZoneActionLabels = GestureZoneActionLabels;
 
     constructor() {
         effect(() => {

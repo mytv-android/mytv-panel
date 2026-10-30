@@ -28,7 +28,16 @@
     "CROSS_GROUP": "频道切换跨分组",
     "CHANNEL_CHANGE_SHOW_INFO": "换台时显示频道信息",
     "CHANNEL_CHANGE_SHOW_INFO_DESC": "换台时在屏幕底部显示当前频道的详细信息",
-    "KEY_BEHAVIOR": "按键（手势）行为",
+    "CHANNEL_CHANGE_BLACK_SCREEN": "换台时黑屏",
+    "CHANNEL_CHANGE_BLACK_SCREEN_DESC": "换台后到新画面出现前，用黑屏盖住上一频道的残留画面",
+    "GESTURE_ZONES": "全屏滑动",
+    "GESTURE_ZONES_DESC": "为左、中、右三个区域分别设置竖向滑动执行的操作",
+    "GESTURE_ZONE_LEFT": "左侧区域",
+    "GESTURE_ZONE_MIDDLE": "中间区域",
+    "GESTURE_ZONE_RIGHT": "右侧区域",
+    "GESTURE_REVERSE_CHANNEL": "反转换台方向",
+    "GESTURE_REVERSE_CHANNEL_DESC": "开启后，上滑与下滑对应的频道方向对调",
+    "KEY_BEHAVIOR": "按键行为",
     "LONG_KEY_BEHAVIOR": "长按按键行为",
     "KEY_UP": "上键",
     "KEY_DOWN": "下键",
@@ -428,6 +437,12 @@
       "AUTO": "自动选择",
       "NNAPI": "NNAPI 设备加速",
       "CPU": "CPU"
+    },
+    "GESTURE_ZONE_ACTION": {
+      "Brightness": "亮度",
+      "Volume": "音量",
+      "ChangeChannel": "换台",
+      "NoAction": "无操作"
     },
     "KEY_DOWN_ACTION": {
       "ChangeCurrentChannelToPrev": "切换上一个频道",

@@ -19,6 +19,60 @@
         </div>
         <mat-slide-toggle [(ngModel)]="configs.iptvChannelChangeShowInfoPanel" (change)="updateConfig()"></mat-slide-toggle>
       </div>
+      <div class="setting-item">
+        <div class="setting-label">
+          <span>{{ 'CONTROL.CHANNEL_CHANGE_BLACK_SCREEN' | translate }}</span>
+          <span class="setting-desc">{{ 'CONTROL.CHANNEL_CHANGE_BLACK_SCREEN_DESC' | translate }}</span>
+        </div>
+        <mat-slide-toggle [(ngModel)]="configs.iptvChannelChangeBlackScreen" (change)="updateConfig()"></mat-slide-toggle>
+      </div>
+
+      <h3>{{ 'CONTROL.GESTURE_ZONES' | translate }}</h3>
+      <div class="setting-desc" style="margin: 0 0 8px;">{{ 'CONTROL.GESTURE_ZONES_DESC' | translate }}</div>
+
+      <div class="setting-item">
+        <span>{{ 'CONTROL.GESTURE_ZONE_LEFT' | translate }}</span>
+        <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
+          <mat-select [(ngModel)]="configs.gestureZoneLeftAction" (selectionChange)="updateConfig()">
+            @for (action of gestureZoneActions; track action) {
+              <mat-option [value]="action">
+                {{ gestureZoneActionLabels[action] | translate }}
+              </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="setting-item">
+        <span>{{ 'CONTROL.GESTURE_ZONE_MIDDLE' | translate }}</span>
+        <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
+          <mat-select [(ngModel)]="configs.gestureZoneMiddleAction" (selectionChange)="updateConfig()">
+            @for (action of gestureZoneActions; track action) {
+              <mat-option [value]="action">
+                {{ gestureZoneActionLabels[action] | translate }}
+              </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="setting-item">
+        <span>{{ 'CONTROL.GESTURE_ZONE_RIGHT' | translate }}</span>
+        <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
+          <mat-select [(ngModel)]="configs.gestureZoneRightAction" (selectionChange)="updateConfig()">
+            @for (action of gestureZoneActions; track action) {
+              <mat-option [value]="action">
+                {{ gestureZoneActionLabels[action] | translate }}
+              </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="setting-item">
+        <div class="setting-label">
+          <span>{{ 'CONTROL.GESTURE_REVERSE_CHANNEL' | translate }}</span>
+          <span class="setting-desc">{{ 'CONTROL.GESTURE_REVERSE_CHANNEL_DESC' | translate }}</span>
+        </div>
+        <mat-slide-toggle [(ngModel)]="configs.gestureReverseChannelDirection" (change)="updateConfig()"></mat-slide-toggle>
+      </div>
 
       <h3>{{ 'CONTROL.KEY_BEHAVIOR' | translate }}</h3>
 
