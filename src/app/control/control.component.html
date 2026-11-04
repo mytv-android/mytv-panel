@@ -91,6 +91,70 @@
         </mat-form-field>
       </div>
 
+      <h3>{{ 'CONTROL.LONG_KEY_BEHAVIOR' | translate }}</h3>
+
+      <div class="setting-item">
+        <span>{{ 'CONTROL.KEY_UP' | translate }}</span>
+        <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
+          <mat-select [(ngModel)]="configs.keyDownEventLongUp" (selectionChange)="updateConfig()">
+            @for (action of keyDownActions; track action) {
+              <mat-option [value]="action">
+                {{ keyDownActionLabels[action] | translate }}
+              </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="setting-item">
+        <span>{{ 'CONTROL.KEY_DOWN' | translate }}</span>
+        <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
+          <mat-select [(ngModel)]="configs.keyDownEventLongDown" (selectionChange)="updateConfig()">
+            @for (action of keyDownActions; track action) {
+              <mat-option [value]="action">
+                {{ keyDownActionLabels[action] | translate }}
+              </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="setting-item">
+        <span>{{ 'CONTROL.KEY_LEFT' | translate }}</span>
+        <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
+          <mat-select [(ngModel)]="configs.keyDownEventLongLeft" (selectionChange)="updateConfig()">
+            @for (action of keyDownActions; track action) {
+              <mat-option [value]="action">
+                {{ keyDownActionLabels[action] | translate }}
+              </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="setting-item">
+        <span>{{ 'CONTROL.KEY_RIGHT' | translate }}</span>
+        <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
+          <mat-select [(ngModel)]="configs.keyDownEventLongRight" (selectionChange)="updateConfig()">
+            @for (action of keyDownActions; track action) {
+              <mat-option [value]="action">
+                {{ keyDownActionLabels[action] | translate }}
+              </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="setting-item">
+        <span>{{ 'CONTROL.KEY_SELECT' | translate }}</span>
+        <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
+          <mat-select [(ngModel)]="configs.keyDownEventLongSelect" (selectionChange)="updateConfig()">
+            @for (action of keyDownActions; track action) {
+              <mat-option [value]="action">
+                {{ keyDownActionLabels[action] | translate }}
+              </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <h3>{{ 'CONTROL.SWIPE' | translate }}</h3>
+
       <div class="setting-item">
         <span>{{ 'CONTROL.GESTURE_ZONE_LEFT_UP' | translate }}</span>
         <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
@@ -164,68 +228,6 @@
         </mat-form-field>
       </div>
 
-      <h3>{{ 'CONTROL.LONG_KEY_BEHAVIOR' | translate }}</h3>
-
-      <div class="setting-item">
-        <span>{{ 'CONTROL.KEY_UP' | translate }}</span>
-        <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
-          <mat-select [(ngModel)]="configs.keyDownEventLongUp" (selectionChange)="updateConfig()">
-            @for (action of keyDownActions; track action) {
-              <mat-option [value]="action">
-                {{ keyDownActionLabels[action] | translate }}
-              </mat-option>
-            }
-          </mat-select>
-        </mat-form-field>
-      </div>
-      <div class="setting-item">
-        <span>{{ 'CONTROL.KEY_DOWN' | translate }}</span>
-        <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
-          <mat-select [(ngModel)]="configs.keyDownEventLongDown" (selectionChange)="updateConfig()">
-            @for (action of keyDownActions; track action) {
-              <mat-option [value]="action">
-                {{ keyDownActionLabels[action] | translate }}
-              </mat-option>
-            }
-          </mat-select>
-        </mat-form-field>
-      </div>
-      <div class="setting-item">
-        <span>{{ 'CONTROL.KEY_LEFT' | translate }}</span>
-        <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
-          <mat-select [(ngModel)]="configs.keyDownEventLongLeft" (selectionChange)="updateConfig()">
-            @for (action of keyDownActions; track action) {
-              <mat-option [value]="action">
-                {{ keyDownActionLabels[action] | translate }}
-              </mat-option>
-            }
-          </mat-select>
-        </mat-form-field>
-      </div>
-      <div class="setting-item">
-        <span>{{ 'CONTROL.KEY_RIGHT' | translate }}</span>
-        <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
-          <mat-select [(ngModel)]="configs.keyDownEventLongRight" (selectionChange)="updateConfig()">
-            @for (action of keyDownActions; track action) {
-              <mat-option [value]="action">
-                {{ keyDownActionLabels[action] | translate }}
-              </mat-option>
-            }
-          </mat-select>
-        </mat-form-field>
-      </div>
-      <div class="setting-item">
-        <span>{{ 'CONTROL.KEY_SELECT' | translate }}</span>
-        <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
-          <mat-select [(ngModel)]="configs.keyDownEventLongSelect" (selectionChange)="updateConfig()">
-            @for (action of keyDownActions; track action) {
-              <mat-option [value]="action">
-                {{ keyDownActionLabels[action] | translate }}
-              </mat-option>
-            }
-          </mat-select>
-        </mat-form-field>
-      </div>
-    </mat-card-content>
+</mat-card-content>
   </mat-card>
 </div>
