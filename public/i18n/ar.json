@@ -30,14 +30,14 @@
     "CHANNEL_CHANGE_SHOW_INFO_DESC": "عرض معلومات تفصيلية للقناة الحالية في أسفل الشاشة عند تبديل القنوات",
     "CHANNEL_CHANGE_BLACK_SCREEN": "شاشة سوداء عند تبديل القناة",
     "CHANNEL_CHANGE_BLACK_SCREEN_DESC": "تغطية القناة السابقة بشاشة سوداء حتى تصبح القناة الجديدة جاهزة",
-    "GESTURE_ZONES": "التمرير بملء الشاشة",
-    "GESTURE_ZONES_DESC": "تعيين إجراء تمرير رأسي لكل من المنطقة اليسرى والوسطى واليمنى",
-    "GESTURE_ZONE_LEFT": "المنطقة اليسرى",
-    "GESTURE_ZONE_MIDDLE": "المنطقة الوسطى",
-    "GESTURE_ZONE_RIGHT": "المنطقة اليمنى",
-    "GESTURE_REVERSE_CHANNEL": "عكس اتجاه تبديل القناة",
-    "GESTURE_REVERSE_CHANNEL_DESC": "عند التمكين، يتم عكس اتجاه القناة بين التمرير لأعلى والتمرير لأسفل",
-    "KEY_BEHAVIOR": "سلوك الأزرار",
+    "KEY_BEHAVIOR": "سلوك الأزرار والتمرير",
+    "KEY_BEHAVIOR_DESC": "تخصيص إجراءات أزرار الجهاز والتمرير الرأسي في المناطق اليسرى والوسطى واليمنى",
+    "GESTURE_ZONE_LEFT_UP": "التمرير لأعلى في المنطقة اليسرى",
+    "GESTURE_ZONE_LEFT_DOWN": "التمرير لأسفل في المنطقة اليسرى",
+    "GESTURE_ZONE_MIDDLE_UP": "التمرير لأعلى في المنطقة الوسطى",
+    "GESTURE_ZONE_MIDDLE_DOWN": "التمرير لأسفل في المنطقة الوسطى",
+    "GESTURE_ZONE_RIGHT_UP": "التمرير لأعلى في المنطقة اليمنى",
+    "GESTURE_ZONE_RIGHT_DOWN": "التمرير لأسفل في المنطقة اليمنى",
     "LONG_KEY_BEHAVIOR": "سلوك الضغط الطويل",
     "KEY_UP": "مفتاح لأعلى",
     "KEY_DOWN": "مفتاح لأسفل",
@@ -403,12 +403,6 @@
       "NNAPI": "تسريع الجهاز عبر NNAPI",
       "CPU": "CPU"
     },
-    "GESTURE_ZONE_ACTION": {
-      "Brightness": "السطوع",
-      "Volume": "مستوى الصوت",
-      "ChangeChannel": "تبديل القناة",
-      "NoAction": "بدون إجراء"
-    },
     "KEY_DOWN_ACTION": {
       "ChangeCurrentChannelToPrev": "القناة السابقة",
       "ChangeCurrentChannelToNext": "القناة التالية",
@@ -422,7 +416,11 @@
       "ToVideoPlayerControllerScreen": "فتح وحدة تحكم المشغل",
       "NoAction": "بدون إجراء",
       "SeekForward": "التقديم السريع",
-      "SeekBackward": "الترجيع"
+      "SeekBackward": "الترجيع",
+      "BrightnessUp": "السطوع +",
+      "BrightnessDown": "السطوع -",
+      "VolumeUp": "مستوى الصوت +",
+      "VolumeDown": "مستوى الصوت -"
     },
     "AUDIO_BALANCE_LEVEL": {
       "Off": "معطل",

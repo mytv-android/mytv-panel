@@ -30,14 +30,14 @@
     "CHANNEL_CHANGE_SHOW_INFO_DESC": "Show detailed info of the current channel at the bottom of the screen when switching channels",
     "CHANNEL_CHANGE_BLACK_SCREEN": "Black Screen When Switching",
     "CHANNEL_CHANGE_BLACK_SCREEN_DESC": "Cover the previous channel with a black screen until the new channel is ready",
-    "GESTURE_ZONES": "Full-screen Swipe",
-    "GESTURE_ZONES_DESC": "Assign a vertical swipe action to each of the left, middle and right zones",
-    "GESTURE_ZONE_LEFT": "Left Zone",
-    "GESTURE_ZONE_MIDDLE": "Middle Zone",
-    "GESTURE_ZONE_RIGHT": "Right Zone",
-    "GESTURE_REVERSE_CHANNEL": "Reverse Channel Direction",
-    "GESTURE_REVERSE_CHANNEL_DESC": "Swap the channel direction of swipe up and swipe down",
-    "KEY_BEHAVIOR": "Key Behavior",
+    "KEY_BEHAVIOR": "Key / Swipe Behavior",
+    "KEY_BEHAVIOR_DESC": "Customize remote key and full-screen left/middle/right zone swipe actions",
+    "GESTURE_ZONE_LEFT_UP": "Swipe Up on Left Zone",
+    "GESTURE_ZONE_LEFT_DOWN": "Swipe Down on Left Zone",
+    "GESTURE_ZONE_MIDDLE_UP": "Swipe Up on Middle Zone",
+    "GESTURE_ZONE_MIDDLE_DOWN": "Swipe Down on Middle Zone",
+    "GESTURE_ZONE_RIGHT_UP": "Swipe Up on Right Zone",
+    "GESTURE_ZONE_RIGHT_DOWN": "Swipe Down on Right Zone",
     "LONG_KEY_BEHAVIOR": "Long Press Key Behavior",
     "KEY_UP": "Up Key",
     "KEY_DOWN": "Down Key",
@@ -403,12 +403,6 @@
       "NNAPI": "NNAPI Device Acceleration",
       "CPU": "CPU"
     },
-    "GESTURE_ZONE_ACTION": {
-      "Brightness": "Brightness",
-      "Volume": "Volume",
-      "ChangeChannel": "Change Channel",
-      "NoAction": "No Action"
-    },
     "KEY_DOWN_ACTION": {
       "ChangeCurrentChannelToPrev": "Previous Channel",
       "ChangeCurrentChannelToNext": "Next Channel",
@@ -422,7 +416,11 @@
       "ToVideoPlayerControllerScreen": "Open Player Controller",
       "NoAction": "No Action",
       "SeekForward": "Seek Forward",
-      "SeekBackward": "Seek Backward"
+      "SeekBackward": "Seek Backward",
+      "BrightnessUp": "Brightness +",
+      "BrightnessDown": "Brightness -",
+      "VolumeUp": "Volume +",
+      "VolumeDown": "Volume -"
     },
     "AUDIO_BALANCE_LEVEL": {
       "Off": "Off",

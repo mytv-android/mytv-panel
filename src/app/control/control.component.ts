@@ -11,8 +11,6 @@ import {
     AppConfigs,
     KeyDownAction,
     KeyDownActionLabels,
-    GestureZoneAction,
-    GestureZoneActionLabels,
 } from '../api';
 
 @Component({
@@ -39,8 +37,6 @@ export class ControlComponent {
 
     keyDownActions = Object.values(KeyDownAction);
     keyDownActionLabels = KeyDownActionLabels;
-    gestureZoneActions = Object.values(GestureZoneAction);
-    gestureZoneActionLabels = GestureZoneActionLabels;
 
     constructor() {
         effect(() => {

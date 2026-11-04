@@ -254,10 +254,12 @@ export interface AppConfigs {
     keyDownEventLongLeft?: KeyDownAction
     keyDownEventLongRight?: KeyDownAction
     keyDownEventLongSelect?: KeyDownAction
-    gestureZoneLeftAction?: GestureZoneAction
-    gestureZoneMiddleAction?: GestureZoneAction
-    gestureZoneRightAction?: GestureZoneAction
-    gestureReverseChannelDirection?: boolean
+    gestureZoneLeftUp?: KeyDownAction
+    gestureZoneLeftDown?: KeyDownAction
+    gestureZoneMiddleUp?: KeyDownAction
+    gestureZoneMiddleDown?: KeyDownAction
+    gestureZoneRightUp?: KeyDownAction
+    gestureZoneRightDown?: KeyDownAction
     updateForceRemind?: boolean
     updateChannel?: string
     globalVideoPlayerCore?: VideoPlayerCore
@@ -384,6 +386,10 @@ export enum KeyDownAction {
     NoAction = 'NoAction',
     SeekForward = 'SeekForward',
     SeekBackward = 'SeekBackward',
+    BrightnessUp = 'BrightnessUp',
+    BrightnessDown = 'BrightnessDown',
+    VolumeUp = 'VolumeUp',
+    VolumeDown = 'VolumeDown',
 }
 
 export interface VideoPlayerDecoderConfigList {
@@ -394,20 +400,6 @@ export interface VideoPlayerDecoderConfigs {
     pattern: string;
     core: VideoPlayerCore;
     forceSoftDecode: boolean;
-}
-
-export enum GestureZoneAction {
-    Brightness = 'Brightness',
-    Volume = 'Volume',
-    ChangeChannel = 'ChangeChannel',
-    NoAction = 'NoAction',
-}
-
-export const GestureZoneActionLabels: { [key in GestureZoneAction]: string } = {
-    [GestureZoneAction.Brightness]: 'SETTINGS.GESTURE_ZONE_ACTION.Brightness',
-    [GestureZoneAction.Volume]: 'SETTINGS.GESTURE_ZONE_ACTION.Volume',
-    [GestureZoneAction.ChangeChannel]: 'SETTINGS.GESTURE_ZONE_ACTION.ChangeChannel',
-    [GestureZoneAction.NoAction]: 'SETTINGS.KEY_DOWN_ACTION.NoAction',
 }
 
 export const KeyDownActionLabels: { [key in KeyDownAction]: string } = {
@@ -424,6 +416,10 @@ export const KeyDownActionLabels: { [key in KeyDownAction]: string } = {
     [KeyDownAction.NoAction]: 'SETTINGS.KEY_DOWN_ACTION.NoAction',
     [KeyDownAction.SeekForward]: 'SETTINGS.KEY_DOWN_ACTION.SeekForward',
     [KeyDownAction.SeekBackward]: 'SETTINGS.KEY_DOWN_ACTION.SeekBackward',
+    [KeyDownAction.BrightnessUp]: 'SETTINGS.KEY_DOWN_ACTION.BrightnessUp',
+    [KeyDownAction.BrightnessDown]: 'SETTINGS.KEY_DOWN_ACTION.BrightnessDown',
+    [KeyDownAction.VolumeUp]: 'SETTINGS.KEY_DOWN_ACTION.VolumeUp',
+    [KeyDownAction.VolumeDown]: 'SETTINGS.KEY_DOWN_ACTION.VolumeDown',
 }
 export enum WebViewCore {
     SYSTEM = 'SYSTEM',
