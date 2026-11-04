@@ -1,6 +1,5 @@
 import { Component, OnInit, signal, Renderer2, OnDestroy, ViewChild, AfterViewInit, Inject, PLATFORM_ID } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
-import { MatCardModule } from '@angular/material/card';
 import { MatTableModule, MatTableDataSource } from '@angular/material/table';
 import { MatPaginatorModule, MatPaginator } from '@angular/material/paginator';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -16,7 +15,6 @@ import { AppApi, AppLog } from '../api';
   standalone: true,
   imports: [
     CommonModule,
-    MatCardModule,
     MatTableModule,
     MatPaginatorModule,
     MatFormFieldModule,
@@ -28,11 +26,7 @@ import { AppApi, AppLog } from '../api';
     TranslateModule
   ],
   templateUrl: './log.component.html',
-  styleUrl: './log.component.css',
-  host: {
-    'animate.enter': 'enter',
-    'animate.leave': 'leave'
-  }
+  styleUrl: './log.component.css'
 })
 export class LogComponent implements OnInit, OnDestroy, AfterViewInit {
   dataSource = new MatTableDataSource<AppLog>([]);

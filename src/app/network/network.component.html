@@ -1,28 +1,82 @@
-<div class="container">
-    <mat-card class="card">
-        <mat-card-header>
-            <mat-card-title>{{ '网络' | translate }}</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-            <div class="setting-item">
-                <div class="setting-label">
-                    <span>{{ 'NETWORK.RETRY_COUNT' | translate }}</span>
-                    <span class="setting-hint">{{ 'NETWORK.RETRY_COUNT_HINT' | translate }}</span>
-                </div>
-                <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
-                    <input matInput type="number" [(ngModel)]="configs.networkRetryCount" (change)="updateConfig()">
-                </mat-form-field>
-            </div>
-            <div class="setting-item">
-                <div class="setting-label">
-                    <span>{{ 'NETWORK.RETRY_INTERVAL' | translate }}</span>
-                    <span class="setting-hint">{{ 'NETWORK.RETRY_INTERVAL_HINT' | translate }}</span>
-                </div>
-                <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
-                    <input matInput type="number" [(ngModel)]="configs.networkRetryInterval" (change)="updateConfig()">
-                    <span matSuffix>ms</span>
-                </mat-form-field>
-            </div>
-        </mat-card-content>
-    </mat-card>
-</div>
+<app-settings-page label="TV.settings_category_network" summary="TV.settings_category_network_summary">
+
+  <app-settings-section label="TV.settings_section_network_retry">
+    <app-settings-row label="TV.ui_network_retry_count" desc="TV.ui_network_retry_count_desc">
+      <mat-form-field appearance="outline" subscriptSizing="dynamic" class="s-narrow">
+        <mat-select [(ngModel)]="c.networkRetryCount" (selectionChange)="save()">
+          @for (n of retryCountOptions; track n) {
+          <mat-option [value]="n">{{ n }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+    </app-settings-row>
+
+    <app-settings-row label="TV.ui_network_retry_interval">
+      <mat-form-field appearance="outline" subscriptSizing="dynamic" class="s-narrow">
+        <mat-select [(ngModel)]="c.networkRetryInterval" (selectionChange)="save()">
+          @for (ms of retryIntervalOptions; track ms) {
+          <mat-option [value]="ms">{{ humanizeMs(ms) }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+    </app-settings-row>
+  </app-settings-section>
+
+  <app-settings-section label="TV.settings_section_network_proxy">
+    <app-settings-row label="TV.ui_player_view_proxy" desc="TV.settings_network_proxy_desc">
+      <mat-form-field below appearance="outline" subscriptSizing="dynamic" class="s-wide">
+        <input matInput [(ngModel)]="c.videoPlayerProxy" (change)="save()"
+          [placeholder]="'TV.settings_value_not_set' | translate">
+      </mat-form-field>
+    </app-settings-row>
+
+    <app-settings-row label="TV.settings_network_proxy_rules" desc="TV.settings_network_proxy_rules_desc">
+      <span class="s-row-value">{{ 'TV.ui_player_view_proxy_rules_count' | translate: { p1: c.videoPlayerProxyRuleList?.list?.length ?? 0 } }}</span>
+      <button matButton="tonal" (click)="addProxyRule()">
+        <mat-icon>add</mat-icon> {{ 'PLAYER.ADD_CONFIG' | translate }}
+      </button>
+      @if (c.videoPlayerProxyRuleList?.list?.length) {
+      <div below class="s-list">
+        @for (item of c.videoPlayerProxyRuleList!.list; track $index) {
+        <div class="s-list-item">
+          <mat-form-field appearance="outline" subscriptSizing="dynamic" class="s-grow">
+            <mat-label>{{ 'PLAYER.REGEX_PATTERN' | translate }}</mat-label>
+            <input matInput [(ngModel)]="item.pattern" (change)="save()">
+          </mat-form-field>
+          <mat-form-field appearance="outline" subscriptSizing="dynamic" class="s-grow">
+            <mat-label>{{ 'TV.ui_player_view_proxy' | translate }}</mat-label>
+            <input matInput [(ngModel)]="item.proxy" (change)="save()">
+          </mat-form-field>
+          <button mat-icon-button (click)="removeProxyRule($index)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+        }
+      </div>
+      }
+    </app-settings-row>
+  </app-settings-section>
+
+  <app-settings-advanced [count]="3">
+    <app-settings-row label="TV.ui_player_view_user_agent" desc="TV.settings_network_ua_desc">
+      <mat-form-field below appearance="outline" subscriptSizing="dynamic" class="s-wide">
+        <input matInput [(ngModel)]="c.videoPlayerUserAgent" (change)="save()">
+      </mat-form-field>
+    </app-settings-row>
+
+    <app-settings-row label="TV.ui_player_view_custom_headers" desc="TV.settings_network_headers_desc">
+      <span class="s-row-value">{{ headerCount ? ('TV.settings_network_headers_count' | translate: { p1: headerCount }) : ('TV.settings_value_not_set' | translate) }}</span>
+      <div below>
+        <app-textarea-with-lines class="s-wide" [rows]="3" [(ngModel)]="c.videoPlayerHeaders" (change)="save()"></app-textarea-with-lines>
+        <div class="s-row-detail">{{ 'TV.ui_player_view_custom_headers_hint' | translate }}</div>
+      </div>
+    </app-settings-row>
+
+    <app-settings-row label="TV.ui_player_view_dns" desc="TV.ui_player_view_dns_desc" media3>
+      <mat-form-field below appearance="outline" subscriptSizing="dynamic" class="s-wide">
+        <input matInput [(ngModel)]="c.videoPlayerDns" (change)="save()"
+          [placeholder]="'TV.settings_value_system_default' | translate">
+      </mat-form-field>
+    </app-settings-row>
+  </app-settings-advanced>
+</app-settings-page>

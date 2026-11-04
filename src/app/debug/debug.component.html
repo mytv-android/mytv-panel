@@ -1,28 +1,36 @@
-<div class="container">
-  <mat-card class="card">
-    <mat-card-header>
-        <mat-card-title>{{ '调试' | translate }}</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      <div class="setting-item">
-        <span>{{ 'DEBUG.SHOW_FPS' | translate }}</span>
-        <mat-slide-toggle [ngModel]="configs.data().debugShowFps" (ngModelChange)="toggleShowFps()">
-        </mat-slide-toggle>
-      </div>
-      <div class="setting-item">
-        <span>{{ 'DEBUG.SHOW_PLAYER_METADATA' | translate }}</span>
-        <mat-slide-toggle [ngModel]="configs.data().debugShowVideoPlayerMetadata" (ngModelChange)="toggleShowVideoPlayerMetadata()">
-        </mat-slide-toggle>
-      </div>
-      <div class="setting-item">
-        <span>{{ 'DEBUG.SHOW_LAYOUT_GRIDS' | translate }}</span>
-        <mat-slide-toggle [ngModel]="configs.data().debugShowLayoutGrids" (ngModelChange)="toggleShowLayoutGrids()">
-        </mat-slide-toggle>
-      </div>
-      <div class="setting-item clickable no-border" (click)="exportData()">
-        <span>{{ 'DEBUG.EXPORT_LOGCAT' | translate }}</span>
-        <mat-icon>chevron_right</mat-icon>
-      </div>
-    </mat-card-content>
-  </mat-card>
-</div>
+<app-settings-page label="TV.settings_category_debug" summary="TV.settings_category_debug_summary">
+
+  <app-settings-section label="TV.settings_section_debug_playback">
+    <app-settings-row label="TV.settings_debug_player_info" desc="TV.ui_debug_show_player_metadata_desc">
+      <mat-slide-toggle [(ngModel)]="c.debugShowVideoPlayerMetadata" (change)="save()"></mat-slide-toggle>
+    </app-settings-row>
+
+    <!-- 网页面板独有：导出设备 logcat -->
+    <app-settings-row label="DEBUG.EXPORT_LOGCAT">
+      <button mat-icon-button (click)="exportLogcat()" [attr.aria-label]="'DEBUG.EXPORT_LOGCAT' | translate">
+        <mat-icon>download</mat-icon>
+      </button>
+    </app-settings-row>
+
+    <app-settings-row label="TV.ui_channel_view_log" desc="TV.settings_debug_log_desc"></app-settings-row>
+    <div class="s-card-body s-embed">
+      <app-log></app-log>
+    </div>
+  </app-settings-section>
+
+  <app-settings-section label="TV.settings_section_debug_smooth">
+    <app-settings-row label="TV.ui_debug_show_fps" desc="TV.ui_debug_show_fps_desc">
+      <mat-slide-toggle [(ngModel)]="c.debugShowFps" (change)="save()"></mat-slide-toggle>
+    </app-settings-row>
+
+    <app-settings-row label="TV.ui_focus_optimize" desc="TV.ui_focus_optimize_desc">
+      <mat-slide-toggle [(ngModel)]="c.uiFocusOptimize" (change)="save()"></mat-slide-toggle>
+    </app-settings-row>
+  </app-settings-section>
+
+  <app-settings-advanced [count]="1">
+    <app-settings-row label="TV.ui_debug_show_layout_grids" desc="TV.settings_debug_layout_grids_desc">
+      <mat-slide-toggle [(ngModel)]="c.debugShowLayoutGrids" (change)="save()"></mat-slide-toggle>
+    </app-settings-row>
+  </app-settings-advanced>
+</app-settings-page>

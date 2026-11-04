@@ -1,0 +1,32 @@
+/* 订阅源行：名称 + 类型标签，第二行地址 */
+.select-row {
+    min-height: 72px;
+}
+
+.source-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+}
+
+.source-name {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.source-title .mytv-tag {
+    flex: none;
+}
+
+.select-row-actions {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+mat-paginator {
+    margin-top: 4px;
+}

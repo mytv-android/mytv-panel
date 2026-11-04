@@ -30,18 +30,31 @@ export class SettingsSearchService {
       });
   }
 
-  /** 页面行没有锚点，用当前语言的行标题文本找目标行；异步加载的页面最多等 1.5s。 */
+  /**
+   * 页面行没有锚点，用当前语言的行标题文本找目标行；异步加载的页面最多等 1.5s。
+   * 分类页的行是 .s-row（标题在 .s-row-title 第一个 span），嵌入的旧组件和展开细项仍是 .setting-item / .setting-block。
+   * 目标在收起的「高级设置」卡片里时先展开它。
+   */
   private highlight(labelKey: string): void {
     if (!isPlatformBrowser(this.platformId)) return;
     const label = this.translate.instant(labelKey);
     const startedAt = Date.now();
+    const titleOf = (element: HTMLElement) =>
+      (element.querySelector(':scope > .s-row-text > .s-row-title > span')?.textContent
+        ?? element.querySelector(':scope > .setting-label > span, :scope > span')?.textContent
+        ?? element.textContent ?? '').trim();
     const tick = () => {
       const row = Array.from(
-        document.querySelectorAll<HTMLElement>('.setting-item, .setting-block, .slider-container')
-      ).find(element => (element.textContent || '').trim().startsWith(label));
+        document.querySelectorAll<HTMLElement>('.s-row, .setting-item, .setting-block, .slider-container')
+      ).find(element => titleOf(element) === label);
       if (row) {
+        const advanced = row.closest('.s-adv-body');
+        if (advanced?.hasAttribute('hidden')) {
+          advanced.closest('.s-adv')?.querySelector<HTMLElement>('.s-adv-toggle')?.click();
+        }
         const pin = () => row.scrollIntoView({ block: 'center' });
-        pin();
+        // 展开高级设置后要等一帧才有布局
+        setTimeout(pin, 0);
         // 页面数据加载后行高可能变化，再补一次定位
         setTimeout(pin, 350);
         row.classList.add('is-search-hit');

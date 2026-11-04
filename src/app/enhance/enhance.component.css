@@ -1,35 +1,22 @@
-/* 语音识别、字幕翻译两个分区：标题 + 分组列表 + 保存按钮 */
-.asr-card {
+/* 行下方展开的细项：沿用分组列表（行距 2、首尾大圆角） */
+.s-sub {
     display: flex;
     flex-direction: column;
     gap: var(--mytv-group-gap);
+    margin-top: 4px;
 }
 
-.asr-card-title {
-    margin: 22px 4px 6px;
-    font: 500 14px / 20px var(--mytv-font-family);
-    color: var(--mat-sys-on-surface-variant);
-}
-
-.action-container {
+.s-sub-actions {
     display: flex;
     justify-content: flex-end;
-    margin: 12px 0 8px;
+    margin-top: 8px;
 }
 
-.full-width {
-    width: 100%;
+.s-row .mat-mdc-form-field.s-num {
+    width: 140px;
 }
 
-mat-form-field {
-    width: 200px;
-}
-
-.add-rule {
-    align-self: flex-start;
-}
-
-/* 译文颜色调色板：与 Android 设置页 ColorPicker 的色板一致 */
+/* 译文颜色调色板：与 App 设置页 ColorPicker 的色板一致 */
 .color-swatches {
     display: flex;
     flex-wrap: wrap;

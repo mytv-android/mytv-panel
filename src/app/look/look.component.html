@@ -1,0 +1,97 @@
+<app-settings-page label="TV.settings_category_look" summary="TV.settings_category_look_summary">
+
+  <app-settings-section label="TV.settings_section_look_theme">
+    <app-settings-row label="TV.app_theme_mode">
+      <mat-button-toggle-group [(ngModel)]="c.themeMode" (change)="save()">
+        <mat-button-toggle [value]="0">{{ 'TV.app_theme_light' | translate }}</mat-button-toggle>
+        <mat-button-toggle [value]="1">{{ 'TV.app_theme_dark' | translate }}</mat-button-toggle>
+        <mat-button-toggle [value]="2">{{ 'TV.app_theme_system' | translate }}</mat-button-toggle>
+      </mat-button-toggle-group>
+    </app-settings-row>
+
+    <app-settings-row label="TV.app_theme_color" desc="TV.app_theme_color_desc">
+      <mat-button-toggle-group [(ngModel)]="c.themeColorProvider" (change)="save()">
+        <mat-button-toggle [value]="0">{{ 'TV.app_theme_color_follow_system' | translate }}</mat-button-toggle>
+        <mat-button-toggle [value]="1">{{ 'TV.app_theme_color_follow_app_background' | translate }}</mat-button-toggle>
+        <mat-button-toggle [value]="2">{{ 'TV.app_theme_color_pure' | translate }}</mat-button-toggle>
+      </mat-button-toggle-group>
+    </app-settings-row>
+
+    <!-- 自定义主题：App 里是「主题」子页的编辑框，这里在行下方直接展开 -->
+    <app-settings-row label="TV.ui_theme_custom" desc="TV.ui_theme_custom_desc">
+      <div below class="s-list">
+        <mat-form-field appearance="outline" subscriptSizing="dynamic" class="s-wide">
+          <mat-label>{{ 'TV.ui_theme_custom_name' | translate }}</mat-label>
+          <input matInput [ngModel]="theme.name" (change)="updateTheme({ name: $any($event.target).value })">
+        </mat-form-field>
+        <mat-form-field appearance="outline" subscriptSizing="dynamic" class="s-wide">
+          <mat-label>{{ 'TV.ui_theme_custom_background' | translate }}</mat-label>
+          <input matInput [ngModel]="theme.background" (change)="updateTheme({ background: $any($event.target).value })">
+          <mat-hint>{{ 'TV.ui_theme_custom_format_hint' | translate }}</mat-hint>
+        </mat-form-field>
+        <mat-form-field appearance="outline" subscriptSizing="dynamic" class="s-wide">
+          <mat-label>{{ 'TV.ui_theme_custom_texture' | translate }}</mat-label>
+          <input matInput [ngModel]="theme.texture" (change)="updateTheme({ texture: $any($event.target).value })">
+        </mat-form-field>
+        <mat-form-field appearance="outline" subscriptSizing="dynamic" class="s-wide">
+          <mat-label>{{ 'TV.ui_theme_custom_texture_alpha' | translate }}</mat-label>
+          <input matInput type="number" min="0" max="1" step="0.05" [ngModel]="theme.textureAlpha"
+            (change)="textureAlphaChange($any($event.target).value)">
+        </mat-form-field>
+      </div>
+    </app-settings-row>
+  </app-settings-section>
+
+  <app-settings-section label="TV.settings_section_look_language">
+    <app-settings-row label="TV.ui_app_startup_page">
+      <mat-form-field appearance="outline" subscriptSizing="dynamic">
+        <mat-select [(ngModel)]="c.appStartupScreen" (selectionChange)="save()">
+          @for (screen of startupScreens; track screen) {
+          <mat-option [value]="screen">{{ startupScreenLabels[screen] | translate }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+    </app-settings-row>
+
+    <app-settings-row label="TV.ui_screen_orientation" desc="TV.ui_screen_orientation_desc" surface="touch">
+      <mat-button-toggle-group [(ngModel)]="c.uiScreenOrientation" (change)="save()">
+        <mat-button-toggle [value]="orientation.AUTO">{{ 'TV.ui_screen_orientation_auto' | translate }}</mat-button-toggle>
+        <mat-button-toggle [value]="orientation.LANDSCAPE">{{ 'TV.ui_screen_orientation_landscape' | translate }}</mat-button-toggle>
+        <mat-button-toggle [value]="orientation.PORTRAIT">{{ 'TV.ui_screen_orientation_portrait' | translate }}</mat-button-toggle>
+      </mat-button-toggle-group>
+    </app-settings-row>
+  </app-settings-section>
+
+  <app-settings-section label="TV.settings_section_look_size">
+    <app-settings-row label="TV.ui_density_scale_ratio" desc="TV.settings_look_density_desc">
+      <mat-form-field appearance="outline" subscriptSizing="dynamic" class="s-narrow">
+        <mat-select [(ngModel)]="c.uiDensityScaleRatio" (selectionChange)="save()">
+          @for (ratio of densityOptions; track ratio) {
+          <mat-option [value]="ratio">{{ ratio === 0 ? ('TV.ui_Density_Ratio_adaptive' | translate) : scaleLabel(ratio) }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+    </app-settings-row>
+
+    <app-settings-row label="TV.ui_font_scale_ratio" desc="TV.settings_look_font_desc">
+      <mat-form-field appearance="outline" subscriptSizing="dynamic" class="s-narrow">
+        <mat-select [(ngModel)]="c.uiFontScaleRatio" (selectionChange)="save()">
+          @for (ratio of fontScaleOptions; track ratio) {
+          <mat-option [value]="ratio">{{ scaleLabel(ratio) }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+    </app-settings-row>
+  </app-settings-section>
+
+  <app-settings-section label="TV.settings_section_look_clock">
+    <app-settings-row label="TV.ui_time_show_mode" desc="TV.settings_look_time_desc">
+      <mat-button-toggle-group [(ngModel)]="c.uiTimeShowMode" (change)="save()">
+        <mat-button-toggle [value]="timeShowMode.HIDDEN">{{ 'TV.settings_choice_time_hidden' | translate }}</mat-button-toggle>
+        <mat-button-toggle [value]="timeShowMode.ALWAYS">{{ 'TV.settings_choice_time_always' | translate }}</mat-button-toggle>
+        <mat-button-toggle [value]="timeShowMode.EVERY_HOUR">{{ 'TV.ui_time_shows_every_hour' | translate }}</mat-button-toggle>
+        <mat-button-toggle [value]="timeShowMode.HALF_HOUR">{{ 'TV.ui_time_shows_half_hour' | translate }}</mat-button-toggle>
+      </mat-button-toggle-group>
+    </app-settings-row>
+  </app-settings-section>
+</app-settings-page>

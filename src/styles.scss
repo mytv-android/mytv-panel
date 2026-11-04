@@ -298,13 +298,15 @@ a:not([class*="mat-"]):focus-visible,
 }
 
 // 分组标题：14px、次要色，与分组拉开距离
-.main-content > * > .container h3 {
+.main-content > * > .container h3,
+.s-embed h3 {
     margin: 22px 4px 6px;
     font: 500 14px / 20px var(--mytv-font-family);
     color: var(--mat-sys-on-surface-variant);
 }
 
-.main-content > * > .container .section-header {
+.main-content > * > .container .section-header,
+.s-embed .section-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -317,7 +319,8 @@ a:not([class*="mat-"]):focus-visible,
     }
 }
 
-.main-content > * > .container > .mat-mdc-card > .mat-mdc-card-content > :is(h3, .section-header):first-child {
+.main-content > * > .container > .mat-mdc-card > .mat-mdc-card-content > :is(h3, .section-header):first-child,
+.s-embed > :first-child > :is(h3, .section-header):first-child {
     margin-top: 0;
 }
 
@@ -422,6 +425,284 @@ a:not([class*="mat-"]):focus-visible,
 .group-gap {
     flex: none;
     height: 20px;
+}
+
+// ========================================
+// 设置分类页（与 App 新版设置页同结构）：
+// 页标题 + 摘要 → 每节一张卡片 → 行（左文字右控件）→ 默认收起的「高级设置」卡片；内容最大宽 860
+// 组件见 app/settings-ui/settings-ui.ts
+// ========================================
+
+.s-page {
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 860px;
+    margin: 0 auto;
+}
+
+.s-page-head {
+    margin: 6px 4px 18px;
+
+    h1 {
+        margin: 0;
+        font: 700 30px / 38px var(--mytv-font-family);
+    }
+
+    p {
+        margin: 4px 0 0;
+        font: 400 14px / 20px var(--mytv-font-family);
+        color: var(--mat-sys-on-surface-variant);
+    }
+}
+
+// 窄屏顶栏已显示页名，页内只留摘要
+@media (max-width: #{tokens.$nav-breakpoint - 1px}) {
+    .s-page-head {
+        margin-top: 0;
+
+        h1 {
+            display: none;
+        }
+    }
+}
+
+.s-card {
+    display: block;
+    margin-bottom: 14px;
+    overflow: hidden;
+    border-radius: var(--mytv-radius-group);
+    background-color: var(--mytv-card);
+}
+
+.s-card-head {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0;
+    padding: 16px 24px 6px;
+    font: 600 15px / 22px var(--mytv-font-family);
+    color: var(--mat-sys-primary);
+
+    small {
+        font: 500 12px / 16px var(--mytv-font-family);
+        color: var(--mat-sys-on-surface-variant);
+    }
+}
+
+// 卡片里整块嵌入的面板功能（服务、日志、备份列表等）
+.s-card-body {
+    padding: 4px 24px 20px;
+}
+
+// 嵌入区里的分组行换成页面底色，和白色卡片区分开
+.s-embed {
+    --mytv-card: var(--mytv-page);
+}
+
+.s-row {
+    box-sizing: border-box;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 24px;
+    min-height: 60px;
+    padding: 12px 24px;
+    border-top: 1px solid color-mix(in srgb, var(--mytv-divider) 55%, transparent);
+    transition: background-color var(--mytv-duration-fast) var(--mytv-easing);
+
+    @include mat.form-field-overrides((
+        container-height: 40px,
+        container-vertical-padding: 8px,
+    ));
+
+    .mat-mdc-form-field {
+        width: 220px;
+        max-width: 100%;
+        font: var(--mat-sys-body-large);
+
+        &.s-narrow {
+            width: 150px;
+        }
+
+        &.s-field {
+            width: 320px;
+        }
+    }
+
+    > [below] {
+        flex: 1 1 100%;
+        min-width: 0;
+    }
+
+    .mat-button-toggle-group {
+        flex-wrap: wrap;
+        max-width: 100%;
+    }
+}
+
+.s-card-head + .s-row {
+    border-top: 0;
+}
+
+.s-row-text {
+    /* 手机宽度下开关仍留在右侧；放不下的宽控件（下拉、按钮组）才换到下一行 */
+    flex: 1 1 180px;
+    min-width: 0;
+}
+
+.s-row-title {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 2px 8px;
+    font: 500 15px / 22px var(--mytv-font-family);
+}
+
+.s-row-desc {
+    display: block;
+    font: 400 13px / 19px var(--mytv-font-family);
+    color: var(--mat-sys-on-surface-variant);
+}
+
+.s-row-detail {
+    margin-top: 2px;
+    font: 400 12px / 18px var(--mytv-font-family);
+    color: color-mix(in srgb, var(--mat-sys-on-surface-variant) 80%, transparent);
+}
+
+.s-row-ctl {
+    flex: 0 1 auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+    max-width: 100%;
+
+    &:empty {
+        display: none;
+    }
+}
+
+// 行下方的整宽输入框 / 列表编辑器
+.s-wide {
+    width: 100%;
+
+    &.mat-mdc-form-field {
+        width: 100%;
+    }
+}
+
+.s-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.s-list-item {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 12px;
+
+    > .mat-mdc-form-field.s-grow {
+        flex: 1 1 200px;
+        width: auto;
+    }
+}
+
+.s-row-value {
+    font: 400 14px / 20px var(--mytv-font-family);
+    color: var(--mat-sys-on-surface-variant);
+}
+
+.s-tag {
+    display: inline-flex;
+    align-items: center;
+    height: 20px;
+    padding: 0 6px;
+    border-radius: var(--mytv-radius-tag);
+    font: 500 11px / 20px var(--mytv-font-family);
+    white-space: nowrap;
+
+    &.rec {
+        background-color: var(--mat-sys-primary-container);
+        color: var(--mat-sys-on-primary-container);
+    }
+
+    &.beta {
+        background-color: var(--mat-sys-tertiary-container);
+        color: var(--mat-sys-on-tertiary-container);
+    }
+
+    &.cond {
+        box-shadow: inset 0 0 0 1px var(--mat-sys-outline-variant);
+        color: var(--mat-sys-on-surface-variant);
+    }
+}
+
+.s-adv-toggle {
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    margin: 0;
+    padding: 16px 24px;
+    border: 0;
+    background: none;
+    color: inherit;
+    font: inherit;
+    text-align: start;
+    cursor: pointer;
+
+    &:hover {
+        background-color: var(--mytv-hover-layer);
+    }
+
+    &:focus-visible {
+        outline: var(--mytv-focus-ring-width) solid var(--mytv-focus-ring);
+        outline-offset: calc(var(--mytv-focus-ring-width) * -1);
+    }
+
+    > .mat-icon {
+        flex: none;
+        color: var(--mat-sys-on-surface-variant);
+    }
+}
+
+.s-adv-text {
+    flex: 1;
+    min-width: 0;
+}
+
+.s-adv-title {
+    display: block;
+    font: 600 15px / 22px var(--mytv-font-family);
+}
+
+.s-adv-chev {
+    transition: transform var(--mytv-duration) var(--mytv-easing);
+}
+
+.s-adv-toggle[aria-expanded="true"] .s-adv-chev {
+    transform: rotate(90deg);
+}
+
+[dir="rtl"] .s-adv-toggle:not([aria-expanded="true"]) .s-adv-chev {
+    transform: scaleX(-1);
+}
+
+// 设置搜索定位：短暂点亮目标行
+.s-row.is-search-hit {
+    background-color: var(--mytv-selected);
+    color: var(--mytv-on-selected);
+
+    .s-row-desc,
+    .s-row-detail {
+        color: var(--mytv-on-selected);
+    }
 }
 
 // ========================================

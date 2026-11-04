@@ -1,0 +1,197 @@
+<app-settings-page label="TV.settings_category_source" summary="TV.settings_category_source_summary">
+
+  <app-settings-section label="TV.settings_section_source_iptv">
+    <app-settings-row label="TV.ui_custom_subscription_source" desc="TV.settings_source_iptv_desc">
+      @if (sources.length) {
+      <span class="s-row-value">{{ 'TV.settings_source_iptv_value' | translate: { p1: sources.length, p2: currentSourceName } }}</span>
+      } @else {
+      <span class="s-row-value">{{ 'TV.settings_hero_empty' | translate }}</span>
+      }
+      <button matButton="tonal" (click)="addSource()">
+        <mat-icon>add</mat-icon> {{ 'TV.settings_hero_add' | translate }}
+      </button>
+      @if (sources.length) {
+      <div below class="s-embed">
+        @for (source of paginatedSources; track source; let i = $index) {
+        @let index = getGlobalIndex(i);
+        @let current = c.iptvSourceCurrentIdx === index;
+        <div class="setting-item select-row" [class.is-selected]="current">
+          <button type="button" class="select-row-main" [attr.aria-pressed]="current"
+            (click)="current || setCurrentSource(index)">
+            <span class="source-title">
+              <span class="source-name">{{ source.name }}</span>
+              <span class="mytv-tag">{{ getSourceTypeLabel(source.sourceType) | translate }}</span>
+            </span>
+            <span class="select-row-desc">
+              @if (source.sourceType === 4) {
+              {{ 'SUBSCRIBE.AGGREGATE_MEMBERS' | translate }}: {{ aggregateMemberNames(source) }}
+              } @else {
+              {{ source.url }}
+              }
+            </span>
+          </button>
+          <span class="select-row-actions">
+            @if (current) {
+            <mat-icon class="select-row-check">check_circle</mat-icon>
+            }
+            <button mat-icon-button [matMenuTriggerFor]="menu">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item (click)="moveSource(index, 'up')" [disabled]="index === 0">
+                <mat-icon>arrow_upward</mat-icon>
+                <span>{{ 'SUBSCRIBE.MOVE_UP' | translate }}</span>
+              </button>
+              <button mat-menu-item (click)="moveSource(index, 'down')" [disabled]="index === sources.length - 1">
+                <mat-icon>arrow_downward</mat-icon>
+                <span>{{ 'SUBSCRIBE.MOVE_DOWN' | translate }}</span>
+              </button>
+              <button mat-menu-item (click)="editSource(index, source)">
+                <mat-icon>edit</mat-icon>
+                <span>{{ 'SUBSCRIBE.EDIT_SOURCE' | translate }}</span>
+              </button>
+              <button mat-menu-item (click)="deleteSource(index)">
+                <mat-icon>delete</mat-icon>
+                <span>{{ 'SUBSCRIBE.DELETE_SOURCE' | translate }}</span>
+              </button>
+            </mat-menu>
+          </span>
+        </div>
+        }
+        @if (sources.length > 5) {
+        <mat-paginator [length]="sources.length" [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 25, 100]"
+          (page)="handlePageEvent($event)" aria-label="Select page">
+        </mat-paginator>
+        }
+      </div>
+      }
+    </app-settings-row>
+
+    <app-settings-row label="TV.ui_subscription_source_cache_time" desc="TV.settings_source_cache_time_desc">
+      <mat-form-field appearance="outline" subscriptSizing="dynamic">
+        <mat-select [(ngModel)]="c.iptvSourceCacheTime" (selectionChange)="save()">
+          @for (ms of cacheTimeOptions; track ms) {
+          <mat-option [value]="ms">{{ cacheTimeLabel(ms) }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+    </app-settings-row>
+
+    <app-settings-row label="TV.ui_auto_add_web_source" desc="TV.ui_auto_add_web_source_desc">
+      <mat-button-toggle-group [(ngModel)]="c.iptvHybridMode" (change)="save()">
+        <mat-button-toggle [value]="hybridMode.DISABLE">{{ 'TV.settings_choice_hybrid_none' | translate }}</mat-button-toggle>
+        <mat-button-toggle [value]="hybridMode.IPTV_FIRST">{{ 'TV.settings_choice_hybrid_after' | translate }}</mat-button-toggle>
+        <mat-button-toggle [value]="hybridMode.HYBRID_FIRST">{{ 'TV.settings_choice_hybrid_before' | translate }}</mat-button-toggle>
+      </mat-button-toggle-group>
+    </app-settings-row>
+
+    <app-settings-row label="TV.ui_iptv_hybrid_yangshipin_cookie" desc="TV.ui_iptv_hybrid_yangshipin_cookie_desc">
+      <app-textarea-with-lines below class="s-wide" [rows]="3" [(ngModel)]="c.iptvHybridYangshipinCookie"
+        (change)="save()"></app-textarea-with-lines>
+    </app-settings-row>
+  </app-settings-section>
+
+  <app-settings-section label="TV.settings_section_source_epg">
+    <app-settings-row label="TV.ui_epg_enable" desc="TV.ui_epg_enable_desc">
+      <mat-slide-toggle [(ngModel)]="c.epgEnable" (change)="save()"></mat-slide-toggle>
+    </app-settings-row>
+
+    <app-settings-row label="TV.ui_epg_source_custom" desc="TV.settings_source_epg_desc">
+      @if (epgCurrentName) {
+      <span class="s-row-value">{{ epgCurrentName }}</span>
+      }
+      <button matButton="tonal" (click)="openEpgManager()">{{ 'TV.settings_hero_manage' | translate }}</button>
+    </app-settings-row>
+
+    <app-settings-row label="TV.ui_epg_source_follow_iptv" desc="TV.ui_epg_source_follow_iptv_desc">
+      <mat-slide-toggle [(ngModel)]="c.epgSourceFollowIptv" (change)="save()"></mat-slide-toggle>
+    </app-settings-row>
+
+    <app-settings-row label="TV.ui_epg_refresh_time_threshold" desc="TV.settings_source_epg_refresh_desc">
+      <mat-form-field appearance="outline" subscriptSizing="dynamic">
+        <mat-select [(ngModel)]="c.epgRefreshTimeThreshold" (selectionChange)="save()">
+          @for (hour of epgThresholdOptions; track hour) {
+          <mat-option [value]="hour">{{ epgThresholdLabel(hour) }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+    </app-settings-row>
+  </app-settings-section>
+
+  <app-settings-section label="TV.settings_section_source_organize">
+    <app-settings-row label="TV.ui_channel_group_manage" desc="TV.settings_source_group_hidden_desc">
+      <button matButton="tonal" (click)="editHiddenGroup()">
+        <mat-icon>add</mat-icon> {{ 'HOME.ADD' | translate }}
+      </button>
+      @if (hiddenGroups.length) {
+      <mat-chip-set below>
+        @for (group of hiddenGroups; track group) {
+        <mat-chip (removed)="removeHidden('iptvChannelGroupHiddenList', group)" (click)="editHiddenGroup(group)">
+          {{ group }}
+          <button matChipRemove><mat-icon>cancel</mat-icon></button>
+        </mat-chip>
+        }
+      </mat-chip-set>
+      }
+    </app-settings-row>
+
+    <app-settings-row label="TV.ui_channel_hidden_list" desc="TV.ui_channel_hidden_list_desc">
+      <button matButton="tonal" (click)="editHiddenChannel()">
+        <mat-icon>add</mat-icon> {{ 'HOME.ADD' | translate }}
+      </button>
+      @if (hiddenChannels.length) {
+      <mat-chip-set below>
+        @for (channel of hiddenChannels; track channel) {
+        <mat-chip (removed)="removeHidden('iptvChannelHiddenList', channel)" (click)="editHiddenChannel(channel)">
+          {{ channel }}
+          <button matChipRemove><mat-icon>cancel</mat-icon></button>
+        </mat-chip>
+        }
+      </mat-chip-set>
+      }
+    </app-settings-row>
+
+    <app-settings-row label="TV.ui_channel_alias" desc="TV.settings_source_alias_desc">
+      <div below>
+        <app-textarea-with-lines class="s-wide" [placeholder]="channelAliasExample" [(ngModel)]="c.iptvChannelNameAlias"
+          (change)="save()"></app-textarea-with-lines>
+        <div class="s-row-detail">{{ 'TV.ui_channel_alias_edit_hint' | translate }}</div>
+      </div>
+    </app-settings-row>
+
+    <app-settings-row label="TV.ui_similar_channel_merge" desc="TV.ui_similar_channel_merge_desc">
+      <mat-slide-toggle [(ngModel)]="c.iptvSimilarChannelMerge" (change)="save()"></mat-slide-toggle>
+    </app-settings-row>
+
+    <app-settings-row label="TV.ui_channel_logo_provider" desc="TV.settings_source_logo_provider_desc">
+      <mat-form-field below appearance="outline" subscriptSizing="dynamic" class="s-wide">
+        <input matInput [(ngModel)]="c.iptvChannelLogoProvider" (change)="save()">
+        <mat-hint>{{ 'TV.ui_channel_logo_provider_edit_hint' | translate }}</mat-hint>
+      </mat-form-field>
+    </app-settings-row>
+
+    <app-settings-row label="TV.ui_channel_logo_override" desc="TV.ui_channel_logo_override_desc">
+      <mat-slide-toggle [(ngModel)]="c.iptvChannelLogoOverride" (change)="save()"></mat-slide-toggle>
+    </app-settings-row>
+
+    <app-settings-row label="TV.ui_support_encrypted_channel_groups" desc="TV.ui_support_encrypted_channel_groups_desc">
+      <mat-slide-toggle [(ngModel)]="c.iptvChannelGroupEncrypted" (change)="save()"></mat-slide-toggle>
+    </app-settings-row>
+  </app-settings-section>
+
+  <app-settings-advanced [count]="3">
+    <app-settings-row label="TV.ui_iptv_pltv_to_tvod" desc="TV.ui_iptv_pltv_to_tvod_desc">
+      <mat-slide-toggle [(ngModel)]="c.iptvPLTVToTVOD" (change)="save()"></mat-slide-toggle>
+    </app-settings-row>
+
+    <app-settings-row label="TV.ui_settings_iptv_channel_group_config" desc="TV.ui_settings_iptv_channel_group_config_desc"
+      detail="TV.ui_settings_iptv_channel_group_config_desc_detail">
+      <mat-slide-toggle [(ngModel)]="c.iptvChannelGroupConfigEnable" (change)="save()"></mat-slide-toggle>
+    </app-settings-row>
+
+    <app-settings-row label="TV.ui_epg_source_load_all" desc="TV.ui_epg_source_load_all_desc"
+      detail="TV.ui_epg_source_load_all_desc_detail">
+      <mat-slide-toggle [(ngModel)]="c.epgSourceLoadAll" (change)="save()"></mat-slide-toggle>
+    </app-settings-row>
+  </app-settings-advanced>
+</app-settings-page>

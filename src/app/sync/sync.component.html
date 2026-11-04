@@ -1,0 +1,70 @@
+<app-settings-page label="TV.settings_category_sync" summary="TV.settings_category_sync_summary">
+
+  <app-settings-section label="TV.settings_section_sync_cloud">
+    <app-settings-row label="TV.cloud_sync_provider" desc="TV.settings_sync_provider_desc">
+      <mat-form-field appearance="outline" subscriptSizing="dynamic">
+        <mat-select [(ngModel)]="c.cloudSyncProvider" (selectionChange)="save()">
+          @for (item of providerLabels; track item[0]) {
+          <mat-option [value]="item[0]">{{ item[1] | translate }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+    </app-settings-row>
+
+    <!-- 只显示所选方式需要填的项（与 App 相同） -->
+    @switch (c.cloudSyncProvider) {
+    @case (provider.GITHUB_GIST) {
+    <ng-container *ngTemplateOutlet="textRow; context: { label: 'TV.cloud_sync_github_gist_id', field: 'cloudSyncGithubGistId' }" />
+    <ng-container *ngTemplateOutlet="textRow; context: { label: 'TV.cloud_sync_github_gist_token', field: 'cloudSyncGithubGistToken', secret: true }" />
+    }
+    @case (provider.GITEE_GIST) {
+    <ng-container *ngTemplateOutlet="textRow; context: { label: 'TV.cloud_sync_gitee_gist_id', field: 'cloudSyncGiteeGistId' }" />
+    <ng-container *ngTemplateOutlet="textRow; context: { label: 'TV.cloud_sync_gitee_gist_token', field: 'cloudSyncGiteeGistToken', secret: true }" />
+    }
+    @case (provider.NETWORK_URL) {
+    <ng-container *ngTemplateOutlet="textRow; context: { label: 'TV.cloud_sync_network_url', field: 'cloudSyncNetworkUrl', placeholder: 'https://example.com/sync' }" />
+    }
+    @case (provider.LOCAL_FILE) {
+    <ng-container *ngTemplateOutlet="textRow; context: { label: 'TV.cloud_sync_local_file_path', field: 'cloudSyncLocalFilePath', placeholder: 'file:///storage/emulated/0/Download/' }" />
+    }
+    @case (provider.WEBDAV) {
+    <ng-container *ngTemplateOutlet="textRow; context: { label: 'TV.cloud_sync_webdav_url', field: 'cloudSyncWebDavUrl', placeholder: 'https://webdav.example.com/remote.php/dav/files/username/' }" />
+    <ng-container *ngTemplateOutlet="textRow; context: { label: 'TV.cloud_sync_webdav_username', field: 'cloudSyncWebDavUsername' }" />
+    <ng-container *ngTemplateOutlet="textRow; context: { label: 'TV.cloud_sync_webdav_password', field: 'cloudSyncWebDavPassword', secret: true }" />
+    }
+    }
+
+    <app-settings-row label="TV.cloud_sync_auto_pull" desc="TV.cloud_sync_auto_pull_desc">
+      <mat-slide-toggle [(ngModel)]="c.cloudSyncAutoPull" (change)="save()"></mat-slide-toggle>
+    </app-settings-row>
+
+    <!-- 网页面板独有：把应用数据导出成文件 / 从文件导入 -->
+    <app-settings-row label="SYNC.EXPORT_DATA">
+      <button mat-icon-button (click)="exportData()" [attr.aria-label]="'SYNC.EXPORT_DATA' | translate">
+        <mat-icon>download</mat-icon>
+      </button>
+    </app-settings-row>
+
+    <app-settings-row label="SYNC.IMPORT_DATA">
+      <button mat-icon-button (click)="importData()" [attr.aria-label]="'SYNC.IMPORT_DATA' | translate">
+        <mat-icon>upload</mat-icon>
+      </button>
+    </app-settings-row>
+  </app-settings-section>
+
+  <app-settings-section label="TV.settings_section_sync_local">
+    <app-settings-row label="TV.ui_backup_manager" desc="TV.ui_backup_manager_desc"></app-settings-row>
+    <div class="s-card-body s-embed">
+      <app-backup-manager></app-backup-manager>
+    </div>
+  </app-settings-section>
+</app-settings-page>
+
+<ng-template #textRow let-label="label" let-field="field" let-secret="secret" let-placeholder="placeholder">
+  <app-settings-row [label]="label">
+    <mat-form-field appearance="outline" subscriptSizing="dynamic" class="s-field">
+      <input matInput [type]="secret ? 'password' : 'text'" [placeholder]="placeholder ?? ''"
+        [ngModel]="$any(c)[field]" (ngModelChange)="setText(field, $event)" (change)="save()">
+    </mat-form-field>
+  </app-settings-row>
+</ng-template>

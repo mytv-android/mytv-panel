@@ -1,7 +1,6 @@
 import { Component, inject, effect, Inject, NgZone, PLATFORM_ID, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { MatCardModule } from '@angular/material/card';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -22,7 +21,6 @@ import { ServiceLogDialogComponent } from './service-log-dialog/service-log-dial
     imports: [
         CommonModule,
         FormsModule,
-        MatCardModule,
         MatListModule,
         MatIconModule,
         MatButtonModule,
@@ -35,11 +33,7 @@ import { ServiceLogDialogComponent } from './service-log-dialog/service-log-dial
         TranslateModule,
     ],
     templateUrl: './services.component.html',
-    styleUrl: './services.component.css',
-    host: {
-        'animate.enter': 'enter',
-        'animate.leave': 'leave'
-    }
+    styleUrl: './services.component.css'
 })
 export class ServicesComponent implements OnInit, OnDestroy {
     configsService = inject(ConfigsService);

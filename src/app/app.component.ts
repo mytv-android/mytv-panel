@@ -35,7 +35,7 @@ export class AppComponent implements OnInit {
   // 按路径精确匹配高亮当前页，忽略 ?lang= 等查询参数
   activeOptions: IsActiveMatchOptions = { paths: 'exact', queryParams: 'ignored', matrixParams: 'ignored', fragment: 'ignored' };
 
-  // 与 App 设置页的“常用 / 播放 / 系统”分组一致；文件、备份管理是面板独有，归入系统
+  // 与 App 新版设置页的分类、分组、顺序一致；文件是面板独有，放在系统组末尾
   menuGroups = [
     {
       name: '',
@@ -44,34 +44,35 @@ export class AppComponent implements OnInit {
       ]
     },
     {
-      name: '常用',
+      name: 'TV.settings_group_watch',
       items: [
-        { name: '通用', route: '/general', icon: 'devices' },
-        { name: '订阅源', route: '/sources', icon: 'subscriptions' },
-        { name: '服务', route: '/services', icon: 'hub' },
-        { name: '节目单', route: '/epg', icon: 'event_note' },
-        { name: '界面', route: '/ui', icon: 'dashboard_customize' },
-        { name: '主题', route: '/theme', icon: 'palette' },
+        { name: 'TV.settings_category_source', route: '/source', icon: 'subscriptions' },
+        { name: 'TV.settings_category_player', route: '/player', icon: 'play_circle' },
+        { name: 'TV.settings_category_enhance', route: '/enhance', icon: 'auto_awesome' },
+        { name: 'TV.settings_category_channels', route: '/channels', icon: 'format_list_bulleted' },
       ]
     },
     {
-      name: '播放',
+      name: 'TV.settings_group_personalize',
       items: [
-        { name: '播放器', route: '/player', icon: 'play_circle' },
-        { name: '控制', route: '/control', icon: 'gamepad' },
-        { name: 'WebView', route: '/webview', icon: 'web' },
+        { name: 'TV.settings_category_look', route: '/look', icon: 'palette' },
+        { name: 'TV.settings_category_control', route: '/control', icon: 'gamepad' },
       ]
     },
     {
-      name: '系统',
+      name: 'TV.settings_group_connect',
       items: [
-        { name: '网络', route: '/network', icon: 'wifi' },
-        { name: '云同步', route: '/sync', icon: 'cloud_sync' },
-        { name: '备份管理', route: '/backup', icon: 'settings_backup_restore' },
+        { name: 'TV.settings_category_cast', route: '/cast', icon: 'cast' },
+        { name: 'TV.settings_category_network', route: '/network', icon: 'wifi' },
+        { name: 'TV.settings_category_sync', route: '/sync', icon: 'cloud_sync' },
+      ]
+    },
+    {
+      name: 'TV.settings_group_system',
+      items: [
+        { name: 'TV.settings_category_app', route: '/app', icon: 'devices' },
+        { name: 'TV.settings_category_debug', route: '/debug', icon: 'help_outline' },
         { name: '文件', route: '/file', icon: 'folder' },
-        { name: '更新', route: '/update', icon: 'system_update' },
-        { name: '调试', route: '/debug', icon: 'bug_report' },
-        { name: '日志', route: '/log', icon: 'receipt_long' },
       ]
     },
   ];

@@ -402,34 +402,11 @@ export interface VideoPlayerDecoderConfigs {
     forceSoftDecode: boolean;
 }
 
-export const KeyDownActionLabels: { [key in KeyDownAction]: string } = {
-    [KeyDownAction.ChangeCurrentChannelToPrev]: 'SETTINGS.KEY_DOWN_ACTION.ChangeCurrentChannelToPrev',
-    [KeyDownAction.ChangeCurrentChannelToNext]: 'SETTINGS.KEY_DOWN_ACTION.ChangeCurrentChannelToNext',
-    [KeyDownAction.ChangeCurrentChannelLineIdxToPrev]: 'SETTINGS.KEY_DOWN_ACTION.ChangeCurrentChannelLineIdxToPrev',
-    [KeyDownAction.ChangeCurrentChannelLineIdxToNext]: 'SETTINGS.KEY_DOWN_ACTION.ChangeCurrentChannelLineIdxToNext',
-    [KeyDownAction.ToIptvSourceScreen]: 'SETTINGS.KEY_DOWN_ACTION.ToIptvSourceScreen',
-    [KeyDownAction.ToChannelScreen]: 'SETTINGS.KEY_DOWN_ACTION.ToChannelScreen',
-    [KeyDownAction.ToQuickOpScreen]: 'SETTINGS.KEY_DOWN_ACTION.ToQuickOpScreen',
-    [KeyDownAction.ToEpgScreen]: 'SETTINGS.KEY_DOWN_ACTION.ToEpgScreen',
-    [KeyDownAction.ToChannelLineScreen]: 'SETTINGS.KEY_DOWN_ACTION.ToChannelLineScreen',
-    [KeyDownAction.ToVideoPlayerControllerScreen]: 'SETTINGS.KEY_DOWN_ACTION.ToVideoPlayerControllerScreen',
-    [KeyDownAction.NoAction]: 'SETTINGS.KEY_DOWN_ACTION.NoAction',
-    [KeyDownAction.SeekForward]: 'SETTINGS.KEY_DOWN_ACTION.SeekForward',
-    [KeyDownAction.SeekBackward]: 'SETTINGS.KEY_DOWN_ACTION.SeekBackward',
-    [KeyDownAction.BrightnessUp]: 'SETTINGS.KEY_DOWN_ACTION.BrightnessUp',
-    [KeyDownAction.BrightnessDown]: 'SETTINGS.KEY_DOWN_ACTION.BrightnessDown',
-    [KeyDownAction.VolumeUp]: 'SETTINGS.KEY_DOWN_ACTION.VolumeUp',
-    [KeyDownAction.VolumeDown]: 'SETTINGS.KEY_DOWN_ACTION.VolumeDown',
-}
 export enum WebViewCore {
     SYSTEM = 'SYSTEM',
     X5 = 'X5',
 }
 
-export const WebViewCoreLabels: { [key in WebViewCore]: string } = {
-    [WebViewCore.SYSTEM]: 'SETTINGS.WEB_VIEW_CORE.SYSTEM',
-    [WebViewCore.X5]: 'SETTINGS.WEB_VIEW_CORE.X5',
-}
 export enum RtspTransport {
     TCP = 'TCP',
     UDP = 'UDP',
@@ -453,12 +430,6 @@ export enum IptvHybridMode {
     DISABLE = 'DISABLE',
     IPTV_FIRST = 'IPTV_FIRST',
     HYBRID_FIRST = 'HYBRID_FIRST',
-}
-
-export const IptvHybridModeLabels: { [key in IptvHybridMode]: string } = {
-    [IptvHybridMode.DISABLE]: 'SETTINGS.IPTV_HYBRID_MODE.DISABLE',
-    [IptvHybridMode.IPTV_FIRST]: 'SETTINGS.IPTV_HYBRID_MODE.IPTV_FIRST',
-    [IptvHybridMode.HYBRID_FIRST]: 'SETTINGS.IPTV_HYBRID_MODE.HYBRID_FIRST',
 }
 
 export interface IptvSource {
@@ -547,33 +518,6 @@ export interface BackupListResult {
     message?: string
 }
 
-export const WebViewLoadingStyleLabels: { [key: number]: string } = {
-    0: 'SETTINGS.WEB_VIEW_LOADING_STYLE.DEFAULT',
-    1: 'SETTINGS.WEB_VIEW_LOADING_STYLE.PERCENT',
-    2: 'SETTINGS.WEB_VIEW_LOADING_STYLE.BLACK',
-}
-
-export const WebViewResolutionLabels: { [key: number]: string } = {
-    0: 'SETTINGS.WEB_VIEW_RESOLUTION.AUTO',
-    1: 'SETTINGS.WEB_VIEW_RESOLUTION.FULL',
-    2: 'SETTINGS.WEB_VIEW_RESOLUTION.P75',
-    3: 'SETTINGS.WEB_VIEW_RESOLUTION.P50',
-}
-
-export const WebViewUaPresetLabels: { [key: number]: string } = {
-    0: 'SETTINGS.WEB_VIEW_UA_PRESET.SYSTEM',
-    1: 'SETTINGS.WEB_VIEW_UA_PRESET.WINDOWS',
-    2: 'SETTINGS.WEB_VIEW_UA_PRESET.MACOS',
-    3: 'SETTINGS.WEB_VIEW_UA_PRESET.IPAD',
-}
-
-export const WebViewLayerAccelLabels: { [key: number]: string } = {
-    0: 'SETTINGS.WEB_VIEW_LAYER_ACCEL.OFF',
-    1: 'SETTINGS.WEB_VIEW_LAYER_ACCEL.HARDWARE',
-    2: 'SETTINGS.WEB_VIEW_LAYER_ACCEL.SOFTWARE',
-}
-
-
 export enum UiTimeShowMode {
     HIDDEN = 'HIDDEN',
     ALWAYS = 'ALWAYS',
@@ -581,23 +525,10 @@ export enum UiTimeShowMode {
     HALF_HOUR = 'HALF_HOUR',
 }
 
-export const UiTimeShowModeLabels: { [key in UiTimeShowMode]: string } = {
-    [UiTimeShowMode.HIDDEN]: 'SETTINGS.TIME_SHOW_MODE.HIDDEN',
-    [UiTimeShowMode.ALWAYS]: 'SETTINGS.TIME_SHOW_MODE.ALWAYS',
-    [UiTimeShowMode.EVERY_HOUR]: 'SETTINGS.TIME_SHOW_MODE.EVERY_HOUR',
-    [UiTimeShowMode.HALF_HOUR]: 'SETTINGS.TIME_SHOW_MODE.HALF_HOUR',
-}
-
 export enum UiScreenOrientation {
     AUTO = 'AUTO',
     LANDSCAPE = 'LANDSCAPE',
     PORTRAIT = 'PORTRAIT',
-}
-
-export const UiScreenOrientationLabels: { [key in UiScreenOrientation]: string } = {
-    [UiScreenOrientation.AUTO]: 'SETTINGS.SCREEN_ORIENTATION.AUTO',
-    [UiScreenOrientation.LANDSCAPE]: 'SETTINGS.SCREEN_ORIENTATION.LANDSCAPE',
-    [UiScreenOrientation.PORTRAIT]: 'SETTINGS.SCREEN_ORIENTATION.PORTRAIT',
 }
 
 export enum VideoPlayerCore {
@@ -654,11 +585,14 @@ export enum VideoPlayerDisplayMode {
     WIDE = 'WIDE',
 }
 
+// 与 App Configs.VideoPlayerSuperResolutionMode 一致（旧版 LEGACY_REAL_ESRGAN 只读不选）
 export enum VideoPlayerSuperResolutionMode {
     OFF = 'OFF',
-    GPU_SPATIAL = 'GPU_SPATIAL',
     ANIME4K = 'ANIME4K',
     GPU_FSR = 'GPU_FSR',
+    SGSR1 = 'SGSR1',
+    SGSR2 = 'SGSR2',
+    ARM_ASR = 'ARM_ASR',
     AI_LITE = 'AI_LITE',
     REAL_ESRGAN_VULKAN = 'REAL_ESRGAN_VULKAN',
 }
@@ -699,13 +633,6 @@ export enum VideoPlayerFrameRateFallback {
     HZ_60 = 'HZ_60',
 }
 
-export const VideoPlayerFrameRateFallbackLabels: { [key in VideoPlayerFrameRateFallback]: string } = {
-    [VideoPlayerFrameRateFallback.SYSTEM_DEFAULT]: 'SETTINGS.VIDEO_PLAYER_FRAME_RATE_FALLBACK.SYSTEM_DEFAULT',
-    [VideoPlayerFrameRateFallback.HZ_50]: 'SETTINGS.VIDEO_PLAYER_FRAME_RATE_FALLBACK.HZ_50',
-    [VideoPlayerFrameRateFallback.HZ_59_94]: 'SETTINGS.VIDEO_PLAYER_FRAME_RATE_FALLBACK.HZ_59_94',
-    [VideoPlayerFrameRateFallback.HZ_60]: 'SETTINGS.VIDEO_PLAYER_FRAME_RATE_FALLBACK.HZ_60',
-}
-
 export enum CloudSyncProvider {
     GITHUB_GIST = 'GITHUB_GIST',
     GITEE_GIST = 'GITEE_GIST',
@@ -724,21 +651,11 @@ export enum AppStartupScreen {
     MultiView = 'MultiView',
 }
 
-export const AppStartupScreenLabels: { [key in AppStartupScreen]: string } = {
-    [AppStartupScreen.Dashboard]: 'GENERAL.STARTUP_SCREENS.Dashboard',
-    [AppStartupScreen.Live]: 'GENERAL.STARTUP_SCREENS.Live',
-    [AppStartupScreen.EpgGuide]: 'GENERAL.STARTUP_SCREENS.EpgGuide',
-    [AppStartupScreen.Channels]: 'GENERAL.STARTUP_SCREENS.Channels',
-    [AppStartupScreen.Favorites]: 'GENERAL.STARTUP_SCREENS.Favorites',
-    [AppStartupScreen.Search]: 'GENERAL.STARTUP_SCREENS.Search',
-    [AppStartupScreen.MultiView]: 'GENERAL.STARTUP_SCREENS.MultiView',
-}
-
 export interface AppThemeDef {
     name: string
     background: string
     texture?: string
-    textureAlpha?: string
+    textureAlpha?: number  // App 侧是 Float?；传空字符串会让整包配置解析失败
 }
 
 export interface Channel {
@@ -767,21 +684,9 @@ export enum AudioBalanceLevel {
     High = 'High',
 }
 
-export const AudioBalanceLevelLabels: { [key in AudioBalanceLevel]: string } = {
-    [AudioBalanceLevel.Off]: 'SETTINGS.AUDIO_BALANCE_LEVEL.Off',
-    [AudioBalanceLevel.Low]: 'SETTINGS.AUDIO_BALANCE_LEVEL.Low',
-    [AudioBalanceLevel.Medium]: 'SETTINGS.AUDIO_BALANCE_LEVEL.Medium',
-    [AudioBalanceLevel.High]: 'SETTINGS.AUDIO_BALANCE_LEVEL.High',
-}
-
 export enum ASRMode {
     RENDERER_ONLY = 'RENDERER_ONLY',
     SOURCE_TAP_PREFERRED = 'SOURCE_TAP_PREFERRED',
-}
-
-export const ASRModeLabels: { [key in ASRMode]: string } = {
-    [ASRMode.RENDERER_ONLY]: 'SETTINGS.ASR_MODE.RENDERER_ONLY',
-    [ASRMode.SOURCE_TAP_PREFERRED]: 'SETTINGS.ASR_MODE.SOURCE_TAP_PREFERRED',
 }
 
 export enum ASRVadType {
@@ -790,8 +695,8 @@ export enum ASRVadType {
 }
 
 export const ASRVadTypeLabels: { [key in ASRVadType]: string } = {
-    [ASRVadType.SILERO]: 'SETTINGS.ASR_VAD_TYPE.SILERO',
-    [ASRVadType.TEN]: 'SETTINGS.ASR_VAD_TYPE.TEN',
+    [ASRVadType.SILERO]: 'SETTINGS.ASR_VAD_TYPE.silero',
+    [ASRVadType.TEN]: 'SETTINGS.ASR_VAD_TYPE.ten',
 }
 
 /**
@@ -821,16 +726,6 @@ export enum ASRTranslationEngine {
     YOUDAO = 'youdao',
     GOOGLE = 'google',
     MICROSOFT = 'microsoft',
-}
-
-export const ASRTranslationEngineLabels: { [key in ASRTranslationEngine]: string } = {
-    [ASRTranslationEngine.NONE]: 'PLAYER.ASR_NO_TRANSLATION',
-    [ASRTranslationEngine.TENCENT]: 'PLAYER.ASR_TENCENT',
-    [ASRTranslationEngine.BAIDU]: 'PLAYER.ASR_BAIDU',
-    [ASRTranslationEngine.MTRANSERVER]: 'PLAYER.ASR_MTRANSERVER',
-    [ASRTranslationEngine.YOUDAO]: 'PLAYER.ASR_YOUDAO',
-    [ASRTranslationEngine.GOOGLE]: 'PLAYER.ASR_GOOGLE',
-    [ASRTranslationEngine.MICROSOFT]: 'PLAYER.ASR_MICROSOFT',
 }
 
 export interface MultiViewScheme {

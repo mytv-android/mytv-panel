@@ -1,726 +1,261 @@
-<div class="container">
-  <mat-card class="card">
-    <mat-card-header>
-      <mat-card-title>{{ '播放器' | translate }}</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      <div class="setting-item">
-        <span>{{ 'PLAYER.CORE' | translate }}</span>
-        <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
-          <mat-select [(ngModel)]="configs.globalVideoPlayerCore" (selectionChange)="updateConfig()">
-            @for (core of videoPlayerCores; track core) {
-              <mat-option [value]="core">
-                {{ 'SETTINGS.VIDEO_PLAYER_CORE.' + core | translate }}
-              </mat-option>
-            }
-          </mat-select>
-        </mat-form-field>
-      </div>
+<app-settings-page label="TV.settings_category_player" summary="TV.settings_category_player_summary">
 
-      <div class="setting-item">
-        <span>{{ 'PLAYER.RENDER_MODE' | translate }}</span>
-        <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
-          <mat-select [(ngModel)]="configs.videoPlayerRenderMode" (selectionChange)="updateConfig()">
-            @for (mode of videoPlayerRenderModes; track mode) {
-              <mat-option [value]="mode">
-                {{ 'SETTINGS.VIDEO_PLAYER_RENDER_MODE.' + mode | translate }}
-              </mat-option>
-            }
-          </mat-select>
-        </mat-form-field>
-      </div>
+  <app-settings-section label="TV.settings_section_player_common">
+    <app-settings-row label="TV.ui_player_view_player_core" desc="TV.settings_player_core_desc" recMedia3>
+      <mat-button-toggle-group [(ngModel)]="c.globalVideoPlayerCore" (change)="save()">
+        @for (core of cores; track core) {
+        <mat-button-toggle [value]="core">{{ coreLabels[core] }}</mat-button-toggle>
+        }
+      </mat-button-toggle-group>
+    </app-settings-row>
 
-      <div class="setting-item">
-        <div class="setting-label">
-          <span>{{ 'PLAYER.DECODER_CONFIG' | translate }}</span>
-          <span class="setting-desc">{{ 'PLAYER.DECODER_CONFIG_DESC' | translate }}</span>
-        </div>
-        <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
-          <mat-select [(ngModel)]="configs.videoPlayerDecoderConfig" (selectionChange)="updateConfig()">
-            @for (config of videoPlayerDecoderConfigs; track config) {
-              <mat-option [value]="config">
-                {{ 'SETTINGS.VIDEO_PLAYER_DECODER_CONFIG.' + config | translate }}
-              </mat-option>
-            }
-          </mat-select>
-        </mat-form-field>
-      </div>
+    <app-settings-row label="TV.ui_player_view_display_mode" desc="TV.settings_player_display_mode_desc">
+      <mat-form-field appearance="outline" subscriptSizing="dynamic">
+        <mat-select [(ngModel)]="c.videoPlayerDisplayMode" (selectionChange)="save()">
+          @for (mode of displayModes; track mode) {
+          <mat-option [value]="mode">{{ displayModeLabels[mode] | translate }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+    </app-settings-row>
 
-      <div class="setting-item">
-        <div class="setting-label">
-          <span>{{ 'PLAYER.DECODER_CONFIG_REGEX_LIST' | translate }}</span>
-        </div>
-        <div style="width: 100%; display: flex; flex-direction: column; gap: 10px; margin-top: 10px;">
-            @if (configs.videoPlayerDecoderConfigRegexList?.list) {
-                @for (item of configs.videoPlayerDecoderConfigRegexList!.list; track $index) {
-                    <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
-                        <mat-form-field appearance="outline" style="flex: 1; min-width: 200px; margin-bottom: -1.25em;">
-                            <mat-label>{{ 'PLAYER.REGEX_PATTERN' | translate }}</mat-label>
-                            <input matInput [(ngModel)]="item.pattern" (change)="updateConfig()">
-                        </mat-form-field>
-                        
-                        <mat-form-field appearance="outline" style="width: 150px; margin-bottom: -1.25em;">
-                            <mat-label>{{ 'PLAYER.CORE' | translate }}</mat-label>
-                            <mat-select [(ngModel)]="item.core" (selectionChange)="updateConfig()">
-                                @for (core of videoPlayerCores; track core) {
-                                    <mat-option [value]="core">
-                                        {{ 'SETTINGS.VIDEO_PLAYER_CORE.' + core | translate }}
-                                    </mat-option>
-                                }
-                            </mat-select>
-                        </mat-form-field>
+    <app-settings-row label="TV.ui_channel_change_black_screen" desc="TV.ui_channel_change_black_screen_desc">
+      <mat-slide-toggle [(ngModel)]="c.iptvChannelChangeBlackScreen" (change)="save()"></mat-slide-toggle>
+    </app-settings-row>
 
-                        <div style="display: flex; align-items: center;">
-                            <mat-slide-toggle [(ngModel)]="item.forceSoftDecode" (change)="updateConfig()">
-                                {{ 'PLAYER.FORCE_SOFT_DECODE' | translate }}
-                            </mat-slide-toggle>
-                        </div>
+    <app-settings-row label="TV.ui_player_view_volume_normalization" desc="TV.ui_player_view_volume_normalization_desc" media3>
+      <mat-button-toggle-group [(ngModel)]="c.videoPlayerVolumeBalanceLevel" (change)="save()">
+        @for (level of balanceLevels; track level) {
+        <mat-button-toggle [value]="level">{{ balanceLevelLabels[level] | translate }}</mat-button-toggle>
+        }
+      </mat-button-toggle-group>
+    </app-settings-row>
 
-                        <button mat-icon-button (click)="removeDecoderConfig($index)">
-                            <mat-icon>delete</mat-icon>
-                        </button>
-                    </div>
-                }
-            }
-            <button matButton="tonal" class="add-rule" (click)="addDecoderConfig()">
-                <mat-icon>add</mat-icon>
-                {{ 'PLAYER.ADD_CONFIG' | translate }}
-            </button>
-        </div>
-      </div>
+    <app-settings-row label="TV.ui_player_view_audio_screensaver" desc="TV.ui_player_view_audio_screensaver_desc">
+      <mat-slide-toggle [(ngModel)]="c.videoPlayerAudioScreensaver" (change)="save()"></mat-slide-toggle>
+    </app-settings-row>
+  </app-settings-section>
 
-      <div class="setting-item">
-        <div class="setting-label">
-          <span>{{ 'PLAYER.FORCE_SOFT_DECODE' | translate }}</span>
-          <span class="setting-desc">{{ 'PLAYER.FORCE_SOFT_DECODE_DESC' | translate }}</span>
-        </div>
-        <mat-slide-toggle [(ngModel)]="configs.globalVideoPlayerForceSoftDecode" (change)="updateConfig()"></mat-slide-toggle>
-      </div>
+  <app-settings-section label="TV.settings_section_player_trouble">
+    <app-settings-row label="TV.ui_player_view_load_timeout" desc="TV.ui_player_view_load_timeout_desc">
+      <mat-form-field appearance="outline" subscriptSizing="dynamic">
+        <mat-select [(ngModel)]="c.videoPlayerLoadTimeout" (selectionChange)="save()">
+          @for (ms of loadTimeoutOptions; track ms) {
+          <mat-option [value]="ms">{{ humanizeMs(ms) }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+    </app-settings-row>
 
-      <div class="setting-item">
-        <div class="setting-label">
-          <span>{{ 'PLAYER.MEDIA3_SOFT_DECODE_AUDIO_ONLY' | translate }}</span>
-          <span class="setting-desc">{{ 'PLAYER.MEDIA3_SOFT_DECODE_AUDIO_ONLY_DESC' | translate }}</span>
-        </div>
-        <mat-slide-toggle [(ngModel)]="configs.globalVideoPlayerMedia3SoftDecodeAudioOnly" (change)="updateConfig()"></mat-slide-toggle>
-      </div>
+    <app-settings-row label="TV.ui_player_view_buffer_time" desc="TV.ui_player_view_buffer_time_desc" detail="TV.settings_buffer_note">
+      <mat-button-toggle-group [ngModel]="c.videoPlayerBufferTime" (change)="c.videoPlayerBufferTime = $event.value; save()">
+        @for (preset of bufferPresets; track preset; let i = $index) {
+        <mat-button-toggle [value]="preset">{{ bufferPresetLabels[i] | translate }}</mat-button-toggle>
+        }
+      </mat-button-toggle-group>
+      <mat-form-field appearance="outline" subscriptSizing="dynamic" class="s-narrow">
+        <mat-select [(ngModel)]="c.videoPlayerBufferTime" (selectionChange)="save()">
+          @for (ms of bufferTimeOptions; track ms) {
+          <mat-option [value]="ms">{{ bufferTimeLabel(ms) }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+    </app-settings-row>
 
-      <div class="setting-item">
-        <div class="setting-label">
-          <span>{{ 'PLAYER.AUDIO_SCREENSAVER' | translate }}</span>
-          <span class="setting-desc">{{ 'PLAYER.AUDIO_SCREENSAVER_DESC' | translate }}</span>
-        </div>
-        <mat-slide-toggle [(ngModel)]="configs.videoPlayerAudioScreensaver" (change)="updateConfig()"></mat-slide-toggle>
-      </div>
+    <app-settings-row label="TV.ui_player_view_stall_retry" desc="TV.ui_player_view_stall_retry_desc">
+      <mat-form-field appearance="outline" subscriptSizing="dynamic">
+        <mat-select [(ngModel)]="c.videoPlayerStallRetryTimeout" (selectionChange)="save()">
+          @for (ms of stallRetryOptions; track ms) {
+          <mat-option [value]="ms">{{ stallRetryLabel(ms) }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+    </app-settings-row>
+  </app-settings-section>
 
-      <div class="setting-item">
-        <div class="setting-label">
-          <span>{{ 'PLAYER.AAC_PREFER' | translate }}</span>
-          <span class="setting-desc">{{ 'PLAYER.AAC_PREFER_DESC' | translate }}</span>
-        </div>
-        <mat-slide-toggle [(ngModel)]="configs.videoPlayerAacPrefer" (change)="updateConfig()"></mat-slide-toggle>
-      </div>
+  <app-settings-section label="TV.settings_section_player_leave">
+    <app-settings-row label="TV.ui_channel_view_picture_in_picture" desc="TV.settings_player_pip_desc">
+      <mat-slide-toggle [(ngModel)]="c.appPipEnable" (change)="onPipChange()"></mat-slide-toggle>
+    </app-settings-row>
 
-      <div class="setting-item">
-        <div class="setting-label">
-          <span>{{ 'PLAYER.MEDIA3_TUNNELED' | translate }}</span>
-          <span class="setting-desc">{{ 'PLAYER.MEDIA3_TUNNELED_DESC' | translate }}</span>
-        </div>
-        <mat-slide-toggle [(ngModel)]="configs.videoPlayerMedia3Tunneled" (change)="updateConfig()"></mat-slide-toggle>
-      </div>
+    <app-settings-row label="TV.ui_app_background_play" desc="TV.ui_app_background_play_desc">
+      <mat-slide-toggle [(ngModel)]="c.appBackgroundPlayEnable" (change)="onBackgroundPlayChange()"></mat-slide-toggle>
+    </app-settings-row>
+  </app-settings-section>
 
-      <div class="setting-item">
-        <div class="setting-label">
-          <span>{{ 'PLAYER.SUPER_RESOLUTION' | translate }}</span>
-          <span class="setting-desc">{{ 'PLAYER.SUPER_RESOLUTION_DESC' | translate }}</span>
-        </div>
-        <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
-          <mat-select [(ngModel)]="configs.globalVideoPlayerSuperResolutionMode" (selectionChange)="updateConfig()">
-            @for (mode of superResolutionModes; track mode) {
-              <mat-option [value]="mode">
-                {{ 'SETTINGS.VIDEO_PLAYER_SUPER_RESOLUTION_MODE.' + mode | translate }}
-              </mat-option>
-            }
-          </mat-select>
-        </mat-form-field>
-      </div>
+  <!-- 网页源：App 里是「网页源播放」子页，网页面板直接展开 -->
+  <app-settings-section label="TV.settings_section_player_web">
+    <app-settings-row label="TV.ui_player_view_webview_core">
+      <mat-button-toggle-group [(ngModel)]="c.webViewCore" (change)="save()">
+        <mat-button-toggle [value]="webViewCore.SYSTEM">Android</mat-button-toggle>
+        <mat-button-toggle [value]="webViewCore.X5">TBS X5</mat-button-toggle>
+      </mat-button-toggle-group>
+    </app-settings-row>
 
-      <div class="setting-item">
-        <div class="setting-label">
-          <span>{{ 'PLAYER.FRAME_INTERPOLATION' | translate }}</span>
-          <span class="setting-desc">{{ 'PLAYER.FRAME_INTERPOLATION_DESC' | translate }}</span>
-        </div>
-        <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
-          <mat-select [(ngModel)]="configs.globalVideoPlayerFrameInterpolationMode" (selectionChange)="updateConfig()">
-            @for (mode of frameInterpolationModes; track mode) {
-              <mat-option [value]="mode">
-                {{ 'SETTINGS.VIDEO_PLAYER_FRAME_INTERPOLATION_MODE.' + mode | translate }}
-              </mat-option>
-            }
-          </mat-select>
-        </mat-form-field>
-      </div>
+    <app-settings-row label="TV.ui_replace_system_webview" desc="TV.ui_replace_system_webview_desc">
+      <mat-slide-toggle [(ngModel)]="c.replaceSystemWebView" (change)="save()"></mat-slide-toggle>
+    </app-settings-row>
 
-      <div class="setting-item">
-        <div class="setting-label">
-          <span>{{ 'PLAYER.INTERPOLATION_TARGET_FPS' | translate }}</span>
-          <span class="setting-desc">{{ 'PLAYER.INTERPOLATION_TARGET_FPS_DESC' | translate }}</span>
-        </div>
-        <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
-          <mat-select [(ngModel)]="configs.globalVideoPlayerInterpolationTargetFps" (selectionChange)="updateConfig()">
-            @for (targetFps of interpolationTargetFps; track targetFps) {
-              <mat-option [value]="targetFps">
-                {{ 'SETTINGS.VIDEO_PLAYER_INTERPOLATION_TARGET_FPS.' + targetFps | translate }}
-              </mat-option>
-            }
-          </mat-select>
-        </mat-form-field>
-      </div>
+    <app-settings-row label="TV.ui_webview_load_timeout" desc="TV.ui_webview_load_timeout_desc">
+      <mat-form-field appearance="outline" subscriptSizing="dynamic">
+        <mat-select [(ngModel)]="c.webViewLoadTimeout" (selectionChange)="save()">
+          @for (ms of webViewLoadTimeoutOptions; track ms) {
+          <mat-option [value]="ms">{{ humanizeMs(ms) }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+    </app-settings-row>
 
-      <div class="setting-item">
-        <div class="setting-label">
-          <span>{{ 'PLAYER.AI_EXECUTION_BACKEND' | translate }}</span>
-          <span class="setting-desc">{{ 'PLAYER.AI_EXECUTION_BACKEND_DESC' | translate }}</span>
-        </div>
-        <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
-          <mat-select [(ngModel)]="configs.globalVideoPlayerAiExecutionBackend" (selectionChange)="updateConfig()">
-            @for (backend of aiExecutionBackends; track backend) {
-              <mat-option [value]="backend">
-                {{ 'SETTINGS.VIDEO_PLAYER_AI_EXECUTION_BACKEND.' + backend | translate }}
-              </mat-option>
-            }
-          </mat-select>
-        </mat-form-field>
-      </div>
+    <app-settings-row label="TV.ui_webview_loading_style" desc="TV.ui_webview_loading_style_desc">
+      <mat-button-toggle-group [(ngModel)]="c.webViewLoadingStyle" (change)="save()">
+        @for (label of webViewLoadingStyleLabels; track $index) {
+        <mat-button-toggle [value]="$index">{{ label | translate }}</mat-button-toggle>
+        }
+      </mat-button-toggle-group>
+    </app-settings-row>
 
-      <div class="setting-item">
-        <span>{{ 'PLAYER.STOP_PREVIOUS_MEDIA_ITEM' | translate }}</span>
-        <mat-slide-toggle [(ngModel)]="configs.videoPlayerStopPreviousMediaItem" (change)="updateConfig()"></mat-slide-toggle>
-      </div>
+    <app-settings-row label="TV.ui_webview_resolution" desc="TV.ui_webview_resolution_desc">
+      <mat-button-toggle-group [(ngModel)]="c.webViewResolution" (change)="save()">
+        @for (label of webViewResolutionLabels; track $index) {
+        <mat-button-toggle [value]="$index">{{ label | translate }}</mat-button-toggle>
+        }
+      </mat-button-toggle-group>
+    </app-settings-row>
 
-      <div class="setting-item">
-        <div class="setting-label">
-          <span>{{ 'PLAYER.FIT_FRAME_RATE' | translate }}</span>
-          <span class="setting-desc">{{ 'PLAYER.FIT_FRAME_RATE_DESC' | translate }}</span>
-        </div>
-        <mat-slide-toggle [(ngModel)]="configs.videoPlayerFitFrameRate" (change)="updateConfig()"></mat-slide-toggle>
-      </div>
+    <app-settings-row label="TV.ui_webview_ua_preset" desc="TV.ui_webview_ua_preset_desc">
+      <mat-button-toggle-group [(ngModel)]="c.webViewUaPreset" (change)="save()">
+        @for (label of webViewUaPresetLabels; track $index) {
+        <mat-button-toggle [value]="$index">{{ label | translate }}</mat-button-toggle>
+        }
+      </mat-button-toggle-group>
+    </app-settings-row>
 
-      @if (configs.videoPlayerFitFrameRate) {
-        <div class="setting-item">
-          <div class="setting-label">
-            <span>{{ 'PLAYER.FRAME_RATE_FALLBACK' | translate }}</span>
-            <span class="setting-desc">{{ 'PLAYER.FRAME_RATE_FALLBACK_DESC' | translate }}</span>
-          </div>
-          <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
-            <mat-select [(ngModel)]="configs.videoPlayerFrameRateFallback" (selectionChange)="updateConfig()">
-              @for (fallback of frameRateFallbacks; track fallback) {
-                <mat-option [value]="fallback">
-                  {{ frameRateFallbackLabels[fallback] | translate }}
-                </mat-option>
+    <app-settings-row label="TV.ui_webview_load_image" desc="TV.ui_webview_load_image_desc">
+      <mat-slide-toggle [(ngModel)]="c.webViewLoadImage" (change)="save()"></mat-slide-toggle>
+    </app-settings-row>
+
+    <app-settings-row label="TV.ui_webview_layer_accel" desc="TV.ui_webview_layer_accel_desc">
+      <mat-button-toggle-group [(ngModel)]="c.webViewLayerAccel" (change)="save()">
+        @for (label of webViewLayerAccelLabels; track $index) {
+        <mat-button-toggle [value]="$index">{{ label | translate }}</mat-button-toggle>
+        }
+      </mat-button-toggle-group>
+    </app-settings-row>
+  </app-settings-section>
+
+  <app-settings-advanced [count]="15">
+    <app-settings-row label="TV.ui_player_view_player_config" desc="TV.settings_player_decoder_config_desc">
+      <mat-button-toggle-group [(ngModel)]="c.videoPlayerDecoderConfig" (change)="save()">
+        <mat-button-toggle [value]="0">{{ 'TV.settings_choice_decoder_config_none' | translate }}</mat-button-toggle>
+        <mat-button-toggle [value]="1">{{ 'TV.settings_choice_decoder_config_host' | translate }}</mat-button-toggle>
+        <mat-button-toggle [value]="2">{{ 'TV.settings_choice_decoder_config_url' | translate }}</mat-button-toggle>
+      </mat-button-toggle-group>
+    </app-settings-row>
+
+    <app-settings-row label="TV.ui_player_view_decoder_regex" desc="TV.ui_player_view_decoder_regex_desc"
+      detail="TV.ui_player_view_decoder_regex_desc_detail">
+      <span class="s-row-value">{{ 'TV.ui_player_view_proxy_rules_count' | translate: { p1: c.videoPlayerDecoderConfigRegexList?.list?.length ?? 0 } }}</span>
+      <button matButton="tonal" (click)="addDecoderConfig()">
+        <mat-icon>add</mat-icon> {{ 'PLAYER.ADD_CONFIG' | translate }}
+      </button>
+      @if (c.videoPlayerDecoderConfigRegexList?.list?.length) {
+      <div below class="s-list">
+        @for (item of c.videoPlayerDecoderConfigRegexList!.list; track $index) {
+        <div class="s-list-item">
+          <mat-form-field appearance="outline" subscriptSizing="dynamic" class="s-grow">
+            <mat-label>{{ 'PLAYER.REGEX_PATTERN' | translate }}</mat-label>
+            <input matInput [(ngModel)]="item.pattern" (change)="save()">
+          </mat-form-field>
+          <mat-form-field appearance="outline" subscriptSizing="dynamic" class="s-narrow">
+            <mat-label>{{ 'PLAYER.CORE' | translate }}</mat-label>
+            <mat-select [(ngModel)]="item.core" (selectionChange)="save()">
+              @for (core of cores; track core) {
+              <mat-option [value]="core">{{ coreLabels[core] }}</mat-option>
               }
             </mat-select>
           </mat-form-field>
+          <mat-slide-toggle [(ngModel)]="item.forceSoftDecode" (change)="save()">
+            {{ 'TV.ui_player_view_force_soft_decode' | translate }}
+          </mat-slide-toggle>
+          <button mat-icon-button (click)="removeDecoderConfig($index)">
+            <mat-icon>delete</mat-icon>
+          </button>
         </div>
+        }
+      </div>
       }
+    </app-settings-row>
 
-      <div class="setting-item">
-        <div class="setting-label">
-          <span>{{ 'PLAYER.BETTER_DETECTION' | translate }}</span>
-          <span class="setting-desc">{{ 'PLAYER.BETTER_DETECTION_DESC' | translate }}</span>
-        </div>
-        <mat-slide-toggle [(ngModel)]="configs.videoPlayerApplyBetterDetection" (change)="updateConfig()"></mat-slide-toggle>
-      </div>
+    <app-settings-row label="TV.ui_player_view_force_soft_decode" desc="TV.ui_player_view_force_soft_decode_desc"
+      detail="TV.ui_player_view_force_soft_decode_desc_detail">
+      <mat-slide-toggle [(ngModel)]="c.globalVideoPlayerForceSoftDecode" (change)="save()"></mat-slide-toggle>
+    </app-settings-row>
 
-      <div class="setting-item">
-        <div class="setting-label">
-          <span>{{ 'PLAYER.EXTRACT_HEADER_FROM_LINK' | translate }}</span>
-          <span class="setting-desc">{{ 'PLAYER.EXTRACT_HEADER_FROM_LINK_DESC' | translate }}</span>
-        </div>
-        <mat-slide-toggle [(ngModel)]="configs.videoPlayerExtractHeaderFromLink" (change)="updateConfig()"></mat-slide-toggle>
-      </div>
+    <app-settings-row label="TV.ui_player_view_media3_soft_decode_audio_only" desc="TV.ui_player_view_media3_soft_decode_audio_only_desc"
+      detail="TV.ui_player_view_media3_soft_decode_audio_only_desc_detail" media3>
+      <mat-slide-toggle [(ngModel)]="c.globalVideoPlayerMedia3SoftDecodeAudioOnly" (change)="save()"></mat-slide-toggle>
+    </app-settings-row>
 
-      <div class="setting-item">
-        <span>{{ 'PLAYER.DISPLAY_MODE' | translate }}</span>
-        <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
-          <mat-select [(ngModel)]="configs.videoPlayerDisplayMode" (selectionChange)="updateConfig()">
-            @for (mode of videoPlayerDisplayModes; track mode) {
-              <mat-option [value]="mode">
-                {{ 'SETTINGS.VIDEO_PLAYER_DISPLAY_MODE.' + mode | translate }}
-              </mat-option>
-            }
-          </mat-select>
-        </mat-form-field>
-      </div>
+    <app-settings-row label="TV.ui_player_view_media3_tunneled" desc="TV.ui_player_view_media3_tunneled_desc" media3>
+      <mat-slide-toggle [(ngModel)]="c.videoPlayerMedia3Tunneled" (change)="save()"></mat-slide-toggle>
+    </app-settings-row>
 
-      <div class="setting-item">
-        <span>{{ 'PLAYER.SEEK_TO_MODE' | translate }}</span>
-        <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
-          <mat-select [(ngModel)]="configs.videoPlayerSeekToMode" (selectionChange)="updateConfig()">
-            @for (mode of videoPlayerSeekToModes; track mode) {
-              <mat-option [value]="mode">
-                {{ 'SETTINGS.VIDEO_PLAYER_SEEK_TO_MODE.' + mode | translate }}
-              </mat-option>
-            }
-          </mat-select>
-        </mat-form-field>
-      </div>
+    <app-settings-row label="TV.ui_player_view_aac_prefer" desc="TV.ui_player_view_aac_prefer_desc"
+      detail="TV.ui_player_view_aac_prefer_desc_detail">
+      <mat-slide-toggle [(ngModel)]="c.videoPlayerAacPrefer" (change)="save()"></mat-slide-toggle>
+    </app-settings-row>
 
-      <div class="setting-item">
-        <div class="setting-label">
-          <span>{{ 'PLAYER.EPG_TIMELINE' | translate }}</span>
-          <span class="setting-desc">{{ 'PLAYER.EPG_TIMELINE_DESC' | translate }}</span>
-        </div>
-        <mat-slide-toggle [(ngModel)]="configs.videoPlayerEpgTimeline" (change)="updateConfig()"></mat-slide-toggle>
-      </div>
+    <app-settings-row label="TV.video_player_support_better_detection" desc="TV.video_player_support_better_detection_desc"
+      detail="TV.video_player_support_better_detection_desc_detail">
+      <mat-slide-toggle [(ngModel)]="c.videoPlayerApplyBetterDetection" (change)="save()"></mat-slide-toggle>
+    </app-settings-row>
 
-      <div class="setting-item">
-        <div class="setting-label">
-          <span>{{ 'PLAYER.LOAD_TIMEOUT' | translate }}</span>
-          <span class="setting-desc">{{ 'PLAYER.LOAD_TIMEOUT_DESC' | translate }}</span>
-        </div>
-        <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
-          <input matInput type="number" [(ngModel)]="configs.videoPlayerLoadTimeout" (change)="updateConfig()">
-        </mat-form-field>
-      </div>
+    <app-settings-row label="TV.ui_player_view_stop_previous_media_item" desc="TV.settings_player_stop_previous_desc">
+      <mat-slide-toggle [(ngModel)]="c.videoPlayerStopPreviousMediaItem" (change)="save()"></mat-slide-toggle>
+    </app-settings-row>
 
-      <div class="setting-item">
-        <div class="setting-label">
-          <span>{{ 'PLAYER.BUFFER_TIME' | translate }}</span>
-          <span class="setting-desc">{{ 'PLAYER.BUFFER_TIME_DESC' | translate }}</span>
-        </div>
-        <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
-          <input matInput type="number" [(ngModel)]="configs.videoPlayerBufferTime" (change)="updateConfig()">
-        </mat-form-field>
-      </div>
-
-      <div class="setting-item">
-        <div class="setting-label">
-          <span>{{ 'PLAYER.STALL_RETRY' | translate }}</span>
-          <span class="setting-desc">{{ 'PLAYER.STALL_RETRY_DESC' | translate }}</span>
-        </div>
-        <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
-          <input matInput type="number" [(ngModel)]="configs.videoPlayerStallRetryTimeout" (change)="updateConfig()">
-        </mat-form-field>
-      </div>
-
-      <div class="setting-item">
-        <span>{{ 'PLAYER.RTSP_TRANSPORT' | translate }}</span>
-        <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
-          <mat-select [(ngModel)]="configs.videoPlayerRtspTransport" (selectionChange)="updateConfig()">
-            @for (transport of rtspTransports; track transport) {
-              <mat-option [value]="transport">
-                {{ 'SETTINGS.RTSP_TRANSPORT.' + transport | translate }}
-              </mat-option>
-            }
-          </mat-select>
-        </mat-form-field>
-      </div>
-
-      <!-- Audio Balance Level -->
-      <div class="setting-item">
-        <div class="setting-label">
-          <span>{{ 'PLAYER.VOLUME_BALANCE_LEVEL' | translate }}</span>
-          <span class="setting-desc">{{ 'PLAYER.VOLUME_BALANCE_LEVEL_DESC' | translate }}</span>
-        </div>
-        <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
-          <mat-select [(ngModel)]="configs.videoPlayerVolumeBalanceLevel" (selectionChange)="updateConfig()">
-            @for (level of audioBalanceLevels; track level) {
-              <mat-option [value]="level">
-                {{ audioBalanceLevelLabels[level] | translate }}
-              </mat-option>
-            }
-          </mat-select>
-        </mat-form-field>
-      </div>
-
-      <!-- ASR Card -->
-      <div class="asr-card">
-        <div class="asr-card-title">{{ 'PLAYER.ASR_CARD_TITLE' | translate }}</div>
-
-        <!-- Real-time ASR Toggle -->
-        <div class="setting-item">
-          <div class="setting-label">
-            <span>{{ 'PLAYER.ASR_REAL_TIME' | translate }}</span>
-            <span class="setting-desc">{{ 'PLAYER.ASR_REAL_TIME_DESC' | translate }}</span>
-          </div>
-          <mat-slide-toggle [(ngModel)]="configs.videoPlayerRealTimeASR"></mat-slide-toggle>
-        </div>
-
-        @if (configs.videoPlayerRealTimeASR) {
-          <!-- ASR Model -->
-          <div class="setting-item">
-            <div class="setting-label">
-              <span>{{ 'PLAYER.ASR_MODEL' | translate }}</span>
-              <span class="setting-desc">{{ 'PLAYER.ASR_MODEL_DESC' | translate }}</span>
-            </div>
-            <mat-form-field appearance="outline" style="margin-bottom: -1.25em; width: 100%;">
-              <input matInput [(ngModel)]="configs.videoPlayerASRModel" placeholder="/storage/emulated/0/sherpa-onnx-streaming-zipformer-zh-14M-2023-02-23">
-            </mat-form-field>
-          </div>
-
-          <!-- 云端模型凭据：紧跟在模型选择下面 -->
-          @if (configs.videoPlayerASRModel === 'gemini-live-translate') {
-            <div class="setting-item">
-              <div class="setting-label">
-                <span>{{ 'PLAYER.ASR_GEMINI_API_KEY' | translate }}</span>
-                <span class="setting-desc">{{ 'PLAYER.ASR_GEMINI_API_KEY_DESC' | translate }}</span>
-              </div>
-              <mat-form-field appearance="outline" class="full-width" style="margin-bottom: -1.25em;">
-                <input matInput [(ngModel)]="configs.videoPlayerASRGeminiApiKey" type="password" (change)="updateConfig()">
-              </mat-form-field>
-            </div>
-            <div class="setting-item">
-              <div class="setting-label">
-                <span>{{ 'PLAYER.ASR_GEMINI_ENDPOINT' | translate }}</span>
-                <span class="setting-desc">{{ 'PLAYER.ASR_GEMINI_ENDPOINT_DESC' | translate }}</span>
-              </div>
-              <mat-form-field appearance="outline" class="full-width" style="margin-bottom: -1.25em;">
-                <input matInput [(ngModel)]="configs.videoPlayerASRGeminiEndpoint" (change)="updateConfig()" placeholder="">
-              </mat-form-field>
-            </div>
-          }
-
-          @if (configs.videoPlayerASRModel === 'aliyun-qwen-livetranslate') {
-            <div class="setting-item">
-              <div class="setting-label">
-                <span>{{ 'PLAYER.ASR_ALIYUN_API_KEY' | translate }}</span>
-                <span class="setting-desc">{{ 'PLAYER.ASR_ALIYUN_API_KEY_DESC' | translate }}</span>
-              </div>
-              <mat-form-field appearance="outline" class="full-width" style="margin-bottom: -1.25em;">
-                <input matInput [(ngModel)]="configs.videoPlayerASRAliyunApiKey" type="password" (change)="updateConfig()">
-              </mat-form-field>
-            </div>
-            <div class="setting-item">
-              <div class="setting-label">
-                <span>{{ 'PLAYER.ASR_ALIYUN_ENDPOINT' | translate }}</span>
-                <span class="setting-desc">{{ 'PLAYER.ASR_ALIYUN_ENDPOINT_DESC' | translate }}</span>
-              </div>
-              <mat-form-field appearance="outline" class="full-width" style="margin-bottom: -1.25em;">
-                <input matInput [(ngModel)]="configs.videoPlayerASRAliyunEndpoint" (change)="updateConfig()" placeholder="">
-              </mat-form-field>
-            </div>
-          }
-
-          @if (configs.videoPlayerASRModel === 'soniox-live-translate') {
-            <div class="setting-item">
-              <div class="setting-label">
-                <span>{{ 'PLAYER.ASR_SONIOX_API_KEY' | translate }}</span>
-                <span class="setting-desc">{{ 'PLAYER.ASR_SONIOX_API_KEY_DESC' | translate }}</span>
-              </div>
-              <mat-form-field appearance="outline" class="full-width" style="margin-bottom: -1.25em;">
-                <input matInput [(ngModel)]="configs.videoPlayerASRSonioxApiKey" type="password" (change)="updateConfig()">
-              </mat-form-field>
-            </div>
-          }
-
-          <!-- ASR Mode -->
-          <div class="setting-item">
-            <div class="setting-label">
-              <span>{{ 'PLAYER.ASR_MODE' | translate }}</span>
-              <span class="setting-desc">{{ 'PLAYER.ASR_MODE_DESC' | translate }}</span>
-            </div>
-            <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
-              <mat-select [(ngModel)]="configs.videoPlayerASRMode">
-                @for (mode of asrModes; track mode) {
-                  <mat-option [value]="mode">
-                    {{ asrModeLabels[mode] | translate }}
-                  </mat-option>
-                }
-              </mat-select>
-            </mat-form-field>
-          </div>
-
-          <!-- ASR Lead Time -->
-          <div class="setting-item">
-            <div class="setting-label">
-              <span>{{ 'PLAYER.ASR_LEAD_TIME' | translate }}</span>
-              <span class="setting-desc">{{ 'PLAYER.ASR_LEAD_TIME_DESC' | translate }}</span>
-            </div>
-            <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
-              <input matInput type="number" [(ngModel)]="configs.videoPlayerASRLeadTimeMs" placeholder="500">
-              <span matTextSuffix>ms</span>
-            </mat-form-field>
-          </div>
-
-          <!-- ASR Silence Threshold -->
-          <div class="setting-item">
-            <div class="setting-label">
-              <span>{{ 'PLAYER.ASR_SILENCE_THRESHOLD' | translate }}</span>
-              <span class="setting-desc">{{ 'PLAYER.ASR_SILENCE_THRESHOLD_DESC' | translate }}</span>
-            </div>
-            <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
-              <input matInput type="number" [(ngModel)]="configs.videoPlayerASRSilenceThresholdMs" placeholder="650">
-              <span matTextSuffix>ms</span>
-            </mat-form-field>
-          </div>
-
-          <!-- ASR VAD Type -->
-          <div class="setting-item">
-            <div class="setting-label">
-              <span>{{ 'PLAYER.ASR_VAD_TYPE' | translate }}</span>
-              <span class="setting-desc">{{ 'PLAYER.ASR_VAD_TYPE_DESC' | translate }}</span>
-            </div>
-            <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
-              <mat-select [(ngModel)]="configs.videoPlayerASRVadType" (selectionChange)="updateConfig()">
-                @for (vad of asrVadTypes; track vad) {
-                  <mat-option [value]="vad">
-                    {{ asrVadTypeLabels[vad] | translate }}
-                  </mat-option>
-                }
-              </mat-select>
-            </mat-form-field>
-          </div>
-
-          <!-- ASR Auto Streaming Fallback -->
-          <div class="setting-item">
-            <div class="setting-label">
-              <span>{{ 'PLAYER.ASR_AUTO_STREAMING_FALLBACK' | translate }}</span>
-              <span class="setting-desc">{{ 'PLAYER.ASR_AUTO_STREAMING_FALLBACK_DESC' | translate }}</span>
-            </div>
-            <mat-slide-toggle [(ngModel)]="configs.videoPlayerASRAutoStreamingFallback" (change)="updateConfig()"></mat-slide-toggle>
-          </div>
-
+    <app-settings-row label="TV.ui_player_view_render_mode" desc="TV.settings_player_render_mode_desc">
+      <mat-button-toggle-group [(ngModel)]="c.videoPlayerRenderMode" (change)="save()">
+        @for (mode of renderModes; track mode) {
+        <mat-button-toggle [value]="mode">{{ renderModeLabels[mode] }}</mat-button-toggle>
         }
+      </mat-button-toggle-group>
+    </app-settings-row>
 
-        <div class="action-container">
-          <button mat-flat-button (click)="saveAsr()">{{ 'PLAYER.ASR_SAVE' | translate }}</button>
-        </div>
-      </div>
+    <app-settings-row label="TV.ui_player_view_fit_frame_rate" desc="TV.ui_player_view_fit_frame_rate_desc"
+      detail="TV.ui_player_view_fit_frame_rate_desc_detail" surfaceView>
+      <mat-slide-toggle [(ngModel)]="c.videoPlayerFitFrameRate" (change)="save()"></mat-slide-toggle>
+    </app-settings-row>
 
-      <!-- Subtitle Translation Card -->
-      <div class="asr-card">
-        <div class="asr-card-title">{{ 'PLAYER.TRANSLATION_CARD_TITLE' | translate }}</div>
-
-        <!-- Translation Engine Button Toggle -->
-        <div class="setting-item">
-          <div class="setting-label">
-            <span>{{ 'PLAYER.ASR_TRANSLATION_ENGINE' | translate }}</span>
-            <span class="setting-desc">{{ 'PLAYER.ASR_TRANSLATION_ENGINE_DESC' | translate }}</span>
-          </div>
-          <mat-button-toggle-group [(ngModel)]="configs.videoPlayerASRTranslationEngine" [vertical]="isSmallScreen">
-            @for (eng of asrTranslationEngines; track eng) {
-              <mat-button-toggle [value]="eng">{{ asrTranslationEngineLabels[eng] | translate }}</mat-button-toggle>
-            }
-          </mat-button-toggle-group>
-        </div>
-
-        @if (configs.videoPlayerASRTranslationEngine) {
-          <!-- Target Language -->
-          <div class="setting-item">
-            <div class="setting-label">
-              <span>{{ 'PLAYER.ASR_TARGET_LANG' | translate }}</span>
-              <span class="setting-desc">{{ 'PLAYER.ASR_TARGET_LANG_DESC' | translate }}</span>
-            </div>
-            <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
-              <input matInput [(ngModel)]="configs.videoPlayerASRTranslationTargetLang" placeholder="en">
-            </mat-form-field>
-          </div>
-
+    <app-settings-row label="TV.ui_player_view_frame_rate_fallback" desc="TV.ui_player_view_frame_rate_fallback_desc">
+      <mat-button-toggle-group [(ngModel)]="c.videoPlayerFrameRateFallback" (change)="save()">
+        @for (fallback of frameRateFallbacks; track fallback) {
+        <mat-button-toggle [value]="fallback">{{ frameRateFallbackLabels[fallback] | translate }}</mat-button-toggle>
         }
+      </mat-button-toggle-group>
+    </app-settings-row>
 
-        <!--
-          译文显示样式（关闭原文 / 大小 / 颜色）放在翻译引擎判断之外：
-          ASR-Live 引擎（Gemini、百炼、Soniox）自带译文，videoPlayerASRTranslationEngine
-          为空，若放在 @if 里这些设置对它们不可见。
-        -->
-        <!-- Translation Hide Original -->
-        <div class="setting-item">
-          <div class="setting-label">
-            <span>{{ 'PLAYER.TRANSLATION_HIDE_ORIGINAL' | translate }}</span>
-            <span class="setting-desc">{{ 'PLAYER.TRANSLATION_HIDE_ORIGINAL_DESC' | translate }}</span>
-          </div>
-          <mat-slide-toggle [(ngModel)]="configs.videoPlayerASRTranslationHideOriginal"></mat-slide-toggle>
-        </div>
+    <app-settings-row label="TV.ui_player_view_seekto_mode" desc="TV.settings_player_seek_desc">
+      <mat-button-toggle-group [(ngModel)]="c.videoPlayerSeekToMode" (change)="save()">
+        <mat-button-toggle [value]="seekToMode.RELOAD_URL">{{ 'TV.settings_choice_seek_reload' | translate }}</mat-button-toggle>
+        <mat-button-toggle [value]="seekToMode.SEEK_TO">{{ 'TV.settings_choice_seek_player' | translate }}</mat-button-toggle>
+      </mat-button-toggle-group>
+    </app-settings-row>
 
-        <!-- Translation Font Scale -->
-        <div class="setting-item">
-          <div class="setting-label">
-            <span>{{ 'PLAYER.TRANSLATION_FONT_SCALE' | translate }}</span>
-            <span class="setting-desc">{{ 'PLAYER.TRANSLATION_FONT_SCALE_DESC' | translate }}</span>
-          </div>
-          <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
-            <input matInput type="number" step="0.1" min="0.5" max="2" [(ngModel)]="configs.videoPlayerASRTranslationFontScale" placeholder="1.0">
-          </mat-form-field>
-        </div>
+    <app-settings-row label="TV.ui_player_view_epg_timeline" desc="TV.ui_player_view_epg_timeline_desc">
+      <mat-slide-toggle [(ngModel)]="c.videoPlayerEpgTimeline" (change)="save()"></mat-slide-toggle>
+    </app-settings-row>
 
-        <!-- Translation Color -->
-        <div class="setting-item">
-          <div class="setting-label">
-            <span>{{ 'PLAYER.TRANSLATION_COLOR' | translate }}</span>
-            <span class="setting-desc">{{ 'PLAYER.TRANSLATION_COLOR_DESC' | translate }}</span>
-          </div>
-          <div class="color-swatches">
-            <button type="button" class="swatch swatch-follow"
-                    [class.active]="!configs.videoPlayerASRTranslationColor"
-                    [attr.aria-label]="'PLAYER.TRANSLATION_COLOR_FOLLOW' | translate"
-                    (click)="configs.videoPlayerASRTranslationColor = 0">
-              {{ 'PLAYER.TRANSLATION_COLOR_FOLLOW' | translate }}
-            </button>
-            @for (c of asrTranslationColors; track c.value) {
-              <button type="button" class="swatch"
-                      [class.active]="configs.videoPlayerASRTranslationColor === c.value"
-                      [style.background]="c.css"
-                      [attr.aria-label]="c.css"
-                      [title]="c.css"
-                      (click)="configs.videoPlayerASRTranslationColor = c.value"></button>
-            }
-          </div>
-        </div>
-
-        @if (configs.videoPlayerASRTranslationEngine === asrTranslationEngine.TENCENT) {
-          <!-- Tencent Cloud Credentials -->
-          <div class="setting-item">
-            <span>{{ 'PLAYER.ASR_TENCENT_SECRET_ID' | translate }}</span>
-            <mat-form-field appearance="outline" class="full-width" style="margin-bottom: -1.25em;">
-              <input matInput [(ngModel)]="configs.videoPlayerASRTranslationTencentSecretId" type="password">
-            </mat-form-field>
-          </div>
-          <div class="setting-item">
-            <span>{{ 'PLAYER.ASR_TENCENT_SECRET_KEY' | translate }}</span>
-            <mat-form-field appearance="outline" class="full-width" style="margin-bottom: -1.25em;">
-              <input matInput [(ngModel)]="configs.videoPlayerASRTranslationTencentSecretKey" type="password">
-            </mat-form-field>
-          </div>
+    <app-settings-row label="TV.ui_player_view_rtsp_transport" desc="TV.settings_player_rtsp_desc">
+      <mat-button-toggle-group [(ngModel)]="c.videoPlayerRtspTransport" (change)="save()">
+        @for (transport of rtspTransports; track transport) {
+        <mat-button-toggle [value]="transport">{{ transport }}</mat-button-toggle>
         }
+      </mat-button-toggle-group>
+    </app-settings-row>
 
-        @if (configs.videoPlayerASRTranslationEngine === asrTranslationEngine.BAIDU) {
-          <!-- Baidu Translation Credentials -->
-          <div class="setting-item">
-            <span>{{ 'PLAYER.ASR_BAIDU_APP_ID' | translate }}</span>
-            <mat-form-field appearance="outline" class="full-width" style="margin-bottom: -1.25em;">
-              <input matInput [(ngModel)]="configs.videoPlayerASRTranslationBaiduAppId">
-            </mat-form-field>
-          </div>
-          <div class="setting-item">
-            <span>{{ 'PLAYER.ASR_BAIDU_SECRET_KEY' | translate }}</span>
-            <mat-form-field appearance="outline" class="full-width" style="margin-bottom: -1.25em;">
-              <input matInput [(ngModel)]="configs.videoPlayerASRTranslationBaiduSecretKey" type="password">
-            </mat-form-field>
-          </div>
-        }
-
-        @if (configs.videoPlayerASRTranslationEngine === asrTranslationEngine.MTRANSERVER) {
-          <!-- MTranServer Configuration -->
-          <div class="setting-item">
-            <span>{{ 'PLAYER.ASR_MTRANSERVER_URL' | translate }}</span>
-            <mat-form-field appearance="outline" class="full-width" style="margin-bottom: -1.25em;">
-              <input matInput [(ngModel)]="configs.videoPlayerASRTranslationMTranServerUrl" placeholder="http://your-server:port">
-            </mat-form-field>
-          </div>
-          <div class="setting-item">
-            <span>{{ 'PLAYER.ASR_MTRANSERVER_TOKEN' | translate }}</span>
-            <mat-form-field appearance="outline" class="full-width" style="margin-bottom: -1.25em;">
-              <input matInput [(ngModel)]="configs.videoPlayerASRTranslationMTranServerToken" type="password">
-            </mat-form-field>
-          </div>
-        }
-
-        @if (configs.videoPlayerASRTranslationEngine === asrTranslationEngine.YOUDAO) {
-          <!-- Youdao Configuration -->
-          <div class="setting-item">
-            <span>{{ 'PLAYER.ASR_YOUDAO_APP_KEY' | translate }}</span>
-            <mat-form-field appearance="outline" class="full-width" style="margin-bottom: -1.25em;">
-              <input matInput [(ngModel)]="configs.videoPlayerASRTranslationYoudaoAppKey">
-            </mat-form-field>
-          </div>
-          <div class="setting-item">
-            <span>{{ 'PLAYER.ASR_YOUDAO_APP_SECRET' | translate }}</span>
-            <mat-form-field appearance="outline" class="full-width" style="margin-bottom: -1.25em;">
-              <input matInput [(ngModel)]="configs.videoPlayerASRTranslationYoudaoAppSecret" type="password">
-            </mat-form-field>
-          </div>
-        }
-
-        @if (configs.videoPlayerASRTranslationEngine === asrTranslationEngine.MICROSOFT) {
-          <!-- Microsoft Translator Configuration -->
-          <div class="setting-item">
-            <span>{{ 'PLAYER.ASR_MICROSOFT_KEY' | translate }}</span>
-            <mat-form-field appearance="outline" class="full-width" style="margin-bottom: -1.25em;">
-              <input matInput [(ngModel)]="configs.videoPlayerASRTranslationMicrosoftKey" type="password">
-            </mat-form-field>
-          </div>
-          <div class="setting-item">
-            <div class="setting-label">
-              <span>{{ 'PLAYER.ASR_MICROSOFT_REGION' | translate }}</span>
-              <span class="setting-desc">{{ 'PLAYER.ASR_MICROSOFT_REGION_DESC' | translate }}</span>
-            </div>
-            <mat-form-field appearance="outline" class="full-width" style="margin-bottom: -1.25em;">
-              <input matInput [(ngModel)]="configs.videoPlayerASRTranslationMicrosoftRegion" placeholder="eastasia">
-            </mat-form-field>
-          </div>
-        }
-
-        <div class="action-container">
-          <button mat-flat-button (click)="saveAsr()">{{ 'PLAYER.ASR_SAVE' | translate }}</button>
-        </div>
-      </div>
-
-      <div class="setting-item">
-        <div class="setting-label">
-          <span>{{ 'PLAYER.DNS' | translate }}</span>
-          <span class="setting-desc">{{ 'PLAYER.DNS_DESC' | translate }}</span>
-        </div>
-        <mat-form-field appearance="outline" style="margin-bottom: -1.25em; width: 100%;">
-          <input matInput [(ngModel)]="configs.videoPlayerDns" (change)="updateConfig()">
-        </mat-form-field>
-      </div>
-
-      <div class="setting-item">
-        <span>{{ 'PLAYER.PROXY' | translate }}</span>
-        <mat-form-field appearance="outline" style="margin-bottom: -1.25em; width: 100%;">
-          <input matInput [(ngModel)]="configs.videoPlayerProxy" (change)="updateConfig()">
-        </mat-form-field>
-      </div>
-
-      <div class="setting-item">
-        <div class="setting-label">
-          <span>{{ 'PLAYER.PROXY_RULES' | translate }}</span>
-          @if (configs.videoPlayerProxyRuleList?.list) {
-            <span class="setting-desc">{{ 'PLAYER.PROXY_RULES_COUNT' | translate: { count: configs.videoPlayerProxyRuleList!.list.length } }}</span>
-          }
-        </div>
-        <div style="width: 100%; display: flex; flex-direction: column; gap: 10px; margin-top: 10px;">
-            @if (configs.videoPlayerProxyRuleList?.list) {
-                @for (item of configs.videoPlayerProxyRuleList!.list; track $index) {
-                    <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
-                        <mat-form-field appearance="outline" style="flex: 1; min-width: 200px; margin-bottom: -1.25em;">
-                            <mat-label>{{ 'PLAYER.REGEX_PATTERN' | translate }}</mat-label>
-                            <input matInput [(ngModel)]="item.pattern" (change)="updateConfig()">
-                        </mat-form-field>
-                        
-                        <mat-form-field appearance="outline" style="flex: 1; min-width: 200px; margin-bottom: -1.25em;">
-                            <mat-label>{{ 'PLAYER.PROXY' | translate }}</mat-label>
-                            <input matInput [(ngModel)]="item.proxy" (change)="updateConfig()">
-                        </mat-form-field>
-
-                        <button mat-icon-button (click)="removeProxyRule($index)">
-                            <mat-icon>delete</mat-icon>
-                        </button>
-                    </div>
-                }
-            }
-            <button matButton="tonal" class="add-rule" (click)="addProxyRule()">
-                <mat-icon>add</mat-icon>
-                {{ 'PLAYER.ADD_CONFIG' | translate }}
-            </button>
-        </div>
-      </div>
-
-      <div class="setting-item">
-        <span>{{ 'HOME.USER_AGENT' | translate }}</span>
-        <mat-form-field appearance="outline" style="margin-bottom: -1.25em; width: 100%;">
-          <input matInput [(ngModel)]="configs.videoPlayerUserAgent" (change)="updateConfig()">
-        </mat-form-field>
-      </div>
-
-      <div class="setting-item">
-        <div class="setting-label">
-          <span>{{ 'HOME.CUSTOM_HEADERS' | translate }}</span>
-        </div>
-        <app-textarea-with-lines [(ngModel)]="configs.videoPlayerHeaders" (change)="updateConfig()"></app-textarea-with-lines>
-      </div>
-
-    </mat-card-content>
-  </mat-card>
-</div>
+    <app-settings-row label="TV.ui_player_view_extract_header_from_link" desc="TV.ui_player_view_extract_header_from_link_desc">
+      <mat-slide-toggle [(ngModel)]="c.videoPlayerExtractHeaderFromLink" (change)="save()"></mat-slide-toggle>
+    </app-settings-row>
+  </app-settings-advanced>
+</app-settings-page>

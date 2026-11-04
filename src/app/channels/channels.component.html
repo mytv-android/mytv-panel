@@ -1,0 +1,123 @@
+<app-settings-page label="TV.settings_category_channels" summary="TV.settings_category_channels_summary">
+
+  <app-settings-section label="TV.settings_section_channels_picker">
+    <app-settings-row label="TV.settings_channels_panel_style" desc="TV.settings_channels_panel_style_desc">
+      <mat-button-toggle-group [ngModel]="!!c.uiUseClassicPanelScreen" (change)="c.uiUseClassicPanelScreen = $event.value; save()">
+        <mat-button-toggle [value]="false">{{ 'TV.settings_choice_panel_new' | translate }}</mat-button-toggle>
+        <mat-button-toggle [value]="true">{{ 'TV.settings_choice_panel_classic' | translate }}</mat-button-toggle>
+      </mat-button-toggle-group>
+    </app-settings-row>
+
+    <app-settings-row label="TV.ui_classic_show_source_list" desc="TV.ui_classic_show_source_list_desc" classic>
+      <mat-slide-toggle [(ngModel)]="c.uiClassicShowSourceList" (change)="save()"></mat-slide-toggle>
+    </app-settings-row>
+
+    <app-settings-row label="TV.ui_classic_show_channel_info" desc="TV.ui_classic_show_channel_info_desc" classic>
+      <mat-slide-toggle [(ngModel)]="c.uiClassicShowChannelInfo" (change)="save()"></mat-slide-toggle>
+    </app-settings-row>
+
+    <app-settings-row label="TV.ui_classic_show_channel_no" desc="TV.ui_classic_show_channel_no_desc" classic>
+      <mat-slide-toggle [(ngModel)]="c.uiClassicShowChannelNo" (change)="save()"></mat-slide-toggle>
+    </app-settings-row>
+
+    <app-settings-row label="TV.ui_epg_always_show_in_classic_channel_screen" desc="TV.ui_epg_always_show_in_classic_channel_screen_desc" classic>
+      <mat-slide-toggle [(ngModel)]="c.alwaysShowEPGInClassicChannelScreen" (change)="save()"></mat-slide-toggle>
+    </app-settings-row>
+
+    <app-settings-row label="TV.ui_classic_show_all_channels" desc="TV.ui_classic_show_all_channels_desc" classic>
+      <mat-slide-toggle [(ngModel)]="c.uiClassicShowAllChannels" (change)="save()"></mat-slide-toggle>
+    </app-settings-row>
+
+    <app-settings-row label="TV.iptv_channel_favorite_enable" desc="TV.iptv_channel_favorite_enable_desc">
+      <mat-slide-toggle [(ngModel)]="c.iptvChannelFavoriteEnable" (change)="save()"></mat-slide-toggle>
+    </app-settings-row>
+
+    <app-settings-row label="TV.iptv_channel_recent_enable" desc="TV.iptv_channel_recent_enable_desc">
+      <mat-slide-toggle [(ngModel)]="c.iptvChannelHistoryEnable" (change)="save()"></mat-slide-toggle>
+    </app-settings-row>
+  </app-settings-section>
+
+  <app-settings-section label="TV.settings_section_channels_list">
+    <app-settings-row label="TV.ui_show_channel_logo">
+      <mat-slide-toggle [(ngModel)]="c.uiShowChannelLogo" (change)="save()"></mat-slide-toggle>
+    </app-settings-row>
+
+    <app-settings-row label="TV.ui_show_epg_programme_progress" desc="TV.ui_show_epg_programme_progress_desc">
+      <mat-slide-toggle [(ngModel)]="c.uiShowEpgProgrammeProgress" (change)="save()"></mat-slide-toggle>
+    </app-settings-row>
+
+    <app-settings-row label="TV.ui_show_channel_preview" desc="TV.settings_channels_preview_desc">
+      <mat-slide-toggle [(ngModel)]="c.uiShowChannelPreview" (change)="save()"></mat-slide-toggle>
+    </app-settings-row>
+
+    <app-settings-row label="TV.settings_channels_preview_speed"
+      [desc]="previewSpeed < 0 ? 'TV.settings_channels_preview_speed_desc_custom' : 'TV.settings_channels_preview_speed_desc'"
+      [descParams]="{ p1: ('TV.settings_channels_preview_speed_desc' | translate) }">
+      @if (previewSpeed < 0) {
+      <span class="s-row-value">{{ 'TV.settings_value_custom' | translate }}</span>
+      }
+      <mat-button-toggle-group [ngModel]="previewSpeed" (change)="setPreviewSpeed($event.value)">
+        <mat-button-toggle [value]="0">{{ 'TV.settings_choice_preview_saver' | translate }}</mat-button-toggle>
+        <mat-button-toggle [value]="1">{{ 'TV.settings_choice_preview_balanced' | translate }}</mat-button-toggle>
+        <mat-button-toggle [value]="2">{{ 'TV.settings_choice_preview_fast' | translate }}</mat-button-toggle>
+      </mat-button-toggle-group>
+    </app-settings-row>
+
+    <app-settings-row label="TV.ui_list_animation" desc="TV.ui_list_animation_desc">
+      <mat-slide-toggle [(ngModel)]="c.uiListAnimation" (change)="save()"></mat-slide-toggle>
+    </app-settings-row>
+  </app-settings-section>
+
+  <app-settings-section label="TV.settings_section_channels_playing">
+    <app-settings-row label="TV.ui_channel_change_show_info_panel" desc="TV.ui_channel_change_show_info_panel_desc">
+      <mat-slide-toggle [(ngModel)]="c.iptvChannelChangeShowInfoPanel" (change)="save()"></mat-slide-toggle>
+    </app-settings-row>
+
+    <app-settings-row label="TV.ui_show_epg_programme_permanent_progress" desc="TV.ui_show_epg_programme_permanent_progress_desc">
+      <mat-slide-toggle [(ngModel)]="c.uiShowEpgProgrammePermanentProgress" (change)="save()"></mat-slide-toggle>
+    </app-settings-row>
+
+    <app-settings-row label="TV.ui_show_replay_badge" desc="TV.ui_show_replay_badge_desc">
+      <mat-slide-toggle [(ngModel)]="c.uiShowReplayBadge" (change)="save()"></mat-slide-toggle>
+    </app-settings-row>
+  </app-settings-section>
+
+  <app-settings-advanced [count]="4">
+    <app-settings-row label="TV.ui_channel_preview_parallel_count" desc="TV.ui_channel_preview_parallel_count_desc"
+      detail="TV.ui_channel_preview_parallel_count_desc_detail">
+      <mat-form-field appearance="outline" subscriptSizing="dynamic" class="s-narrow">
+        <mat-select [(ngModel)]="c.channelPreviewParallelCount" (selectionChange)="save()">
+          @for (n of counts; track n) {
+          <mat-option [value]="n">{{ n }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+    </app-settings-row>
+
+    <app-settings-row label="TV.ui_lazy_render" desc="TV.ui_lazy_render_desc" detail="TV.ui_lazy_render_desc_detail">
+      <mat-slide-toggle [(ngModel)]="c.uiLazyRender" (change)="save()"></mat-slide-toggle>
+    </app-settings-row>
+
+    <app-settings-row label="TV.ui_lazy_render_parallel_count" desc="TV.ui_lazy_render_parallel_count_desc"
+      detail="TV.ui_lazy_render_parallel_count_desc_detail">
+      <mat-form-field appearance="outline" subscriptSizing="dynamic" class="s-narrow">
+        <mat-select [(ngModel)]="c.uiLazyRenderParallelCount" (selectionChange)="save()">
+          @for (n of counts; track n) {
+          <mat-option [value]="n">{{ n }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+    </app-settings-row>
+
+    <app-settings-row label="TV.ui_lazy_render_interval" desc="TV.ui_lazy_render_interval_desc"
+      detail="TV.ui_lazy_render_interval_desc_detail">
+      <mat-form-field appearance="outline" subscriptSizing="dynamic" class="s-narrow">
+        <mat-select [(ngModel)]="c.uiLazyRenderInterval" (selectionChange)="save()">
+          @for (ms of lazyRenderIntervals; track ms) {
+          <mat-option [value]="ms">{{ ms < 0 ? ('TV.settings_value_off' | translate) : ms + 'ms' }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+    </app-settings-row>
+  </app-settings-advanced>
+</app-settings-page>

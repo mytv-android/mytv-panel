@@ -1,233 +1,43 @@
-<div class="container">
-  <mat-card class="card">
-    <mat-card-header>
-      <mat-card-title>{{ '控制' | translate }}</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      <div class="setting-item">
-        <span>{{ 'CONTROL.CHANNEL_LOOP' | translate }}</span>
-        <mat-slide-toggle [(ngModel)]="configs.iptvChannelChangeListLoop" (change)="updateConfig()"></mat-slide-toggle>
-      </div>
-      <div class="setting-item">
-        <span>{{ 'CONTROL.CROSS_GROUP' | translate }}</span>
-        <mat-slide-toggle [(ngModel)]="configs.iptvChannelChangeCrossGroup" (change)="updateConfig()"></mat-slide-toggle>
-      </div>
-      <div class="setting-item">
-        <div class="setting-label">
-          <span>{{ 'CONTROL.CHANNEL_CHANGE_SHOW_INFO' | translate }}</span>
-          <span class="setting-desc">{{ 'CONTROL.CHANNEL_CHANGE_SHOW_INFO_DESC' | translate }}</span>
-        </div>
-        <mat-slide-toggle [(ngModel)]="configs.iptvChannelChangeShowInfoPanel" (change)="updateConfig()"></mat-slide-toggle>
-      </div>
-      <div class="setting-item">
-        <div class="setting-label">
-          <span>{{ 'CONTROL.CHANNEL_CHANGE_BLACK_SCREEN' | translate }}</span>
-          <span class="setting-desc">{{ 'CONTROL.CHANNEL_CHANGE_BLACK_SCREEN_DESC' | translate }}</span>
-        </div>
-        <mat-slide-toggle [(ngModel)]="configs.iptvChannelChangeBlackScreen" (change)="updateConfig()"></mat-slide-toggle>
-      </div>
+<app-settings-page label="TV.settings_category_control" summary="TV.settings_category_control_summary">
 
-      <h3>{{ 'CONTROL.KEY_BEHAVIOR' | translate }}</h3>
-      <div class="setting-desc" style="margin: 0 0 8px;">{{ 'CONTROL.KEY_BEHAVIOR_DESC' | translate }}</div>
+  <app-settings-section label="TV.settings_section_control_switch">
+    <app-settings-row label="TV.ui_channel_list_loop" desc="TV.ui_channel_list_loop_desc">
+      <mat-slide-toggle [(ngModel)]="c.iptvChannelChangeListLoop" (change)="save()"></mat-slide-toggle>
+    </app-settings-row>
 
-      <div class="setting-item">
-        <span>{{ 'CONTROL.KEY_UP' | translate }}</span>
-        <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
-          <mat-select [(ngModel)]="configs.keyDownEventUp" (selectionChange)="updateConfig()">
-            @for (action of keyDownActions; track action) {
-              <mat-option [value]="action">
-                {{ keyDownActionLabels[action] | translate }}
-              </mat-option>
-            }
-          </mat-select>
-        </mat-form-field>
-      </div>
-      <div class="setting-item">
-        <span>{{ 'CONTROL.KEY_DOWN' | translate }}</span>
-        <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
-          <mat-select [(ngModel)]="configs.keyDownEventDown" (selectionChange)="updateConfig()">
-            @for (action of keyDownActions; track action) {
-              <mat-option [value]="action">
-                {{ keyDownActionLabels[action] | translate }}
-              </mat-option>
-            }
-          </mat-select>
-        </mat-form-field>
-      </div>
-      <div class="setting-item">
-        <span>{{ 'CONTROL.KEY_LEFT' | translate }}</span>
-        <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
-          <mat-select [(ngModel)]="configs.keyDownEventLeft" (selectionChange)="updateConfig()">
-            @for (action of keyDownActions; track action) {
-              <mat-option [value]="action">
-                {{ keyDownActionLabels[action] | translate }}
-              </mat-option>
-            }
-          </mat-select>
-        </mat-form-field>
-      </div>
-      <div class="setting-item">
-        <span>{{ 'CONTROL.KEY_RIGHT' | translate }}</span>
-        <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
-          <mat-select [(ngModel)]="configs.keyDownEventRight" (selectionChange)="updateConfig()">
-            @for (action of keyDownActions; track action) {
-              <mat-option [value]="action">
-                {{ keyDownActionLabels[action] | translate }}
-              </mat-option>
-            }
-          </mat-select>
-        </mat-form-field>
-      </div>
-      <div class="setting-item">
-        <span>{{ 'CONTROL.KEY_SELECT' | translate }}</span>
-        <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
-          <mat-select [(ngModel)]="configs.keyDownEventSelect" (selectionChange)="updateConfig()">
-            @for (action of keyDownActions; track action) {
-              <mat-option [value]="action">
-                {{ keyDownActionLabels[action] | translate }}
-              </mat-option>
-            }
-          </mat-select>
-        </mat-form-field>
-      </div>
+    <app-settings-row label="TV.ui_channel_change_cross_group" desc="TV.ui_channel_change_cross_group_desc">
+      <mat-slide-toggle [(ngModel)]="c.iptvChannelChangeCrossGroup" (change)="save()"></mat-slide-toggle>
+    </app-settings-row>
+  </app-settings-section>
 
-      <h3>{{ 'CONTROL.LONG_KEY_BEHAVIOR' | translate }}</h3>
+  <!-- App 在电视上只显示遥控器两节、在触屏设备上只显示全屏手势；网页面板全列出并标明 -->
+  <app-settings-section label="TV.ui_control_group_key" surface="tv">
+    @for (row of keys; track row.label) {
+    <ng-container *ngTemplateOutlet="actionRow; context: { $implicit: row }" />
+    }
+  </app-settings-section>
 
-      <div class="setting-item">
-        <span>{{ 'CONTROL.KEY_UP' | translate }}</span>
-        <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
-          <mat-select [(ngModel)]="configs.keyDownEventLongUp" (selectionChange)="updateConfig()">
-            @for (action of keyDownActions; track action) {
-              <mat-option [value]="action">
-                {{ keyDownActionLabels[action] | translate }}
-              </mat-option>
-            }
-          </mat-select>
-        </mat-form-field>
-      </div>
-      <div class="setting-item">
-        <span>{{ 'CONTROL.KEY_DOWN' | translate }}</span>
-        <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
-          <mat-select [(ngModel)]="configs.keyDownEventLongDown" (selectionChange)="updateConfig()">
-            @for (action of keyDownActions; track action) {
-              <mat-option [value]="action">
-                {{ keyDownActionLabels[action] | translate }}
-              </mat-option>
-            }
-          </mat-select>
-        </mat-form-field>
-      </div>
-      <div class="setting-item">
-        <span>{{ 'CONTROL.KEY_LEFT' | translate }}</span>
-        <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
-          <mat-select [(ngModel)]="configs.keyDownEventLongLeft" (selectionChange)="updateConfig()">
-            @for (action of keyDownActions; track action) {
-              <mat-option [value]="action">
-                {{ keyDownActionLabels[action] | translate }}
-              </mat-option>
-            }
-          </mat-select>
-        </mat-form-field>
-      </div>
-      <div class="setting-item">
-        <span>{{ 'CONTROL.KEY_RIGHT' | translate }}</span>
-        <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
-          <mat-select [(ngModel)]="configs.keyDownEventLongRight" (selectionChange)="updateConfig()">
-            @for (action of keyDownActions; track action) {
-              <mat-option [value]="action">
-                {{ keyDownActionLabels[action] | translate }}
-              </mat-option>
-            }
-          </mat-select>
-        </mat-form-field>
-      </div>
-      <div class="setting-item">
-        <span>{{ 'CONTROL.KEY_SELECT' | translate }}</span>
-        <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
-          <mat-select [(ngModel)]="configs.keyDownEventLongSelect" (selectionChange)="updateConfig()">
-            @for (action of keyDownActions; track action) {
-              <mat-option [value]="action">
-                {{ keyDownActionLabels[action] | translate }}
-              </mat-option>
-            }
-          </mat-select>
-        </mat-form-field>
-      </div>
-      <h3>{{ 'CONTROL.SWIPE' | translate }}</h3>
+  <app-settings-section label="TV.ui_control_group_long_key" surface="tv">
+    @for (row of longKeys; track row.label) {
+    <ng-container *ngTemplateOutlet="actionRow; context: { $implicit: row }" />
+    }
+  </app-settings-section>
 
-      <div class="setting-item">
-        <span>{{ 'CONTROL.GESTURE_ZONE_LEFT_UP' | translate }}</span>
-        <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
-          <mat-select [(ngModel)]="configs.gestureZoneLeftUp" (selectionChange)="updateConfig()">
-            @for (action of keyDownActions; track action) {
-              <mat-option [value]="action">
-                {{ keyDownActionLabels[action] | translate }}
-              </mat-option>
-            }
-          </mat-select>
-        </mat-form-field>
-      </div>
-      <div class="setting-item">
-        <span>{{ 'CONTROL.GESTURE_ZONE_LEFT_DOWN' | translate }}</span>
-        <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
-          <mat-select [(ngModel)]="configs.gestureZoneLeftDown" (selectionChange)="updateConfig()">
-            @for (action of keyDownActions; track action) {
-              <mat-option [value]="action">
-                {{ keyDownActionLabels[action] | translate }}
-              </mat-option>
-            }
-          </mat-select>
-        </mat-form-field>
-      </div>
-      <div class="setting-item">
-        <span>{{ 'CONTROL.GESTURE_ZONE_MIDDLE_UP' | translate }}</span>
-        <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
-          <mat-select [(ngModel)]="configs.gestureZoneMiddleUp" (selectionChange)="updateConfig()">
-            @for (action of keyDownActions; track action) {
-              <mat-option [value]="action">
-                {{ keyDownActionLabels[action] | translate }}
-              </mat-option>
-            }
-          </mat-select>
-        </mat-form-field>
-      </div>
-      <div class="setting-item">
-        <span>{{ 'CONTROL.GESTURE_ZONE_MIDDLE_DOWN' | translate }}</span>
-        <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
-          <mat-select [(ngModel)]="configs.gestureZoneMiddleDown" (selectionChange)="updateConfig()">
-            @for (action of keyDownActions; track action) {
-              <mat-option [value]="action">
-                {{ keyDownActionLabels[action] | translate }}
-              </mat-option>
-            }
-          </mat-select>
-        </mat-form-field>
-      </div>
-      <div class="setting-item">
-        <span>{{ 'CONTROL.GESTURE_ZONE_RIGHT_UP' | translate }}</span>
-        <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
-          <mat-select [(ngModel)]="configs.gestureZoneRightUp" (selectionChange)="updateConfig()">
-            @for (action of keyDownActions; track action) {
-              <mat-option [value]="action">
-                {{ keyDownActionLabels[action] | translate }}
-              </mat-option>
-            }
-          </mat-select>
-        </mat-form-field>
-      </div>
-      <div class="setting-item">
-        <span>{{ 'CONTROL.GESTURE_ZONE_RIGHT_DOWN' | translate }}</span>
-        <mat-form-field appearance="outline" style="margin-bottom: -1.25em;">
-          <mat-select [(ngModel)]="configs.gestureZoneRightDown" (selectionChange)="updateConfig()">
-            @for (action of keyDownActions; track action) {
-              <mat-option [value]="action">
-                {{ keyDownActionLabels[action] | translate }}
-              </mat-option>
-            }
-          </mat-select>
-        </mat-form-field>
-      </div>
+  <app-settings-section label="TV.ui_control_group_swipe" surface="touch">
+    @for (row of gestures; track row.label) {
+    <ng-container *ngTemplateOutlet="actionRow; context: { $implicit: row }" />
+    }
+  </app-settings-section>
+</app-settings-page>
 
-</mat-card-content>
-  </mat-card>
-</div>
+<ng-template #actionRow let-row>
+  <app-settings-row [label]="row.label" [desc]="row.desc ?? ''" [descParams]="{ p1: (row.key ?? '') | translate }">
+    <mat-form-field appearance="outline" subscriptSizing="dynamic">
+      <mat-select [ngModel]="$any(c)[row.field]" (ngModelChange)="setAction(row.field, $event)">
+        @for (action of actions; track action) {
+        <mat-option [value]="action">{{ actionLabels[action] | translate }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+  </app-settings-row>
+</ng-template>

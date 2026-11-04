@@ -1,9 +1,6 @@
-.spacer {
-    flex: 1 1 auto;
-}
-
 .filter-container {
     display: flex;
+    align-items: center;
     gap: 16px;
     margin-bottom: 8px;
 }

@@ -18,7 +18,7 @@
             <span class="row-main">
               <span class="row-label">{{ entry.labelKey | translate }}</span>
               <span class="row-sub">
-                {{ group.pageKey | translate }}@if (entry.descKey) { · {{ entry.descKey | translate }} }
+                {{ (entry.sectionKey ?? group.pageKey) | translate }}@if (entry.descKey) { · {{ entry.descKey | translate }} }
               </span>
             </span>
           </button>

@@ -73,7 +73,8 @@ export class SettingsSearchDialogComponent implements AfterViewInit {
       const label = this.normalize(this.translate.instant(entry.labelKey));
       const desc = entry.descKey ? this.normalize(this.translate.instant(entry.descKey)) : '';
       const page = this.normalize(this.translate.instant(entry.pageKey));
-      if (!query || label.includes(query) || desc.includes(query) || page.includes(query)) {
+      const section = entry.sectionKey ? this.normalize(this.translate.instant(entry.sectionKey)) : '';
+      if (!query || label.includes(query) || desc.includes(query) || page.includes(query) || section.includes(query)) {
         const items = groups.get(entry.pageKey) ?? [];
         items.push(entry);
         groups.set(entry.pageKey, items);

@@ -1,0 +1,326 @@
+<app-settings-page label="TV.settings_category_enhance" summary="TV.settings_category_enhance_summary">
+
+  <app-settings-section label="TV.settings_section_enhance_subtitles">
+    <!-- AI 实时字幕：App 里是子页，这里在行下方直接展开细项 -->
+    <app-settings-row label="TV.ui_player_view_real_time_asr" desc="TV.ui_player_view_real_time_asr_desc" beta>
+      <mat-slide-toggle [(ngModel)]="c.videoPlayerRealTimeASR" (change)="save()"></mat-slide-toggle>
+      @if (c.videoPlayerRealTimeASR) {
+      <div below class="s-embed s-sub">
+        <div class="setting-block">
+          <div class="setting-label">
+            <span>{{ 'TV.ui_player_view_asr_recognition_model' | translate }}</span>
+            <span class="setting-desc">{{ 'TV.ui_player_view_asr_recognition_model_desc' | translate }}</span>
+          </div>
+          <mat-form-field appearance="outline" subscriptSizing="dynamic" class="s-wide">
+            <input matInput [(ngModel)]="c.videoPlayerASRModel" placeholder="/storage/emulated/0/sherpa-onnx-streaming-zipformer-zh-14M-2023-02-23">
+          </mat-form-field>
+        </div>
+
+        <!-- 云端模型凭据：紧跟在模型下面 -->
+        @if (c.videoPlayerASRModel === 'gemini-live-translate') {
+        <div class="setting-block">
+          <div class="setting-label">
+            <span>{{ 'TV.ui_player_view_asr_gemini_api_key' | translate }}</span>
+            <span class="setting-desc">{{ 'TV.ui_player_view_asr_gemini_api_key_desc' | translate }}</span>
+          </div>
+          <mat-form-field appearance="outline" subscriptSizing="dynamic" class="s-wide">
+            <input matInput type="password" [(ngModel)]="c.videoPlayerASRGeminiApiKey">
+          </mat-form-field>
+        </div>
+        <div class="setting-block">
+          <div class="setting-label">
+            <span>{{ 'TV.ui_player_view_asr_gemini_endpoint' | translate }}</span>
+            <span class="setting-desc">{{ 'TV.ui_player_view_asr_gemini_endpoint_desc' | translate }}</span>
+          </div>
+          <mat-form-field appearance="outline" subscriptSizing="dynamic" class="s-wide">
+            <input matInput [(ngModel)]="c.videoPlayerASRGeminiEndpoint">
+          </mat-form-field>
+        </div>
+        }
+        @if (c.videoPlayerASRModel === 'aliyun-qwen-livetranslate') {
+        <div class="setting-block">
+          <div class="setting-label">
+            <span>{{ 'TV.ui_player_view_asr_aliyun_api_key' | translate }}</span>
+            <span class="setting-desc">{{ 'TV.ui_player_view_asr_aliyun_api_key_desc' | translate }}</span>
+          </div>
+          <mat-form-field appearance="outline" subscriptSizing="dynamic" class="s-wide">
+            <input matInput type="password" [(ngModel)]="c.videoPlayerASRAliyunApiKey">
+          </mat-form-field>
+        </div>
+        <div class="setting-block">
+          <div class="setting-label">
+            <span>{{ 'TV.ui_player_view_asr_aliyun_endpoint' | translate }}</span>
+            <span class="setting-desc">{{ 'TV.ui_player_view_asr_aliyun_endpoint_desc' | translate }}</span>
+          </div>
+          <mat-form-field appearance="outline" subscriptSizing="dynamic" class="s-wide">
+            <input matInput [(ngModel)]="c.videoPlayerASRAliyunEndpoint">
+          </mat-form-field>
+        </div>
+        }
+        @if (c.videoPlayerASRModel === 'soniox-live-translate') {
+        <div class="setting-block">
+          <div class="setting-label">
+            <span>{{ 'TV.ui_player_view_asr_soniox_api_key' | translate }}</span>
+            <span class="setting-desc">{{ 'TV.ui_player_view_asr_soniox_api_key_desc' | translate }}</span>
+          </div>
+          <mat-form-field appearance="outline" subscriptSizing="dynamic" class="s-wide">
+            <input matInput type="password" [(ngModel)]="c.videoPlayerASRSonioxApiKey">
+          </mat-form-field>
+        </div>
+        }
+
+        <div class="setting-item">
+          <div class="setting-label">
+            <span>{{ 'TV.ui_player_view_asr_leading_subtitles' | translate }}</span>
+            <span class="setting-desc">{{ 'TV.ui_player_view_asr_leading_subtitles_desc' | translate }}</span>
+          </div>
+          <mat-slide-toggle [(ngModel)]="leadingSubtitles"></mat-slide-toggle>
+        </div>
+        <div class="setting-item">
+          <div class="setting-label">
+            <span>{{ 'TV.ui_player_view_asr_lead_time' | translate }}</span>
+            <span class="setting-desc">{{ 'TV.ui_player_view_asr_lead_time_desc' | translate }}</span>
+          </div>
+          <mat-form-field appearance="outline" subscriptSizing="dynamic" class="s-num">
+            <input matInput type="number" [(ngModel)]="c.videoPlayerASRLeadTimeMs" placeholder="500">
+            <span matTextSuffix>ms</span>
+          </mat-form-field>
+        </div>
+        <div class="setting-item">
+          <div class="setting-label">
+            <span>{{ 'TV.ui_player_view_asr_silence_threshold' | translate }}</span>
+            <span class="setting-desc">{{ 'TV.ui_player_view_asr_silence_threshold_desc' | translate }}</span>
+          </div>
+          <mat-form-field appearance="outline" subscriptSizing="dynamic" class="s-num">
+            <input matInput type="number" [(ngModel)]="c.videoPlayerASRSilenceThresholdMs" placeholder="650">
+            <span matTextSuffix>ms</span>
+          </mat-form-field>
+        </div>
+        <div class="setting-item">
+          <div class="setting-label">
+            <span>{{ 'PLAYER.ASR_VAD_TYPE' | translate }}</span>
+            <span class="setting-desc">{{ 'PLAYER.ASR_VAD_TYPE_DESC' | translate }}</span>
+          </div>
+          <mat-form-field appearance="outline" subscriptSizing="dynamic" class="s-num">
+            <mat-select [(ngModel)]="c.videoPlayerASRVadType">
+              @for (vad of vadTypes; track vad) {
+              <mat-option [value]="vad">{{ vadTypeLabels[vad] | translate }}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="setting-item">
+          <div class="setting-label">
+            <span>{{ 'TV.ui_player_view_asr_auto_streaming_fallback' | translate }}</span>
+            <span class="setting-desc">{{ 'TV.ui_player_view_asr_auto_streaming_fallback_desc' | translate }}</span>
+          </div>
+          <mat-slide-toggle [(ngModel)]="c.videoPlayerASRAutoStreamingFallback"></mat-slide-toggle>
+        </div>
+        <div class="s-sub-actions">
+          <button mat-flat-button (click)="saveAsr()">{{ 'PLAYER.ASR_SAVE' | translate }}</button>
+        </div>
+      </div>
+      }
+    </app-settings-row>
+
+    <!-- 字幕翻译：App 里是子页（含「译文样式」），这里在行下方直接展开 -->
+    <app-settings-row label="TV.ui_player_view_asr_translation" desc="TV.ui_player_view_asr_translation_desc" beta>
+      <div below class="s-embed s-sub">
+        <div class="setting-item">
+          <span>{{ 'TV.ui_player_view_asr_translation_engine' | translate }}</span>
+          <mat-form-field appearance="outline" subscriptSizing="dynamic">
+            <mat-select [(ngModel)]="c.videoPlayerASRTranslationEngine">
+              @for (eng of engines; track eng) {
+              <mat-option [value]="eng">{{ engineLabels[eng] | translate }}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        @if (c.videoPlayerASRTranslationEngine) {
+        <div class="setting-item">
+          <div class="setting-label">
+            <span>{{ 'TV.ui_player_view_asr_translation_target_lang' | translate }}</span>
+            <span class="setting-desc">{{ 'TV.ui_player_view_asr_translation_target_lang_desc' | translate }}</span>
+          </div>
+          <mat-form-field appearance="outline" subscriptSizing="dynamic">
+            <mat-select [ngModel]="c.videoPlayerASRTranslationTargetLang || 'en'"
+              (ngModelChange)="c.videoPlayerASRTranslationTargetLang = $event">
+              @for (lang of targetLangs; track lang[0]) {
+              <mat-option [value]="lang[0]">{{ lang[1] }}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+        </div>
+        }
+
+        @if (c.videoPlayerASRTranslationEngine === engine.TENCENT) {
+        <div class="setting-item">
+          <span>{{ 'TV.ui_player_view_asr_translation_tencent_secret_id' | translate }}</span>
+          <mat-form-field appearance="outline" subscriptSizing="dynamic">
+            <input matInput type="password" [(ngModel)]="c.videoPlayerASRTranslationTencentSecretId">
+          </mat-form-field>
+        </div>
+        <div class="setting-item">
+          <span>{{ 'TV.ui_player_view_asr_translation_tencent_secret_key' | translate }}</span>
+          <mat-form-field appearance="outline" subscriptSizing="dynamic">
+            <input matInput type="password" [(ngModel)]="c.videoPlayerASRTranslationTencentSecretKey">
+          </mat-form-field>
+        </div>
+        }
+        @if (c.videoPlayerASRTranslationEngine === engine.BAIDU) {
+        <div class="setting-item">
+          <span>{{ 'TV.ui_player_view_asr_translation_baidu_app_id' | translate }}</span>
+          <mat-form-field appearance="outline" subscriptSizing="dynamic">
+            <input matInput [(ngModel)]="c.videoPlayerASRTranslationBaiduAppId">
+          </mat-form-field>
+        </div>
+        <div class="setting-item">
+          <span>{{ 'TV.ui_player_view_asr_translation_baidu_secret_key' | translate }}</span>
+          <mat-form-field appearance="outline" subscriptSizing="dynamic">
+            <input matInput type="password" [(ngModel)]="c.videoPlayerASRTranslationBaiduSecretKey">
+          </mat-form-field>
+        </div>
+        }
+        @if (c.videoPlayerASRTranslationEngine === engine.MTRANSERVER) {
+        <div class="setting-item">
+          <div class="setting-label">
+            <span>{{ 'TV.ui_player_view_asr_translation_mtranserver_url' | translate }}</span>
+            <span class="setting-desc">{{ 'TV.ui_player_view_asr_translation_mtranserver_url_desc' | translate }}</span>
+          </div>
+          <mat-form-field appearance="outline" subscriptSizing="dynamic">
+            <input matInput [(ngModel)]="c.videoPlayerASRTranslationMTranServerUrl" placeholder="http://your-server:port">
+          </mat-form-field>
+        </div>
+        <div class="setting-item">
+          <div class="setting-label">
+            <span>{{ 'TV.ui_player_view_asr_translation_mtranserver_token' | translate }}</span>
+            <span class="setting-desc">{{ 'TV.ui_player_view_asr_translation_mtranserver_token_desc' | translate }}</span>
+          </div>
+          <mat-form-field appearance="outline" subscriptSizing="dynamic">
+            <input matInput type="password" [(ngModel)]="c.videoPlayerASRTranslationMTranServerToken">
+          </mat-form-field>
+        </div>
+        }
+        @if (c.videoPlayerASRTranslationEngine === engine.YOUDAO) {
+        <div class="setting-item">
+          <span>{{ 'TV.ui_player_view_asr_translation_youdao_app_key' | translate }}</span>
+          <mat-form-field appearance="outline" subscriptSizing="dynamic">
+            <input matInput [(ngModel)]="c.videoPlayerASRTranslationYoudaoAppKey">
+          </mat-form-field>
+        </div>
+        <div class="setting-item">
+          <span>{{ 'TV.ui_player_view_asr_translation_youdao_app_secret' | translate }}</span>
+          <mat-form-field appearance="outline" subscriptSizing="dynamic">
+            <input matInput type="password" [(ngModel)]="c.videoPlayerASRTranslationYoudaoAppSecret">
+          </mat-form-field>
+        </div>
+        }
+        @if (c.videoPlayerASRTranslationEngine === engine.MICROSOFT) {
+        <div class="setting-item">
+          <span>{{ 'TV.ui_player_view_asr_translation_microsoft_key' | translate }}</span>
+          <mat-form-field appearance="outline" subscriptSizing="dynamic">
+            <input matInput type="password" [(ngModel)]="c.videoPlayerASRTranslationMicrosoftKey">
+          </mat-form-field>
+        </div>
+        <div class="setting-item">
+          <div class="setting-label">
+            <span>{{ 'TV.ui_player_view_asr_translation_microsoft_region' | translate }}</span>
+            <span class="setting-desc">{{ 'TV.ui_player_view_asr_translation_microsoft_region_desc' | translate }}</span>
+          </div>
+          <mat-form-field appearance="outline" subscriptSizing="dynamic">
+            <input matInput [(ngModel)]="c.videoPlayerASRTranslationMicrosoftRegion" placeholder="eastasia">
+          </mat-form-field>
+        </div>
+        }
+
+        <!-- 译文样式放在引擎判断之外：Gemini、百炼、Soniox 自带译文，引擎为空时也要能调 -->
+        <div class="setting-item">
+          <div class="setting-label">
+            <span>{{ 'TV.ui_player_view_asr_translation_hide_original' | translate }}</span>
+            <span class="setting-desc">{{ 'TV.ui_player_view_asr_translation_hide_original_desc' | translate }}</span>
+          </div>
+          <mat-slide-toggle [(ngModel)]="c.videoPlayerASRTranslationHideOriginal"></mat-slide-toggle>
+        </div>
+        <div class="setting-item">
+          <div class="setting-label">
+            <span>{{ 'TV.ui_player_view_asr_translation_font_scale' | translate }}</span>
+            <span class="setting-desc">{{ 'TV.ui_player_view_asr_translation_font_scale_desc' | translate }}</span>
+          </div>
+          <mat-form-field appearance="outline" subscriptSizing="dynamic" class="s-num">
+            <input matInput type="number" step="0.1" min="0.5" max="2" [(ngModel)]="c.videoPlayerASRTranslationFontScale" placeholder="1.0">
+          </mat-form-field>
+        </div>
+        <div class="setting-item">
+          <div class="setting-label">
+            <span>{{ 'TV.ui_player_view_asr_translation_color' | translate }}</span>
+            <span class="setting-desc">{{ 'TV.ui_player_view_asr_translation_color_desc' | translate }}</span>
+          </div>
+          <div class="color-swatches">
+            <button type="button" class="swatch swatch-follow" [class.active]="!c.videoPlayerASRTranslationColor"
+              (click)="c.videoPlayerASRTranslationColor = 0">
+              {{ 'TV.ui_player_view_asr_translation_color_follow' | translate }}
+            </button>
+            @for (color of translationColors; track color.value) {
+            <button type="button" class="swatch" [class.active]="c.videoPlayerASRTranslationColor === color.value"
+              [style.background]="color.css" [attr.aria-label]="color.css" [title]="color.css"
+              (click)="c.videoPlayerASRTranslationColor = color.value"></button>
+            }
+          </div>
+        </div>
+        <div class="s-sub-actions">
+          <button mat-flat-button (click)="saveAsr()">{{ 'PLAYER.ASR_SAVE' | translate }}</button>
+        </div>
+      </div>
+    </app-settings-row>
+  </app-settings-section>
+
+  <app-settings-section label="TV.settings_section_enhance_picture">
+    <!-- 画质增强：App 里是子页，这里在行下方直接展开四项 -->
+    <app-settings-row label="TV.ui_player_view_video_enhancement" desc="TV.ui_player_view_video_enhancement_desc"
+      detail="TV.ui_player_view_enhancement_compatibility_warning" experimental>
+      <div below class="s-embed s-sub">
+        <div class="setting-item">
+          <span>{{ 'TV.ui_player_view_super_resolution' | translate }}</span>
+          <mat-form-field appearance="outline" subscriptSizing="dynamic">
+            <mat-select [(ngModel)]="c.globalVideoPlayerSuperResolutionMode" (selectionChange)="save()">
+              @for (mode of superResolutionOptions; track mode) {
+              <mat-option [value]="mode">{{ (superResolutionLabels[mode] ?? mode) | translate }}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="setting-item">
+          <span>{{ 'TV.ui_player_view_frame_interpolation' | translate }}</span>
+          <mat-form-field appearance="outline" subscriptSizing="dynamic">
+            <mat-select [(ngModel)]="c.globalVideoPlayerFrameInterpolationMode" (selectionChange)="save()">
+              @for (mode of interpolationOptions; track mode) {
+              <mat-option [value]="mode">{{ (interpolationLabels[mode] ?? mode) | translate }}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="setting-item">
+          <span>{{ 'TV.ui_player_view_interpolation_target_fps' | translate }}</span>
+          <mat-form-field appearance="outline" subscriptSizing="dynamic">
+            <mat-select [(ngModel)]="c.globalVideoPlayerInterpolationTargetFps" (selectionChange)="save()">
+              @for (fps of targetFpsList; track fps) {
+              <mat-option [value]="fps">{{ targetFpsLabels[fps] | translate }}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="setting-item">
+          <span>{{ 'TV.ui_player_view_ai_execution_backend' | translate }}</span>
+          <mat-form-field appearance="outline" subscriptSizing="dynamic">
+            <mat-select [(ngModel)]="c.globalVideoPlayerAiExecutionBackend" (selectionChange)="save()">
+              @for (backend of aiBackends; track backend) {
+              <mat-option [value]="backend">{{ aiBackendLabels[backend] | translate }}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+    </app-settings-row>
+  </app-settings-section>
+</app-settings-page>

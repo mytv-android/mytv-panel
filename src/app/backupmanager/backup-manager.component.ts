@@ -1,7 +1,6 @@
 import { Component, inject, effect, Inject, PLATFORM_ID } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -16,7 +15,6 @@ import { AppApi, BackupItem } from '../api';
     imports: [
         CommonModule,
         FormsModule,
-        MatCardModule,
         MatButtonModule,
         MatIconModule,
         MatFormFieldModule,
@@ -25,11 +23,7 @@ import { AppApi, BackupItem } from '../api';
         TranslateModule,
     ],
     templateUrl: './backup-manager.component.html',
-    styleUrl: './backup-manager.component.css',
-    host: {
-        'animate.enter': 'enter',
-        'animate.leave': 'leave'
-    }
+    styleUrl: './backup-manager.component.css'
 })
 export class BackupManagerComponent {
     private snackBar = inject(MatSnackBar);
