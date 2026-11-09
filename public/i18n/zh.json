@@ -159,7 +159,8 @@
     "VIDEO_PLAYER_CORE": {
       "MEDIA3": "Media3",
       "IJK": "IjkPlayer",
-      "VLC": "VLC"
+      "VLC": "VLC",
+      "FS": "FSPlayer"
     },
     "RTSP_TRANSPORT": {
       "TCP": "TCP",
