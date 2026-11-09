@@ -244,6 +244,18 @@
         </div>
         <div class="setting-item">
           <div class="setting-label">
+            <span>{{ 'TV.ui_player_view_asr_translation_position' | translate }}</span>
+            <span class="setting-desc">{{ 'TV.ui_player_view_asr_translation_position_desc' | translate }}</span>
+          </div>
+          <mat-form-field appearance="outline" subscriptSizing="dynamic">
+            <mat-select [(ngModel)]="c.videoPlayerASRTranslationPosition">
+              <mat-option value="below">{{ 'TV.ui_player_view_asr_translation_position_below' | translate }}</mat-option>
+              <mat-option value="above">{{ 'TV.ui_player_view_asr_translation_position_above' | translate }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="setting-item">
+          <div class="setting-label">
             <span>{{ 'TV.ui_player_view_asr_translation_font_scale' | translate }}</span>
             <span class="setting-desc">{{ 'TV.ui_player_view_asr_translation_font_scale_desc' | translate }}</span>
           </div>

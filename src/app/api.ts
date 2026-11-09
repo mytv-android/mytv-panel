@@ -323,6 +323,7 @@ export interface AppConfigs {
     videoPlayerASRTranslationFontScale?: number  // NEW: 字幕翻译译文缩放比例（相对原文）
     videoPlayerASRTranslationHideOriginal?: boolean  // NEW: 字幕翻译关闭原文（只显示译文）
     videoPlayerASRTranslationColor?: number  // NEW: 字幕翻译译文颜色（ARGB，0 = 跟随字幕前景色）
+    videoPlayerASRTranslationPosition?: string  // NEW: 字幕翻译译文位置 (below = 原文下方 / above = 原文上方)
     videoPlayerASRMode?: ASRMode  // NEW: ASR 模式
     videoPlayerASRLeadTimeMs?: number  // NEW: ASR 领先字幕显示提前量（毫秒）
     videoPlayerASRAutoStreamingFallback?: boolean  // NEW: ASR 非领先路径自动优先流式模型
