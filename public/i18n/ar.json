@@ -655,7 +655,7 @@
     "ui_player_view_asr_lead_time": "Leading subtitle lead time",
     "ui_player_view_asr_lead_time_desc": "Active recognition prefers current playback position plus this offset. If the playlist does not expose that far ahead, it uses the farthest available future segments.",
     "ui_player_view_asr_leading_subtitles": "Experimental leading subtitles (HLS)",
-    "ui_player_view_asr_leading_subtitles_desc": "Media3 HLS actively decodes future segments for early recognition. Subtitles still display at their media time; unsupported streams fall back automatically.",
+    "ui_player_view_asr_leading_subtitles_desc": "Media3 HLS actively decodes future segments for early recognition and shows subtitles at the start of speech (about 0.15 s early). Live streams may play further behind the live edge to make room for the lead; unsupported streams fall back automatically.",
     "ui_player_view_asr_recognition_model": "Recognition Model",
     "ui_player_view_asr_recognition_model_desc": "Select speech recognition model (not yet implemented, coming soon)",
     "ui_player_view_asr_silence_threshold": "Silence threshold",

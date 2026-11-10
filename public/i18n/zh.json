@@ -655,7 +655,7 @@
     "ui_player_view_asr_lead_time": "领先字幕提前量",
     "ui_player_view_asr_lead_time_desc": "主动识别优先从当前播放进度加上该时间的位置开始；如果播放列表没有这么远的未来分片，则使用能取到的最远未来分片。",
     "ui_player_view_asr_leading_subtitles": "实验性领先字幕（HLS）",
-    "ui_player_view_asr_leading_subtitles_desc": "Media3 HLS 会主动解码未来分片并提前识别；不提前显示字幕，不支持的流会自动回退。",
+    "ui_player_view_asr_leading_subtitles_desc": "Media3 HLS 会主动解码未来分片并提前识别，字幕按说话起点显示（约提前 0.15 秒）；直播会按需拉开与直播边缘的距离以留出提前量，不支持的流会自动回退。",
     "ui_player_view_asr_recognition_model": "识别模型",
     "ui_player_view_asr_recognition_model_desc": "选择语音识别模型（暂未实现，敬请期待）",
     "ui_player_view_asr_silence_threshold": "断句静音阈值",
