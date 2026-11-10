@@ -537,6 +537,7 @@ export enum VideoPlayerCore {
     IJK = 'IJK',
     VLC = 'VLC',
     FS = 'FS',
+    MPV = 'MPV',
 }
 
 export const VideoPlayerCoreLabels: { [key in VideoPlayerCore]: string } = {
@@ -544,6 +545,7 @@ export const VideoPlayerCoreLabels: { [key in VideoPlayerCore]: string } = {
     [VideoPlayerCore.IJK]: 'SETTINGS.VIDEO_PLAYER_CORE.IJK',
     [VideoPlayerCore.VLC]: 'SETTINGS.VIDEO_PLAYER_CORE.VLC',
     [VideoPlayerCore.FS]: 'SETTINGS.VIDEO_PLAYER_CORE.FS',
+    [VideoPlayerCore.MPV]: 'SETTINGS.VIDEO_PLAYER_CORE.MPV',
 }
 
 export enum VideoPlayerDecoderConfig {

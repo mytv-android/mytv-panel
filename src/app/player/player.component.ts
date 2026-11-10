@@ -46,7 +46,7 @@ export class PlayerComponent extends SettingsPageBase {
 
     core = VideoPlayerCore;
     cores = Object.values(VideoPlayerCore);
-    coreLabels: Record<VideoPlayerCore, string> = { MEDIA3: 'Media3', IJK: 'IJK', VLC: 'VLC', FS: 'FSPlayer' };
+    coreLabels: Record<VideoPlayerCore, string> = { MEDIA3: 'Media3', IJK: 'IJK', VLC: 'VLC', FS: 'FSPlayer', MPV: 'MPV' };
     displayModes = Object.values(VideoPlayerDisplayMode);
     displayModeLabels: Record<VideoPlayerDisplayMode, string> = {
         ORIGINAL: 'TV.settings_choice_display_original',

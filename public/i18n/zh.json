@@ -160,7 +160,8 @@
       "MEDIA3": "Media3",
       "IJK": "IjkPlayer",
       "VLC": "VLC",
-      "FS": "FSPlayer"
+      "FS": "FSPlayer",
+      "MPV": "MPV"
     },
     "RTSP_TRANSPORT": {
       "TCP": "TCP",
