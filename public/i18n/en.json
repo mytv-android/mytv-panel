@@ -153,6 +153,19 @@
     "ASR_VAD_TYPE": {
       "silero": "Silero (Default)",
       "ten": "TenVad"
+    },
+    "MPV_FILTER_PRESET": {
+      "OFF": "Off",
+      "SHARPEN": "Sharpen",
+      "DENOISE": "Denoise",
+      "COLOR": "Color boost",
+      "DEINTERLACE": "Deinterlace",
+      "CUSTOM": "Custom"
+    },
+    "MPV_FILTER_STRENGTH": {
+      "LOW": "Low",
+      "MEDIUM": "Medium",
+      "HIGH": "High"
     }
   },
   "EPG": {
@@ -841,6 +854,28 @@
     "ui_webview_ua_windows": "Windows",
     "video_player_support_better_detection": "Detect video format more carefully",
     "video_player_support_better_detection_desc": "Turn on when some channels fail or show artifacts; playback starts a bit slower",
-    "video_player_support_better_detection_desc_detail": "When enabled, the player will attempt to more accurately detect video formats, which may increase startup time.\nFor Media3, the player will support TS files missing AUD and IDR, and disable HLS without chunk preparation.\nFor IJK, the player will increase detection size and analysis duration, and enable loop filtering and precise seeking."
+    "video_player_support_better_detection_desc_detail": "When enabled, the player will attempt to more accurately detect video formats, which may increase startup time.\nFor Media3, the player will support TS files missing AUD and IDR, and disable HLS without chunk preparation.\nFor IJK, the player will increase detection size and analysis duration, and enable loop filtering and precise seeking.",
+    "ui_player_view_mpv_filter": "Video filters",
+    "settings_section_player_filter": "Video filters",
+    "settings_mpv_filter_desc": "Only applies to the MPV core; sharpening and denoising use extra CPU",
+    "settings_mpv_filter_preset_title": "Filter",
+    "settings_mpv_filter_preset_off": "Off",
+    "settings_mpv_filter_preset_off_desc": "No filters, keep the original picture",
+    "settings_mpv_filter_preset_sharpen": "Sharpen",
+    "settings_mpv_filter_preset_sharpen_desc": "Enhance edges so low-bitrate sources look crisper",
+    "settings_mpv_filter_preset_denoise": "Denoise",
+    "settings_mpv_filter_preset_denoise_desc": "Reduce noise and color blocks for a cleaner picture",
+    "settings_mpv_filter_preset_color": "Color boost",
+    "settings_mpv_filter_preset_color_desc": "Slightly raise saturation and contrast",
+    "settings_mpv_filter_preset_deinterlace": "Deinterlace",
+    "settings_mpv_filter_preset_deinterlace_desc": "Remove combing from interlaced sources",
+    "settings_mpv_filter_preset_custom": "Custom",
+    "settings_mpv_filter_preset_custom_desc": "Enter filters yourself using mpv syntax",
+    "settings_mpv_filter_strength_title": "Filter strength",
+    "settings_mpv_filter_strength_low": "Low",
+    "settings_mpv_filter_strength_medium": "Medium",
+    "settings_mpv_filter_strength_high": "High",
+    "settings_mpv_filter_custom_title": "Custom filter expression",
+    "settings_mpv_filter_custom_desc": "Use mpv vf syntax, e.g. lavfi=eq=saturation=1.2; leave empty to disable"
   }
 }

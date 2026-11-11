@@ -187,6 +187,19 @@
     "ASR_VAD_TYPE": {
       "silero": "Silero（默认）",
       "ten": "TenVad"
+    },
+    "MPV_FILTER_PRESET": {
+      "OFF": "关闭",
+      "SHARPEN": "锐化",
+      "DENOISE": "降噪",
+      "COLOR": "色彩增强",
+      "DEINTERLACE": "去隔行",
+      "CUSTOM": "自定义"
+    },
+    "MPV_FILTER_STRENGTH": {
+      "LOW": "低",
+      "MEDIUM": "中",
+      "HIGH": "高"
     }
   },
   "EPG": {
@@ -841,6 +854,28 @@
     "ui_webview_ua_windows": "Windows",
     "video_player_support_better_detection": "更仔细地识别视频格式",
     "video_player_support_better_detection_desc": "个别频道打不开或花屏时开启，起播会慢一点",
-    "video_player_support_better_detection_desc_detail": "启用后，播放器将尝试更准确地探测视频格式，这可能会增加起播时间。\n对于Meida3，播放器将支持播放器缺少AUD和IDR的TS文件，并禁用HLS无块准备。\n对于IJK，播放器将增加探测大小和分析时长并开启环路过滤和精确跳转。\n 对于VLC，将启用android-opaque输出"
+    "video_player_support_better_detection_desc_detail": "启用后，播放器将尝试更准确地探测视频格式，这可能会增加起播时间。\n对于Meida3，播放器将支持播放器缺少AUD和IDR的TS文件，并禁用HLS无块准备。\n对于IJK，播放器将增加探测大小和分析时长并开启环路过滤和精确跳转。\n 对于VLC，将启用android-opaque输出",
+    "ui_player_view_mpv_filter": "画面滤镜",
+    "settings_section_player_filter": "画面滤镜",
+    "settings_mpv_filter_desc": "仅 MPV 内核生效；锐化、降噪会多占一些 CPU",
+    "settings_mpv_filter_preset_title": "滤镜",
+    "settings_mpv_filter_preset_off": "关闭",
+    "settings_mpv_filter_preset_off_desc": "不加任何滤镜，保持原画",
+    "settings_mpv_filter_preset_sharpen": "锐化",
+    "settings_mpv_filter_preset_sharpen_desc": "增强边缘细节，低清晰度源看起来更利落",
+    "settings_mpv_filter_preset_denoise": "降噪",
+    "settings_mpv_filter_preset_denoise_desc": "压低噪点和色块，画面更干净",
+    "settings_mpv_filter_preset_color": "色彩增强",
+    "settings_mpv_filter_preset_color_desc": "小幅提升饱和度与对比度",
+    "settings_mpv_filter_preset_deinterlace": "去隔行",
+    "settings_mpv_filter_preset_deinterlace_desc": "去掉隔行源的横向梳齿",
+    "settings_mpv_filter_preset_custom": "自定义",
+    "settings_mpv_filter_preset_custom_desc": "按 mpv 滤镜语法手动填写",
+    "settings_mpv_filter_strength_title": "滤镜强度",
+    "settings_mpv_filter_strength_low": "低",
+    "settings_mpv_filter_strength_medium": "中",
+    "settings_mpv_filter_strength_high": "高",
+    "settings_mpv_filter_custom_title": "自定义滤镜表达式",
+    "settings_mpv_filter_custom_desc": "按 mpv 的 vf 语法填写，例如 lavfi=eq=saturation=1.2；留空则不启用"
   }
 }

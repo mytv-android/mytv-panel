@@ -11,6 +11,7 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import {
     VideoPlayerCore, VideoPlayerRenderMode, VideoPlayerDisplayMode, VideoPlayerSeekToMode, RtspTransport,
     AudioBalanceLevel, VideoPlayerFrameRateFallback, WebViewCore,
+    MpvFilterPreset, MpvFilterPresetLabels, MpvFilterStrength, MpvFilterStrengthLabels,
 } from '../api';
 import { SETTINGS_UI, SettingsPageBase, humanizeMs, optionsWith } from '../settings-ui/settings-ui';
 
@@ -63,6 +64,11 @@ export class PlayerComponent extends SettingsPageBase {
         Medium: 'TV.ui_player_view_volume_balance_level_medium',
         High: 'TV.ui_player_view_volume_balance_level_high',
     };
+    mpvFilterPresets = Object.values(MpvFilterPreset);
+    mpvFilterPresetLabels: Record<MpvFilterPreset, string> = MpvFilterPresetLabels;
+    mpvFilterStrengths = Object.values(MpvFilterStrength);
+    mpvFilterStrengthLabels: Record<MpvFilterStrength, string> = MpvFilterStrengthLabels;
+    mpvFilterPreset = MpvFilterPreset;
     bufferPresets = [0, 2 * SECOND, 10 * SECOND];
     bufferPresetLabels = ['TV.settings_buffer_preset_fastest', 'TV.settings_buffer_preset_balanced', 'TV.settings_buffer_preset_smooth'];
     renderModes = Object.values(VideoPlayerRenderMode);

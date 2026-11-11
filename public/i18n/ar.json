@@ -153,6 +153,19 @@
     "ASR_VAD_TYPE": {
       "silero": "Silero (افتراضي)",
       "ten": "TenVad"
+    },
+    "MPV_FILTER_PRESET": {
+      "OFF": "إيقاف",
+      "SHARPEN": "زيادة الحِدّة",
+      "DENOISE": "إزالة الضوضاء",
+      "COLOR": "تعزيز الألوان",
+      "DEINTERLACE": "إزالة التشابك",
+      "CUSTOM": "مخصّص"
+    },
+    "MPV_FILTER_STRENGTH": {
+      "LOW": "منخفضة",
+      "MEDIUM": "متوسطة",
+      "HIGH": "عالية"
     }
   },
   "EPG": {
@@ -841,6 +854,28 @@
     "ui_webview_ua_windows": "Windows",
     "video_player_support_better_detection": "اكتشاف تنسيق الفيديو بعناية أكبر",
     "video_player_support_better_detection_desc": "فعّله عندما تفشل بعض القنوات أو تظهر تشوهات؛ يبدأ التشغيل أبطأ قليلًا",
-    "video_player_support_better_detection_desc_detail": "عند التمكين، سيحاول المشغل اكتشاف تنسيق الفيديو بدقة أكبر، وقد يزيد ذلك من زمن بدء التشغيل.\nبالنسبة إلى Media3، سيضيف دعمًا لملفات TS التي تفتقد AUD و IDR، كما سيعطّل ميزة التحضير بدون أجزاء (chunkless preparation) في HLS.\nأما بالنسبة إلى IJK، فسيزيد حجم الاستكشاف ومدة التحليل، وسيفعّل مرشح الحلقة (loop filter) والقفز الدقيق (accurate seek)."
+    "video_player_support_better_detection_desc_detail": "عند التمكين، سيحاول المشغل اكتشاف تنسيق الفيديو بدقة أكبر، وقد يزيد ذلك من زمن بدء التشغيل.\nبالنسبة إلى Media3، سيضيف دعمًا لملفات TS التي تفتقد AUD و IDR، كما سيعطّل ميزة التحضير بدون أجزاء (chunkless preparation) في HLS.\nأما بالنسبة إلى IJK، فسيزيد حجم الاستكشاف ومدة التحليل، وسيفعّل مرشح الحلقة (loop filter) والقفز الدقيق (accurate seek).",
+    "ui_player_view_mpv_filter": "مرشّحات الصورة",
+    "settings_section_player_filter": "مرشّحات الصورة",
+    "settings_mpv_filter_desc": "تعمل مع نواة MPV فقط؛ الحِدّة وإزالة الضوضاء تستهلكان معالجًا إضافيًا",
+    "settings_mpv_filter_preset_title": "المرشّح",
+    "settings_mpv_filter_preset_off": "إيقاف",
+    "settings_mpv_filter_preset_off_desc": "بلا مرشّحات، الصورة الأصلية كما هي",
+    "settings_mpv_filter_preset_sharpen": "زيادة الحِدّة",
+    "settings_mpv_filter_preset_sharpen_desc": "إبراز الحواف ليبدو المصدر منخفض الجودة أوضح",
+    "settings_mpv_filter_preset_denoise": "إزالة الضوضاء",
+    "settings_mpv_filter_preset_denoise_desc": "تقليل الضوضاء والكتل اللونية لصورة أنظف",
+    "settings_mpv_filter_preset_color": "تعزيز الألوان",
+    "settings_mpv_filter_preset_color_desc": "رفع التشبّع والتباين قليلًا",
+    "settings_mpv_filter_preset_deinterlace": "إزالة التشابك",
+    "settings_mpv_filter_preset_deinterlace_desc": "إزالة التمشيط من المصادر المتشابكة",
+    "settings_mpv_filter_preset_custom": "مخصّص",
+    "settings_mpv_filter_preset_custom_desc": "أدخل المرشّحات بنفسك بصيغة mpv",
+    "settings_mpv_filter_strength_title": "قوة المرشّح",
+    "settings_mpv_filter_strength_low": "منخفضة",
+    "settings_mpv_filter_strength_medium": "متوسطة",
+    "settings_mpv_filter_strength_high": "عالية",
+    "settings_mpv_filter_custom_title": "تعبير مرشّح مخصّص",
+    "settings_mpv_filter_custom_desc": "استخدم صيغة vf في mpv، مثل lavfi=eq=saturation=1.2؛ اتركه فارغًا للتعطيل"
   }
 }

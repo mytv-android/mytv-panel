@@ -36,6 +36,37 @@
     </app-settings-row>
   </app-settings-section>
 
+  <app-settings-section label="TV.settings_section_player_filter">
+    <app-settings-row label="TV.ui_player_view_mpv_filter" desc="TV.settings_mpv_filter_desc">
+      <mat-button-toggle-group [(ngModel)]="c.videoPlayerMpvFilterPreset" (change)="save()">
+        @for (preset of mpvFilterPresets; track preset) {
+        <mat-button-toggle [value]="preset">{{ mpvFilterPresetLabels[preset] | translate }}</mat-button-toggle>
+        }
+      </mat-button-toggle-group>
+    </app-settings-row>
+
+    @if (c.videoPlayerMpvFilterPreset === mpvFilterPreset.SHARPEN ||
+         c.videoPlayerMpvFilterPreset === mpvFilterPreset.DENOISE ||
+         c.videoPlayerMpvFilterPreset === mpvFilterPreset.COLOR) {
+    <app-settings-row label="TV.settings_mpv_filter_strength_title">
+      <mat-button-toggle-group [(ngModel)]="c.videoPlayerMpvFilterStrength" (change)="save()">
+        @for (level of mpvFilterStrengths; track level) {
+        <mat-button-toggle [value]="level">{{ mpvFilterStrengthLabels[level] | translate }}</mat-button-toggle>
+        }
+      </mat-button-toggle-group>
+    </app-settings-row>
+    }
+
+    @if (c.videoPlayerMpvFilterPreset === mpvFilterPreset.CUSTOM) {
+    <app-settings-row label="TV.settings_mpv_filter_custom_title" desc="TV.settings_mpv_filter_custom_desc">
+      <mat-form-field appearance="outline" subscriptSizing="dynamic">
+        <input matInput [(ngModel)]="c.videoPlayerMpvFilterCustom" (change)="save()"
+               placeholder="lavfi=eq=saturation=1.2">
+      </mat-form-field>
+    </app-settings-row>
+    }
+  </app-settings-section>
+
   <app-settings-section label="TV.settings_section_player_trouble">
     <app-settings-row label="TV.ui_player_view_load_timeout" desc="TV.ui_player_view_load_timeout_desc">
       <mat-form-field appearance="outline" subscriptSizing="dynamic">

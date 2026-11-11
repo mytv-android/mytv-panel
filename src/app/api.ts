@@ -287,6 +287,9 @@ export interface AppConfigs {
     webViewLoadTimeout?: number
     videoPlayerBufferTime?: number
     videoPlayerStallRetryTimeout?: number
+    videoPlayerMpvFilterPreset?: MpvFilterPreset
+    videoPlayerMpvFilterStrength?: MpvFilterStrength
+    videoPlayerMpvFilterCustom?: string
     videoPlayerDisplayMode?: VideoPlayerDisplayMode
     globalVideoPlayerForceSoftDecode?: boolean
     globalVideoPlayerMedia3SoftDecodeAudioOnly?: boolean  // NEW: Media3软解仅用于音频
@@ -546,6 +549,36 @@ export const VideoPlayerCoreLabels: { [key in VideoPlayerCore]: string } = {
     [VideoPlayerCore.VLC]: 'SETTINGS.VIDEO_PLAYER_CORE.VLC',
     [VideoPlayerCore.FS]: 'SETTINGS.VIDEO_PLAYER_CORE.FS',
     [VideoPlayerCore.MPV]: 'SETTINGS.VIDEO_PLAYER_CORE.MPV',
+}
+
+export enum MpvFilterPreset {
+    OFF = 'OFF',
+    SHARPEN = 'SHARPEN',
+    DENOISE = 'DENOISE',
+    COLOR = 'COLOR',
+    DEINTERLACE = 'DEINTERLACE',
+    CUSTOM = 'CUSTOM',
+}
+
+export const MpvFilterPresetLabels: { [key in MpvFilterPreset]: string } = {
+    [MpvFilterPreset.OFF]: 'SETTINGS.MPV_FILTER_PRESET.OFF',
+    [MpvFilterPreset.SHARPEN]: 'SETTINGS.MPV_FILTER_PRESET.SHARPEN',
+    [MpvFilterPreset.DENOISE]: 'SETTINGS.MPV_FILTER_PRESET.DENOISE',
+    [MpvFilterPreset.COLOR]: 'SETTINGS.MPV_FILTER_PRESET.COLOR',
+    [MpvFilterPreset.DEINTERLACE]: 'SETTINGS.MPV_FILTER_PRESET.DEINTERLACE',
+    [MpvFilterPreset.CUSTOM]: 'SETTINGS.MPV_FILTER_PRESET.CUSTOM',
+}
+
+export enum MpvFilterStrength {
+    LOW = 'LOW',
+    MEDIUM = 'MEDIUM',
+    HIGH = 'HIGH',
+}
+
+export const MpvFilterStrengthLabels: { [key in MpvFilterStrength]: string } = {
+    [MpvFilterStrength.LOW]: 'SETTINGS.MPV_FILTER_STRENGTH.LOW',
+    [MpvFilterStrength.MEDIUM]: 'SETTINGS.MPV_FILTER_STRENGTH.MEDIUM',
+    [MpvFilterStrength.HIGH]: 'SETTINGS.MPV_FILTER_STRENGTH.HIGH',
 }
 
 export enum VideoPlayerDecoderConfig {
