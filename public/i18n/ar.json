@@ -876,6 +876,6 @@
     "settings_mpv_filter_strength_medium": "متوسطة",
     "settings_mpv_filter_strength_high": "عالية",
     "settings_mpv_filter_custom_title": "تعبير مرشّح مخصّص",
-    "settings_mpv_filter_custom_desc": "استخدم صيغة vf في mpv، مثل lavfi=eq=saturation=1.2؛ اتركه فارغًا للتعطيل"
+    "settings_mpv_filter_custom_desc": "استخدم صيغة vf في mpv، مثل lavfi=[eq=saturation=1.2]؛ اتركه فارغًا للتعطيل"
   }
 }

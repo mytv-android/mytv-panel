@@ -876,6 +876,6 @@
     "settings_mpv_filter_strength_medium": "Medium",
     "settings_mpv_filter_strength_high": "High",
     "settings_mpv_filter_custom_title": "Custom filter expression",
-    "settings_mpv_filter_custom_desc": "Use mpv vf syntax, e.g. lavfi=eq=saturation=1.2; leave empty to disable"
+    "settings_mpv_filter_custom_desc": "Use mpv vf syntax, e.g. lavfi=[eq=saturation=1.2]; leave empty to disable"
   }
 }

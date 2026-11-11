@@ -61,7 +61,7 @@
     <app-settings-row label="TV.settings_mpv_filter_custom_title" desc="TV.settings_mpv_filter_custom_desc">
       <mat-form-field appearance="outline" subscriptSizing="dynamic">
         <input matInput [(ngModel)]="c.videoPlayerMpvFilterCustom" (change)="save()"
-               placeholder="lavfi=eq=saturation=1.2">
+               placeholder="lavfi=[eq=saturation=1.2]">
       </mat-form-field>
     </app-settings-row>
     }

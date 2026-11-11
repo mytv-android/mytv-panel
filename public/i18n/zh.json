@@ -876,6 +876,6 @@
     "settings_mpv_filter_strength_medium": "中",
     "settings_mpv_filter_strength_high": "高",
     "settings_mpv_filter_custom_title": "自定义滤镜表达式",
-    "settings_mpv_filter_custom_desc": "按 mpv 的 vf 语法填写，例如 lavfi=eq=saturation=1.2；留空则不启用"
+    "settings_mpv_filter_custom_desc": "按 mpv 的 vf 语法填写，例如 lavfi=[eq=saturation=1.2]；留空则不启用"
   }
 }
