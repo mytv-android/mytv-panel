@@ -38,7 +38,7 @@
       <mat-slide-toggle [(ngModel)]="c.cloudSyncAutoPull" (change)="save()"></mat-slide-toggle>
     </app-settings-row>
 
-    <!-- 网页面板独有：把应用数据导出成文件 / 从文件导入 -->
+    <!-- 把应用数据导出成文件 / 从文件导入（App 设置 → 备份与同步里也有） -->
     <app-settings-row label="SYNC.EXPORT_DATA">
       <button mat-icon-button (click)="exportData()" [attr.aria-label]="'SYNC.EXPORT_DATA' | translate">
         <mat-icon>download</mat-icon>

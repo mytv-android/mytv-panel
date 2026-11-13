@@ -18,7 +18,7 @@ type SyncTextField = Extract<keyof AppConfigs,
     'cloudSyncNetworkUrl' | 'cloudSyncLocalFilePath' | 'cloudSyncWebDavUrl' | 'cloudSyncWebDavUsername' | 'cloudSyncWebDavPassword'>;
 
 /**
- * 备份与同步：云同步（服务商与各自的凭据、自动恢复）、网页面板独有的导入 / 导出；
+ * 备份与同步：云同步（服务商与各自的凭据、自动恢复）、导入 / 导出（App 设置 → 备份与同步里也有）；
  * 本机备份（网页面板的备份管理整块嵌入）。上传 / 从云端恢复只能在 App 里操作
  */
 @Component({
