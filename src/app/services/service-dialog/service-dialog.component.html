@@ -69,6 +69,10 @@
       <mat-label>{{ 'SERVICES.CODE_FILE_PATH' | translate }}</mat-label>
       <input matInput [(ngModel)]="codeUrl"
         [placeholder]="isPhp ? '/data/user/0/<包名>/files/myscript.php' : '/data/user/0/<包名>/files/myscript.py'">
+      <button mat-icon-button matSuffix type="button" (click)="pickScriptPath()"
+        [attr.aria-label]="'FILE_PICKER.BROWSE' | translate" [title]="'FILE_PICKER.BROWSE' | translate">
+        <mat-icon>folder_open</mat-icon>
+      </button>
       <mat-hint>{{ 'SERVICES.CODE_FILE_HINT' | translate }}</mat-hint>
     </mat-form-field>
     }

@@ -122,6 +122,10 @@
         <mat-form-field appearance="outline" class="full-width">
           <mat-label>{{ 'HOME.FILE_PATH' | translate }}</mat-label>
           <input matInput [(ngModel)]="subscription.url" placeholder="{{ 'HOME.FILE_PATH' | translate }}">
+          <button mat-icon-button matSuffix type="button" (click)="pickSubscriptionFile()"
+            [attr.aria-label]="'FILE_PICKER.BROWSE' | translate" [title]="'FILE_PICKER.BROWSE' | translate">
+            <mat-icon>folder_open</mat-icon>
+          </button>
         </mat-form-field>
       </div>
       }
@@ -378,6 +382,10 @@
           <mat-form-field appearance="outline" class="full-width">
             <input matInput [(ngModel)]="configs.cloudSyncLocalFilePath"
               placeholder="file:///storage/emulated/0/Download/">
+            <button mat-icon-button matSuffix type="button" (click)="pickCloudSyncFile()"
+              [attr.aria-label]="'FILE_PICKER.BROWSE' | translate" [title]="'FILE_PICKER.BROWSE' | translate">
+              <mat-icon>folder_open</mat-icon>
+            </button>
           </mat-form-field>
         </div>
       </div>

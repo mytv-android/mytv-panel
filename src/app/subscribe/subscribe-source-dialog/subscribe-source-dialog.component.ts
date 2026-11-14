@@ -1,7 +1,7 @@
 import { Component, Inject, ViewChild, ElementRef } from '@angular/core';
 
 import { FormsModule } from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
@@ -13,6 +13,7 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { AppApi, IptvSource, IptvSourceRef } from '../../api';
 import { TextareaWithLinesComponent } from '../../common/textarea-with-lines/textarea-with-lines.component';
+import { DeviceFilePickerDialogComponent, DeviceFileSelection } from '../../common/device-file-picker-dialog/device-file-picker-dialog.component';
 
 @Component({
   selector: 'app-subscribe-source-dialog',
@@ -38,6 +39,8 @@ export class SubscribeSourceDialogComponent {
   source: IptvSource;
   isEdit: boolean;
   content = '';
+  contentDirty = false;
+  private contentLoadId = 0;
   sourceTypes = [
     { value: 0, label: 'HOME.REMOTE' },
     { value: 2, label: 'HOME.XTREAM' },
@@ -62,7 +65,8 @@ export class SubscribeSourceDialogComponent {
     public dialogRef: MatDialogRef<SubscribeSourceDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { source?: IptvSource, sources?: IptvSource[] },
     private snackBar: MatSnackBar,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private dialog: MatDialog
   ) {
     this.isEdit = !!data.source;
     this.source = data.source ? { ...data.source } : {
@@ -81,9 +85,13 @@ export class SubscribeSourceDialogComponent {
     this.source.aggregateSources ??= [];
     this.source.aggregateSources = [...this.source.aggregateSources];
     if (this.source.sourceType === 1) {
+      const contentLoad = ++this.contentLoadId;
       AppApi.getFileContent(this.source.url).then(content => {
-        this.content = content;
+        if (contentLoad === this.contentLoadId && !this.contentDirty) {
+          this.content = content;
+        }
       }).catch(err => {
+        if (contentLoad !== this.contentLoadId) return;
         console.error('Failed to get file content', err);
         // 文件内容接口仅允许访问电视端 fileDir / cacheDir 内的路径
         this.snackBar.open(
@@ -161,6 +169,21 @@ export class SubscribeSourceDialogComponent {
     this.source.aggregateSources = [...refs];
   }
 
+  pickSourceFile(): void {
+    this.dialog.open(DeviceFilePickerDialogComponent, {
+      data: { mode: 'file', initialPath: this.source.url },
+      width: '720px',
+      maxWidth: '95vw',
+    }).afterClosed().subscribe((selection?: DeviceFileSelection) => {
+      if (!selection) return;
+      // 选择只改路径；未重新编辑内容时绝不能把已有设备文件写成空文件。
+      this.contentLoadId++;
+      this.source.url = selection.path;
+      this.content = '';
+      this.contentDirty = false;
+    });
+  }
+
   onSave(): void {
     if (this.source.sourceType === 4) {
       // 聚合配置自身不含地址：成员按勾选顺序即线路优先级，已被删除的引用不写入
@@ -171,7 +194,7 @@ export class SubscribeSourceDialogComponent {
       this.source.aggregateSources = [];
     }
 
-    if (this.source.sourceType === 1) {
+    if (this.source.sourceType === 1 && this.contentDirty) {
       AppApi.writeFileContent(this.source.url, this.content).catch(err => {
         console.error('Failed to write file content', err);
         this.snackBar.open(

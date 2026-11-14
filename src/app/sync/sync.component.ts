@@ -8,10 +8,12 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { AppApi, AppConfigs, CloudSyncProvider } from '../api';
 import { SETTINGS_UI, SettingsPageBase } from '../settings-ui/settings-ui';
 import { BackupManagerComponent } from '../backupmanager/backup-manager.component';
+import { DeviceFilePickerDialogComponent, DeviceFileSelection, formatDirectorySelection } from '../common/device-file-picker-dialog/device-file-picker-dialog.component';
 
 type SyncTextField = Extract<keyof AppConfigs,
     'cloudSyncGithubGistId' | 'cloudSyncGithubGistToken' | 'cloudSyncGiteeGistId' | 'cloudSyncGiteeGistToken' |
@@ -32,6 +34,7 @@ type SyncTextField = Extract<keyof AppConfigs,
         MatInputModule,
         MatButtonModule,
         MatIconModule,
+        MatDialogModule,
         MatSnackBarModule,
         TranslateModule,
         BackupManagerComponent,
@@ -46,6 +49,7 @@ type SyncTextField = Extract<keyof AppConfigs,
 export class SyncComponent extends SettingsPageBase {
     snackBar = inject(MatSnackBar);
     translate = inject(TranslateService);
+    private dialog = inject(MatDialog);
 
     provider = CloudSyncProvider;
     providerLabels: [CloudSyncProvider, string][] = [
@@ -59,6 +63,18 @@ export class SyncComponent extends SettingsPageBase {
     /** 各服务商凭据行共用一个模板，字段名从模板上下文传进来 */
     setText(field: SyncTextField, value: string) {
         this.c[field] = value;
+    }
+
+    pickLocalFile(): void {
+        this.dialog.open(DeviceFilePickerDialogComponent, {
+            data: { mode: 'any', initialPath: this.c.cloudSyncLocalFilePath },
+            width: '720px',
+            maxWidth: '95vw',
+        }).afterClosed().subscribe((selection?: DeviceFileSelection) => {
+            if (!selection) return;
+            this.setText('cloudSyncLocalFilePath', formatDirectorySelection(selection));
+            void this.save();
+        });
     }
 
     async exportData() {

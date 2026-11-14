@@ -1,12 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { TranslateModule } from '@ngx-translate/core';
 import { AppStartupScreen, AppThemeDef, UiScreenOrientation, UiTimeShowMode } from '../api';
 import { SETTINGS_UI, SettingsPageBase, optionsWith } from '../settings-ui/settings-ui';
+import { DeviceFilePickerDialogComponent, DeviceFileSelection, filePathToUri } from '../common/device-file-picker-dialog/device-file-picker-dialog.component';
 
 /** 外观：主题（含自定义主题）、启动与屏幕方向、大小、屏幕时钟。界面语言是 App 本机设置，网页面板用右上角的语言菜单 */
 @Component({
@@ -16,7 +20,10 @@ import { SETTINGS_UI, SettingsPageBase, optionsWith } from '../settings-ui/setti
         MatSelectModule,
         MatFormFieldModule,
         MatInputModule,
+        MatButtonModule,
+        MatIconModule,
         MatButtonToggleModule,
+        MatDialogModule,
         TranslateModule,
         ...SETTINGS_UI,
     ],
@@ -27,6 +34,8 @@ import { SETTINGS_UI, SettingsPageBase, optionsWith } from '../settings-ui/setti
     }
 })
 export class LookComponent extends SettingsPageBase {
+    private dialog = inject(MatDialog);
+
     startupScreens = Object.values(AppStartupScreen);
     startupScreenLabels: Record<AppStartupScreen, string> = {
         Dashboard: 'TV.ui_dashboard_module_dashboard',
@@ -69,6 +78,18 @@ export class LookComponent extends SettingsPageBase {
         }
         this.c.themeAppCurrent = theme;
         this.save();
+    }
+
+    pickThemeFile(field: 'background' | 'texture'): void {
+        this.dialog.open(DeviceFilePickerDialogComponent, {
+            data: { mode: 'file', initialPath: this.theme[field] },
+            width: '720px',
+            maxWidth: '95vw',
+        }).afterClosed().subscribe((selection?: DeviceFileSelection) => {
+            if (!selection) return;
+            const uri = filePathToUri(selection.path);
+            this.updateTheme(field === 'background' ? { background: uri } : { texture: uri });
+        });
     }
 
     textureAlphaChange(value: string) {

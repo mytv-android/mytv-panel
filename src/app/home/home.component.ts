@@ -11,10 +11,12 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSelectModule } from '@angular/material/select';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { ConfigsService, AppApi, IptvSource, IptvSourceList, AppConfigs, EpgSource, CloudSyncProvider } from '../api';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { TextareaWithLinesComponent } from '../common/textarea-with-lines/textarea-with-lines.component';
+import { DeviceFilePickerDialogComponent, DeviceFileSelection, formatDirectorySelection } from '../common/device-file-picker-dialog/device-file-picker-dialog.component';
 import { FILE_PICKER_KEY } from '../file/file.component';
 @Component({
     selector: 'app-home',
@@ -31,6 +33,7 @@ import { FILE_PICKER_KEY } from '../file/file.component';
         MatCheckboxModule,
         MatIconModule,
         MatSelectModule,
+        MatDialogModule,
         MatSnackBarModule,
         TranslateModule,
         TextareaWithLinesComponent
@@ -48,6 +51,7 @@ export class HomeComponent {
     snackBar = inject(MatSnackBar);
     breakpointObserver = inject(BreakpointObserver);
     translate = inject(TranslateService);
+    private dialog = inject(MatDialog);
 
     isSmallScreen = false;
     isSubscriptionNameTouched = false;
@@ -262,6 +266,26 @@ export class HomeComponent {
             console.error('Failed to read file', err);
         };
         reader.readAsText(file);
+    }
+
+    pickSubscriptionFile(): void {
+        this.dialog.open(DeviceFilePickerDialogComponent, {
+            data: { mode: 'file', initialPath: this.subscription.url },
+            width: '720px',
+            maxWidth: '95vw',
+        }).afterClosed().subscribe((selection?: DeviceFileSelection) => {
+            if (selection) this.subscription.url = selection.path;
+        });
+    }
+
+    pickCloudSyncFile(): void {
+        this.dialog.open(DeviceFilePickerDialogComponent, {
+            data: { mode: 'any', initialPath: this.configs.cloudSyncLocalFilePath },
+            width: '720px',
+            maxWidth: '95vw',
+        }).afterClosed().subscribe((selection?: DeviceFileSelection) => {
+            if (selection) this.configs.cloudSyncLocalFilePath = formatDirectorySelection(selection);
+        });
     }
 
     selectedFile: File | null = null;

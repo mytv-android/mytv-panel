@@ -98,6 +98,18 @@
     "EMPTY": "目录为空",
     "OPERATION_FAILED": "操作失败"
   },
+  "FILE_PICKER": {
+    "TITLE_FILE": "选择文件",
+    "TITLE_DIRECTORY": "选择目录",
+    "TITLE_ANY": "选择文件或目录",
+    "BROWSE": "浏览设备文件",
+    "PERMISSION_HINT": "未授予外部存储权限，仅显示应用私有目录。可在电视端「设置 → 权限」中授权后浏览内部共享存储、SD 卡和 U 盘。",
+    "STORAGE_LOCATION": "存储位置",
+    "SELECT_CURRENT": "选择当前目录",
+    "RETRY": "重试",
+    "INVALID_PATH": "路径无效或不可读",
+    "DIRECTORY_ERROR": "目录不存在或不可读"
+  },
   "BACKUP": {
     "RESTORE_WARNING": "恢复会覆盖电视端当前的应用设置与数据库，恢复完成后需重启应用才能完全生效；请谨慎操作。",
     "NAME": "名称",

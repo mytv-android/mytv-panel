@@ -242,6 +242,18 @@
     "EMPTY": "Empty directory",
     "OPERATION_FAILED": "Operation failed"
   },
+  "FILE_PICKER": {
+    "TITLE_FILE": "Select File",
+    "TITLE_DIRECTORY": "Select Directory",
+    "TITLE_ANY": "Select File or Directory",
+    "BROWSE": "Browse device files",
+    "PERMISSION_HINT": "External storage permission is not granted, so only app-private directories are shown. Grant it on the TV under Settings → Permissions to browse internal shared storage, SD cards and USB drives.",
+    "STORAGE_LOCATION": "Storage location",
+    "SELECT_CURRENT": "Select current directory",
+    "RETRY": "Retry",
+    "INVALID_PATH": "Invalid or unreadable path",
+    "DIRECTORY_ERROR": "Directory does not exist or is not readable"
+  },
   "BACKUP": {
     "RESTORE_WARNING": "Restoring overwrites the current app settings and database on the TV. A restart is required for all settings to take effect. Proceed with caution.",
     "NAME": "Name",

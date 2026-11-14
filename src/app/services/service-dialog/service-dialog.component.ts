@@ -9,11 +9,12 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatExpansionModule } from '@angular/material/expansion';
-import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { AppApi, PythonCheckResult, PythonServiceInfo } from '../../api';
 import { TextareaWithLinesComponent } from '../../common/textarea-with-lines/textarea-with-lines.component';
+import { DeviceFilePickerDialogComponent, DeviceFileSelection } from '../../common/device-file-picker-dialog/device-file-picker-dialog.component';
 
 /**
  * 添加/编辑 Python 服务：名称 → 端口/代码来源 → 远程链接 / 本地上传 / 电视本地路径 →
@@ -74,6 +75,7 @@ export class ServiceDialogComponent implements OnInit {
         private ref: MatDialogRef<ServiceDialogComponent>,
         private snackBar: MatSnackBar,
         private translate: TranslateService,
+        private dialog: MatDialog,
     ) { }
 
     async ngOnInit() {
@@ -178,6 +180,16 @@ export class ServiceDialogComponent implements OnInit {
         reader.readAsText(file);
         // 允许再次选择同一个文件
         input.value = '';
+    }
+
+    pickScriptPath(): void {
+        this.dialog.open(DeviceFilePickerDialogComponent, {
+            data: { mode: 'file', initialPath: this.codeUrl },
+            width: '720px',
+            maxWidth: '95vw',
+        }).afterClosed().subscribe((selection?: DeviceFileSelection) => {
+            if (selection) this.codeUrl = selection.path;
+        });
     }
 
     /** 检查设备上该服务已保存的脚本（仅编辑时可用） */

@@ -43,6 +43,18 @@ export const AppApi = {
         return RequestUtil.get<FileListResult>(`${prefix}api/file/list`, { path })
     },
 
+    getDeviceFilePickerRoots() {
+        return RequestUtil.get<DeviceFilePickerRootsResult>(`${prefix}api/file-picker/roots`)
+    },
+
+    getDeviceFilePickerList(path: string) {
+        return RequestUtil.get<FileListResult>(`${prefix}api/file-picker/list`, { path })
+    },
+
+    selectDeviceFile(path: string) {
+        return RequestUtil.get<DeviceFileSelectionResult>(`${prefix}api/file-picker/select`, { path })
+    },
+
     createFileDir(path: string) {
         return RequestUtil.post(`${prefix}api/file/mkdir`, { path })
     },
@@ -507,6 +519,31 @@ export interface FileListResult {
         parent: string | null
         entries: FileEntry[]
     }
+    message?: string
+}
+
+export interface DeviceFileRoot {
+    name: string
+    path: string
+}
+
+export interface DeviceFilePickerRootsResult {
+    code: number
+    data?: {
+        externalStorageGranted: boolean
+        roots: DeviceFileRoot[]
+    }
+    message?: string
+}
+
+export interface DeviceFileSelection {
+    path: string
+    isDirectory: boolean
+}
+
+export interface DeviceFileSelectionResult {
+    code: number
+    data?: DeviceFileSelection
     message?: string
 }
 

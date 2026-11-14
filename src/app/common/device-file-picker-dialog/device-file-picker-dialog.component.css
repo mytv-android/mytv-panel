@@ -1,0 +1,144 @@
+.picker-content {
+    min-width: min(660px, calc(90vw - 48px));
+}
+
+.permission-hint {
+    margin: 0 0 12px;
+    color: var(--mat-sys-on-surface-variant);
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.storage-select {
+    width: 100%;
+    margin-bottom: 8px;
+}
+
+.breadcrumb {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 4px;
+    padding: 0 0 8px;
+    font-size: 14px;
+    color: var(--mat-sys-on-surface-variant);
+    word-break: break-all;
+}
+
+.crumb-sep {
+    margin: 0 2px;
+}
+
+.crumb {
+    color: var(--mat-sys-on-surface);
+}
+
+.error-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 8px;
+    color: var(--mat-sys-error);
+    font-size: 13px;
+}
+
+.table-scroll {
+    max-height: 45vh;
+    overflow: auto;
+}
+
+.file-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    overflow: hidden;
+    border-radius: var(--mytv-radius-group);
+    background-color: var(--mytv-card);
+    font: 400 14px / 20px var(--mytv-font-family);
+}
+
+.file-table th {
+    text-align: start;
+    padding: 12px 8px;
+    border-bottom: 1px solid var(--mytv-divider);
+    white-space: nowrap;
+    user-select: none;
+    font-weight: 500;
+    color: var(--mat-sys-on-surface-variant);
+}
+
+.file-table td {
+    padding: 8px;
+    border-bottom: 1px solid var(--mytv-divider);
+    vertical-align: middle;
+}
+
+.file-table tr:last-child td {
+    border-bottom: none;
+}
+
+.file-table th:first-child,
+.file-table td:first-child {
+    padding-inline-start: 16px;
+}
+
+.col-name {
+    width: 65%;
+    word-break: break-all;
+}
+
+.col-size {
+    width: 15%;
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+}
+
+.col-time {
+    width: 20%;
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+}
+
+.entry-icon {
+    font-size: 18px;
+    height: 18px;
+    width: 18px;
+    vertical-align: middle;
+    margin-right: 6px;
+    color: var(--mat-sys-on-surface-variant);
+}
+
+.entry-name {
+    vertical-align: middle;
+}
+
+a.entry-name {
+    color: var(--mat-sys-on-surface);
+    cursor: pointer;
+    text-decoration: none;
+}
+
+a.entry-name:hover {
+    text-decoration: underline;
+}
+
+.empty {
+    text-align: center;
+    color: var(--mat-sys-on-surface-variant);
+    padding: 24px 0;
+}
+
+@media (max-width: 600px) {
+    .picker-content {
+        min-width: 0;
+    }
+
+    .col-time {
+        display: none;
+    }
+
+    .col-name {
+        width: 75%;
+    }
+}

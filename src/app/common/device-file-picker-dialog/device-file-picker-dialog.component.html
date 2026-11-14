@@ -1,0 +1,76 @@
+<h2 mat-dialog-title>{{ titleKey | translate }}</h2>
+<mat-dialog-content class="picker-content">
+  @if (roots.length && !externalStorageGranted) {
+    <p class="permission-hint">{{ 'FILE_PICKER.PERMISSION_HINT' | translate }}</p>
+  }
+
+  @if (roots.length) {
+    <mat-form-field appearance="outline" class="storage-select">
+      <mat-label>{{ 'FILE_PICKER.STORAGE_LOCATION' | translate }}</mat-label>
+      <mat-select [ngModel]="selectedRoot" [disabled]="loading || selecting"
+        (selectionChange)="openDirectory($event.value)">
+        @for (root of roots; track root.path) {
+          <mat-option [value]="root.path">{{ root.name }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+  }
+
+  <div class="breadcrumb">
+    <button mat-icon-button type="button" [disabled]="!parentPath || loading || selecting"
+      (click)="parentPath && openDirectory(parentPath)" [attr.aria-label]="'FILE.UP' | translate">
+      <mat-icon>arrow_upward</mat-icon>
+    </button>
+    @for (crumb of breadcrumbs; track crumb.path) {
+      <span class="crumb-sep">/</span>
+      <span class="crumb">{{ crumb.name }}</span>
+    }
+  </div>
+
+  @if (error) {
+    <div class="error-row">
+      <span>{{ error }}</span>
+      <button mat-button type="button" (click)="retry()" [disabled]="loading || selecting">
+        {{ 'FILE_PICKER.RETRY' | translate }}
+      </button>
+    </div>
+  }
+
+  <div class="table-scroll">
+    <table class="file-table">
+      <thead>
+        <tr>
+          <th class="col-name">{{ 'FILE.NAME' | translate }}</th>
+          <th class="col-size">{{ 'FILE.SIZE' | translate }}</th>
+          <th class="col-time">{{ 'FILE.MTIME' | translate }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        @if (loading) {
+          <tr><td colspan="3" class="empty">{{ 'FILE.LOADING' | translate }}</td></tr>
+        } @else if (!error && displayedEntries.length === 0) {
+          <tr><td colspan="3" class="empty">{{ 'FILE.EMPTY' | translate }}</td></tr>
+        } @else if (!error) {
+          @for (entry of displayedEntries; track entry.name) {
+            <tr>
+              <td class="col-name">
+                <mat-icon class="entry-icon">{{ entry.isDir ? 'folder' : 'insert_drive_file' }}</mat-icon>
+                <a class="entry-name" (click)="openEntry(entry)">{{ entry.name }}</a>
+              </td>
+              <td class="col-size">{{ entry.isDir ? '-' : formatSize(entry.size) }}</td>
+              <td class="col-time">{{ formatTime(entry.mtime) }}</td>
+            </tr>
+          }
+        }
+      </tbody>
+    </table>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button type="button" (click)="close()">{{ 'SERVICES.CANCEL' | translate }}</button>
+  @if (mode !== 'file') {
+    <button mat-flat-button type="button" color="primary" [disabled]="!canSelectCurrent" (click)="selectCurrent()">
+      {{ 'FILE_PICKER.SELECT_CURRENT' | translate }}
+    </button>
+  }
+</mat-dialog-actions>

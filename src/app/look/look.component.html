@@ -27,11 +27,19 @@
         <mat-form-field appearance="outline" subscriptSizing="dynamic" class="s-wide">
           <mat-label>{{ 'TV.ui_theme_custom_background' | translate }}</mat-label>
           <input matInput [ngModel]="theme.background" (change)="updateTheme({ background: $any($event.target).value })">
+          <button mat-icon-button matSuffix type="button" (click)="pickThemeFile('background')"
+            [attr.aria-label]="'FILE_PICKER.BROWSE' | translate" [title]="'FILE_PICKER.BROWSE' | translate">
+            <mat-icon>folder_open</mat-icon>
+          </button>
           <mat-hint>{{ 'TV.ui_theme_custom_format_hint' | translate }}</mat-hint>
         </mat-form-field>
         <mat-form-field appearance="outline" subscriptSizing="dynamic" class="s-wide">
           <mat-label>{{ 'TV.ui_theme_custom_texture' | translate }}</mat-label>
           <input matInput [ngModel]="theme.texture" (change)="updateTheme({ texture: $any($event.target).value })">
+          <button mat-icon-button matSuffix type="button" (click)="pickThemeFile('texture')"
+            [attr.aria-label]="'FILE_PICKER.BROWSE' | translate" [title]="'FILE_PICKER.BROWSE' | translate">
+            <mat-icon>folder_open</mat-icon>
+          </button>
         </mat-form-field>
         <mat-form-field appearance="outline" subscriptSizing="dynamic" class="s-wide">
           <mat-label>{{ 'TV.ui_theme_custom_texture_alpha' | translate }}</mat-label>

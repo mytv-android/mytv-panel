@@ -25,7 +25,7 @@
     <ng-container *ngTemplateOutlet="textRow; context: { label: 'TV.cloud_sync_network_url', field: 'cloudSyncNetworkUrl', placeholder: 'https://example.com/sync' }" />
     }
     @case (provider.LOCAL_FILE) {
-    <ng-container *ngTemplateOutlet="textRow; context: { label: 'TV.cloud_sync_local_file_path', field: 'cloudSyncLocalFilePath', placeholder: 'file:///storage/emulated/0/Download/' }" />
+    <ng-container *ngTemplateOutlet="textRow; context: { label: 'TV.cloud_sync_local_file_path', field: 'cloudSyncLocalFilePath', placeholder: 'file:///storage/emulated/0/Download/', picker: true }" />
     }
     @case (provider.WEBDAV) {
     <ng-container *ngTemplateOutlet="textRow; context: { label: 'TV.cloud_sync_webdav_url', field: 'cloudSyncWebDavUrl', placeholder: 'https://webdav.example.com/remote.php/dav/files/username/' }" />
@@ -60,11 +60,17 @@
   </app-settings-section>
 </app-settings-page>
 
-<ng-template #textRow let-label="label" let-field="field" let-secret="secret" let-placeholder="placeholder">
+<ng-template #textRow let-label="label" let-field="field" let-secret="secret" let-placeholder="placeholder" let-picker="picker">
   <app-settings-row [label]="label">
     <mat-form-field appearance="outline" subscriptSizing="dynamic" class="s-field">
       <input matInput [type]="secret ? 'password' : 'text'" [placeholder]="placeholder ?? ''"
         [ngModel]="$any(c)[field]" (ngModelChange)="setText(field, $event)" (change)="save()">
+      @if (picker) {
+        <button mat-icon-button matSuffix type="button" (click)="pickLocalFile()"
+          [attr.aria-label]="'FILE_PICKER.BROWSE' | translate" [title]="'FILE_PICKER.BROWSE' | translate">
+          <mat-icon>folder_open</mat-icon>
+        </button>
+      }
     </mat-form-field>
   </app-settings-row>
 </ng-template>
