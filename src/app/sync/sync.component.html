@@ -53,6 +53,10 @@
   </app-settings-section>
 
   <app-settings-section label="TV.settings_section_sync_local">
+    <app-settings-row label="TV.ui_app_backup_enable" desc="TV.ui_app_backup_enable_desc">
+      <mat-slide-toggle [(ngModel)]="c.appBackupEnable" (change)="save()"></mat-slide-toggle>
+    </app-settings-row>
+
     <app-settings-row label="TV.ui_backup_manager" desc="TV.ui_backup_manager_desc"></app-settings-row>
     <div class="s-card-body s-embed">
       <app-backup-manager></app-backup-manager>

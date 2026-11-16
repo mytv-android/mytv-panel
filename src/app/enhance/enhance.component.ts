@@ -10,7 +10,8 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import {
     ASRMode, ASRTranslationEngine, ASRVadType, ASRVadTypeLabels, ASRTranslationColors,
     VideoPlayerSuperResolutionMode, VideoPlayerFrameInterpolationMode, VideoPlayerInterpolationTargetFps,
-    VideoPlayerAiExecutionBackend,
+    VideoPlayerAiExecutionBackend, VideoPlayerSubtitleStyle, SubtitleColors, SubtitleBackgroundColors,
+    SubtitleTextSizePercents, SubtitleOpacityPercents, SubtitlePositionPercents,
 } from '../api';
 import { SETTINGS_UI, SettingsPageBase, optionsWith } from '../settings-ui/settings-ui';
 
@@ -59,6 +60,11 @@ export class EnhanceComponent extends SettingsPageBase {
     vadTypes = Object.values(ASRVadType);
     vadTypeLabels = ASRVadTypeLabels;
     translationColors = ASRTranslationColors;
+    subtitleColors = SubtitleColors;
+    subtitleBackgroundColors = SubtitleBackgroundColors;
+    subtitleTextSizePercents = SubtitleTextSizePercents;
+    subtitleOpacityPercents = SubtitleOpacityPercents;
+    subtitlePositionPercents = SubtitlePositionPercents;
 
     superResolutionModes = Object.values(VideoPlayerSuperResolutionMode);
     superResolutionLabels: { [mode: string]: string | undefined } = {
@@ -120,5 +126,74 @@ export class EnhanceComponent extends SettingsPageBase {
         } catch {
             this.snackBar.open(this.translate.instant('PLAYER.ASR_SAVE_FAILED'), undefined, { duration: 3000 });
         }
+    }
+
+    /** 字幕样式：设备没下发过该字段时用 App 的默认值补齐（EDGE_TYPE_OUTLINE = 1） */
+    get subtitle(): Required<VideoPlayerSubtitleStyle> {
+        const s = this.c.uiVideoPlayerSubtitle;
+        return {
+            useSystemDefault: s?.useSystemDefault ?? false,
+            isApplyEmbeddedStyles: s?.isApplyEmbeddedStyles ?? true,
+            textSize: s?.textSize ?? 70,
+            bottomPaddingFraction: s?.bottomPaddingFraction ?? 0.08,
+            style: {
+                foregroundColor: s?.style?.foregroundColor ?? -1,
+                backgroundColor: s?.style?.backgroundColor ?? 0,
+                windowColor: s?.style?.windowColor ?? 0,
+                edgeType: s?.style?.edgeType ?? 1,
+                edgeColor: s?.style?.edgeColor ?? 0,
+            },
+        };
+    }
+
+    /** 改字幕样式：整体写回（与 App 一样每次改动都整块提交） */
+    updateSubtitle(patch: Partial<VideoPlayerSubtitleStyle>) {
+        this.c.uiVideoPlayerSubtitle = { ...this.subtitle, ...patch };
+        this.save();
+    }
+
+    updateSubtitleStyle(patch: Partial<VideoPlayerSubtitleStyle['style']>) {
+        this.updateSubtitle({ style: { ...this.subtitle.style, ...patch } });
+    }
+
+    setSubtitleBackgroundColor(value: number) {
+        // 只换 RGB，alpha 仍归不透明度管
+        const alpha = (this.subtitle.style.backgroundColor >>> 24) & 0xFF;
+        this.updateSubtitleStyle({ backgroundColor: ((alpha << 24) | (value & 0xFFFFFF)) | 0 });
+    }
+
+    /** 背景色是否选中（alpha 归不透明度管，只比 RGB） */
+    isSubtitleBackgroundColor(value: number): boolean {
+        return (this.subtitle.style.backgroundColor & 0xFFFFFF) === (value & 0xFFFFFF);
+    }
+
+    /** 背景色的 alpha 通道即不透明度（与 App 一致：颜色只存 RGB） */
+    get subtitleBackgroundOpacity(): number {
+        const alpha = (this.subtitle.style.backgroundColor >>> 24) & 0xFF;
+        return Math.round(alpha / 255 * 100);
+    }
+
+    setSubtitleBackgroundOpacity(percent: number) {
+        const bg = this.subtitle.style.backgroundColor;
+        const alpha = Math.round(percent / 100 * 255);
+        this.updateSubtitleStyle({ backgroundColor: ((alpha << 24) | (bg & 0xFFFFFF)) | 0 });
+    }
+
+    /** 字号：配置值 = 百分比 × 0.7（70f 为 100%） */
+    get subtitleTextSizePercent(): number {
+        return Math.round(this.subtitle.textSize / 70 * 100);
+    }
+
+    setSubtitleTextSizePercent(percent: number) {
+        this.updateSubtitle({ textSize: percent * 0.7 });
+    }
+
+    /** 离底部：bottomPaddingFraction 0~0.5 对应 0%~50% */
+    get subtitlePositionPercent(): number {
+        return Math.round(this.subtitle.bottomPaddingFraction * 100);
+    }
+
+    setSubtitlePositionPercent(percent: number) {
+        this.updateSubtitle({ bottomPaddingFraction: percent / 100 });
     }
 }

@@ -9,7 +9,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import {
-    VideoPlayerCore, VideoPlayerRenderMode, VideoPlayerDisplayMode, VideoPlayerSeekToMode, RtspTransport,
+    VideoPlayerCore, VideoPlayerCoreLabels, VideoPlayerRenderMode, VideoPlayerRenderModeLabels,
+    VideoPlayerDisplayMode, VideoPlayerDisplayModeLabels, VideoPlayerSeekToMode, RtspTransport,
     AudioBalanceLevel, VideoPlayerFrameRateFallback, WebViewCore,
     MpvFilterPreset, MpvFilterPresetLabels, MpvFilterStrength, MpvFilterStrengthLabels,
 } from '../api';
@@ -47,16 +48,9 @@ export class PlayerComponent extends SettingsPageBase {
 
     core = VideoPlayerCore;
     cores = Object.values(VideoPlayerCore);
-    coreLabels: Record<VideoPlayerCore, string> = { MEDIA3: 'Media3', IJK: 'IJK', VLC: 'VLC', FS: 'FSPlayer', MPV: 'MPV' };
+    coreLabels: Record<VideoPlayerCore, string> = VideoPlayerCoreLabels;
     displayModes = Object.values(VideoPlayerDisplayMode);
-    displayModeLabels: Record<VideoPlayerDisplayMode, string> = {
-        ORIGINAL: 'TV.settings_choice_display_original',
-        FILL: 'TV.settings_choice_display_fill',
-        CROP: 'TV.settings_choice_display_crop',
-        FOUR_THREE: '4:3',
-        SIXTEEN_NINE: '16:9',
-        WIDE: '2.35:1',
-    };
+    displayModeLabels: Record<VideoPlayerDisplayMode, string> = VideoPlayerDisplayModeLabels;
     balanceLevels = Object.values(AudioBalanceLevel);
     balanceLevelLabels: Record<AudioBalanceLevel, string> = {
         Off: 'TV.ui_player_view_volume_balance_level_off',
@@ -72,11 +66,7 @@ export class PlayerComponent extends SettingsPageBase {
     bufferPresets = [0, 2 * SECOND, 10 * SECOND];
     bufferPresetLabels = ['TV.settings_buffer_preset_fastest', 'TV.settings_buffer_preset_balanced', 'TV.settings_buffer_preset_smooth'];
     renderModes = Object.values(VideoPlayerRenderMode);
-    renderModeLabels: Record<VideoPlayerRenderMode, string> = {
-        SURFACE_VIEW: 'SurfaceView',
-        TEXTURE_VIEW: 'TextureView',
-        GL_SURFACE_VIEW: 'GLSurfaceView',
-    };
+    renderModeLabels: Record<VideoPlayerRenderMode, string> = VideoPlayerRenderModeLabels;
     frameRateFallbacks = Object.values(VideoPlayerFrameRateFallback);
     frameRateFallbackLabels: Record<VideoPlayerFrameRateFallback, string> = {
         SYSTEM_DEFAULT: 'TV.ui_player_view_frame_rate_fallback_system',

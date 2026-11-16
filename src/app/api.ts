@@ -189,8 +189,10 @@ export interface AppConfigs {
     appPipEnable?: boolean
     appBackgroundPlayEnable?: boolean  // NEW: 后台播放（听电视），与画中画互斥
     castReceiverEnabled?: boolean  // NEW: 投屏接收（DLNA DMR，接收手机等设备推送的视频）
+    castDeviceName?: string  // NEW: 投屏设备通告名（各接收协议共用；空 = 用机型名，最多 32 字符）
     appLastLatestVersion?: string
     appAgreementAgreed?: boolean
+    appBackupEnable?: boolean  // NEW: 允许系统备份（换新设备时通过系统迁移设置和收藏）
     appStartupScreen?: string
     debugDeveloperMode?: boolean
     debugShowFps?: boolean
@@ -281,7 +283,6 @@ export interface AppConfigs {
     videoPlayerRtspTransport?: RtspTransport
     videoPlayerDecoderConfig?: number
     videoPlayerDecoderConfigRegexList?: VideoPlayerDecoderConfigList
-    videoPlayerDecoderConfigDeviceList?: VideoPlayerDecoderConfigList  // NEW: 播放器设备解码配置列表
     videoPlayerAudioScreensaver?: boolean | null  // NEW: 音频屏保
     videoPlayerAacPrefer?: boolean | null         // NEW: AAC 优先
     videoPlayerMedia3Tunneled?: boolean | null    // NEW: Media3 隧道解码
@@ -388,6 +389,58 @@ export interface CaptionStyleCompat {
     edgeType: number
     edgeColor: number
 }
+
+/** 字幕文字 / 描边 / 窗口颜色调色板（与 App SubtitleColors 一致，末项为透明） */
+export const SubtitleColors: { value: number, css: string }[] = [
+    { value: -1, css: '#FFFFFF' },          // White
+    { value: -256, css: '#FFFF00' },        // Yellow
+    { value: -16711681, css: '#00FFFF' },   // Cyan
+    { value: -16711936, css: '#00FF00' },   // Green
+    { value: -65281, css: '#FF00FF' },      // Magenta
+    { value: -65536, css: '#FF0000' },      // Red
+    { value: -16776961, css: '#0000FF' },   // Blue
+    { value: -4210753, css: '#BFBFBF' },    // LightGray
+    { value: -7829368, css: '#888888' },    // Gray
+    { value: -12303292, css: '#444444' },   // DarkGray
+    { value: -16777216, css: '#000000' },   // Black
+    { value: 0, css: 'transparent' },       // Transparent
+]
+
+/** 字幕背景色调色板（与 App SubtitleBackgroundColors 一致：去掉透明，不透明度单独控制） */
+export const SubtitleBackgroundColors: { value: number, css: string }[] = [
+    { value: -16777216, css: '#000000' },   // Black
+    { value: -12303292, css: '#444444' },   // DarkGray
+    { value: -7829368, css: '#888888' },    // Gray
+    { value: -4210753, css: '#BFBFBF' },    // LightGray
+    { value: -1, css: '#FFFFFF' },          // White
+    { value: -16776961, css: '#0000FF' },   // Blue
+    { value: -65536, css: '#FF0000' },      // Red
+    { value: -65281, css: '#FF00FF' },      // Magenta
+    { value: -16711936, css: '#00FF00' },   // Green
+    { value: -16711681, css: '#00FFFF' },   // Cyan
+    { value: -256, css: '#FFFF00' },        // Yellow
+]
+
+/** 字幕字号档位（与 App 一致：10%~200%，每档 10%；配置值 = 百分比 × 0.7） */
+export const SubtitleTextSizePercents: number[] = (() => {
+    const percents: number[] = [];
+    for (let i = 1; i <= 20; i++) percents.push(i * 10);
+    return percents;
+})();
+
+/** 字幕背景不透明度档位（与 App 一致：0%~100%，每档 5%） */
+export const SubtitleOpacityPercents: number[] = (() => {
+    const percents: number[] = [];
+    for (let i = 0; i <= 20; i++) percents.push(i * 5);
+    return percents;
+})();
+
+/** 字幕离底部档位（与 App 一致：0%~50%，每档 1%） */
+export const SubtitlePositionPercents: number[] = (() => {
+    const percents: number[] = [];
+    for (let i = 0; i <= 50; i++) percents.push(i);
+    return percents;
+})();
 export enum KeyDownAction {
     ChangeCurrentChannelToPrev = 'ChangeCurrentChannelToPrev',
     ChangeCurrentChannelToNext = 'ChangeCurrentChannelToNext',
@@ -624,12 +677,6 @@ export enum VideoPlayerDecoderConfig {
     URL = 2,
 }
 
-export const VideoPlayerDecoderConfigLabels: { [key in VideoPlayerDecoderConfig]: string } = {
-    [VideoPlayerDecoderConfig.NONE]: 'SETTINGS.VIDEO_PLAYER_DECODER_CONFIG.NONE',
-    [VideoPlayerDecoderConfig.HOST]: 'SETTINGS.VIDEO_PLAYER_DECODER_CONFIG.HOST',
-    [VideoPlayerDecoderConfig.URL]: 'SETTINGS.VIDEO_PLAYER_DECODER_CONFIG.URL',
-}
-
 export interface VideoPlayerProxyRule {
     pattern: string
     proxy: string
@@ -737,9 +784,14 @@ export interface Channel {
     name: string
     standardName: string
     epgName: string
+    /** 节目单 ID，用于查询节目单 */
+    epgID: string
     lineList: any
     logo?: string
     index: number
+    /** 来自 tvg-chno 的频道编号，优先于 index 显示 */
+    channelNumber?: number
+    hash: number
 }
 
 export interface ChannelFavoriteList {
@@ -750,6 +802,9 @@ export interface CloudSyncData {
     version: string
     syncAt: number
     syncFrom: string
+    description?: string
+    configs?: AppConfigs
+    extraLocalIptvSourceList?: { [path: string]: string }
 }
 
 export enum AudioBalanceLevel {
@@ -845,7 +900,7 @@ export interface PythonRuntimeInfo {
 export interface PythonServiceInfo {
     id: string
     name: string
-    /** python / php */
+    /** python / php / js */
     language: string
     enabled: boolean
     port: number
@@ -872,6 +927,8 @@ export interface PythonServiceInfo {
 export interface PythonStatus {
     runtime: PythonRuntimeInfo
     phpRuntime: PythonRuntimeInfo
+    /** JS 运行时（QuickJS）随应用内置，无需下载；旧版本应用不返回 */
+    jsRuntime?: PythonRuntimeInfo
     services: PythonServiceInfo[]
 }
 

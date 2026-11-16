@@ -6,6 +6,13 @@
     margin-top: 4px;
 }
 
+/* 字幕样式来源：两个开关并排 */
+.setting-toggles {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 24px;
+}
+
 .s-sub-actions {
     display: flex;
     justify-content: flex-end;

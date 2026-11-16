@@ -91,6 +91,17 @@
 </div>
 }
 
+<!-- JS 运行环境（随应用内置，无需下载） -->
+<div class="section-header">
+  <h3>{{ 'SERVICES.RUNTIME_JS' | translate }}</h3>
+</div>
+
+<div class="runtime-state">
+  <span class="badge" [ngClass]="jsRuntimeReady ? 'badge-running' : (jsRuntime?.state === 'unsupported' ? 'badge-error' : 'badge-default')">
+    {{ jsRuntimeStateText }}
+  </span>
+</div>
+
 <!-- 服务列表 -->
 <div class="section-header">
   <h3>{{ 'SERVICES.TITLE' | translate }}</h3>
@@ -108,7 +119,7 @@
   <mat-list-item class="service-item">
     <div matListItemTitle class="service-title">
       {{ svc.name }}
-      <span class="badge" [ngClass]="svc.language === 'php' ? 'badge-php' : 'badge-python'">{{ svc.language === 'php' ? 'PHP' : 'Python' }}</span>
+      <span class="badge" [ngClass]="svc.language === 'php' ? 'badge-php' : (svc.language === 'js' ? 'badge-js' : 'badge-python')">{{ languageLabel(svc.language) }}</span>
       <span class="badge" [ngClass]="stateBadgeClass(svc)">{{ stateLabel(svc) }}</span>
       @if (!svc.scriptExists) {
       <span class="badge badge-error">{{ 'SERVICES.SCRIPT_MISSING' | translate }}</span>

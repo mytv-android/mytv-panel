@@ -36,7 +36,7 @@
     </app-settings-row>
   </app-settings-section>
 
-  <app-settings-section label="TV.settings_section_player_filter">
+  <app-settings-section label="TV.settings_section_enhance_picture">
     <app-settings-row label="TV.ui_player_view_mpv_filter" desc="TV.settings_mpv_filter_desc">
       <mat-button-toggle-group [(ngModel)]="c.videoPlayerMpvFilterPreset" (change)="save()">
         @for (preset of mpvFilterPresets; track preset) {

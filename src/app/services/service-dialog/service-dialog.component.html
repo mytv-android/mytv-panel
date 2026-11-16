@@ -13,6 +13,7 @@
         <mat-select [(ngModel)]="language" [disabled]="isEdit" (selectionChange)="onLanguageChange()">
           <mat-option value="python">Python</mat-option>
           <mat-option value="php">PHP</mat-option>
+          <mat-option value="js">JavaScript</mat-option>
         </mat-select>
         <mat-hint>{{ 'SERVICES.SCRIPT_LANGUAGE_HINT' | translate }}</mat-hint>
       </mat-form-field>
@@ -37,7 +38,7 @@
     @if (isRemote) {
     <mat-form-field appearance="outline" class="full-width">
       <mat-label>{{ 'SERVICES.CODE_URL' | translate }}</mat-label>
-      <input matInput [(ngModel)]="codeUrl" [placeholder]="isPhp ? 'https://example.com/ysp.php' : 'https://example.com/ysp-live.py'">
+      <input matInput [(ngModel)]="codeUrl" [placeholder]="codeUrlPlaceholder">
       <mat-hint>{{ 'SERVICES.CODE_URL_HINT' | translate }}</mat-hint>
     </mat-form-field>
 
@@ -52,7 +53,7 @@
         <mat-icon>upload_file</mat-icon> {{ 'SERVICES.SELECT_SCRIPT_FILE' | translate }}
       </button>
       <span class="upload-filename">{{ scriptFileName || ('SERVICES.NO_SCRIPT_FILE' | translate) }}</span>
-      <input #scriptFileInput type="file" style="display:none" [accept]="isPhp ? '.php' : '.py,.php'"
+      <input #scriptFileInput type="file" style="display:none" [accept]="scriptAccept"
         (change)="onScriptFileSelected($event)" />
     </div>
 
@@ -61,14 +62,13 @@
     }
 
     <app-textarea-with-lines class="full-width" [(ngModel)]="code" [rows]="12" [maxRows]="10"
-      [label]="'SERVICES.SCRIPT_CODE' | translate" [placeholder]="isPhp ? '<?php ...' : '#!/usr/bin/env python3'"
+      [label]="'SERVICES.SCRIPT_CODE' | translate" [placeholder]="codePlaceholder"
       [required]="true"></app-textarea-with-lines>
     <p class="field-hint">{{ 'SERVICES.SCRIPT_CODE_HINT' | translate }}</p>
     } @else {
     <mat-form-field appearance="outline" class="full-width">
       <mat-label>{{ 'SERVICES.CODE_FILE_PATH' | translate }}</mat-label>
-      <input matInput [(ngModel)]="codeUrl"
-        [placeholder]="isPhp ? '/data/user/0/<包名>/files/myscript.php' : '/data/user/0/<包名>/files/myscript.py'">
+      <input matInput [(ngModel)]="codeUrl" [placeholder]="scriptPathPlaceholder">
       <button mat-icon-button matSuffix type="button" (click)="pickScriptPath()"
         [attr.aria-label]="'FILE_PICKER.BROWSE' | translate" [title]="'FILE_PICKER.BROWSE' | translate">
         <mat-icon>folder_open</mat-icon>
@@ -100,7 +100,7 @@
           <mat-hint>{{ 'SERVICES.HTTP_PROXY_HINT' | translate }}</mat-hint>
         </mat-form-field>
 
-        @if (!isPhp) {
+        @if (!isHosted) {
         <mat-form-field appearance="outline" class="full-width">
           <mat-label>{{ 'SERVICES.EXTRA_ARGS' | translate }}</mat-label>
           <input matInput [(ngModel)]="extraArgs" placeholder="--no-4k">
@@ -144,7 +144,7 @@
 </mat-dialog-content>
 
 <mat-dialog-actions align="end">
-  @if (isEdit && !isPhp) {
+  @if (isEdit && !isHosted) {
   <button mat-button (click)="checkCode()" [disabled]="checking">
     <mat-icon>fact_check</mat-icon> {{ 'SERVICES.CHECK_CODE' | translate }}
   </button>

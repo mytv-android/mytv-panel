@@ -17,10 +17,11 @@ import { TextareaWithLinesComponent } from '../../common/textarea-with-lines/tex
 import { DeviceFilePickerDialogComponent, DeviceFileSelection } from '../../common/device-file-picker-dialog/device-file-picker-dialog.component';
 
 /**
- * 添加/编辑 Python 服务：名称 → 端口/代码来源 → 远程链接 / 本地上传 / 电视本地路径 →
+ * 添加/编辑脚本服务：名称 → 语言 → 端口/代码来源 → 远程链接 / 本地上传 / 电视本地路径 →
  * 启用/局域网共享 → 高级选项（UA/代理/启动参数/环境变量/自动重启）。
  * 远程链接在保存时拉取一次，之后按更新间隔自动更新；本地文件按内容变化同步；
  * 本地上传/直接填写把文件或粘贴的代码随保存推送，由应用存成电视上的脚本文件。
+ * PHP / JS 由应用内置宿主监听端口，不走脚本自身的启动参数/环境变量/自动重启。
  */
 @Component({
     selector: 'app-service-dialog',
@@ -69,6 +70,8 @@ export class ServiceDialogComponent implements OnInit {
 
     isEdit = false;
     private serviceId?: string;
+    /** 切换语言前的语言，用于判断端口是否还是旧语言的默认值 */
+    private lastLanguage = 'python';
 
     constructor(
         @Inject(MAT_DIALOG_DATA) public data: { service: PythonServiceInfo | null },
@@ -87,6 +90,7 @@ export class ServiceDialogComponent implements OnInit {
         this.serviceId = svc.id;
         this.name = svc.name;
         this.language = svc.language || 'python';
+        this.lastLanguage = this.language;
         this.port = svc.port;
         this.lanShare = svc.lanShare;
         this.enabled = svc.enabled;
@@ -133,16 +137,62 @@ export class ServiceDialogComponent implements OnInit {
         return this.language === 'php';
     }
 
-    /** 仅新建时可切换语言；切换时把未改动的默认端口同步到对应语言 */
+    /** JS（内置 QuickJS 宿主的 nanoService 脚本）：与 PHP 一样由宿主监听端口 */
+    get isJs(): boolean {
+        return this.language === 'js';
+    }
+
+    /** PHP / JS 由应用内置宿主按请求执行：不走脚本自身的启动参数/环境变量/自动重启，也无 Python 语法检查 */
+    get isHosted(): boolean {
+        return this.isPhp || this.isJs;
+    }
+
+    /** 各语言默认端口（互相错开，便于三类服务并存） */
+    private defaultPortOf(language: string): number {
+        switch (language) {
+            case 'php':
+                return 8768;
+            case 'js':
+                return 8769;
+            default:
+                return 8767;
+        }
+    }
+
+    /** 可选脚本后缀：PHP/JS 各只收自身后缀 */
+    get scriptAccept(): string {
+        return this.isPhp ? '.php' : this.isJs ? '.js' : '.py,.php';
+    }
+
+    /** 代码框占位提示 */
+    get codePlaceholder(): string {
+        return this.isPhp ? '<?php ...' : this.isJs ? 'nanoService.start(async (host) => { ... })' : '#!/usr/bin/env python3';
+    }
+
+    /** 远程链接占位提示 */
+    get codeUrlPlaceholder(): string {
+        return this.isPhp
+            ? 'https://example.com/ysp.php'
+            : this.isJs
+                ? 'https://example.com/ysp-live.js'
+                : 'https://example.com/ysp-live.py';
+    }
+
+    /** 电视本地路径占位提示 */
+    get scriptPathPlaceholder(): string {
+        const ext = this.isPhp ? 'php' : this.isJs ? 'js' : 'py';
+        return `/data/user/0/<包名>/files/myscript.${ext}`;
+    }
+
+    /** 仅新建时可切换语言；端口仍是旧语言默认值时跟着换，避免各语言服务默认端口撞车 */
     onLanguageChange() {
         if (this.isEdit) {
             return;
         }
-        if (this.language === 'php' && this.port === 8767) {
-            this.port = 8768;
-        }
-        if (this.language === 'python' && this.port === 8768) {
-            this.port = 8767;
+        const previousDefault = this.defaultPortOf(this.lastLanguage);
+        this.lastLanguage = this.language;
+        if (this.port === previousDefault) {
+            this.port = this.defaultPortOf(this.language);
         }
     }
 
@@ -168,7 +218,7 @@ export class ServiceDialogComponent implements OnInit {
         const file = input.files[0];
         this.scriptFileName = file.name;
         if (!this.name) {
-            this.name = file.name.replace(/\.(py|php)$/i, '');
+            this.name = file.name.replace(/\.(py|php|js)$/i, '');
         }
         const reader = new FileReader();
         reader.onload = () => {
@@ -232,7 +282,7 @@ export class ServiceDialogComponent implements OnInit {
                 id: this.serviceId,
                 name: this.name,
                 language: this.language,
-                port: Number(this.port) || (this.language === 'php' ? 8768 : 8767),
+                port: Number(this.port) || this.defaultPortOf(this.language),
                 lanShare: this.lanShare,
                 enabled: this.enabled,
                 codeSource: this.codeSource,

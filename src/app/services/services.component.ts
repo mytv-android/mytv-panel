@@ -45,6 +45,7 @@ export class ServicesComponent implements OnInit, OnDestroy {
 
     runtime?: PythonRuntimeInfo;
     phpRuntime?: PythonRuntimeInfo;
+    jsRuntime?: PythonRuntimeInfo;
     services: PythonServiceInfo[] = [];
     selfTest?: PythonSelfTest;
     showSelfTest = false;
@@ -79,10 +80,26 @@ export class ServicesComponent implements OnInit, OnDestroy {
             const res = await AppApi.getPythonStatus();
             this.runtime = res.data.runtime;
             this.phpRuntime = res.data.phpRuntime;
+            this.jsRuntime = res.data.jsRuntime;
             this.services = res.data.services;
         } catch {
             // 设备离线/服务未启动时保持上一次状态
         }
+    }
+
+    get jsRuntimeStateText(): string {
+        if (!this.jsRuntime) return '';
+        if (this.jsRuntime.state === 'unsupported') {
+            return this.translate.instant('SERVICES.RUNTIME_UNSUPPORTED');
+        }
+        return this.translate.instant('SERVICES.RUNTIME_JS_READY', {
+            version: this.jsRuntime.version,
+            abi: this.jsRuntime.abi,
+        });
+    }
+
+    get jsRuntimeReady(): boolean {
+        return this.jsRuntime?.state === 'ready';
     }
 
     get runtimeStateText(): string {
@@ -243,7 +260,11 @@ export class ServicesComponent implements OnInit, OnDestroy {
                 envVars: svc.envVars,
                 autoRestart: svc.autoRestart,
             });
-            const ready = svc.language === 'php' ? this.phpRuntimeReady : this.runtimeReady;
+            const ready = svc.language === 'php'
+                ? this.phpRuntimeReady
+                : svc.language === 'js'
+                    ? true // JS 运行时（QuickJS）随应用内置，无需下载
+                    : this.runtimeReady;
             if (!svc.enabled && !ready) {
                 this.showSuccess(this.translate.instant('SERVICES.NEED_RUNTIME'));
             }
@@ -303,6 +324,18 @@ export class ServicesComponent implements OnInit, OnDestroy {
             await this.refreshStatus();
         } catch (e) {
             this.showError(e);
+        }
+    }
+
+    /** 语言标签（与设置页一致） */
+    languageLabel(language: string): string {
+        switch (language) {
+            case 'php':
+                return 'PHP';
+            case 'js':
+                return 'JS';
+            default:
+                return 'Python';
         }
     }
 

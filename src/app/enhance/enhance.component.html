@@ -12,7 +12,7 @@
             <span class="setting-desc">{{ 'TV.ui_player_view_asr_recognition_model_desc' | translate }}</span>
           </div>
           <mat-form-field appearance="outline" subscriptSizing="dynamic" class="s-wide">
-            <input matInput [(ngModel)]="c.videoPlayerASRModel" placeholder="/storage/emulated/0/sherpa-onnx-streaming-zipformer-zh-14M-2023-02-23">
+            <input matInput [(ngModel)]="c.videoPlayerASRModel" placeholder="streaming-zipformer-zh-int8-2025">
           </mat-form-field>
         </div>
 
@@ -282,6 +282,120 @@
         </div>
         <div class="s-sub-actions">
           <button mat-flat-button (click)="saveAsr()">{{ 'PLAYER.ASR_SAVE' | translate }}</button>
+        </div>
+      </div>
+    </app-settings-row>
+
+    <!-- 字幕样式：App 里是「字幕样式」子页，这里在行下方直接展开 -->
+    <app-settings-row label="TV.ui_video_player_subtitle_settings" desc="TV.ui_video_player_subtitle_settings_desc">
+      <div below class="s-embed s-sub">
+        <div class="setting-block">
+          <div class="setting-label">
+            <span>{{ 'TV.settings_subtitle_section_source' | translate }}</span>
+          </div>
+          <div class="setting-toggles">
+            <mat-slide-toggle [checked]="subtitle.useSystemDefault"
+              (change)="updateSubtitle({ useSystemDefault: $event.checked })">
+              {{ 'TV.ui_video_player_subtitle_use_system_style' | translate }}
+            </mat-slide-toggle>
+            <mat-slide-toggle [checked]="subtitle.isApplyEmbeddedStyles"
+              (change)="updateSubtitle({ isApplyEmbeddedStyles: $event.checked })">
+              {{ 'TV.ui_video_player_subtitle_follow_embedded_style' | translate }}
+            </mat-slide-toggle>
+          </div>
+          <p class="setting-desc">{{ 'TV.ui_video_player_subtitle_use_system_style_desc' | translate }}</p>
+        </div>
+
+        <div class="setting-block">
+          <div class="setting-label">
+            <span>{{ 'TV.ui_video_player_subtitle_text_size' | translate }}</span>
+          </div>
+          <mat-form-field appearance="outline" subscriptSizing="dynamic" class="s-wide">
+            <mat-select [value]="subtitleTextSizePercent" (selectionChange)="setSubtitleTextSizePercent($event.value)">
+              @for (percent of subtitleTextSizePercents; track percent) {
+              <mat-option [value]="percent">{{ percent }}%</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="setting-block">
+          <div class="setting-label">
+            <span>{{ 'TV.ui_video_player_subtitle_foreground_color' | translate }}</span>
+          </div>
+          <div class="color-swatches">
+            @for (color of subtitleColors; track color.value) {
+            <button type="button" class="swatch" [class.active]="subtitle.style.foregroundColor === color.value"
+              [style.background]="color.css" [attr.aria-label]="color.css" [title]="color.css"
+              (click)="updateSubtitleStyle({ foregroundColor: color.value })"></button>
+            }
+          </div>
+        </div>
+
+        <div class="setting-block">
+          <div class="setting-label">
+            <span>{{ 'TV.ui_video_player_subtitle_background_color' | translate }}</span>
+          </div>
+          <div class="color-swatches">
+            @for (color of subtitleBackgroundColors; track color.value) {
+            <button type="button" class="swatch" [class.active]="isSubtitleBackgroundColor(color.value)"
+              [style.background]="color.css" [attr.aria-label]="color.css" [title]="color.css"
+              (click)="setSubtitleBackgroundColor(color.value)"></button>
+            }
+          </div>
+        </div>
+
+        <div class="setting-block">
+          <div class="setting-label">
+            <span>{{ 'TV.ui_video_player_subtitle_background_opacity' | translate }}</span>
+          </div>
+          <mat-form-field appearance="outline" subscriptSizing="dynamic" class="s-wide">
+            <mat-select [value]="subtitleBackgroundOpacity" (selectionChange)="setSubtitleBackgroundOpacity($event.value)">
+              @for (percent of subtitleOpacityPercents; track percent) {
+              <mat-option [value]="percent">{{ percent }}%</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="setting-block">
+          <div class="setting-label">
+            <span>{{ 'TV.ui_video_player_subtitle_position' | translate }}</span>
+            <span class="setting-desc">{{ 'TV.settings_subtitle_position_desc' | translate }}</span>
+          </div>
+          <mat-form-field appearance="outline" subscriptSizing="dynamic" class="s-wide">
+            <mat-select [value]="subtitlePositionPercent" (selectionChange)="setSubtitlePositionPercent($event.value)">
+              @for (percent of subtitlePositionPercents; track percent) {
+              <mat-option [value]="percent">{{ percent }}%</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="setting-block">
+          <div class="setting-label">
+            <span>{{ 'TV.ui_video_player_subtitle_edge_color' | translate }}</span>
+          </div>
+          <div class="color-swatches">
+            @for (color of subtitleColors; track color.value) {
+            <button type="button" class="swatch" [class.active]="subtitle.style.edgeColor === color.value"
+              [style.background]="color.css" [attr.aria-label]="color.css" [title]="color.css"
+              (click)="updateSubtitleStyle({ edgeColor: color.value })"></button>
+            }
+          </div>
+        </div>
+
+        <div class="setting-block">
+          <div class="setting-label">
+            <span>{{ 'TV.ui_video_player_subtitle_window_color' | translate }}</span>
+          </div>
+          <div class="color-swatches">
+            @for (color of subtitleColors; track color.value) {
+            <button type="button" class="swatch" [class.active]="subtitle.style.windowColor === color.value"
+              [style.background]="color.css" [attr.aria-label]="color.css" [title]="color.css"
+              (click)="updateSubtitleStyle({ windowColor: color.value })"></button>
+            }
+          </div>
         </div>
       </div>
     </app-settings-row>
