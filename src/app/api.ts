@@ -276,6 +276,8 @@ export interface AppConfigs {
     gestureZoneRightDown?: KeyDownAction
     updateForceRemind?: boolean
     updateChannel?: string
+    /** GitHub 加速镜像（GithubMirror 枚举名）：AUTO / DIRECT / PROXY_ORG … */
+    githubMirror?: string
     globalVideoPlayerCore?: VideoPlayerCore
     webViewCore?: WebViewCore
     replaceSystemWebView?: boolean

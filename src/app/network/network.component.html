@@ -23,6 +23,16 @@
   </app-settings-section>
 
   <app-settings-section label="TV.settings_section_network_proxy">
+    <app-settings-row label="TV.settings_network_github_mirror" desc="TV.settings_network_github_mirror_desc">
+      <mat-form-field appearance="outline" subscriptSizing="dynamic" class="s-narrow">
+        <mat-select [(ngModel)]="c.githubMirror" (selectionChange)="save()">
+          @for (mirror of githubMirrorOptions; track mirror.value) {
+          <mat-option [value]="mirror.value">{{ mirror.key ? (mirror.key | translate) : mirror.label }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+    </app-settings-row>
+
     <app-settings-row label="TV.ui_player_view_proxy" desc="TV.settings_network_proxy_desc">
       <mat-form-field below appearance="outline" subscriptSizing="dynamic" class="s-wide">
         <input matInput [(ngModel)]="c.videoPlayerProxy" (change)="save()"

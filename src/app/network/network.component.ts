@@ -32,6 +32,18 @@ import { TextareaWithLinesComponent } from '../common/textarea-with-lines/textar
 export class NetworkComponent extends SettingsPageBase {
     humanizeMs = humanizeMs;
 
+    /** 与 App 的 GithubMirror 枚举一一对应；只列 2026-11-17 实测可用的线路。 */
+    readonly githubMirrorOptions: { value: string; key?: string; label?: string }[] = [
+        { value: 'AUTO', key: 'TV.settings_network_github_mirror_auto' },
+        { value: 'DIRECT', key: 'TV.settings_network_github_mirror_direct' },
+        { value: 'PROXY_ORG', label: 'gh-proxy.org' },
+        { value: 'PROXY_COM', label: 'gh-proxy.com' },
+        { value: 'GEEKERTAO', label: 'ghfile.geekertao.top' },
+        { value: 'GHFAST', label: 'ghfast.top' },
+        { value: 'THREE_W', label: 'gh.3w.pm' },
+        { value: 'PROXY_NET', label: 'ghproxy.net' },
+    ];
+
     /** 与 App 相同：重试次数 1~10、15、20、30、40、50；重试间隔 0~30 秒 */
     get retryCountOptions(): number[] {
         return optionsWith([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 15, 20, 30, 40, 50], this.c.networkRetryCount);
