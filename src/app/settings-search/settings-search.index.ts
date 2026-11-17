@@ -165,6 +165,7 @@ export const SETTINGS_SEARCH_INDEX: SettingsSearchEntry[] = [
   // /network
   { key: 'network.TV.ui_network_retry_count', route: '/network', labelKey: 'TV.ui_network_retry_count', descKey: 'TV.ui_network_retry_count_desc', pageKey: 'TV.settings_category_network', sectionKey: 'TV.settings_section_network_retry' },
   { key: 'network.TV.ui_network_retry_interval', route: '/network', labelKey: 'TV.ui_network_retry_interval', pageKey: 'TV.settings_category_network', sectionKey: 'TV.settings_section_network_retry' },
+  { key: 'network.TV.settings_network_github_mirror', route: '/network', labelKey: 'TV.settings_network_github_mirror', descKey: 'TV.settings_network_github_mirror_desc', pageKey: 'TV.settings_category_network', sectionKey: 'TV.settings_section_network_proxy' },
   { key: 'network.TV.ui_player_view_proxy', route: '/network', labelKey: 'TV.ui_player_view_proxy', descKey: 'TV.settings_network_proxy_desc', pageKey: 'TV.settings_category_network', sectionKey: 'TV.settings_section_network_proxy' },
   { key: 'network.TV.settings_network_proxy_rules', route: '/network', labelKey: 'TV.settings_network_proxy_rules', descKey: 'TV.settings_network_proxy_rules_desc', pageKey: 'TV.settings_category_network', sectionKey: 'TV.settings_section_network_proxy' },
   { key: 'network.TV.ui_player_view_user_agent', route: '/network', labelKey: 'TV.ui_player_view_user_agent', descKey: 'TV.settings_network_ua_desc', pageKey: 'TV.settings_category_network', sectionKey: 'TV.settings_advanced' },
