@@ -898,7 +898,7 @@
     "settings_subtitle_opacity_opaque": "معتم",
     "video_player_support_better_detection": "اكتشاف تنسيق الفيديو بعناية أكبر",
     "video_player_support_better_detection_desc": "فعّله عندما تفشل بعض القنوات أو تظهر تشوهات؛ يبدأ التشغيل أبطأ قليلًا",
-    "video_player_support_better_detection_desc_detail": "عند التمكين، سيحاول المشغل اكتشاف تنسيق الفيديو بدقة أكبر، وقد يزيد ذلك من زمن بدء التشغيل.\nبالنسبة إلى Media3، سيضيف دعمًا لملفات TS التي تفتقد AUD و IDR، كما سيعطّل ميزة التحضير بدون أجزاء (chunkless preparation) في HLS.\nأما بالنسبة إلى IJK، فسيزيد حجم الاستكشاف ومدة التحليل، وسيفعّل مرشح الحلقة (loop filter) والقفز الدقيق (accurate seek).",
+    "video_player_support_better_detection_desc_detail": "عند التمكين، سيحاول المشغل اكتشاف تنسيق الفيديو بدقة أكبر، وقد يزيد ذلك من زمن بدء التشغيل.\nبالنسبة إلى Media3، سيضيف دعمًا لملفات TS التي تفتقد AUD و IDR، كما سيعطّل ميزة التحضير بدون أجزاء (chunkless preparation) في HLS.\nأما بالنسبة إلى IJK و FSPlayer، فسيزيد حجم الاستكشاف ومدة التحليل، وسيفعّل القفز الدقيق (accurate seek).\nوبالنسبة إلى MPV، سيزيد حجم الاستكشاف ومدة التحليل.\nوبالنسبة إلى VLC، سيفعّل مخرج android-opaque.",
     "ui_player_view_mpv_filter": "مرشّحات الصورة",
     "settings_mpv_filter_desc": "تعمل مع نواة MPV فقط؛ الحِدّة وإزالة الضوضاء تستهلكان معالجًا إضافيًا",
     "settings_mpv_filter_preset_title": "المرشّح",

@@ -898,7 +898,7 @@
     "settings_subtitle_opacity_opaque": "不透明",
     "video_player_support_better_detection": "更仔细地识别视频格式",
     "video_player_support_better_detection_desc": "个别频道打不开或花屏时开启，起播会慢一点",
-    "video_player_support_better_detection_desc_detail": "启用后，播放器将尝试更准确地探测视频格式，这可能会增加起播时间。\n对于Meida3，播放器将支持播放器缺少AUD和IDR的TS文件，并禁用HLS无块准备。\n对于IJK，播放器将增加探测大小和分析时长并开启环路过滤和精确跳转。\n 对于VLC，将启用android-opaque输出",
+    "video_player_support_better_detection_desc_detail": "启用后，播放器将尝试更准确地探测视频格式，这可能会增加起播时间。\n对于Media3，播放器将支持缺少AUD和IDR的TS文件，并禁用HLS无块准备。\n对于IJK和FSPlayer，播放器将增加探测大小和分析时长并开启精确跳转。\n对于MPV，播放器将增加探测大小和分析时长。\n对于VLC，将启用android-opaque输出",
     "ui_player_view_mpv_filter": "画面滤镜",
     "settings_mpv_filter_desc": "仅 MPV 内核生效；锐化、降噪会多占一些 CPU",
     "settings_mpv_filter_preset_title": "滤镜",

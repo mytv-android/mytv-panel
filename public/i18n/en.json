@@ -898,7 +898,7 @@
     "settings_subtitle_opacity_opaque": "Opaque",
     "video_player_support_better_detection": "Detect video format more carefully",
     "video_player_support_better_detection_desc": "Turn on when some channels fail or show artifacts; playback starts a bit slower",
-    "video_player_support_better_detection_desc_detail": "When enabled, the player will attempt to more accurately detect video formats, which may increase startup time.\nFor Media3, the player will support TS files missing AUD and IDR, and disable HLS without chunk preparation.\nFor IJK, the player will increase detection size and analysis duration, and enable loop filtering and precise seeking.",
+    "video_player_support_better_detection_desc_detail": "When enabled, the player will attempt to more accurately detect video formats, which may increase startup time.\nFor Media3, the player will support TS files missing AUD and IDR, and disable HLS chunkless preparation.\nFor IJK and FSPlayer, the player will increase detection size and analysis duration, and enable precise seeking.\nFor MPV, the player will increase detection size and analysis duration.\nFor VLC, android-opaque output will be enabled.",
     "ui_player_view_mpv_filter": "Video filters",
     "settings_mpv_filter_desc": "Only applies to the MPV core; sharpening and denoising use extra CPU",
     "settings_mpv_filter_preset_title": "Filter",
