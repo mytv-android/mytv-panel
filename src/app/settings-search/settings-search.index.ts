@@ -160,6 +160,9 @@ export const SETTINGS_SEARCH_INDEX: SettingsSearchEntry[] = [
 
   // /cast
   { key: 'cast.TV.settings_app_cast_receiver', route: '/cast', labelKey: 'TV.settings_app_cast_receiver', descKey: 'TV.settings_app_cast_receiver_desc', pageKey: 'TV.settings_category_cast', sectionKey: 'TV.settings_section_cast_cast' },
+  { key: 'cast.TV.settings_mcp_title', route: '/cast', labelKey: 'TV.settings_mcp_title', descKey: 'TV.settings_mcp_summary', pageKey: 'TV.settings_category_cast', sectionKey: 'TV.settings_mcp_section' },
+  { key: 'cast.TV.settings_mcp_level', route: '/cast', labelKey: 'TV.settings_mcp_level', descKey: 'TV.settings_mcp_level_desc', pageKey: 'TV.settings_category_cast', sectionKey: 'TV.settings_mcp_section' },
+  { key: 'cast.TV.settings_mcp_token', route: '/cast', labelKey: 'TV.settings_mcp_token', descKey: 'TV.settings_mcp_token_desc', pageKey: 'TV.settings_category_cast', sectionKey: 'TV.settings_mcp_section' },
   { key: 'cast.TV.ui_python_service', route: '/cast', labelKey: 'TV.ui_python_service', descKey: 'TV.settings_cast_script_desc', pageKey: 'TV.settings_category_cast', sectionKey: 'TV.ui_python_service' },
 
   // /network

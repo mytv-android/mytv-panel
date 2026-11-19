@@ -305,6 +305,23 @@ a:not([class*="mat-"]):focus-visible,
     color: var(--mat-sys-on-surface-variant);
 }
 
+/* AI 助手（MCP）：令牌与连接地址要能整段复制，长串可折行 */
+.s-row-ctl .mcp-token {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+
+    code {
+        max-width: 320px;
+        padding: 6px 10px;
+        border-radius: 8px;
+        background: var(--mat-sys-surface-container-high);
+        font: 12px / 18px ui-monospace, SFMono-Regular, Menlo, monospace;
+        word-break: break-all;
+    }
+}
+
 .main-content > * > .container .section-header,
 .s-embed .section-header {
     display: flex;

@@ -190,6 +190,10 @@ export interface AppConfigs {
     appBackgroundPlayEnable?: boolean  // NEW: 后台播放（听电视），与画中画互斥
     castReceiverEnabled?: boolean  // NEW: 投屏接收（DLNA DMR，接收手机等设备推送的视频）
     castDeviceName?: string  // NEW: 投屏设备通告名（各接收协议共用；空 = 用机型名，最多 32 字符）
+    mcpEnable?: boolean  // NEW: AI 助手（MCP）总开关
+    mcpToken?: string  // NEW: AI 助手访问令牌（首次开启时生成，可重置）
+    mcpPermissionLevel?: McpPermissionLevel  // NEW: AI 助手权限级别
+    mcpShowNotice?: boolean  // NEW: AI 助手操作时在电视上提示
     appLastLatestVersion?: string
     appAgreementAgreed?: boolean
     appBackupEnable?: boolean  // NEW: 允许系统备份（换新设备时通过系统迁移设置和收藏）
@@ -698,6 +702,19 @@ export const VideoPlayerRenderModeLabels: { [key in VideoPlayerRenderMode]: stri
     [VideoPlayerRenderMode.SURFACE_VIEW]: 'SETTINGS.VIDEO_PLAYER_RENDER_MODE.SURFACE_VIEW',
     [VideoPlayerRenderMode.TEXTURE_VIEW]: 'SETTINGS.VIDEO_PLAYER_RENDER_MODE.TEXTURE_VIEW',
     [VideoPlayerRenderMode.GL_SURFACE_VIEW]: 'SETTINGS.VIDEO_PLAYER_RENDER_MODE.GL_SURFACE_VIEW',
+}
+
+// AI 助手（MCP）权限级别：级联，管理 ⊃ 播放控制 ⊃ 只读
+export enum McpPermissionLevel {
+    READ_ONLY = 'READ_ONLY',
+    CONTROL = 'CONTROL',
+    ADMIN = 'ADMIN',
+}
+
+export const McpPermissionLevelLabels: { [key in McpPermissionLevel]: string } = {
+    [McpPermissionLevel.READ_ONLY]: '只读',
+    [McpPermissionLevel.CONTROL]: '播放控制',
+    [McpPermissionLevel.ADMIN]: '管理',
 }
 
 export enum VideoPlayerDisplayMode {
