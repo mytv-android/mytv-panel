@@ -200,6 +200,7 @@
     "MOVE_DOWN": "Move Down",
     "DELETE_SOURCE": "Delete",
     "USER_AGENT": "User Agent",
+    "CUSTOM_HEADERS": "Custom headers",
     "PROXY": "Proxy",
     "EPG_URL": "EPG URL",
     "EPG_URL_HINT": "Used first when EPG is set to follow the source",

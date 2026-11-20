@@ -155,6 +155,10 @@
       </mat-form-field>
     </div>
     <div class="form-row">
+      <app-textarea-with-lines class="full-width" [label]="'SUBSCRIBE.CUSTOM_HEADERS' | translate"
+        [(ngModel)]="source.httpHeaders" placeholder='{"Referer":"https://a.com","Cookie":"k=v"}'></app-textarea-with-lines>
+    </div>
+    <div class="form-row">
       <mat-form-field appearance="outline" class="full-width">
         <mat-label>{{ 'SUBSCRIBE.PROXY' | translate }}</mat-label>
         <input matInput [(ngModel)]="source.httpProxy" placeholder="http://host:port / socks5://host:port">

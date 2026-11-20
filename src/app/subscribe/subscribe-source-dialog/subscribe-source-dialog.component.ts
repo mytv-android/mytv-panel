@@ -79,6 +79,7 @@ export class SubscribeSourceDialogComponent {
     // 新字段在旧设备数据里可能缺失，补默认值避免表单绑定 undefined
     this.source.protocol ??= 'auto';
     this.source.epg ??= '';
+    this.source.httpHeaders ??= '';
     this.source.disableChannelPreview ??= false;
     this.source.disableDelayDetection ??= false;
     this.source.autoRefresh ??= 0;
@@ -211,6 +212,7 @@ export class SubscribeSourceDialogComponent {
       ? Math.floor(port)
       : undefined;
     this.source.epg = this.source.epg?.trim() || undefined;
+    this.source.httpHeaders = this.source.httpHeaders?.trim() || undefined;
     // Stalker MAC 归一化：去分隔符后补齐冒号并转大写
     if (this.source.sourceType === 3 && this.source.mac) {
       const compact = this.source.mac.replace(/[^0-9a-fA-F]/g, '').toUpperCase();

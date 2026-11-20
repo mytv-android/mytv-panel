@@ -246,6 +246,7 @@
     "MOVE_DOWN": "下移",
     "DELETE_SOURCE": "删除",
     "USER_AGENT": "UA",
+    "CUSTOM_HEADERS": "自定义请求头",
     "PROXY": "代理",
     "EPG_URL": "EPG 地址",
     "EPG_URL_HINT": "节目单开启「跟随订阅源」时优先使用",

@@ -518,6 +518,8 @@ export interface IptvSource {
     format?: string
     transformJs?: string
     httpUserAgent?: string
+    /** 自定义请求头（JSON），如 {"Referer":"https://a.com","Cookie":"k=v"}；拉取源与源下频道播放都生效 */
+    httpHeaders?: string
     httpProxy?: string
     mac?: string
     /** 网络协议：auto/http 或留空按 url 识别；ftp/ftps/smb/webdav/webdavs 强制走对应协议 */
