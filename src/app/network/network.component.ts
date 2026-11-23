@@ -32,7 +32,10 @@ import { TextareaWithLinesComponent } from '../common/textarea-with-lines/textar
 export class NetworkComponent extends SettingsPageBase {
     humanizeMs = humanizeMs;
 
-    /** 与 App 的 GithubMirror 枚举一一对应；只列 2026-11-17 实测可用的线路。 */
+    /**
+     * 与 App 的 GithubMirror 枚举一一对应。顺序即 App 内的兜底顺序：
+     * 镜像优先 → 国内直连 → 慢镜像 → 只服务 raw 的镜像（铁律见 gitee my-mirror）。
+     */
     readonly githubMirrorOptions: { value: string; key?: string; label?: string }[] = [
         { value: 'AUTO', key: 'TV.settings_network_github_mirror_auto' },
         { value: 'DIRECT', key: 'TV.settings_network_github_mirror_direct' },
@@ -41,7 +44,11 @@ export class NetworkComponent extends SettingsPageBase {
         { value: 'GEEKERTAO', label: 'ghfile.geekertao.top' },
         { value: 'GHFAST', label: 'ghfast.top' },
         { value: 'THREE_W', label: 'gh.3w.pm' },
+        { value: 'CORS_ISTEED', label: 'cors.isteed.cc' },
         { value: 'PROXY_NET', label: 'ghproxy.net' },
+        { value: 'RAW_GITHACK', label: 'raw.githack.com（仅 raw）' },
+        { value: 'RAWCDN_GITHACK', label: 'rawcdn.githack.com（仅 raw）' },
+        { value: 'GITHACK', label: 'githack.com（仅 raw）' },
     ];
 
     /** 与 App 相同：重试次数 1~10、15、20、30、40、50；重试间隔 0~30 秒 */
