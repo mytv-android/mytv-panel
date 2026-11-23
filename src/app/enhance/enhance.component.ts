@@ -12,6 +12,7 @@ import {
     VideoPlayerSuperResolutionMode, VideoPlayerFrameInterpolationMode, VideoPlayerInterpolationTargetFps,
     VideoPlayerAiExecutionBackend, VideoPlayerSubtitleStyle, SubtitleColors, SubtitleBackgroundColors,
     SubtitleTextSizePercents, SubtitleOpacityPercents, SubtitlePositionPercents,
+    LLMTranslationProtocol, LLMThinkingLevel,
 } from '../api';
 import { SETTINGS_UI, SettingsPageBase, optionsWith } from '../settings-ui/settings-ui';
 
@@ -50,6 +51,22 @@ export class EnhanceComponent extends SettingsPageBase {
         youdao: 'TV.ui_player_view_asr_translation_engine_youdao',
         google: 'TV.ui_player_view_asr_translation_engine_google',
         microsoft: 'TV.ui_player_view_asr_translation_engine_microsoft',
+        llm: 'TV.ui_player_view_asr_translation_engine_llm',
+    };
+    llmProtocol = LLMTranslationProtocol;
+    llmProtocols = Object.values(LLMTranslationProtocol);
+    llmProtocolLabels: Record<LLMTranslationProtocol, string> = {
+        anthropic: 'TV.ui_player_view_asr_translation_llm_protocol_anthropic',
+        openai_completion: 'TV.ui_player_view_asr_translation_llm_protocol_openai_completion',
+        openai_response: 'TV.ui_player_view_asr_translation_llm_protocol_openai_response',
+    };
+    llmThinking = LLMThinkingLevel;
+    llmThinkingLevels = Object.values(LLMThinkingLevel);
+    llmThinkingLabels: Record<LLMThinkingLevel, string> = {
+        off: 'TV.ui_player_view_asr_translation_llm_thinking_off',
+        low: 'TV.ui_player_view_asr_translation_llm_thinking_low',
+        medium: 'TV.ui_player_view_asr_translation_llm_thinking_medium',
+        high: 'TV.ui_player_view_asr_translation_llm_thinking_high',
     };
     /** 与 App 相同：各语言用自己的写法，不随界面语言翻译 */
     targetLangs: [string, string][] = [

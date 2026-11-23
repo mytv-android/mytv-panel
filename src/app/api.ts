@@ -346,6 +346,12 @@ export interface AppConfigs {
     videoPlayerASRTranslationHideOriginal?: boolean  // NEW: 字幕翻译关闭原文（只显示译文）
     videoPlayerASRTranslationColor?: number  // NEW: 字幕翻译译文颜色（ARGB，0 = 跟随字幕前景色）
     videoPlayerASRTranslationPosition?: string  // NEW: 字幕翻译译文位置 (below = 原文下方 / above = 原文上方)
+    videoPlayerASRTranslationLlmEndpoint?: string  // NEW: 字幕翻译 LLM 端点（留空用各家官方默认）
+    videoPlayerASRTranslationLlmProtocol?: LLMTranslationProtocol  // NEW: 字幕翻译 LLM 协议
+    videoPlayerASRTranslationLlmApiKey?: string  // NEW: 字幕翻译 LLM API Key
+    videoPlayerASRTranslationLlmModel?: string  // NEW: 字幕翻译 LLM 模型名
+    videoPlayerASRTranslationLlmUa?: string  // NEW: 字幕翻译 LLM User-Agent
+    videoPlayerASRTranslationLlmThinking?: LLMThinkingLevel  // NEW: 字幕翻译 LLM 思考级别
     videoPlayerASRMode?: ASRMode  // NEW: ASR 模式
     videoPlayerASRLeadTimeMs?: number  // NEW: ASR 领先字幕显示提前量（毫秒）
     videoPlayerASRAutoStreamingFallback?: boolean  // NEW: ASR 非领先路径自动优先流式模型
@@ -877,6 +883,22 @@ export enum ASRTranslationEngine {
     YOUDAO = 'youdao',
     GOOGLE = 'google',
     MICROSOFT = 'microsoft',
+    LLM = 'llm',
+}
+
+/** 与 LLMTranslationEngine.kt 的协议常量一致 */
+export enum LLMTranslationProtocol {
+    ANTHROPIC = 'anthropic',
+    OPENAI_COMPLETION = 'openai_completion',
+    OPENAI_RESPONSE = 'openai_response',
+}
+
+/** 与 LLMTranslationEngine.kt 的思考级别常量一致 */
+export enum LLMThinkingLevel {
+    OFF = 'off',
+    LOW = 'low',
+    MEDIUM = 'medium',
+    HIGH = 'high',
 }
 
 export interface MultiViewScheme {

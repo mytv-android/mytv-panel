@@ -234,6 +234,68 @@
         </div>
         }
 
+        @if (c.videoPlayerASRTranslationEngine === engine.LLM) {
+        <div class="setting-item">
+          <div class="setting-label">
+            <span>{{ 'TV.ui_player_view_asr_translation_llm_endpoint' | translate }}</span>
+            <span class="setting-desc">{{ 'TV.ui_player_view_asr_translation_llm_endpoint_desc' | translate }}</span>
+          </div>
+          <mat-form-field appearance="outline" subscriptSizing="dynamic">
+            <input matInput [(ngModel)]="c.videoPlayerASRTranslationLlmEndpoint"
+              placeholder="https://api.anthropic.com">
+          </mat-form-field>
+        </div>
+        <div class="setting-item">
+          <span>{{ 'TV.ui_player_view_asr_translation_llm_protocol' | translate }}</span>
+          <mat-form-field appearance="outline" subscriptSizing="dynamic">
+            <mat-select [ngModel]="c.videoPlayerASRTranslationLlmProtocol || llmProtocol.OPENAI_COMPLETION"
+              (ngModelChange)="c.videoPlayerASRTranslationLlmProtocol = $event">
+              @for (p of llmProtocols; track p) {
+              <mat-option [value]="p">{{ llmProtocolLabels[p] | translate }}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="setting-item">
+          <div class="setting-label">
+            <span>{{ 'TV.ui_player_view_asr_translation_llm_model' | translate }}</span>
+            <span class="setting-desc">{{ 'TV.ui_player_view_asr_translation_llm_model_desc' | translate }}</span>
+          </div>
+          <mat-form-field appearance="outline" subscriptSizing="dynamic">
+            <input matInput [(ngModel)]="c.videoPlayerASRTranslationLlmModel" placeholder="claude-sonnet-4-5">
+          </mat-form-field>
+        </div>
+        <div class="setting-item">
+          <span>{{ 'TV.ui_player_view_asr_translation_llm_api_key' | translate }}</span>
+          <mat-form-field appearance="outline" subscriptSizing="dynamic">
+            <input matInput type="password" [(ngModel)]="c.videoPlayerASRTranslationLlmApiKey">
+          </mat-form-field>
+        </div>
+        <div class="setting-item">
+          <div class="setting-label">
+            <span>{{ 'TV.ui_player_view_asr_translation_llm_ua' | translate }}</span>
+            <span class="setting-desc">{{ 'TV.ui_player_view_asr_translation_llm_ua_desc' | translate }}</span>
+          </div>
+          <mat-form-field appearance="outline" subscriptSizing="dynamic">
+            <input matInput [(ngModel)]="c.videoPlayerASRTranslationLlmUa">
+          </mat-form-field>
+        </div>
+        <div class="setting-item">
+          <div class="setting-label">
+            <span>{{ 'TV.ui_player_view_asr_translation_llm_thinking' | translate }}</span>
+            <span class="setting-desc">{{ 'TV.ui_player_view_asr_translation_llm_thinking_desc' | translate }}</span>
+          </div>
+          <mat-form-field appearance="outline" subscriptSizing="dynamic">
+            <mat-select [ngModel]="c.videoPlayerASRTranslationLlmThinking || llmThinking.OFF"
+              (ngModelChange)="c.videoPlayerASRTranslationLlmThinking = $event">
+              @for (t of llmThinkingLevels; track t) {
+              <mat-option [value]="t">{{ llmThinkingLabels[t] | translate }}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+        </div>
+        }
+
         <!-- 译文样式放在引擎判断之外：Gemini、百炼、Soniox 自带译文，引擎为空时也要能调 -->
         <div class="setting-item">
           <div class="setting-label">
