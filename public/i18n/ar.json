@@ -366,6 +366,10 @@
     "PLACEHOLDER": "ابحث بالاسم أو الوصف أو الصفحة",
     "NO_RESULT": "لا توجد إعدادات مطابقة"
   },
+  "FAVORITES": {
+    "DRAG_HINT": "اسحب المقبض لإعادة الترتيب. تُحفظ التغييرات على التلفزيون فورًا.",
+    "LINE_COUNT": "الخطوط: {{count}}"
+  },
   "SETTINGS_UI": {
     "SURFACE_TV": "جهاز التحكم عن بعد",
     "SURFACE_TOUCH": "أجهزة اللمس"
@@ -578,6 +582,7 @@
     "ui_channel_change_cross_group_desc": "عند الإيقاف يبقى التبديل داخل المجموعة الحالية",
     "ui_channel_change_show_info_panel": "عرض شريط المعلومات عند التبديل",
     "ui_channel_change_show_info_panel_desc": "يعرض اسم القناة والبرنامج والخط أسفل الشاشة",
+    "ui_channel_count_short": "{{p1}} قناة",
     "ui_channel_group_manage": "المجموعات المخفية",
     "ui_channel_hidden_list": "إخفاء القنوات حسب الاسم",
     "ui_channel_hidden_list_desc": "لا تُعرض القنوات التي يحتوي اسمها على النص المحدد (تُدعم التعابير النمطية)",
@@ -643,6 +648,18 @@
     "ui_epg_source_load_all": "تحميل جميع الأدلة معًا",
     "ui_epg_source_load_all_desc": "قد يصبح بطيئًا جدًا أو يتوقف مع كثرة الأدلة؛ اتركه معطّلًا عادةً",
     "ui_epg_source_load_all_desc_detail": "عند التمكين، سيقوم التطبيق بتحميل جميع أدلة البرامج المخصصة، مما قد يؤدي إلى نفاد الذاكرة، وزيادة وقت التحميل، وفشل التحميل.",
+    "ui_favorites_action_remove": "إزالة من المفضلة",
+    "ui_favorites_action_replace_line": "استخدام خط المصدر الحالي",
+    "ui_favorites_action_top": "نقل إلى الأعلى",
+    "ui_favorites_empty": "لا توجد قنوات مفضلة",
+    "ui_favorites_line_replaced": "تم التبديل إلى خط «{{p1}}»: {{p2}}",
+    "ui_favorites_source_group": "{{p1}} · {{p2}}",
+    "ui_favorites_stale_missing": "لم تعد هذه القناة موجودة في «{{p1}}»",
+    "ui_favorites_stale_source_deleted": "تم حذف المصدر «{{p1}}»",
+    "ui_favorites_tag_stale": "غير متاحة",
+    "ui_favorites_tidy_remove": "إزالة غير الموجودة ({{p1}})",
+    "ui_favorites_tidy_replace": "استخدام خطوط المصدر الحالي ({{p1}})",
+    "ui_favorites_tidy_replaced": "تم التبديل إلى خطوط «{{p1}}»: {{p2}} قناة",
     "ui_focus_optimize": "العودة إلى الموضع السابق عند الرجوع",
     "ui_focus_optimize_desc": "أوقفه إذا تعطّل جهاز يعمل باللمس",
     "ui_font_scale_ratio": "حجم النص",

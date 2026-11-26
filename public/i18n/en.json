@@ -366,6 +366,10 @@
     "PLACEHOLDER": "Search by name, description, or page",
     "NO_RESULT": "No matching settings"
   },
+  "FAVORITES": {
+    "DRAG_HINT": "Drag the handle to reorder. Changes are saved to the TV right away.",
+    "LINE_COUNT": "Lines: {{count}}"
+  },
   "SETTINGS_UI": {
     "SURFACE_TV": "Remote control",
     "SURFACE_TOUCH": "Touch devices"
@@ -578,6 +582,7 @@
     "ui_channel_change_cross_group_desc": "When off, switching stays within the current group",
     "ui_channel_change_show_info_panel": "Show info bar when switching",
     "ui_channel_change_show_info_panel_desc": "Shows the channel name, program and line at the bottom of the screen",
+    "ui_channel_count_short": "{{p1}} channels",
     "ui_channel_group_manage": "Hidden groups",
     "ui_channel_hidden_list": "Hide channels by name",
     "ui_channel_hidden_list_desc": "Channels whose names contain the given text are hidden (regular expressions supported)",
@@ -643,6 +648,18 @@
     "ui_epg_source_load_all": "Load all guides at once",
     "ui_epg_source_load_all_desc": "Can be very slow or crash with many guides; usually keep it off",
     "ui_epg_source_load_all_desc_detail": "When enabled, the app will load all custom EPGs. This may cause issues such as out of memory, long loading times, and load failures.",
+    "ui_favorites_action_remove": "Remove from favorites",
+    "ui_favorites_action_replace_line": "Use the current source's line",
+    "ui_favorites_action_top": "Move to top",
+    "ui_favorites_empty": "No favorite channels",
+    "ui_favorites_line_replaced": "Switched to the line from “{{p1}}”: {{p2}}",
+    "ui_favorites_source_group": "{{p1}} · {{p2}}",
+    "ui_favorites_stale_missing": "No longer found in “{{p1}}”",
+    "ui_favorites_stale_source_deleted": "Source “{{p1}}” was deleted",
+    "ui_favorites_tag_stale": "Unavailable",
+    "ui_favorites_tidy_remove": "Remove the ones not found ({{p1}})",
+    "ui_favorites_tidy_replace": "Use the current source's lines ({{p1}})",
+    "ui_favorites_tidy_replaced": "Switched to lines from “{{p1}}”: {{p2}} channels",
     "ui_focus_optimize": "Return to the previous position on back",
     "ui_focus_optimize_desc": "Turn off if a touch device crashes",
     "ui_font_scale_ratio": "Text size",

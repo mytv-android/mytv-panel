@@ -366,6 +366,10 @@
     "PLACEHOLDER": "输入名称、说明或页面",
     "NO_RESULT": "没有找到匹配的设置"
   },
+  "FAVORITES": {
+    "DRAG_HINT": "拖动把手调整顺序，改动即时保存到电视",
+    "LINE_COUNT": "{{count}} 条线路"
+  },
   "SETTINGS_UI": {
     "SURFACE_TV": "遥控器",
     "SURFACE_TOUCH": "触屏设备"
@@ -578,6 +582,7 @@
     "ui_channel_change_cross_group_desc": "关闭后只在当前分组里换台",
     "ui_channel_change_show_info_panel": "换台时显示信息条",
     "ui_channel_change_show_info_panel_desc": "屏幕底部显示台名、节目和线路",
+    "ui_channel_count_short": "{{p1}}个频道",
     "ui_channel_group_manage": "隐藏分组",
     "ui_channel_hidden_list": "按名称隐藏频道",
     "ui_channel_hidden_list_desc": "名称里含有指定文字的频道不显示，支持正则表达式",
@@ -643,6 +648,18 @@
     "ui_epg_source_load_all": "同时加载全部节目单",
     "ui_epg_source_load_all_desc": "节目单多时会很慢甚至闪退，一般保持关闭",
     "ui_epg_source_load_all_desc_detail": "启用后，应用将加载所有的自定义节目单，这可能会导致内存溢出、加载事件变长和加载失败等问题。",
+    "ui_favorites_action_remove": "取消收藏",
+    "ui_favorites_action_replace_line": "换成当前源的线路",
+    "ui_favorites_action_top": "置顶",
+    "ui_favorites_empty": "没有收藏的频道",
+    "ui_favorites_line_replaced": "已换成「{{p1}}」的线路：{{p2}}",
+    "ui_favorites_source_group": "{{p1}} · {{p2}}",
+    "ui_favorites_stale_missing": "「{{p1}}」里找不到这个台了",
+    "ui_favorites_stale_source_deleted": "订阅源「{{p1}}」已删除",
+    "ui_favorites_tag_stale": "失效",
+    "ui_favorites_tidy_remove": "取消收藏找不到的（{{p1}}）",
+    "ui_favorites_tidy_replace": "换成当前源的线路（{{p1}}）",
+    "ui_favorites_tidy_replaced": "已换成「{{p1}}」的线路：{{p2}} 个频道",
     "ui_focus_optimize": "返回时回到原来的位置",
     "ui_focus_optimize_desc": "触屏设备遇到闪退时关闭",
     "ui_font_scale_ratio": "文字大小",

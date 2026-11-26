@@ -1,0 +1,76 @@
+<app-settings-section label="TV.ui_dashboard_module_favorites">
+  @let list = favorites;
+  @if (list.length === 0) {
+  <div class="s-row">
+    <div class="s-row-text">
+      <div class="s-row-desc">{{ 'TV.ui_favorites_empty' | translate }}</div>
+    </div>
+  </div>
+  } @else {
+  @let fix = tidy();
+  <div class="s-row">
+    <div class="s-row-text">
+      <div class="s-row-title">{{ 'TV.ui_channel_count_short' | translate: { p1: list.length } }}</div>
+      <div class="s-row-desc">{{ 'FAVORITES.DRAG_HINT' | translate }}</div>
+    </div>
+    @if (fix.replace.length || fix.remove.length) {
+    <div class="s-row-ctl">
+      @if (fix.replace.length) {
+      <button mat-flat-button type="button" [disabled]="busy()" (click)="replaceLine(fix.replace)">
+        <mat-icon>sync_alt</mat-icon>
+        {{ 'TV.ui_favorites_tidy_replace' | translate: { p1: fix.replace.length } }}
+      </button>
+      }
+      @if (fix.remove.length) {
+      <button mat-stroked-button type="button" [disabled]="busy()" (click)="remove(fix.remove)">
+        <mat-icon>delete</mat-icon>
+        {{ 'TV.ui_favorites_tidy_remove' | translate: { p1: fix.remove.length } }}
+      </button>
+      }
+    </div>
+    }
+  </div>
+
+  <div class="fav-list" cdkDropList cdkDropListLockAxis="y" [cdkDropListDisabled]="busy()"
+    (cdkDropListDropped)="drop($event)">
+    @for (f of list; track f.channel.name; let i = $index, first = $first) {
+    @let reason = staleReason(f);
+    <div class="fav-row" cdkDrag>
+      <span class="fav-handle" cdkDragHandle>
+        <mat-icon>drag_handle</mat-icon>
+      </span>
+      <span class="fav-plate">
+        @if (f.channel.logo && !brokenLogos().has(f.channel.logo)) {
+        <img [src]="f.channel.logo" alt="" loading="lazy" draggable="false" (error)="logoFailed(f.channel.logo)">
+        } @else {
+        <span class="fav-plate-name">{{ f.channel.name }}</span>
+        }
+      </span>
+      <span class="fav-text">
+        <span class="fav-name">{{ f.channel.name }}</span>
+        @if (reason) {
+        <span class="fav-meta is-stale">{{ 'TV.ui_favorites_tag_stale' | translate }} · {{ reason | translate: { p1: f.iptvSourceName } }}</span>
+        } @else {
+        <span class="fav-meta">{{ 'TV.ui_favorites_source_group' | translate: { p1: f.iptvSourceName, p2: f.groupName } }} · {{ 'FAVORITES.LINE_COUNT' | translate: { count: lineCount(f) } }}</span>
+        }
+      </span>
+      <span class="fav-actions">
+        <button mat-icon-button type="button" class="fav-opt" [disabled]="first || busy()" (click)="moveToTop(i)"
+          [matTooltip]="'TV.ui_favorites_action_top' | translate" [attr.aria-label]="'TV.ui_favorites_action_top' | translate">
+          <mat-icon>keyboard_double_arrow_up</mat-icon>
+        </button>
+        <button mat-icon-button type="button" [disabled]="!replaceable().has(f.channel.name) || busy()"
+          (click)="replaceLine([f.channel.name])" [matTooltip]="'TV.ui_favorites_action_replace_line' | translate"
+          [attr.aria-label]="'TV.ui_favorites_action_replace_line' | translate">
+          <mat-icon>sync_alt</mat-icon>
+        </button>
+        <button mat-icon-button type="button" [disabled]="busy()" (click)="remove([f.channel.name])"
+          [matTooltip]="'TV.ui_favorites_action_remove' | translate" [attr.aria-label]="'TV.ui_favorites_action_remove' | translate">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </span>
+    </div>
+    }
+  </div>
+  }
+</app-settings-section>

@@ -37,6 +37,8 @@
     </app-settings-row>
   </app-settings-section>
 
+  <app-favorites-section />
+
   <app-settings-section label="TV.settings_section_channels_list">
     <app-settings-row label="TV.ui_show_channel_logo">
       <mat-slide-toggle [(ngModel)]="c.uiShowChannelLogo" (change)="save()"></mat-slide-toggle>

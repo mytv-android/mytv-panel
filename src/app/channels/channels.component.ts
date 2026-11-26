@@ -6,6 +6,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { TranslateModule } from '@ngx-translate/core';
 import { SETTINGS_UI, SettingsPageBase } from '../settings-ui/settings-ui';
+import { FavoritesSectionComponent } from './favorites/favorites-section.component';
 
 /** 选台与频道列表：选台界面、频道列表、播放时；高级里是预览抓帧的四项细调 */
 @Component({
@@ -18,6 +19,7 @@ import { SETTINGS_UI, SettingsPageBase } from '../settings-ui/settings-ui';
         MatButtonToggleModule,
         TranslateModule,
         ...SETTINGS_UI,
+        FavoritesSectionComponent,
     ],
     templateUrl: './channels.component.html',
     host: {

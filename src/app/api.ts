@@ -27,6 +27,16 @@ export const AppApi = {
         return RequestUtil.post(`${prefix}api/configs`, config)
     },
 
+    /** 能「换成当前源的线路」的收藏（台名），由电视端按当前源目录判断 */
+    getFavoritesReplaceable() {
+        return RequestUtil.get<FavoritesReplaceable>(`${prefix}api/favorites/replaceable`)
+    },
+
+    /** 电视端把这些收藏（台名）原地换成当前源的线路并写入配置；之后须重新拉取配置，不能用旧副本整包写回 */
+    replaceFavoritesLine(names: string[]) {
+        return RequestUtil.post<FavoritesReplaced>(`${prefix}api/favorites/replace-line`, { names })
+    },
+
     getFileContent(path: string) {
         return RequestUtil.getText(`${prefix}api/file/content`, { path })
     },
@@ -821,8 +831,26 @@ export interface Channel {
     hash: number
 }
 
+export interface ChannelFavorite {
+    channel: Channel
+    iptvSourceName: string
+    groupName: string
+    /** 来源订阅源刷新后找不到这个台 */
+    missing?: boolean
+}
+
+/** 收藏按 channel.name 唯一；列表顺序就是各处的显示顺序 */
 export interface ChannelFavoriteList {
-    value: { channel: Channel, iptvSourceName: string, groupName: string }[]
+    value: ChannelFavorite[]
+}
+
+export interface FavoritesReplaceable {
+    currentSource: string
+    names: string[]
+}
+
+export interface FavoritesReplaced {
+    replaced: number
 }
 
 export interface CloudSyncData {

@@ -1,0 +1,128 @@
+:host {
+  display: block;
+}
+
+.fav-list {
+  display: block;
+}
+
+.fav-row {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 64px;
+  padding-block: 6px;
+  padding-inline: 12px 16px;
+  border-top: 1px solid color-mix(in srgb, var(--mytv-divider) 55%, transparent);
+  background-color: var(--mytv-card);
+}
+
+.fav-handle {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 44px;
+  color: var(--mat-sys-on-surface-variant);
+  cursor: grab;
+}
+
+.fav-plate {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 32px;
+  overflow: hidden;
+  border-radius: var(--mytv-radius-plate);
+  background-color: var(--mytv-plate);
+}
+
+.fav-plate img {
+  box-sizing: border-box;
+  max-width: 100%;
+  max-height: 100%;
+  padding: 3px;
+  object-fit: contain;
+}
+
+.fav-plate-name {
+  max-width: 100%;
+  padding: 0 4px;
+  box-sizing: border-box;
+  overflow: hidden;
+  font: 600 11px / 16px var(--mytv-font-family);
+  color: #fff;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.fav-text {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.fav-name,
+.fav-meta {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.fav-name {
+  font: 500 15px / 22px var(--mytv-font-family);
+}
+
+.fav-meta {
+  font: 400 13px / 19px var(--mytv-font-family);
+  color: var(--mat-sys-on-surface-variant);
+}
+
+.fav-meta.is-stale {
+  color: var(--mat-sys-error);
+}
+
+.fav-actions {
+  flex: none;
+  display: flex;
+  gap: 2px;
+  color: var(--mat-sys-on-surface-variant);
+}
+
+/* 拖动中：浮起的那一行用「已选」配色，原位留空 */
+.fav-row.cdk-drag-preview {
+  border-top: 0;
+  border-radius: var(--mytv-radius-card);
+  background-color: var(--mytv-selected);
+  color: var(--mytv-on-selected);
+  box-shadow: var(--mat-sys-level3);
+}
+
+.fav-row.cdk-drag-placeholder {
+  opacity: 0;
+}
+
+.fav-row.cdk-drag-animating,
+.fav-list.cdk-drop-list-dragging .fav-row:not(.cdk-drag-placeholder) {
+  transition: transform var(--mytv-duration) var(--mytv-easing);
+}
+
+.fav-list.cdk-drop-list-dragging .fav-handle {
+  cursor: grabbing;
+}
+
+/* 手机宽度：去掉台标位和「置顶」（可直接拖），保证不横向滚动 */
+@media (max-width: 560px) {
+  .fav-row {
+    gap: 8px;
+    padding-inline: 4px 8px;
+  }
+
+  .fav-plate,
+  .fav-opt {
+    display: none;
+  }
+}
