@@ -23,6 +23,16 @@
       <mat-slide-toggle [(ngModel)]="c.iptvChannelChangeBlackScreen" (change)="save()"></mat-slide-toggle>
     </app-settings-row>
 
+    <app-settings-row label="TV.settings_player_volume" desc="TV.settings_player_volume_desc">
+      <mat-form-field appearance="outline" subscriptSizing="dynamic" class="s-narrow">
+        <mat-select [(ngModel)]="c.videoPlayerVolume" (selectionChange)="save()">
+          @for (v of volumePercentOptions; track v) {
+          <mat-option [value]="v">{{ volumePercentLabel(v) }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+    </app-settings-row>
+
     <app-settings-row label="TV.ui_player_view_volume_normalization" desc="TV.ui_player_view_volume_normalization_desc" media3>
       <mat-button-toggle-group [(ngModel)]="c.videoPlayerVolumeBalanceLevel" (change)="save()">
         @for (level of balanceLevels; track level) {

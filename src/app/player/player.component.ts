@@ -21,6 +21,8 @@ const SECOND = 1000;
 const LOAD_TIMEOUTS = [1, 2, 3, 4, 5, 10, 15, 20, 25, 30, 45, 60].map(s => s * SECOND);
 const STALL_RETRIES = [0, 3, 5, 8, 10, 15, 20, 30, 45, 60].map(s => s * SECOND);
 const BUFFER_TIMES = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 15, 20, 25, 30, 45, 60].map(s => s * SECOND);
+/** 与 App 相同的取值：播放器音量每档 5%，0~100 共 21 档 */
+const VOLUME_PERCENTS = Array.from({ length: 21 }, (_, i) => i * 5);
 
 /** 播放：常用、播不了或卡顿时、离开播放页时、网页源；高级里是解码与渲染细项 */
 @Component({
@@ -98,6 +100,14 @@ export class PlayerComponent extends SettingsPageBase {
 
     get bufferTimeOptions(): number[] {
         return optionsWith(BUFFER_TIMES, this.c.videoPlayerBufferTime);
+    }
+
+    get volumePercentOptions(): number[] {
+        return optionsWith(VOLUME_PERCENTS, this.c.videoPlayerVolume ?? 100);
+    }
+
+    volumePercentLabel(v: number): string {
+        return this.translate.instant('TV.settings_value_percent', { p1: v });
     }
 
     stallRetryLabel(ms: number): string {

@@ -301,6 +301,7 @@ export interface AppConfigs {
     videoPlayerDecoderConfigRegexList?: VideoPlayerDecoderConfigList
     videoPlayerAudioScreensaver?: boolean | null  // NEW: 音频屏保
     videoPlayerAacPrefer?: boolean | null         // NEW: AAC 优先
+    videoPlayerVolume?: number | null             // NEW: 播放器音量 0~100，独立于系统音量
     videoPlayerMedia3Tunneled?: boolean | null    // NEW: Media3 隧道解码
     webViewLoadingStyle?: number | null           // NEW: WebView 加载风格 0默认 1百分比 2黑屏
     webViewResolution?: number | null             // NEW: WebView 分辨率 0自适应 1 100% 2 75% 3 50%
